@@ -1,0 +1,40 @@
+# Feature 1 with a team account. The owner signs in on the tablet with an ion
+# account that belongs to a team (the test only opens the sign-in page; it never
+# sets a token). Then: the account name, the team in Settings, the core
+# regression checks with the team selected, and back to Personal.
+tap Cancel
+wait 2
+pane
+wait 8
+signIn
+wait 15
+screenshot signin-page
+note The owner signs in on the tablet now (the run waits about 7 minutes).
+wait 140
+screenshot signin-2min
+wait 140
+screenshot signin-5min
+wait 140
+atak
+wait 8
+pane
+wait 15
+expect Signed in to Cesium ion
+expect Signed in as
+expect Workspaces: personal and [0-9]+ teams?
+settings open
+wait 3
+screenshot settings-workspace
+longpress ●
+wait 1
+screenshot status-tooltip-team
+settings close
+workspace first
+wait 15
+expect Workspace: .+\. Listing its assets
+pane
+wait 5
+screenshot team-assets
+include regression
+workspace personal
+wait 10

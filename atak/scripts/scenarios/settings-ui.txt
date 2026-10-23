@@ -1,0 +1,21 @@
+# The pane's header: status pill (with its tooltip) and the settings gear, then the settings panel.
+tap Cancel
+wait 2
+pane
+wait 10
+screenshot pane-header
+# Long-press the status pill: its tooltip says who is signed in, or which server.
+longpress ●
+wait 1
+screenshot status-tooltip
+wait 4
+settings open
+wait 3
+screenshot settings-open
+scroll down
+screenshot settings-form
+settings close
+wait 2
+scroll up
+scroll up
+screenshot settings-closed

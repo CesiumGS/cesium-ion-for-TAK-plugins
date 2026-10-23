@@ -1,0 +1,22 @@
+// Command-line probe for checking ion connectivity, asset discovery, and
+// Google Photorealistic 3D Tiles streaming from a desktop, without ATAK.
+//
+//   ./gradlew :ion-probe:installDist
+//   ion-probe/build/install/ion-probe/bin/ion-probe help
+plugins {
+    id "application"
+}
+
+dependencies {
+    implementation project(":ion-client-java")
+}
+
+tasks.named("compileJava") {
+    options.release = 17
+    options.encoding = "UTF-8"
+}
+
+application {
+    mainClass = "com.cesium.tak.ion.probe.IonProbe"
+    applicationName = "ion-probe"
+}

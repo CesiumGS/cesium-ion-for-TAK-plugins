@@ -1,0 +1,19 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "",
+	"Category": "",
+	"Description": "Builds Cesium for Unreal against VR-TAK's engine (Cesium ion for TAK, Phase 2).",
+	"Modules": [
+		{
+			"Name": "CesiumHost",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "CesiumForUnreal",
+			"Enabled": true
+		}
+	]
+}

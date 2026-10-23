@@ -1,0 +1,47 @@
+{
+  "description": "References a tile proxy must route, in document order, for each fixture tileset. Rewriting with an identity mapping must leave the document byte-identical. When a geometricErrorCeiling is given, every geometricError above it is replaced by the ceiling (written as an integer when integral) and nothing else changes; expectMaxGeometricError is the largest value in the input.",
+  "cases": [
+    {
+      "fixture": "fixtures/google-root-tileset.json",
+      "sourceUrl": "https://tile.googleapis.com/v1/3dtiles/root.json?key=FAKE-GOOGLE-KEY",
+      "expectReferences": [
+        "/v1/3dtiles/datasets/CgA/files/UlRPVEhfRUFSVEg.json?session=FAKE-SESSION"
+      ],
+      "expectResolved": [
+        "https://tile.googleapis.com/v1/3dtiles/datasets/CgA/files/UlRPVEhfRUFSVEg.json?session=FAKE-SESSION&key=FAKE-GOOGLE-KEY"
+      ],
+      "geometricErrorCeiling": 10000000,
+      "expectClamped": 2,
+      "expectMaxGeometricError": 1e+100
+    },
+    {
+      "fixture": "fixtures/google-child-tileset.json",
+      "sourceUrl": "https://tile.googleapis.com/v1/3dtiles/datasets/CgA/files/UlRPVEhfRUFSVEg.json?session=FAKE-SESSION&key=FAKE-GOOGLE-KEY",
+      "expectReferences": [
+        "/v1/3dtiles/datasets/CgA/files/AJVsH2fH.glb",
+        "/v1/3dtiles/datasets/CgA/files/UlRPVEhfQ2hpbGQ.json"
+      ],
+      "expectResolved": [
+        "https://tile.googleapis.com/v1/3dtiles/datasets/CgA/files/AJVsH2fH.glb?session=FAKE-SESSION&key=FAKE-GOOGLE-KEY",
+        "https://tile.googleapis.com/v1/3dtiles/datasets/CgA/files/UlRPVEhfQ2hpbGQ.json?session=FAKE-SESSION&key=FAKE-GOOGLE-KEY"
+      ],
+      "geometricErrorCeiling": 10000000,
+      "expectClamped": 0,
+      "expectMaxGeometricError": 7429600
+    },
+    {
+      "fixture": "fixtures/implicit-tileset-1.1.json",
+      "sourceUrl": "https://assets.ion.cesium.com/12345/tileset.json",
+      "expectReferences": [
+        "metadata/schema.json",
+        "content/{level}/{x}/{y}/{z}.glb",
+        "subtrees/{level}/{x}/{y}/{z}.subtree"
+      ],
+      "expectResolved": [
+        "https://assets.ion.cesium.com/12345/metadata/schema.json",
+        "https://assets.ion.cesium.com/12345/content/{level}/{x}/{y}/{z}.glb",
+        "https://assets.ion.cesium.com/12345/subtrees/{level}/{x}/{y}/{z}.subtree"
+      ]
+    }
+  ]
+}

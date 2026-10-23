@@ -1,0 +1,96 @@
+{
+  "description": "URL resolution used for 3D Tiles, terrain, and imagery references. 'resolve' is RFC 3986 section 5.2 (examples from section 5.4) and must keep implicit-tiling templates intact. 'deriveChild' additionally inherits same-origin parent query parameters the child does not set (CesiumJS / cesium-native behavior that carries Google's key and session) and drops fragments.",
+  "resolve": [
+    { "base": "http://a/b/c/d;p?q", "reference": "g:h", "expect": "g:h" },
+    { "base": "http://a/b/c/d;p?q", "reference": "g", "expect": "http://a/b/c/g" },
+    { "base": "http://a/b/c/d;p?q", "reference": "./g", "expect": "http://a/b/c/g" },
+    { "base": "http://a/b/c/d;p?q", "reference": "g/", "expect": "http://a/b/c/g/" },
+    { "base": "http://a/b/c/d;p?q", "reference": "/g", "expect": "http://a/g" },
+    { "base": "http://a/b/c/d;p?q", "reference": "//g", "expect": "http://g" },
+    { "base": "http://a/b/c/d;p?q", "reference": "?y", "expect": "http://a/b/c/d;p?y" },
+    { "base": "http://a/b/c/d;p?q", "reference": "g?y", "expect": "http://a/b/c/g?y" },
+    { "base": "http://a/b/c/d;p?q", "reference": "#s", "expect": "http://a/b/c/d;p?q#s" },
+    { "base": "http://a/b/c/d;p?q", "reference": "g#s", "expect": "http://a/b/c/g#s" },
+    { "base": "http://a/b/c/d;p?q", "reference": "g?y#s", "expect": "http://a/b/c/g?y#s" },
+    { "base": "http://a/b/c/d;p?q", "reference": ";x", "expect": "http://a/b/c/;x" },
+    { "base": "http://a/b/c/d;p?q", "reference": "g;x", "expect": "http://a/b/c/g;x" },
+    { "base": "http://a/b/c/d;p?q", "reference": "", "expect": "http://a/b/c/d;p?q" },
+    { "base": "http://a/b/c/d;p?q", "reference": ".", "expect": "http://a/b/c/" },
+    { "base": "http://a/b/c/d;p?q", "reference": "./", "expect": "http://a/b/c/" },
+    { "base": "http://a/b/c/d;p?q", "reference": "..", "expect": "http://a/b/" },
+    { "base": "http://a/b/c/d;p?q", "reference": "../", "expect": "http://a/b/" },
+    { "base": "http://a/b/c/d;p?q", "reference": "../g", "expect": "http://a/b/g" },
+    { "base": "http://a/b/c/d;p?q", "reference": "../..", "expect": "http://a/" },
+    { "base": "http://a/b/c/d;p?q", "reference": "../../", "expect": "http://a/" },
+    { "base": "http://a/b/c/d;p?q", "reference": "../../g", "expect": "http://a/g" },
+    { "base": "http://a/b/c/d;p?q", "reference": "../../../g", "expect": "http://a/g" },
+    { "base": "http://a/b/c/d;p?q", "reference": "../../../../g", "expect": "http://a/g" },
+    { "base": "http://a/b/c/d;p?q", "reference": "/./g", "expect": "http://a/g" },
+    { "base": "http://a/b/c/d;p?q", "reference": "/../g", "expect": "http://a/g" },
+    { "base": "http://a/b/c/d;p?q", "reference": "g.", "expect": "http://a/b/c/g." },
+    { "base": "http://a/b/c/d;p?q", "reference": ".g", "expect": "http://a/b/c/.g" },
+    { "base": "http://a/b/c/d;p?q", "reference": "g..", "expect": "http://a/b/c/g.." },
+    { "base": "http://a/b/c/d;p?q", "reference": "..g", "expect": "http://a/b/c/..g" },
+    { "base": "http://a/b/c/d;p?q", "reference": "./../g", "expect": "http://a/b/g" },
+    { "base": "http://a/b/c/d;p?q", "reference": "./g/.", "expect": "http://a/b/c/g/" },
+    { "base": "http://a/b/c/d;p?q", "reference": "g/./h", "expect": "http://a/b/c/g/h" },
+    { "base": "http://a/b/c/d;p?q", "reference": "g/../h", "expect": "http://a/b/c/h" },
+    { "base": "http://a/b/c/d;p?q", "reference": "g;x=1/./y", "expect": "http://a/b/c/g;x=1/y" },
+    { "base": "http://a/b/c/d;p?q", "reference": "g;x=1/../y", "expect": "http://a/b/c/y" },
+    {
+      "base": "https://assets.ion.cesium.com/123/tileset.json",
+      "reference": "content/{level}/{x}/{y}/{z}.glb",
+      "expect": "https://assets.ion.cesium.com/123/content/{level}/{x}/{y}/{z}.glb"
+    }
+  ],
+  "deriveChild": [
+    {
+      "name": "Google root to first child: keeps the child's session, inherits the key",
+      "parent": "https://tile.googleapis.com/v1/3dtiles/root.json?key=FAKE-GOOGLE-KEY",
+      "reference": "/v1/3dtiles/datasets/CgA/files/UlRPVEhfRUFSVEg.json?session=FAKE-SESSION",
+      "expect": "https://tile.googleapis.com/v1/3dtiles/datasets/CgA/files/UlRPVEhfRUFSVEg.json?session=FAKE-SESSION&key=FAKE-GOOGLE-KEY"
+    },
+    {
+      "name": "Google relative leaf inherits session and key",
+      "parent": "https://tile.googleapis.com/v1/3dtiles/datasets/CgA/files/UlRPVEhfRUFSVEg.json?session=FAKE-SESSION&key=FAKE-GOOGLE-KEY",
+      "reference": "/v1/3dtiles/datasets/CgA/files/AJVsH2.glb",
+      "expect": "https://tile.googleapis.com/v1/3dtiles/datasets/CgA/files/AJVsH2.glb?session=FAKE-SESSION&key=FAKE-GOOGLE-KEY"
+    },
+    {
+      "name": "Child parameters win over inherited ones",
+      "parent": "https://tile.googleapis.com/v1/3dtiles/a.json?session=OLD&key=FAKE-GOOGLE-KEY",
+      "reference": "b.json?session=NEW",
+      "expect": "https://tile.googleapis.com/v1/3dtiles/b.json?session=NEW&key=FAKE-GOOGLE-KEY"
+    },
+    {
+      "name": "Nothing is inherited across origins",
+      "parent": "https://tile.googleapis.com/v1/3dtiles/root.json?key=FAKE-GOOGLE-KEY",
+      "reference": "https://other.example.com/tile.glb",
+      "expect": "https://other.example.com/tile.glb"
+    },
+    {
+      "name": "Nothing is inherited when only the port differs",
+      "parent": "https://tiles.example.com/root.json?key=FAKE",
+      "reference": "https://tiles.example.com:8443/tile.glb",
+      "expect": "https://tiles.example.com:8443/tile.glb"
+    },
+    {
+      "name": "Explicit default port is the same origin",
+      "parent": "https://tiles.example.com/root.json?key=FAKE",
+      "reference": "https://tiles.example.com:443/tile.glb",
+      "expect": "https://tiles.example.com:443/tile.glb?key=FAKE"
+    },
+    {
+      "name": "ion relative content inherits a version parameter",
+      "parent": "https://assets.ion.cesium.com/96188/tileset.json?v=2",
+      "reference": "0/0/0.b3dm",
+      "expect": "https://assets.ion.cesium.com/96188/0/0/0.b3dm?v=2"
+    },
+    {
+      "name": "Fragments are dropped",
+      "parent": "https://assets.ion.cesium.com/96188/tileset.json",
+      "reference": "child.json#ignored",
+      "expect": "https://assets.ion.cesium.com/96188/child.json"
+    }
+  ]
+}

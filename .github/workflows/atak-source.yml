@@ -1,0 +1,67 @@
+name: ATAK source zip for TAK.gov
+
+# Packages the ATAK plugin's source (atak/scripts/source-zip.sh) as a DRAFT
+# GitHub release, so the repository owner can download it and upload it to the
+# TAK.gov Third-Party Pipeline for signing (atak/docs/releasing.md). Drafts are
+# visible only to people with write access, and this workflow never publishes.
+#
+# Trigger: a push to the plugin development branch whose head commit message
+# holds "[atak-source]". An earlier draft of the same version is replaced.
+
+on:
+  push:
+    branches:
+      - main
+      - "claude/**"
+
+permissions:
+  contents: write
+
+jobs:
+  source:
+    if: >-
+      contains(github.event.head_commit.message, '[atak-source]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the source zip
+        run: |
+          atak/scripts/source-zip.sh out
+          zip="$(ls out/CesiumIon-*-source.zip)"
+          version="$(basename "$zip" | sed 's/^CesiumIon-\(.*\)-source\.zip$/\1/')"
+          unzip -l "$zip" | tail -1
+          echo "ZIP=$zip" >> "$GITHUB_ENV"
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+
+      - name: Publish the draft release with the zip
+        run: |
+          set -euo pipefail
+          api="https://api.github.com/repos/$GITHUB_REPOSITORY/releases"
+          name="Cesium ion for ATAK $VERSION: source for TAK.gov signing"
+          # Replace an earlier draft of this version (drafts have no tag to look up).
+          curl -sS -f -H "Authorization: Bearer $GH_TOKEN" "$api?per_page=100" \
+            | python3 -c 'import json,sys; [print(r["id"]) for r in json.load(sys.stdin) if r["draft"] and r["name"] == sys.argv[1]]' "$name" \
+            | while read -r old; do
+                curl -sS -f -X DELETE -H "Authorization: Bearer $GH_TOKEN" "$api/$old"
+                echo "Replaced draft $old"
+              done
+          notes="$(printf '%s\n' \
+            "Source of the ATAK plugin at ${GITHUB_SHA::7}, packaged for the TAK.gov Third-Party Pipeline." \
+            "" \
+            "1. Download $(basename "$ZIP") below." \
+            "2. On tak.gov, open the Third-Party Pipeline, upload the zip, and choose ATAK 5.7.0 (CIV)." \
+            "3. Download the signed APK the pipeline returns; that is the build to hand to users." \
+            "" \
+            "Steps and checklist: atak/docs/releasing.md. This draft is not meant to be published.")"
+          body="$(python3 -c 'import json,sys; print(json.dumps({"tag_name": sys.argv[1], "target_commitish": sys.argv[2], "name": sys.argv[3], "body": sys.argv[4], "draft": True}))' \
+            "atak-v$VERSION" "$GITHUB_SHA" "$name" "$notes")"
+          release="$(curl -sS -f -X POST -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json' "$api" -d "$body")"
+          id="$(printf '%s' "$release" | python3 -c 'import json,sys; print(json.load(sys.stdin)["id"])')"
+          curl -sS -f -X POST -H "Authorization: Bearer $GH_TOKEN" -H 'Content-Type: application/zip' \
+            --data-binary @"$ZIP" \
+            "https://uploads.github.com/repos/$GITHUB_REPOSITORY/releases/$id/assets?name=$(basename "$ZIP")" > /dev/null
+          printf '%s' "$release" | python3 -c 'import json,sys; print("Draft:", json.load(sys.stdin)["html_url"])'

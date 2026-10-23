@@ -1,0 +1,124 @@
+name: Device test (ATAK tablet)
+
+# Runs a scripted scenario on the tablet attached to a self-hosted Mac
+# runner (label atak-device), then publishes the redacted report and
+# screenshots to the device-reports branch.
+#
+# Triggers (both need someone with write access to this private repository):
+# - manual dispatch, with a scenario name;
+# - a push to the plugin development branch whose head commit message holds
+#   "[device-test: <scenario>]", which is how Claude runs the device loop.
+# Pull requests never trigger it: it runs on a personal machine.
+# Setup: atak/scripts/setup-runner.sh and atak/README.md.
+
+on:
+  workflow_dispatch:
+    inputs:
+      scenario:
+        description: Scenario in atak/scripts/scenarios (file name without .txt)
+        required: true
+        default: smoke
+  push:
+    branches:
+      - main
+      - "claude/**"
+
+permissions:
+  contents: write
+
+jobs:
+  device:
+    if: >-
+      github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[device-test: ') || contains(github.event.head_commit.message, '[device-test]')
+    runs-on: [self-hosted, macOS, atak-device]
+    # On the job, not the workflow: a push without the marker skips the job
+    # and must not join the group, where it would cancel a pending test run.
+    concurrency:
+      group: atak-device
+      cancel-in-progress: false
+    timeout-minutes: 45
+    env:
+      INPUT_SCENARIO: ${{ inputs.scenario }}
+      HEAD_MESSAGE: ${{ github.event.head_commit.message }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Choose the scenario
+        run: |
+          scenario="$INPUT_SCENARIO"
+          if [ -z "$scenario" ]; then
+            # "[device-test: terrain]" in the commit message; "[device-test]" means smoke.
+            scenario="$(printf '%s' "$HEAD_MESSAGE" | sed -n 's/.*\[device-test: *\([A-Za-z0-9_-]*\) *\].*/\1/p' | head -1)"
+            scenario="${scenario:-smoke}"
+          fi
+          [[ "$scenario" =~ ^[A-Za-z0-9_-]+$ ]] || { echo "Invalid scenario name"; exit 1; }
+          echo "SCENARIO=$scenario" >> "$GITHUB_ENV"
+          echo "Scenario: $scenario"
+
+      - name: Check the scenario exists
+        run: |
+          [ "$SCENARIO" = "server-probe" ] || [ "$SCENARIO" = "release-check" ] || [ "$SCENARIO" = "screen" ] || [ "$SCENARIO" = "release-smoke" ] || [ "$SCENARIO" = "atak-install" ] || [ "$SCENARIO" = "plugin-diag" ] || [ "$SCENARIO" = "anr-diag" ] || [ "$SCENARIO" = "atak-install-dev" ] || test -f "atak/scripts/scenarios/$SCENARIO.txt" \
+            || { echo "No scenario $SCENARIO"; exit 1; }
+
+      - name: Build, install, and run the scenario on the tablet
+        if: env.SCENARIO != 'server-probe' && env.SCENARIO != 'release-check' && env.SCENARIO != 'screen' && env.SCENARIO != 'release-smoke' && env.SCENARIO != 'atak-install' && env.SCENARIO != 'plugin-diag' && env.SCENARIO != 'anr-diag' && env.SCENARIO != 'atak-install-dev'
+        run: atak/scripts/device-test.sh --scenario "$SCENARIO" 1800
+
+      # "screen": only saves what the tablet shows now (no install, restart or taps).
+      # "release-smoke": the minified release APK in ATAK on the tablet (no test hooks).
+      - name: Release build smoke test
+        if: env.SCENARIO == 'release-smoke'
+        run: atak/scripts/release-smoke.sh
+
+      # "atak-install": installs standard ATAK-CIV (release APK in ~/Downloads)
+      # and answers its first-start screens.
+      - name: Install standard ATAK-CIV
+        if: env.SCENARIO == 'atak-install'
+        run: atak/scripts/atak-install.sh
+
+      # "atak-install-dev": the SDK's developer ATAK, for test builds.
+      - name: Install the developer ATAK
+        if: env.SCENARIO == 'atak-install-dev'
+        run: ATAK_FLAVOR=developer atak/scripts/atak-install.sh
+
+      # "plugin-diag": why ATAK will not load the installed plugin.
+      - name: Plugin load diagnostics
+        if: env.SCENARIO == 'plugin-diag'
+        run: atak/scripts/plugin-diag.sh
+
+      # "anr-diag": what ATAK was stuck on when Android said it was not responding.
+      - name: ATAK not-responding diagnostics
+        if: env.SCENARIO == 'anr-diag'
+        run: atak/scripts/anr-diag.sh
+
+      - name: Capture the tablet screen
+        if: env.SCENARIO == 'screen'
+        run: atak/scripts/screen-capture.sh
+
+      # "release-check": no tablet; the SDK's plugin template and a release
+      # (minified) build, for the TAK.gov Third-Party Pipeline.
+      - name: Release readiness check
+        if: env.SCENARIO == 'release-check'
+        run: atak/scripts/release-check.sh
+
+      # "server-probe": no tablet; probes the Self-Hosted ion server on the
+      # runner's LAN (atak/scripts/server-probe.conf) and publishes the result.
+      - name: Probe the Self-Hosted ion server
+        if: env.SCENARIO == 'server-probe'
+        run: |
+          mkdir -p atak/device-reports
+          read -r api assets < atak/scripts/server-probe.conf
+          atak/scripts/server-probe.sh "$api" $assets | tee "atak/device-reports/$(date +%Y%m%d-%H%M%S)-probe-report.txt"
+
+      - name: Publish the report to the device-reports branch
+        if: always()
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          files=(atak/device-reports/*-report.txt atak/device-reports/*-scenario.txt atak/device-reports/*.png)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No report was written."
+            exit 0
+          fi
+          dest="runs/$(date -u +%Y%m%d-%H%M%S)-${GITHUB_SHA::7}-$SCENARIO"
+          .github/scripts/publish-reports.sh "$dest" "Device report: $SCENARIO at ${GITHUB_SHA::7} (run $GITHUB_RUN_ID)" "${files[@]}"

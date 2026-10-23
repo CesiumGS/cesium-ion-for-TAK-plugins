@@ -1,0 +1,19 @@
+// Platform-neutral Cesium ion core shared by the TAK plugins.
+//
+// This build has no Android or TAK SDK dependencies, so it builds and tests on
+// any machine with JDK 17+:
+//
+//   ./gradlew test
+//
+// The ATAK plugin build includes :ion-client-java directly from this
+// directory, so there is a single copy of the source.
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+    }
+}
+
+rootProject.name = "cesium-ion-core"
+include ":ion-client-java"
+include ":ion-probe"

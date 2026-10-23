@@ -1,0 +1,18 @@
+{
+  "asset": { "version": "1.1" },
+  "schemaUri": "metadata/schema.json",
+  "geometricError": 5000,
+  "root": {
+    "boundingVolume": { "region": [-1.3197, 0.6988, -1.3196, 0.6989, 0, 120.25] },
+    "geometricError": 2500,
+    "refine": "ADD",
+    "transform": [0.9686356343768792, 0.24848542777253735, 0, 0, -0.15986460744966327, 0.623177611820219, 0.765567091384559, 0, 0.19023226619126932, -0.7415555652213445, 0.6433560667227647, 0, 1215011.9317263428, -4736309.3434217675, 4081602.0044800863, 1],
+    "content": { "uri": "content/{level}/{x}/{y}/{z}.glb" },
+    "implicitTiling": {
+      "subdivisionScheme": "OCTREE",
+      "subtreeLevels": 6,
+      "availableLevels": 12,
+      "subtrees": { "uri": "subtrees/{level}/{x}/{y}/{z}.subtree" }
+    }
+  }
+}

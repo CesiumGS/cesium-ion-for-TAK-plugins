@@ -1,0 +1,63 @@
+# Status-page and install-guide screenshots on the tablet (ion Cloud, signed
+# in). Long settle times so tiles finish loading before each picture; then
+# ATAK's toolbar, menu and Plugins list, the pane and its settings. Changes
+# nothing on the device except the layers it adds and removes.
+tap Cancel
+removeAll
+wait 3
+pane close
+wait 3
+
+load 2275207 Google Photorealistic 3D Tiles
+wait 8
+fly 39.9526 -75.1635 1200 60
+wait 100
+screenshot hq-google-map
+pane
+wait 20
+screenshot hq-google-pane
+expect Added\. In ATAK: Overlay Manager
+removeAll
+wait 5
+pane close
+wait 2
+
+load 2 Bing Maps Aerial
+wait 5
+load 96188 Cesium OSM Buildings
+wait 5
+fly 40.7069 -74.0113 1800 60
+wait 100
+screenshot hq-osm-bing-map
+pane
+wait 10
+screenshot hq-osm-bing-pane
+expect Showing "Cesium ion - Bing Maps Aerial"
+removeAll
+wait 5
+
+# Install guide: toolbar, menu, Plugins list (ATAK's menu button has no text).
+pane close
+wait 3
+screenshot guide-toolbar
+dumpui
+tapxy 2508 110
+wait 3
+dumpui
+screenshot guide-menu
+tap Plugins
+wait 5
+dumpui
+screenshot guide-plugins
+key BACK
+wait 2
+key BACK
+wait 2
+pane
+wait 5
+screenshot guide-pane
+settings open
+wait 3
+screenshot guide-settings
+settings close
+wait 2

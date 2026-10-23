@@ -1,0 +1,62 @@
+# Every asset type the plugin loads, one after another. ~4 minutes, after
+# ATAK's map starts drawing.
+# "camera" lines log where the map is looking, to check each fly landed.
+removeAll
+wait 3
+camera start
+
+# Clears ATAK's "3D Model" entries that earlier builds left behind
+# when removing these (they are re-requested at every ATAK start).
+load 5011045 Stale splat entry
+wait 5
+remove 5011045
+wait 2
+
+# ion 3D Tiles through the proxy, then Google Photorealistic (direct).
+# The fly waits for ATAK's import, in case the import moves the map.
+load 96188 Cesium OSM Buildings
+camera after OSM load
+wait 8
+camera before OSM fly
+fly 39.9526 -75.1635 1500 55
+wait 2
+camera after OSM fly
+wait 15
+camera at OSM screenshot
+screenshot osm-buildings
+remove 96188
+load 2275207 Google Photorealistic 3D Tiles
+wait 8
+camera before Google 3D fly
+fly 39.9526 -75.1635 1500 55
+wait 25
+camera at Google 3D screenshot
+screenshot google-3d
+removeAll
+wait 3
+
+# Imagery: Bing and Google 2D, which the plugin selects in Map Layers > Mobile.
+load 2 Bing Maps Aerial
+wait 5
+fly 39.9526 -75.1635 3000 0
+wait 2
+camera after Bing fly
+wait 13
+screenshot bing
+load 3830182 Google Maps 2D Satellite
+wait 5
+wait 15
+camera at Google 2D screenshot
+screenshot google-2d
+
+# Terrain.
+load 1 Cesium World Terrain
+fly 46.8523 -121.7603 20000 60
+wait 25
+fly 46.8600 -121.7500 15000 65
+wait 25
+camera at terrain screenshot
+screenshot terrain-rainier
+
+removeAll
+wait 5

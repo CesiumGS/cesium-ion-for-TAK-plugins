@@ -1,0 +1,39 @@
+name: ATAK APKs for the work PC
+
+# Builds the plugin on the Mac (the only machine with the ATAK SDK) and
+# uploads it with the SDK's atak.apk as a private artifact kept for one day,
+# so the work PC can run ATAK in an emulator next to ion Self-Hosted.
+# Approved by the repository owner. Trigger: manual dispatch, or a push
+# whose head commit holds "[atak-apks]".
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - "claude/**"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: >-
+      github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[atak-apks]')
+    runs-on: [self-hosted, macOS, atak-device]
+    concurrency:
+      group: atak-device
+      cancel-in-progress: false
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: atak/scripts/device-test.sh --build-only "$RUNNER_TEMP/atak-apks"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: atak-apks
+          path: ${{ runner.temp }}/atak-apks/*.apk
+          retention-days: 1
+          if-no-files-found: error

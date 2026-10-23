@@ -1,0 +1,44 @@
+# No commands: when does the map start drawing after ATAK restarts?
+# Screenshots every 20 s for 4 minutes, with the camera and a jump to
+# Rainier first so a drawn map is recognisable. Read with the report's
+# logcat tag timeline, the activity/focus/power states, and the logcat
+# lines between the marks (the map started drawing at 140-160 s before).
+camera start
+fly 46.8523 -121.7603 20000 60 jump
+screenshot t000
+state
+wait 20
+screenshot t020
+wait 20
+camera t040
+screenshot t040
+wait 20
+screenshot t060
+wait 20
+camera t080
+screenshot t080
+wait 20
+screenshot t100
+wait 20
+camera t120
+screenshot t120
+state
+mark window-start
+wait 20
+screenshot t140
+wait 20
+camera t160
+screenshot t160
+state
+mark window-end
+wait 20
+screenshot t180
+wait 20
+camera t200
+screenshot t200
+wait 20
+screenshot t220
+wait 20
+camera t240
+screenshot t240
+state

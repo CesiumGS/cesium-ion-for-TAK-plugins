@@ -1,0 +1,2 @@
+# Nothing to drive: a short run whose report carries the SDK scan.
+wait 5

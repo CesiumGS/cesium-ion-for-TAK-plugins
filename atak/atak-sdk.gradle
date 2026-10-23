@@ -1,0 +1,136 @@
+// Locates the ATAK-CIV plugin SDK: the folder that contains
+// atak-gradle-takdev.jar, main.jar, and android_keystore together.
+// Applied from settings.gradle; the result is gradle.ext.atakSdkDir.
+//
+// Order:
+//   1. takdev.plugin in local.properties: the jar itself or any folder above it
+//   2. the ATAK_SDK environment variable (same forms)
+//   3. a search near this checkout and in ~/Documents, ~/Downloads, ~/Desktop, ~
+//      (several SDKs: prefer the one whose path names atakVersion)
+// Pin the result with takdev.plugin in local.properties to skip the search.
+
+def requiredFiles = ["atak-gradle-takdev.jar", "main.jar", "android_keystore"]
+def skippedFolders = ["node_modules", "Library", "build", "Applications", "Pictures", "Music", "Movies"] as Set
+
+def localProperties = new Properties()
+def localPropertiesFile = new File(settingsDir, "local.properties")
+if (localPropertiesFile.canRead()) {
+    localPropertiesFile.withInputStream { localProperties.load(it) }
+}
+def atakVersion = localProperties.getProperty("atakVersion", "5.7.0").trim()
+
+// With takrepo.url (the TAK.gov Third-Party Pipeline, or artifacts.tak.gov
+// access), the takdev plugin and the ATAK SDK come from TAK's Maven
+// repository (app/build.gradle), so no local SDK is needed.
+def takrepoUrl = providers.gradleProperty("takrepo.url").getOrNull() ?: localProperties.getProperty("takrepo.url")
+if (takrepoUrl != null && !takrepoUrl.trim().isEmpty()) {
+    println "ATAK SDK: from TAK's Maven repository (takrepo.url is set)"
+    gradle.ext.atakSdkDir = null
+    gradle.ext.atakVersion = atakVersion
+    return
+}
+def home = new File(System.getProperty("user.home"))
+
+def isSdkFolder = { File folder ->
+    folder != null && folder.isDirectory() && requiredFiles.every { new File(folder, it).isFile() }
+}
+
+// Breadth-first, so shallower SDKs are found first.
+def findSdkFolders = { File start, int maxDepth ->
+    def found = []
+    def queue = [[start, 0]]
+    while (!queue.isEmpty()) {
+        def entry = queue.remove(0)
+        File folder = entry[0]
+        int depth = entry[1]
+        if (isSdkFolder(folder)) {
+            found << folder
+            continue
+        }
+        if (depth >= maxDepth) {
+            continue
+        }
+        File[] children = folder.listFiles()
+        if (children == null) {
+            continue
+        }
+        children.findAll { it.isDirectory() && !it.name.startsWith(".") && !skippedFolders.contains(it.name) }
+                .sort { it.name }
+                .each { queue << [it, depth + 1] }
+    }
+    return found
+}
+
+def expandHome = { String path ->
+    path.startsWith("~") ? home.absolutePath + path.substring(1) : path
+}
+
+def fromSetting = { String label, String value ->
+    File configured = new File(expandHome(value.trim()))
+    if (!configured.isAbsolute()) {
+        configured = new File(settingsDir, configured.path)
+    }
+    if (configured.isFile() && isSdkFolder(configured.parentFile)) {
+        return configured.parentFile
+    }
+    if (configured.isDirectory()) {
+        def found = findSdkFolders(configured, 3)
+        if (!found.isEmpty()) {
+            return found[0]
+        }
+    }
+    throw new GradleException(
+            "${label} is set to '${value}', but no ATAK SDK was found there. It must be "
+                    + "atak-gradle-takdev.jar, or a folder containing it next to main.jar and android_keystore. "
+                    + "Fix or remove ${label} to let the build search for the SDK.")
+}
+
+File sdkFolder = null
+String source = null
+String configuredJar = localProperties.getProperty("takdev.plugin", "").trim()
+String environmentSdk = (System.getenv("ATAK_SDK") ?: "").trim()
+if (!configuredJar.isEmpty()) {
+    sdkFolder = fromSetting("takdev.plugin (atak/local.properties)", configuredJar)
+    source = "takdev.plugin"
+} else if (!environmentSdk.isEmpty()) {
+    sdkFolder = fromSetting("ATAK_SDK", environmentSdk)
+    source = "ATAK_SDK"
+} else {
+    def roots = [
+            settingsDir.parentFile,              // repository root
+            settingsDir.parentFile?.parentFile,  // where the old plugin's ../../ default pointed
+            new File(home, "Documents"),
+            new File(home, "Downloads"),
+            new File(home, "Desktop"),
+            home
+    ].findAll { it != null && it.isDirectory() }.unique { it.canonicalPath }
+    def found = []
+    for (File root : roots) {
+        found.addAll(findSdkFolders(root, 4))
+        if (!found.isEmpty()) {
+            break
+        }
+    }
+    found = found.unique { it.canonicalPath }
+    if (found.isEmpty()) {
+        throw new GradleException(
+                "No ATAK SDK found. Looked for a folder containing ${requiredFiles.join(', ')} under "
+                        + roots.collect { it.absolutePath }.join(', ')
+                        + ". Set takdev.plugin in atak/local.properties to the SDK's atak-gradle-takdev.jar.")
+    }
+    def matchingVersion = found.findAll { it.absolutePath.contains(atakVersion) }
+    sdkFolder = (matchingVersion.isEmpty() ? found : matchingVersion)[0]
+    source = "search"
+    if (found.size() > 1) {
+        println "Several ATAK SDKs found: ${found.collect { it.absolutePath }.join(', ')}"
+    }
+}
+
+println "ATAK SDK: ${sdkFolder.absolutePath} (from ${source})"
+if (source == "search") {
+    println "To skip this search, add to atak/local.properties:"
+    println "  takdev.plugin=${new File(sdkFolder, 'atak-gradle-takdev.jar').absolutePath}"
+}
+
+gradle.ext.atakSdkDir = sdkFolder
+gradle.ext.atakVersion = atakVersion

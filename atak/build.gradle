@@ -1,0 +1,9 @@
+// AGP 9.3.1 with Gradle 9.5.0 is the combination proven to build ATAK 5.7
+// plugins on a Mac whose Android Studio bundles JDK 25.
+plugins {
+    id("com.android.application") version "9.3.1" apply false
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.layout.buildDirectory
+}

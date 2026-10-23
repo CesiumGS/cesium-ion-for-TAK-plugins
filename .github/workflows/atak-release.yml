@@ -1,0 +1,114 @@
+name: ATAK test release
+
+# Publishes an ATAK plugin build for testers as a GitHub prerelease, only
+# after the core regression checks pass on the tablet attached to the Mac
+# runner (the only machine with the ATAK SDK). Requested by the repository
+# owner: "when we have a version ready for users to test, put it in Releases".
+#
+# Trigger: a push to the plugin development branch whose head commit message
+# holds "[atak-release: <tag>]", for example "[atak-release: atak-v0.2.0-beta.1]".
+# The release notes come from atak/release-notes/<tag>.md (required). The
+# release carries the plugin APK only; this repository never redistributes ATAK.
+#
+# Two kinds of release:
+# - Test build (tag with a suffix, e.g. atak-v0.2.0-beta.1): built here as a
+#   debug APK, checked with the core regression on the tablet's developer
+#   ATAK, published as a prerelease.
+# - TAK.gov-signed build: the signed APK the pipeline returned, committed at
+#   atak/release-artifacts/<tag>/ for this run only. It is checked with the
+#   release smoke test in standard ATAK-CIV on the tablet and published as the
+#   release (a prerelease if the tag has a suffix).
+
+on:
+  push:
+    branches:
+      - main
+      - "claude/**"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: >-
+      contains(github.event.head_commit.message, '[atak-release: ')
+    runs-on: [self-hosted, macOS, atak-device]
+    concurrency:
+      group: atak-device
+      cancel-in-progress: false
+    timeout-minutes: 60
+    env:
+      HEAD_MESSAGE: ${{ github.event.head_commit.message }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read the tag and its release notes
+        run: |
+          tag="$(printf '%s' "$HEAD_MESSAGE" | sed -n 's/.*\[atak-release: *\([A-Za-z0-9._-]*\) *\].*/\1/p' | head -1)"
+          [[ "$tag" =~ ^atak-v[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9.]+)?$ ]] || { echo "Invalid tag: '$tag'"; exit 1; }
+          test -f "atak/release-notes/$tag.md" || { echo "No atak/release-notes/$tag.md"; exit 1; }
+          status="$(curl -sS -o /dev/null -w '%{http_code}' -H "Authorization: Bearer $GH_TOKEN" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/releases/tags/$tag")"
+          [ "$status" = "404" ] || { echo "Release $tag already exists (HTTP $status)."; exit 1; }
+          echo "TAG=$tag" >> "$GITHUB_ENV"
+          echo "Release: $tag"
+
+      - name: Find a TAK.gov-signed APK for this tag
+        run: |
+          signed="$(ls atak/release-artifacts/"$TAG"/*.apk 2>/dev/null | head -1 || true)"
+          echo "SIGNED_APK=$signed" >> "$GITHUB_ENV"
+          echo "Signed APK: ${signed:-none (test build)}"
+
+      - name: Build, install, and run the regression checks on the tablet (test build)
+        if: env.SIGNED_APK == ''
+        run: atak/scripts/device-test.sh --scenario regression 1800
+
+      - name: Install the signed APK in standard ATAK and run the release smoke test
+        if: env.SIGNED_APK != ''
+        run: atak/scripts/release-smoke.sh
+
+      - name: Require REGRESSION PASS
+        run: |
+          report="$(ls -t atak/device-reports/*-report.txt | head -1)"
+          grep -E '^REGRESSION: (PASS|FAIL)' "$report"
+          grep -q '^REGRESSION: PASS' "$report" || { echo "Regression checks did not pass; no release."; exit 1; }
+
+      - name: Publish the prerelease with the plugin APK
+        run: |
+          set -euo pipefail
+          if [ -n "$SIGNED_APK" ]; then
+            apk="$SIGNED_APK"; title="Cesium ion for ATAK ${TAG#atak-v}"
+          else
+            apk="$(ls -t atak/app/build/outputs/apk/civ/debug/ATAK-Plugin-CesiumIon-*.apk | head -1)"
+            title="Cesium ion for ATAK ${TAG#atak-v} (test build)"
+          fi
+          case "${TAG#atak-v}" in *-*) prerelease=true ;; *) prerelease=false ;; esac
+          echo "APK: $apk, prerelease: $prerelease"
+          body="$(python3 -c 'import json,sys; print(json.dumps({"tag_name": sys.argv[1], "target_commitish": sys.argv[2], "name": sys.argv[3], "body": open(sys.argv[4]).read(), "prerelease": sys.argv[5] == "true"}))' \
+            "$TAG" "$GITHUB_SHA" "$title" "atak/release-notes/$TAG.md" "$prerelease")"
+          # A draft for the same tag (the TAK.gov source zip's) would clash with the new release.
+          curl -sS -f -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$GITHUB_REPOSITORY/releases?per_page=100" \
+            | python3 -c 'import json,sys; [print(r["id"]) for r in json.load(sys.stdin) if r["draft"] and r["tag_name"] == sys.argv[1]]' "$TAG" \
+            | while read -r old; do
+                curl -sS -f -X DELETE -H "Authorization: Bearer $GH_TOKEN" "https://api.github.com/repos/$GITHUB_REPOSITORY/releases/$old"
+                echo "Removed draft $old (tag $TAG)"
+              done
+          release="$(curl -sS -f -X POST -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json' \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/releases" -d "$body")"
+          id="$(printf '%s' "$release" | python3 -c 'import json,sys; print(json.load(sys.stdin)["id"])')"
+          name="$(basename "$apk")"
+          curl -sS -f -X POST -H "Authorization: Bearer $GH_TOKEN" -H 'Content-Type: application/vnd.android.package-archive' \
+            --data-binary @"$apk" \
+            "https://uploads.github.com/repos/$GITHUB_REPOSITORY/releases/$id/assets?name=$name" > /dev/null
+          printf '%s' "$release" | python3 -c 'import json,sys; print("Published:", json.load(sys.stdin)["html_url"])'
+
+      - name: Publish the regression report to the device-reports branch
+        if: always()
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          files=(atak/device-reports/*-report.txt atak/device-reports/*-scenario.txt atak/device-reports/*.png)
+          [ ${#files[@]} -gt 0 ] || { echo "No report was written."; exit 0; }
+          dest="runs/$(date -u +%Y%m%d-%H%M%S)-${GITHUB_SHA::7}-release-${TAG:-unknown}"
+          .github/scripts/publish-reports.sh "$dest" "Release check: ${TAG:-unknown} at ${GITHUB_SHA::7} (run $GITHUB_RUN_ID)" "${files[@]}"

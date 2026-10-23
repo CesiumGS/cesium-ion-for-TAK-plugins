@@ -1,0 +1,116 @@
+name: VR-TAK (work PC)
+
+# Runs on the Windows work PC runner (.github/scripts/setup-runner-windows.ps1) when
+# a push to the plugin development branch has "[vrtak: <task>]" in its head
+# commit message; runs vrtak/scripts/<task>.ps1 and publishes its text output
+# to the device-reports branch, or when dispatched from the Actions tab
+# with a task name (once this workflow is on the default branch). Pull
+# requests never trigger it.
+
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: Task in vrtak/scripts (file name without .ps1)
+        required: true
+        default: vrtak-launch-cloud
+  push:
+    branches:
+      - main
+      - "claude/**"
+
+permissions:
+  contents: write
+  # atak-selfhosted downloads the Mac runner's APK artifact.
+  actions: read
+
+jobs:
+  vrtak:
+    if: >-
+      github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[vrtak: ')
+    runs-on: [self-hosted, Windows, vrtak]
+    # On the job, not the workflow: a push without the marker skips the job
+    # and must not join the group, where it would cancel a pending test run.
+    concurrency:
+      group: vrtak
+      cancel-in-progress: false
+    timeout-minutes: 60
+    env:
+      HEAD_MESSAGE: ${{ github.event.head_commit.message }}
+      INPUT_TASK: ${{ inputs.task }}
+      GH_TOKEN: ${{ github.token }}
+    defaults:
+      run:
+        # Windows PowerShell's default execution policy (Restricted) refuses
+        # the runner's step scripts; bypass it for these processes only.
+        shell: powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "& '{0}'"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run the task
+        timeout-minutes: 45
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $task = if ($env:INPUT_TASK) { $env:INPUT_TASK } else {
+            [regex]::Match($env:HEAD_MESSAGE, '\[vrtak:\s*([A-Za-z0-9_-]+)\s*\]').Groups[1].Value
+          }
+          if ($task -notmatch '^[A-Za-z0-9_-]+$') { throw 'No valid task name (letters, digits, - and _).' }
+          $script = "vrtak\scripts\$task.ps1"
+          if (-not (Test-Path $script)) { throw "No task script $script." }
+          New-Item -ItemType Directory -Force -Path vrtak\reports | Out-Null
+          $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+          Add-Content -Path $env:GITHUB_ENV -Value "TASK=$task" -Encoding ascii
+          $report = Join-Path (Resolve-Path vrtak\reports) "$stamp-$task-report.txt"
+          # Lines go to the report as they arrive (UTF-8 without BOM; Tee-Object
+          # in Windows PowerShell writes UTF-16), so a timeout keeps what ran.
+          $utf8 = New-Object Text.UTF8Encoding $false
+          try {
+            & $script *>&1 | Out-String -Stream -Width 400 | ForEach-Object {
+              $_
+              [IO.File]::AppendAllText($report, $_ + "`r`n", $utf8)
+            }
+          } catch {
+            [IO.File]::AppendAllText($report, "TASK FAILED: $_`r`n", $utf8)
+            throw
+          }
+          # Inspection tasks probe tools that may be missing; a native command's
+          # exit code must not fail a task that finished.
+          $global:LASTEXITCODE = 0
+
+      - name: Publish the report to the device-reports branch
+        if: always()
+        run: |
+          # Native git writes progress to stderr; judge it by exit codes.
+          $ErrorActionPreference = 'Continue'
+          function Invoke-Git { git @args; if ($LASTEXITCODE -ne 0) { throw "git $($args -join ' ') failed ($LASTEXITCODE)" } }
+          $files = @(Get-ChildItem vrtak\reports -File -ErrorAction SilentlyContinue)
+          if ($files.Count -eq 0) { 'No report.'; exit 0 }
+          $task = if ($env:TASK) { $env:TASK } else { 'unknown' }
+          $sha7 = $env:GITHUB_SHA.Substring(0, 7)
+          $dest = "runs/$((Get-Date).ToUniversalTime().ToString('yyyyMMdd-HHmmss'))-$sha7-vrtak-$task"
+          $tree = Join-Path $env:RUNNER_TEMP "device-reports-$env:GITHUB_RUN_ID-$env:GITHUB_RUN_ATTEMPT"
+          Invoke-Git fetch -q --depth 1 origin device-reports
+          Invoke-Git worktree add -q -B device-reports $tree FETCH_HEAD
+          try {
+            # The Mac runner publishes to the same branch: on a rejected
+            # push, retry on the new tip (each run writes its own folder).
+            $published = $false
+            foreach ($attempt in 1..6) {
+              $target = Join-Path $tree $dest
+              New-Item -ItemType Directory -Force -Path $target | Out-Null
+              Copy-Item -Path $files.FullName -Destination $target -Force
+              Invoke-Git -C $tree add $dest
+              Invoke-Git -C $tree -c user.name=device-test -c user.email=device-test@users.noreply.github.com commit -qm "VR-TAK report: $task at $sha7 (run $env:GITHUB_RUN_ID)"
+              git -C $tree push -q origin device-reports
+              if ($LASTEXITCODE -eq 0) { $published = $true; break }
+              "Push rejected (another runner published); retrying on the new tip ($attempt)."
+              Start-Sleep -Seconds (3 * $attempt)
+              # FETCH_HEAD is per worktree: fetch and reset inside the report tree.
+              Invoke-Git -C $tree fetch -q --depth 1 origin device-reports
+              Invoke-Git -C $tree reset -q --hard FETCH_HEAD
+            }
+            if (-not $published) { throw 'Could not publish after several attempts.' }
+          } finally {
+            git worktree remove --force $tree
+          }
+          "Published to device-reports:$dest"

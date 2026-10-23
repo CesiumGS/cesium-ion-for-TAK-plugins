@@ -1,0 +1,19 @@
+# terrain-stress on a freshly installed ATAK: opens ion's sign-in page first,
+# and the owner signs in on the tablet (Log in as a team, CesiumBD) while the
+# run waits; the test only opens the page and never sets a token.
+tap Cancel
+wait 2
+pane
+wait 8
+signIn
+wait 15
+screenshot signin-page
+note The owner signs in on the tablet now (the run waits about 4 minutes).
+wait 120
+screenshot signin-2min
+wait 110
+atak
+wait 8
+pane close
+wait 2
+include terrain-stress

@@ -1,0 +1,28 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+// Finds the ATAK SDK (local.properties takdev.plugin, ATAK_SDK, or a search).
+apply from: "atak-sdk.gradle"
+
+rootProject.name = "CesiumIon"
+include ":app"
+
+// The shared Cesium ion core is compiled from its single source location, so
+// ATAK and the desktop probe always use the same code (see core/README.md).
+// A source zip for the TAK.gov pipeline carries a copy in ./ion-client-java.
+include ":ion-client-java"
+def bundledCore = file("ion-client-java")
+project(":ion-client-java").projectDir = bundledCore.isDirectory() ? bundledCore : file("../core/ion-client-java")
