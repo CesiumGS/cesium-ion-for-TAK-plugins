@@ -1,0 +1,54 @@
+# Core functionality every change must keep working (Cesium ion Cloud, signed in):
+# pane and settings, asset list, 3D Tiles, imagery, terrain, Google Photorealistic,
+# remove. ~6 minutes. The report ends its checks with "REGRESSION: PASS" or FAIL.
+removeAll
+wait 3
+tap Cancel
+wait 2
+pane
+wait 10
+screenshot pane
+expect Found [0-9]+ assets
+settings open
+wait 3
+screenshot settings
+settings close
+wait 2
+
+load 96188 Cesium OSM Buildings
+wait 8
+fly 39.9526 -75.1635 1500 55
+wait 20
+screenshot osm-buildings
+expect Added\. In ATAK: Overlay Manager
+remove 96188
+wait 3
+expect Removal requested
+
+load 2275207 Google Photorealistic 3D Tiles
+wait 8
+fly 39.9526 -75.1635 1500 55
+wait 25
+screenshot google-3d
+removeAll
+wait 3
+
+load 2 Bing Maps Aerial
+wait 5
+fly 39.9526 -75.1635 3000 0
+wait 15
+screenshot bing
+expect Showing "Cesium ion - Bing Maps Aerial"
+
+load 1 Cesium World Terrain
+fly 46.8523 -121.7603 20000 60
+wait 30
+screenshot terrain
+expect Added as ATAK's elevation
+
+pane
+wait 3
+screenshot pane-loaded
+removeAll
+wait 5
+expect Removed [0-9]+ layers

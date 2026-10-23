@@ -1,0 +1,247 @@
+{
+  "description": "GET /v1/assets/{id}/endpoint response -> resolved endpoint. All tokens and keys are fake.",
+  "cases": [
+    {
+      "name": "ion-hosted 3D Tiles with a JWT endpoint token",
+      "assetId": 96188,
+      "response": {
+        "type": "3DTILES",
+        "url": "https://assets.ion.cesium.com/96188/tileset.json",
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmYWtlLWVuZHBvaW50LXRva2VuIiwiYXNzZXRJZCI6OTYxODgsImV4cCI6MTg5MzQ1NjAwMH0.ZmFrZS1zaWduYXR1cmU",
+        "attributions": [
+          { "html": "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors", "collapsible": false }
+        ]
+      },
+      "expect": {
+        "kind": "ION_HOSTED",
+        "type": "3DTILES",
+        "url": "https://assets.ion.cesium.com/96188/tileset.json",
+        "credentialNames": ["access_token"],
+        "expiresAtEpochMillis": 1893456000000,
+        "googlePhotorealistic": false,
+        "attributionText": ["© OpenStreetMap contributors"],
+        "authorize": [
+          {
+            "input": "https://assets.ion.cesium.com/96188/0/0.b3dm",
+            "output": "https://assets.ion.cesium.com/96188/0/0.b3dm?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmYWtlLWVuZHBvaW50LXRva2VuIiwiYXNzZXRJZCI6OTYxODgsImV4cCI6MTg5MzQ1NjAwMH0.ZmFrZS1zaWduYXR1cmU"
+          },
+          {
+            "input": "https://example.com/other.b3dm",
+            "output": "https://example.com/other.b3dm"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ion-hosted terrain with an opaque token and a version query",
+      "assetId": 1,
+      "response": {
+        "type": "TERRAIN",
+        "url": "https://assets.ion.cesium.com/asset_depot/1/CesiumWorldTerrain/v1.2/?v=2",
+        "accessToken": "opaque-fake-token",
+        "attributions": []
+      },
+      "expect": {
+        "kind": "ION_HOSTED",
+        "type": "TERRAIN",
+        "url": "https://assets.ion.cesium.com/asset_depot/1/CesiumWorldTerrain/v1.2/?v=2",
+        "credentialNames": ["access_token"],
+        "expiresAtEpochMillis": -1,
+        "googlePhotorealistic": false,
+        "attributionText": [],
+        "authorize": [
+          {
+            "input": "https://assets.ion.cesium.com/asset_depot/1/CesiumWorldTerrain/v1.2/layer.json?v=2",
+            "output": "https://assets.ion.cesium.com/asset_depot/1/CesiumWorldTerrain/v1.2/layer.json?v=2&access_token=opaque-fake-token"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Google Photorealistic 3D Tiles (asset 2275207)",
+      "assetId": 2275207,
+      "response": {
+        "type": "3DTILES",
+        "externalType": "3DTILES",
+        "options": {
+          "url": "https://tile.googleapis.com/v1/3dtiles/root.json?key=FAKE-GOOGLE-KEY"
+        },
+        "attributions": [
+          { "html": "<img src=\"https://assets.ion.cesium.com/google-credit.png\" alt=\"Google\"/>", "collapsible": false }
+        ]
+      },
+      "expect": {
+        "kind": "EXTERNAL_3D_TILES",
+        "type": "3DTILES",
+        "url": "https://tile.googleapis.com/v1/3dtiles/root.json",
+        "credentialNames": ["key"],
+        "expiresAtEpochMillis": -1,
+        "googlePhotorealistic": true,
+        "attributionText": [""],
+        "authorize": [
+          {
+            "input": "https://tile.googleapis.com/v1/3dtiles/datasets/CgA/files/UlRPVEhfRUFSVEg.json?session=FAKE-SESSION",
+            "output": "https://tile.googleapis.com/v1/3dtiles/datasets/CgA/files/UlRPVEhfRUFSVEg.json?session=FAKE-SESSION&key=FAKE-GOOGLE-KEY"
+          },
+          {
+            "input": "https://evil.example.com/v1/3dtiles/root.json",
+            "output": "https://evil.example.com/v1/3dtiles/root.json"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Legacy external type name for Google 3D Tiles",
+      "assetId": 2275207,
+      "response": {
+        "externalType": "GOOGLE_PHOTOREALISTIC_3DTILES",
+        "options": { "url": "https://tile.googleapis.com/v1/3dtiles/root.json?key=FAKE-GOOGLE-KEY" }
+      },
+      "expect": {
+        "kind": "EXTERNAL_3D_TILES",
+        "type": "3DTILES",
+        "url": "https://tile.googleapis.com/v1/3dtiles/root.json",
+        "credentialNames": ["key"],
+        "expiresAtEpochMillis": -1,
+        "googlePhotorealistic": true,
+        "attributionText": []
+      }
+    },
+    {
+      "name": "External 3D Tiles that are not Google",
+      "assetId": 4242,
+      "response": {
+        "type": "3DTILES",
+        "externalType": "3DTILES",
+        "options": { "url": "https://tiles.example.com/city/tileset.json" }
+      },
+      "expect": {
+        "kind": "EXTERNAL_3D_TILES",
+        "type": "3DTILES",
+        "url": "https://tiles.example.com/city/tileset.json",
+        "credentialNames": [],
+        "expiresAtEpochMillis": -1,
+        "googlePhotorealistic": false,
+        "attributionText": []
+      }
+    },
+    {
+      "name": "Bing Maps aerial imagery",
+      "assetId": 2,
+      "response": {
+        "type": "IMAGERY",
+        "externalType": "BING",
+        "options": { "url": "https://dev.virtualearth.net", "key": "FAKE-BING-KEY", "mapStyle": "Aerial" },
+        "attributions": []
+      },
+      "expect": {
+        "kind": "BING_IMAGERY",
+        "type": "IMAGERY",
+        "url": "https://dev.virtualearth.net",
+        "credentialNames": ["key"],
+        "expiresAtEpochMillis": -1,
+        "googlePhotorealistic": false,
+        "attributionText": [],
+        "mapStyle": "Aerial"
+      }
+    },
+    {
+      "name": "Google Maps 2D imagery",
+      "assetId": 9000001,
+      "response": {
+        "type": "IMAGERY",
+        "externalType": "GOOGLE_2D_MAPS",
+        "options": { "url": "https://tile.googleapis.com", "session": "FAKE-2D-SESSION", "key": "FAKE-GOOGLE-KEY" }
+      },
+      "expect": {
+        "kind": "GOOGLE_2D_IMAGERY",
+        "type": "IMAGERY",
+        "url": "https://tile.googleapis.com",
+        "credentialNames": ["session", "key"],
+        "expiresAtEpochMillis": -1,
+        "googlePhotorealistic": false,
+        "attributionText": [],
+        "tileTemplate": "https://tile.googleapis.com/v1/2dtiles/{z}/{x}/{y}"
+      }
+    },
+    {
+      "name": "Google 2D tiles through ion's proxy, with an endpoint token",
+      "assetId": 3830182,
+      "response": {
+        "type": "IMAGERY",
+        "externalType": "GOOGLE_2D_MAPS",
+        "options": {
+          "url": "https://assets.ion.cesium.com/proxy/3830182",
+          "session": "FAKE-2D-SESSION",
+          "key": "FAKE-GOOGLE-KEY",
+          "accessToken": "FAKE-ION-ENDPOINT-TOKEN"
+        }
+      },
+      "expect": {
+        "kind": "GOOGLE_2D_IMAGERY",
+        "type": "IMAGERY",
+        "url": "https://assets.ion.cesium.com/proxy/3830182",
+        "credentialNames": ["session", "key", "access_token"],
+        "expiresAtEpochMillis": -1,
+        "googlePhotorealistic": false,
+        "attributionText": [],
+        "tileTemplate": "https://assets.ion.cesium.com/proxy/3830182/v1/2dtiles/{z}/{x}/{y}"
+      }
+    },
+    {
+      "name": "External STK terrain server",
+      "assetId": 777,
+      "response": {
+        "type": "TERRAIN",
+        "externalType": "STK_TERRAIN_SERVER",
+        "options": { "url": "https://terrain.example.com/tilesets/world/tiles" }
+      },
+      "expect": {
+        "kind": "EXTERNAL_TERRAIN",
+        "type": "TERRAIN",
+        "url": "https://terrain.example.com/tilesets/world/tiles",
+        "credentialNames": [],
+        "expiresAtEpochMillis": -1,
+        "googlePhotorealistic": false,
+        "attributionText": []
+      }
+    },
+    {
+      "name": "An external imagery type the plugins do not stream",
+      "assetId": 888,
+      "response": {
+        "type": "IMAGERY",
+        "externalType": "WMS",
+        "options": { "url": "https://wms.example.com/service", "layers": "0" }
+      },
+      "expect": {
+        "kind": "UNSUPPORTED",
+        "type": "IMAGERY",
+        "url": "",
+        "credentialNames": [],
+        "expiresAtEpochMillis": -1,
+        "googlePhotorealistic": false,
+        "attributionText": [],
+        "externalType": "WMS"
+      }
+    },
+    {
+      "name": "ion-hosted response without a URL",
+      "assetId": 5,
+      "response": { "type": "3DTILES", "accessToken": "opaque-fake-token" },
+      "expectError": "INVALID_RESPONSE"
+    },
+    {
+      "name": "Bing response missing its key",
+      "assetId": 2,
+      "response": { "type": "IMAGERY", "externalType": "BING", "options": { "url": "https://dev.virtualearth.net", "mapStyle": "Aerial" } },
+      "expectError": "INVALID_RESPONSE"
+    },
+    {
+      "name": "Relative URL is rejected",
+      "assetId": 6,
+      "response": { "type": "3DTILES", "url": "/96188/tileset.json", "accessToken": "opaque-fake-token" },
+      "expectError": "INVALID_RESPONSE"
+    }
+  ]
+}

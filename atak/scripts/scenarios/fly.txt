@@ -1,0 +1,31 @@
+# Camera moves only, no layers: does the map render where a fly lands?
+# Compares jumps with animated flights, near and far. ~2 minutes.
+removeAll
+wait 3
+camera start
+screenshot start
+
+fly 39.9526 -75.1635 3000 0 jump
+wait 8
+camera Philadelphia jump
+screenshot philadelphia-jump
+
+fly 46.8523 -121.7603 20000 60 jump
+wait 8
+camera Rainier jump
+screenshot rainier-jump
+
+fly 39.9526 -75.1635 1500 55 jump
+wait 8
+camera Philadelphia tilted jump
+screenshot philadelphia-tilted-jump
+
+fly 46.8523 -121.7603 20000 60 animate
+wait 12
+camera Rainier animated
+screenshot rainier-animated
+
+fly 39.9526 -75.1635 1500 55 animate
+wait 12
+camera Philadelphia tilted animated
+screenshot philadelphia-tilted-animated

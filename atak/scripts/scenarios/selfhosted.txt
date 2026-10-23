@@ -1,0 +1,42 @@
+# Cesium ion Self-Hosted (single-user, no token) on the work PC, then back to
+# ion Cloud. Asset IDs are that server's (its test assets cover
+# Philadelphia); the tablet must reach 192.168.1.247.
+removeAll
+wait 3
+server http://192.168.1.247:32470 http://192.168.1.247:31813
+wait 3
+fly 39.9526 -75.1635 3000 0 jump
+wait 3
+
+load 12 USGS Philly aerial PNG
+wait 15
+camera self-hosted imagery PNG
+screenshot selfhosted-imagery-png
+load 8 USGS Philly aerial GeoTIFF
+wait 15
+screenshot selfhosted-imagery-geotiff
+
+load 21 Philadelphia Box Elevated Diagnostic 75m
+wait 20
+camera self-hosted 3D Tiles
+screenshot selfhosted-3dtiles
+load 11 Philadelphia box 3D Tiles
+wait 15
+screenshot selfhosted-3dtiles-box
+
+load 9 Mapzen Philly elevation
+fly 39.9526 -75.1635 8000 60 jump
+wait 25
+screenshot selfhosted-terrain
+
+load 5 atak-test-philadelphia
+wait 10
+screenshot selfhosted-kml
+load 4 Natural Earth countries
+wait 20
+screenshot selfhosted-geojson
+
+removeAll
+wait 5
+server cloud
+wait 2

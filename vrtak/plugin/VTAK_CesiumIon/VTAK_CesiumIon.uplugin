@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "0.1.0",
+	"FriendlyName": "Cesium ion",
+	"Description": "Sign in to Cesium ion (Cloud or Self-Hosted), browse your assets, and add 3D Tiles such as Google Photorealistic 3D Tiles to VR-TAK's world.",
+	"Category": "VR-TAK",
+	"CreatedBy": "Cesium",
+	"CreatedByURL": "https://cesium.com",
+	"CanContainContent": false,
+	"IsBetaVersion": true,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "VTAK_CesiumIon",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{ "Name": "VH_Globe", "Enabled": true },
+		{ "Name": "CesiumForUnreal", "Enabled": true }
+	]
+}

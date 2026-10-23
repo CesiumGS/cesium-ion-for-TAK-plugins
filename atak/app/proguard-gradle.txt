@@ -1,0 +1,19 @@
+-dontskipnonpubliclibraryclasses
+-dontshrink
+-dontoptimize
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable,*Annotation*,Signature,InnerClasses
+-applymapping <atak.proguard.mapping>
+
+# ATAK instantiates the plugin entry point named in assets/plugin.xml.
+-keep class * implements gov.tak.api.plugin.IPlugin {
+}
+
+# Android recreates preference fragments reflectively through the no-arg constructor.
+-keep class * extends com.atakmap.android.preference.PluginPreferenceFragment {
+    public <init>();
+}
+
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}

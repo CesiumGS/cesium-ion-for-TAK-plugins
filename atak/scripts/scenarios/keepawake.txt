@@ -1,0 +1,8 @@
+# Keeps the Mac and the tablet awake (done at the start of every run) and
+# checks the pane once. Quick.
+tap Cancel
+wait 2
+pane
+wait 10
+screenshot pane
+expect Found [0-9]+ assets

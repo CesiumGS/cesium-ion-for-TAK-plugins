@@ -1,0 +1,50 @@
+# The v1.0.0 freeze (ATAK-CIV 5.7.0.16, 2026-10-21): ATAK's main thread
+# waited for its terrain lock while the Cesium ion pane opened, with Cesium
+# World Terrain attached and tiles loading. This loads terrain over mountains,
+# moves the map so tiles keep arriving (and the plugin re-attaches terrain),
+# and opens and closes the pane throughout. The report's "no ANRs" check is
+# the result.
+removeAll
+wait 3
+load 1 Cesium World Terrain
+expect Added as ATAK's elevation
+fly 46.8523 -121.7603 25000 60
+pane open
+wait 4
+pane close
+wait 4
+pane open
+fly 46.8600 -121.7500 15000 65 animate
+wait 2
+pane close
+wait 3
+pane open
+wait 3
+fly 46.7900 -121.7300 9000 70 animate
+pane close
+wait 2
+pane open
+wait 2
+pane close
+fly 46.8523 -121.7603 6000 72 animate
+wait 2
+pane open
+wait 5
+pane close
+fly 46.9000 -121.8000 12000 60 animate
+pane open
+wait 3
+pane close
+wait 3
+pane open
+wait 70
+note A minute still: the plugin may re-attach terrain now; open and close the pane through it.
+pane close
+wait 2
+pane open
+wait 2
+pane close
+wait 2
+pane open
+wait 20
+screenshot terrain-stress

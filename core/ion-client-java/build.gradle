@@ -1,0 +1,47 @@
+// Cesium ion client shared by the ATAK plugin (and mirrored by the Phase 2
+// VR-TAK C++ client through spec/ion-contract).
+//
+// Constraints, because this module is loaded inside ATAK's process:
+//  - no runtime dependencies (a plugin's copy of a library such as Gson or
+//    OkHttp can collide with the copy ATAK already ships);
+//  - Java 8 APIs only (--release 8), which Android API 26 (ATAK 5.7 minSdk)
+//    provides, so nothing here fails at runtime on a device.
+plugins {
+    id "java-library"
+}
+
+group = "com.cesium.tak"
+version = "0.1.0"
+
+tasks.named("compileJava") {
+    options.release = 8
+    options.encoding = "UTF-8"
+    // JDK 17+ warns that release 8 is deprecated; it is a deliberate choice.
+    options.compilerArgs += ["-Xlint:all", "-Xlint:-options", "-Werror"]
+}
+
+tasks.named("compileTestJava") {
+    options.release = 17
+    options.encoding = "UTF-8"
+}
+
+dependencies {
+    testImplementation platform("org.junit:junit-bom:5.11.4")
+    testImplementation "org.junit.jupiter:junit-jupiter"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+def ionContractDir = rootProject.file("../spec/ion-contract")
+
+tasks.named("test") {
+    useJUnitPlatform()
+    // Language-neutral fixtures shared with the Phase 2 C++ client.
+    systemProperty "ionContractDir", ionContractDir.absolutePath
+    if (ionContractDir.isDirectory()) {
+        inputs.dir(ionContractDir).withPropertyName("ionContract").withPathSensitivity(PathSensitivity.RELATIVE)
+    }
+    testLogging {
+        events "failed"
+        exceptionFormat = "full"
+    }
+}

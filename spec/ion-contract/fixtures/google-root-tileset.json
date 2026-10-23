@@ -1,0 +1,25 @@
+{
+  "asset": { "version": "1.0" },
+  "geometricError": 1e+100,
+  "root": {
+    "boundingVolume": {
+      "box": [0, 0, 0, 7972671.322099999, 0, 0, 0, 7972671.322099999, 0, 0, 0, 7945940.687199999]
+    },
+    "geometricError": 1e+100,
+    "refine": "REPLACE",
+    "children": [
+      {
+        "boundingVolume": {
+          "box": [0, 0, 0, 7972671.322099999, 0, 0, 0, 7972671.322099999, 0, 0, 0, 7945940.687199999]
+        },
+        "geometricError": 7.4296E+6,
+        "refine": "REPLACE",
+        "content": {
+          "uri": "/v1/3dtiles/datasets/CgA/files/UlRPVEhfRUFSVEg.json?session=FAKE-SESSION"
+        },
+        "extras": { "note": "/v1/3dtiles/not-a-reference.json" }
+      }
+    ]
+  },
+  "extensionsUsed": []
+}

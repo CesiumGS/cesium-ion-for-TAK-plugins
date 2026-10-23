@@ -1,0 +1,16 @@
+# Feature 1: team workspaces. Settings lists Personal and the account's teams
+# (hidden when the account has none). Starts with the core regression checks.
+include regression
+tap Cancel
+wait 2
+pane
+wait 12
+expect Workspaces?: 
+expect Found [0-9]+ assets
+settings open
+wait 3
+screenshot settings-workspace
+longpress ●
+wait 1
+screenshot status-tooltip
+settings close

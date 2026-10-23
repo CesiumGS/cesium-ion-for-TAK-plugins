@@ -1,0 +1,37 @@
+# The Cesium ion pane, top to bottom, before and after adding layers.
+removeAll
+wait 3
+# A login dialog left over from an earlier run.
+tap Cancel
+wait 2
+pane
+wait 10
+screenshot pane-top
+scroll down
+screenshot pane-assets
+scroll down
+screenshot pane-featured
+scroll down
+screenshot pane-bottom
+load 96188 Cesium OSM Buildings
+load 2 Bing Maps Aerial
+load 1 Cesium World Terrain
+wait 15
+pane
+wait 3
+scroll up
+scroll up
+scroll up
+scroll up
+scroll up
+screenshot pane-loaded-top
+scroll down
+screenshot pane-loaded
+scroll down
+screenshot pane-loaded-assets
+pane close
+fly 39.9526 -75.1635 1500 55
+wait 15
+screenshot map-loaded
+removeAll
+wait 3

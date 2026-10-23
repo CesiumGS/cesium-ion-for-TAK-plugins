@@ -1,0 +1,230 @@
+buildscript {
+    ext.PLUGIN_VERSION = "1.0.1"
+    // The TAK.gov Third-Party Pipeline builds for the ATAK version named here
+    // (the SDK plugin template's form; keep it a plain literal).
+    ext.ATAK_VERSION = '5.7.0'
+
+    def takdevVersion = '3.+'
+
+    // A Gradle property (-P, gradle.properties) or local.properties value.
+    def readProperty = { String name, Object fallback ->
+        def value = project.findProperty(name)
+        if (value == null) {
+            def propertiesFile = rootProject.file("local.properties")
+            if (propertiesFile.canRead()) {
+                def properties = new Properties()
+                propertiesFile.withInputStream { properties.load(it) }
+                value = properties.getProperty(name)
+            }
+        }
+        return value == null ? fallback : value
+    }
+
+    // As in the SDK's plugin template: with takrepo.url set (the TAK.gov
+    // pipeline, or a developer with artifacts.tak.gov access), the takdev
+    // plugin and the ATAK SDK come from TAK's Maven repository. Otherwise
+    // they come from the local ATAK SDK that ../atak-sdk.gradle found.
+    ext.isDevKitEnabled = { -> readProperty("takrepo.url", null) != null }
+    // The takdev plugin adds a "takrepo" repository even without TAK access;
+    // the template's https://localhost/ default fails every lookup (connection
+    // refused disables the repository and aborts dependency resolution), so
+    // point it at Google's Maven repository instead.
+    ext.takrepoUrl = readProperty("takrepo.url", "https://dl.google.com/dl/android/maven2/")
+    ext.takrepoUser = readProperty("takrepo.user", "invalid")
+    ext.takrepoPassword = readProperty("takrepo.password", "invalid")
+
+    File atakSdkDir = gradle.ext.atakSdkDir
+    ext.atakMainJar = atakSdkDir == null ? null : new File(atakSdkDir, "main.jar")
+    ext.atakPluginKeystore = atakSdkDir == null ? null : new File(atakSdkDir, "android_keystore")
+
+    repositories {
+        google()
+        mavenCentral()
+        if (isDevKitEnabled()) {
+            maven {
+                url = takrepoUrl
+                credentials {
+                    username = takrepoUser
+                    password = takrepoPassword
+                }
+            }
+        }
+    }
+    dependencies {
+        if (isDevKitEnabled()) {
+            classpath "com.atakmap.gradle:atak-gradle-takdev:${takdevVersion}"
+        } else {
+            classpath files(new File(atakSdkDir, "atak-gradle-takdev.jar"))
+        }
+    }
+}
+
+plugins {
+    id("com.android.application")
+}
+apply plugin: "atak-takdev-plugin"
+
+// The takdev plugin declares project repositories (a flatDir), and any
+// project repository makes Gradle ignore those in settings.gradle, so the
+// test dependencies need theirs declared here.
+repositories {
+    google()
+    mavenCentral()
+}
+
+// Version code: the last commit's time in epoch seconds (the scheme the
+// takdev plugin uses), so every build from a newer commit upgrades in place.
+// takdev's own getVersionCode() silently falls back to 1 in this repository,
+// which Android refuses as a downgrade. Without git, the build time is used.
+def gitOutput = { List<String> command ->
+    try {
+        def result = providers.exec {
+            commandLine command
+            workingDir rootDir
+            ignoreExitValue = true
+        }
+        return result.result.get().exitValue == 0 ? result.standardOutput.asText.get().trim() : ""
+    } catch (Exception ignored) {
+        return ""
+    }
+}
+def commitEpoch = gitOutput(["git", "log", "-1", "--format=%ct"])
+ext.PLUGIN_VERSION_CODE = commitEpoch.isInteger()
+        ? commitEpoch.toInteger()
+        : (int) (System.currentTimeMillis() / 1000L)
+ext.PLUGIN_REVISION = gitOutput(["git", "rev-parse", "--short", "HEAD"]) ?: "local"
+
+def supportedFlavors = [
+        [name: "civ", default: true, atakPackage: "com.atakmap.app.civ"],
+        [name: "mil", atakPackage: "com.atakmap.app.mil"],
+        [name: "gov", atakPackage: "com.atakmap.app.civ"]
+]
+
+android {
+    namespace "com.cesium.atak.ion"
+    compileSdk 36
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    bundle {
+        storeArchive {
+            enable = false
+        }
+    }
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+        resources {
+            excludes += ["META-INF/INDEX.LIST"]
+        }
+    }
+
+    // The ATAK SDK's own development keystore and its published credentials.
+    // ATAK rejects plugins signed with an ordinary Android debug key. Release
+    // builds for official ATAK must go through the TAK.gov Third-Party
+    // Plugin pipeline, which re-signs them.
+    signingConfigs {
+        debug {
+            storeFile atakPluginKeystore ?: layout.buildDirectory.file("android_keystore").get().asFile
+            storePassword "tnttnt"
+            keyAlias "wintec_mapping"
+            keyPassword "tnttnt"
+        }
+        release {
+            storeFile atakPluginKeystore ?: layout.buildDirectory.file("android_keystore").get().asFile
+            storePassword "tnttnt"
+            keyAlias "wintec_mapping"
+            keyPassword "tnttnt"
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            matchingFallbacks = ["sdk"]
+        }
+        release {
+            minifyEnabled true
+            proguardFiles "proguard-gradle.txt", "proguard-gradle-repackage.txt"
+            signingConfig signingConfigs.release
+            matchingFallbacks = ["odk"]
+        }
+    }
+
+    flavorDimensions "application"
+    productFlavors {
+        supportedFlavors.each { flavor ->
+            "${flavor.name}" {
+                getIsDefault().set(flavor.default == true)
+                dimension "application"
+                if (flavor.name != "civ" && flavor.name != "mil") {
+                    applicationIdSuffix = ".${flavor.name}"
+                }
+                matchingFallbacks = ["civ"]
+                def apiFlavor = flavor.name == "gov" ? "CIV" : flavor.name.toUpperCase()
+                manifestPlaceholders = [
+                        atakApiVersion: "com.atakmap.app@${ATAK_VERSION}.${apiFlavor}"
+                ]
+                buildConfigField "String", "ATAK_PACKAGE_NAME", "\"${flavor.atakPackage}\""
+            }
+        }
+
+        applicationVariants.all { variant ->
+            variant.resValue "string", "versionName", variant.versionName
+        }
+    }
+
+    sourceSets {
+        main {
+            defaultConfig.versionCode = PLUGIN_VERSION_CODE
+            defaultConfig.versionName =
+                    "${PLUGIN_VERSION} (${PLUGIN_REVISION}) - [${ATAK_VERSION}]"
+        }
+        debug.setRoot("build-types/debug")
+        release.setRoot("build-types/release")
+    }
+
+    defaultConfig {
+        minSdk 26
+        targetSdk 34
+        // "Sign in with Cesium ion": the public client ID of the ion OAuth
+        // application (redirect http://127.0.0.1:38736/cesium-tak/oauth2/callback,
+        // scopes assets:list assets:read). Not a secret; override with
+        // -PionOAuthClientId=<id>, or set it empty to offer token pasting only.
+        buildConfigField "String", "ION_OAUTH_CLIENT_ID",
+                "\"${project.findProperty('ionOAuthClientId') ?: '2438'}\""
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    lint {
+        abortOnError true
+        checkReleaseBuilds true
+    }
+}
+
+afterEvaluate {
+    project.file("proguard-gradle-repackage.txt").text =
+            "-repackageclasses atakplugin.${rootProject.name}"
+    base.archivesName = "ATAK-Plugin-${rootProject.name}-${PLUGIN_VERSION}-${PLUGIN_REVISION}-${ATAK_VERSION}"
+}
+
+dependencies {
+    implementation project(":ion-client-java")
+    if (atakMainJar != null) {
+        // Local SDK; with takrepo the takdev plugin adds the ATAK SDK itself.
+        compileOnly files(atakMainJar)
+    }
+    testImplementation "junit:junit:4.13.2"
+}

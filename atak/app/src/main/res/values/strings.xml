@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cesium ion</string>
+    <string name="app_desc">Stream Cesium ion imagery, terrain, and 3D Tiles (Cloud or Self-Hosted) into ATAK.</string>
+
+    <string name="prefs_title">Cesium ion</string>
+    <string name="prefs_summary">Cesium ion server and access token</string>
+    <string name="prefs_category_server">Server</string>
+    <string name="prefs_category_auth">Authentication</string>
+    <string name="prefs_mode_title">Cesium ion deployment</string>
+    <string name="prefs_server_url_title">Self-Hosted server URL</string>
+    <string name="prefs_server_url_summary">The address you open in a browser, e.g. https://ion.example.mil</string>
+    <string name="prefs_api_url_title">Self-Hosted API URL (optional)</string>
+    <string name="prefs_api_url_summary">Leave empty to discover it from the server\'s config.json</string>
+    <string name="prefs_allow_http_title">Allow unencrypted HTTP</string>
+    <string name="prefs_allow_http_summary">Only for an isolated lab network. Tokens and data travel in clear text.</string>
+    <string name="prefs_single_user_title">Single-user server (no token)</string>
+    <string name="prefs_single_user_summary">The Self-Hosted server accepts requests without an access token</string>
+    <string name="prefs_token_title">Access token</string>
+    <string name="prefs_token_dialog">Paste a Cesium ion access token with the assets:list and assets:read scopes. It is stored encrypted on this device and never shown again.</string>
+    <string name="prefs_clear_token_title">Remove saved access token</string>
+
+    <string-array name="prefs_mode_entries">
+        <item>Cesium ion Cloud</item>
+        <item>Cesium ion Self-Hosted</item>
+    </string-array>
+    <string-array name="prefs_mode_values" translatable="false">
+        <item>cloud</item>
+        <item>self_hosted</item>
+    </string-array>
+</resources>

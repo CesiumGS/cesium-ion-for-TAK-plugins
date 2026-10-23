@@ -1,0 +1,33 @@
+{
+  "description": "Credentials must never appear in logs, UI, or errors. Values of the parameters access_token, token, key, apikey, api_key, session, signature, sig, code, and client_secret (case-insensitive) are masked; so are bearer tokens and JWTs anywhere in text.",
+  "cases": [
+    {
+      "input": "https://tile.googleapis.com/v1/3dtiles/root.json?key=FAKE-GOOGLE-KEY",
+      "expect": "https://tile.googleapis.com/v1/3dtiles/root.json?key=REDACTED"
+    },
+    {
+      "input": "https://tile.googleapis.com/a.glb?session=FAKE-SESSION&key=FAKE-GOOGLE-KEY&v=1",
+      "expect": "https://tile.googleapis.com/a.glb?session=REDACTED&key=REDACTED&v=1"
+    },
+    {
+      "input": "GET https://assets.ion.cesium.com/1/layer.json?ACCESS_TOKEN=abc123 failed",
+      "expect": "GET https://assets.ion.cesium.com/1/layer.json?ACCESS_TOKEN=REDACTED failed"
+    },
+    {
+      "input": "Authorization: Bearer abc.def-ghi",
+      "expect": "Authorization: Bearer REDACTED"
+    },
+    {
+      "input": "token eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE4OTM0NTYwMDB9.c2lnbmF0dXJl leaked",
+      "expect": "token REDACTED leaked"
+    },
+    {
+      "input": "https://api.cesium.com/v1/assets?search=key%3Dvalue&limit=10",
+      "expect": "https://api.cesium.com/v1/assets?search=key%3Dvalue&limit=10"
+    },
+    {
+      "input": "No secrets here.",
+      "expect": "No secrets here."
+    }
+  ]
+}

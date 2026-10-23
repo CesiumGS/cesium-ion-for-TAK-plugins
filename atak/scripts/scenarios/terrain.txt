@@ -1,0 +1,13 @@
+# Cesium World Terrain over Mount Rainier; moves the map so ATAK re-reads tiles.
+removeAll
+wait 3
+load 1 Cesium World Terrain
+fly 46.8523 -121.7603 25000 60
+wait 30
+screenshot terrain-1
+fly 46.8600 -121.7500 15000 65
+wait 30
+screenshot terrain-2
+fly 46.8523 -121.7603 8000 70
+wait 30
+screenshot terrain-3

@@ -1,0 +1,27 @@
+{
+  "description": "GET /v1/assets page -> parsed assets. Items without a positive id are skipped. 'status' may be a string or an object with 'type'. Paging uses nextPageToken (sent back as pageToken) or an RFC 8288 Link rel=next header on the API origin.",
+  "response": {
+    "items": [
+      { "id": 96188, "name": "Cesium OSM Buildings", "description": "", "type": "3DTILES", "status": "COMPLETE", "percentComplete": 100, "bytes": 0, "dateAdded": "2020-01-01T00:00:00.000Z", "attribution": "OpenStreetMap" },
+      { "id": 2275207, "name": "Google Photorealistic 3D Tiles", "type": "3DTILES", "status": "COMPLETE", "percentComplete": 100 },
+      { "id": 1, "name": "Cesium World Terrain", "type": "TERRAIN", "status": { "type": "COMPLETE" } },
+      { "id": 12345, "name": "Survey upload", "type": "3DTILES", "status": "IN_PROGRESS", "percentComplete": 42 },
+      { "id": 54321, "name": "Truck model", "type": "GLTF", "status": "COMPLETE" },
+      { "id": 3954, "name": "Sentinel-2", "type": "IMAGERY" },
+      { "name": "No id, skipped", "type": "IMAGERY" },
+      { "id": 0, "name": "Zero id, skipped", "type": "IMAGERY" }
+    ],
+    "nextPageToken": "page-2-token"
+  },
+  "expect": {
+    "items": [
+      { "id": 96188, "type": "3DTILES", "status": "COMPLETE", "loadable": true, "percentComplete": 100 },
+      { "id": 2275207, "type": "3DTILES", "status": "COMPLETE", "loadable": true, "percentComplete": 100 },
+      { "id": 1, "type": "TERRAIN", "status": "COMPLETE", "loadable": true, "percentComplete": 0 },
+      { "id": 12345, "type": "3DTILES", "status": "IN_PROGRESS", "loadable": false, "percentComplete": 42 },
+      { "id": 54321, "type": "GLTF", "status": "COMPLETE", "loadable": false, "percentComplete": 0 },
+      { "id": 3954, "type": "IMAGERY", "status": "UNKNOWN", "loadable": true, "percentComplete": 0 }
+    ],
+    "nextPageToken": "page-2-token"
+  }
+}

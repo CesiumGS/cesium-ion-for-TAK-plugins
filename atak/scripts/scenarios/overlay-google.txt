@@ -1,0 +1,17 @@
+# GeoJSON parcels with Google Photorealistic 3D Tiles: are the parcels
+# visible on top? (Loading GeoJSON flies the map to it.)
+removeAll
+wait 3
+load 6033145 CoStar_Parcel_sample
+wait 10
+camera parcels
+screenshot parcels-alone
+load 2275207 Google Photorealistic 3D Tiles
+wait 30
+camera parcels with Google
+screenshot parcels-google-basemap-hidden
+basemap 100
+wait 10
+screenshot parcels-google-basemap-shown
+removeAll
+wait 3

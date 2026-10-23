@@ -1,0 +1,18 @@
+# Status page: the pane's settings connected to the work PC's ion Self-Hosted
+# server (Server: Self-Hosted, server and API URLs). Then back to ion Cloud.
+tap Cancel
+server http://192.168.1.247:32470 http://192.168.1.247:31813
+wait 5
+pane
+wait 12
+expect Found [0-9]+ assets
+settings open
+wait 4
+screenshot settings-selfhosted
+scroll down
+wait 2
+screenshot settings-selfhosted-form
+settings close
+wait 2
+server cloud
+wait 3

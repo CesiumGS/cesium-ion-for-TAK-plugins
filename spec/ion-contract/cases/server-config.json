@@ -1,0 +1,86 @@
+{
+  "description": "Validation and normalization of user-entered Self-Hosted server and API URLs, and REST API discovery. Discovery mirrors cesium-native CesiumIonClient::Connection::getApiUrl: an explicit API URL wins; Cesium ion Cloud uses https://api.cesium.com/; otherwise read apiHostname from <server>/config.json; if that is missing, not JSON, or has no apiHostname, use <server>/api/. Network failures are errors, not fallbacks.",
+  "selfHostedValidation": [
+    { "serverUrl": "https://ion.example.mil", "expectServerUrl": "https://ion.example.mil/" },
+    { "serverUrl": "  https://ion.example.mil/cesium  ", "expectServerUrl": "https://ion.example.mil/cesium/" },
+    { "serverUrl": "https://ion.example.mil:8443/", "expectServerUrl": "https://ion.example.mil:8443/" },
+    { "serverUrl": "http://localhost:8080", "expectServerUrl": "http://localhost:8080/" },
+    { "serverUrl": "http://ion.lab.local", "allowCleartext": true, "expectServerUrl": "http://ion.lab.local/" },
+    { "serverUrl": "http://ion.lab.local", "expectError": "CONFIGURATION" },
+    { "serverUrl": "ftp://ion.example.mil", "expectError": "CONFIGURATION" },
+    { "serverUrl": "ion.example.mil", "expectError": "CONFIGURATION" },
+    { "serverUrl": "https://user:pass@ion.example.mil", "expectError": "CONFIGURATION" },
+    { "serverUrl": "https://ion.example.mil/?x=1", "expectError": "CONFIGURATION" },
+    { "serverUrl": "", "expectError": "CONFIGURATION" },
+    { "serverUrl": "https://ion.example.mil", "apiUrlOverride": "http://api.example.mil", "expectError": "CONFIGURATION" }
+  ],
+  "apiDiscovery": [
+    {
+      "name": "Cloud never fetches config.json",
+      "server": { "kind": "CLOUD" },
+      "expectApiUrl": "https://api.cesium.com/",
+      "expectRequests": []
+    },
+    {
+      "name": "Self-hosted pointing at ion.cesium.com is treated as Cloud",
+      "server": { "kind": "SELF_HOSTED", "serverUrl": "https://ion.cesium.com" },
+      "expectApiUrl": "https://api.cesium.com/",
+      "expectRequests": []
+    },
+    {
+      "name": "Explicit API URL override wins",
+      "server": { "kind": "SELF_HOSTED", "serverUrl": "https://ion.example.mil", "apiUrlOverride": "https://ion-api.example.mil/v" },
+      "expectApiUrl": "https://ion-api.example.mil/v/",
+      "expectRequests": []
+    },
+    {
+      "name": "apiHostname from config.json",
+      "server": { "kind": "SELF_HOSTED", "serverUrl": "https://ion.example.mil" },
+      "config": { "status": 200, "body": "{\"apiHostname\":\"api.ion.example.mil\"}" },
+      "expectApiUrl": "https://api.ion.example.mil/",
+      "expectRequests": ["https://ion.example.mil/config.json"]
+    },
+    {
+      "name": "apiHostname with a port keeps the server's scheme",
+      "server": { "kind": "SELF_HOSTED", "serverUrl": "http://ion.lab.local:8080", "allowCleartext": true },
+      "config": { "status": 200, "body": "{\"apiHostname\":\"ion.lab.local:8081\"}" },
+      "expectApiUrl": "http://ion.lab.local:8081/",
+      "expectRequests": ["http://ion.lab.local:8080/config.json"]
+    },
+    {
+      "name": "apiHostname given as a full URL",
+      "server": { "kind": "SELF_HOSTED", "serverUrl": "https://ion.example.mil" },
+      "config": { "status": 200, "body": "{\"apiHostname\":\"https://gateway.example.mil/ion-api\"}" },
+      "expectApiUrl": "https://gateway.example.mil/ion-api/",
+      "expectRequests": ["https://ion.example.mil/config.json"]
+    },
+    {
+      "name": "Missing config.json falls back to <server>/api/",
+      "server": { "kind": "SELF_HOSTED", "serverUrl": "https://ion.example.mil/cesium" },
+      "config": { "status": 404, "body": "" },
+      "expectApiUrl": "https://ion.example.mil/cesium/api/",
+      "expectRequests": ["https://ion.example.mil/cesium/config.json"]
+    },
+    {
+      "name": "HTML instead of JSON falls back to <server>/api/",
+      "server": { "kind": "SELF_HOSTED", "serverUrl": "https://ion.example.mil" },
+      "config": { "status": 200, "body": "<!doctype html><html></html>" },
+      "expectApiUrl": "https://ion.example.mil/api/",
+      "expectRequests": ["https://ion.example.mil/config.json"]
+    },
+    {
+      "name": "Unreachable server is an error",
+      "server": { "kind": "SELF_HOSTED", "serverUrl": "https://ion.example.mil" },
+      "config": { "networkError": true },
+      "expectError": "NETWORK",
+      "expectRequests": ["https://ion.example.mil/config.json"]
+    },
+    {
+      "name": "config.json cannot downgrade the API to cleartext",
+      "server": { "kind": "SELF_HOSTED", "serverUrl": "https://ion.example.mil" },
+      "config": { "status": 200, "body": "{\"apiHostname\":\"http://api.example.mil\"}" },
+      "expectError": "CONFIGURATION",
+      "expectRequests": ["https://ion.example.mil/config.json"]
+    }
+  ]
+}

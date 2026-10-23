@@ -1,0 +1,15 @@
+# Imagery only: load Bing and Google 2D (the plugin selects each in Map
+# Layers > Mobile) and check the map shows it. ~1.5 minutes after the map draws.
+removeAll
+wait 3
+fly 39.9526 -75.1635 3000 0 jump
+load 2 Bing Maps Aerial
+wait 5
+wait 12
+screenshot bing
+load 3830182 Google Maps 2D Satellite
+wait 5
+wait 12
+screenshot google-2d
+removeAll
+wait 3

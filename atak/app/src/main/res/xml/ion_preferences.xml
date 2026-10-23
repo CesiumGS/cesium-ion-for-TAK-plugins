@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Non-secret settings persist in ATAK's preferences. The access token field is
+  intercepted by IonPreferenceFragment and stored encrypted instead; it is
+  never written to (or exported with) ATAK's preferences.
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/prefs_category_server">
+        <ListPreference
+            android:defaultValue="cloud"
+            android:entries="@array/prefs_mode_entries"
+            android:entryValues="@array/prefs_mode_values"
+            android:key="cesium_ion_mode"
+            android:title="@string/prefs_mode_title" />
+        <EditTextPreference
+            android:inputType="textUri"
+            android:key="cesium_ion_server_url"
+            android:singleLine="true"
+            android:summary="@string/prefs_server_url_summary"
+            android:title="@string/prefs_server_url_title" />
+        <EditTextPreference
+            android:inputType="textUri"
+            android:key="cesium_ion_api_url"
+            android:singleLine="true"
+            android:summary="@string/prefs_api_url_summary"
+            android:title="@string/prefs_api_url_title" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="cesium_ion_single_user"
+            android:summary="@string/prefs_single_user_summary"
+            android:title="@string/prefs_single_user_title" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="cesium_ion_allow_http"
+            android:summary="@string/prefs_allow_http_summary"
+            android:title="@string/prefs_allow_http_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/prefs_category_auth">
+        <EditTextPreference
+            android:dialogMessage="@string/prefs_token_dialog"
+            android:inputType="textPassword"
+            android:key="cesium_ion_token_entry"
+            android:persistent="false"
+            android:singleLine="true"
+            android:title="@string/prefs_token_title" />
+        <Preference
+            android:key="cesium_ion_token_clear"
+            android:title="@string/prefs_clear_token_title" />
+    </PreferenceCategory>
+</PreferenceScreen>

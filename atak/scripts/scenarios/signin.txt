@@ -1,0 +1,27 @@
+# "Sign in with Cesium ion": opens ion's sign-in page in the browser.
+# Nobody signs in here, so the saved access is unchanged; the screenshot
+# shows whether ion accepts the plugin's OAuth client and redirect.
+tap Cancel
+wait 2
+pane
+wait 5
+screenshot signin-pane
+signIn
+wait 12
+# Chrome's first-run screens on a fresh emulator (no Google account used).
+tap Use without an account
+wait 4
+tap No thanks
+wait 3
+tap Got it
+wait 3
+tap No thanks
+wait 12
+screenshot signin-browser
+wait 10
+screenshot signin-browser-later
+key BACK
+wait 3
+key BACK
+wait 3
+screenshot signin-back

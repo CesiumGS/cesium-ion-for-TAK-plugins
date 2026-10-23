@@ -1,0 +1,19 @@
+# Map credits on the tablet: Google Photorealistic 3D Tiles must show Google's
+# logo and the tile copyrights on the map, also once the view has finished
+# loading (150 s with no new tiles). Logs the credits row's placement.
+tap Cancel
+removeAll
+wait 3
+pane close
+wait 2
+load 2275207 Google Photorealistic 3D Tiles
+wait 8
+fly 39.9526 -75.1635 1200 60
+wait 150
+screenshot credits-map
+pane
+wait 8
+screenshot credits-pane
+expect Map credits placement
+removeAll
+wait 5

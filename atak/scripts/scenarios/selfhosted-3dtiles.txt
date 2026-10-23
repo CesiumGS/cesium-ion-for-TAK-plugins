@@ -1,0 +1,26 @@
+# Status screenshots: 3D Tiles from the work PC's ion Self-Hosted server
+# up close. Of the server's processed 3D Tiles, Office_Park has no geographic
+# position (local coordinates) and the others are 3 m test boxes, so this
+# frames the Philadelphia box from 60 m. Then back to ion Cloud.
+tap Cancel
+removeAll
+wait 3
+server http://192.168.1.247:32470 http://192.168.1.247:31813
+wait 5
+pane
+wait 12
+expect Found [0-9]+ assets
+load 11 Philadelphia box 3D Tiles
+wait 15
+# The box is 6 m across: a close view, tilted.
+fly 39.9524 -75.1636 60 50
+wait 40
+screenshot sh-3d-box
+expect Added\. In ATAK: Overlay Manager
+pane close
+wait 5
+screenshot sh-3d-box-map
+removeAll
+wait 5
+server cloud
+wait 2

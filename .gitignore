@@ -1,0 +1,24 @@
+# OS / IDE
+.DS_Store
+.idea/
+*.iml
+.vscode/
+
+# Secrets and local machine config. Never commit tokens, keystores, or SDK paths.
+.env
+*.local
+local.properties
+*.keystore
+*.jks
+
+# Gradle / Android
+.gradle/
+build/
+.takdev/
+.cxx/
+captures/
+
+# ATAK plugin (atak/)
+atak/app/build-types/
+atak/app/proguard-gradle-repackage.txt
+atak/device-reports/
