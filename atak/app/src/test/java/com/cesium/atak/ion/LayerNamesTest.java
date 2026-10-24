@@ -23,4 +23,11 @@ public class LayerNamesTest {
         assertEquals(".kml", LayerNames.vectorExtension(AssetType.KML, "<kml/>".getBytes(StandardCharsets.UTF_8)));
         assertEquals(".kmz", LayerNames.vectorExtension(AssetType.KML, new byte[] {'P', 'K', 3, 4, 0}));
     }
+
+    @Test
+    public void recognisesItsOwnImageryNames() {
+        org.junit.Assert.assertTrue(LayerNames.isImageryLayerName(LayerNames.imageryLayerName("Sentinel-2")));
+        org.junit.Assert.assertFalse(LayerNames.isImageryLayerName("ESRI World Topo"));
+        org.junit.Assert.assertFalse(LayerNames.isImageryLayerName(null));
+    }
 }
