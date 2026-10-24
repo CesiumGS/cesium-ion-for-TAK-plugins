@@ -38,4 +38,24 @@ public class MapSourceXmlTest {
     public void fileNamesAreStable() {
         assertEquals("cesium-ion-2.xml", MapSourceXml.fileName(2));
     }
+
+    @Test
+    public void coarseImageryGetsAZoomOutNote() {
+        // Blue Marble: geographic, sharpest level 8 (about 300 m per pixel).
+        TileTemplate blueMarble = new TileTemplate("https://assets.ion.cesium.com/3845/{z}/{x}/{y}.jpg",
+                TileTemplate.Scheme.TMS, 0, 8, "jpg", true, true);
+        String note = MapSourceXml.resolutionNote("Blue Marble", blueMarble);
+        assertTrue(note, note.startsWith("Blue Marble has detail down to about 306 m per pixel."));
+        assertTrue(note, note.contains("zoom out to see it"));
+    }
+
+    @Test
+    public void sharpImageryGetsNoNote() {
+        TileTemplate sentinel = new TileTemplate("https://assets.ion.cesium.com/3954/{z}/{x}/{y}.jpg",
+                TileTemplate.Scheme.TMS, 0, 16, "jpg", true, true);
+        assertEquals(null, MapSourceXml.resolutionNote("Sentinel-2", sentinel));
+        TileTemplate bing = new TileTemplate("https://ecn.t0.tiles.virtualearth.net/tiles/a{q}.jpeg",
+                TileTemplate.Scheme.QUADKEY, 1, 21, "jpg", false, false);
+        assertEquals(null, MapSourceXml.resolutionNote("Bing Maps Aerial", bing));
+    }
 }

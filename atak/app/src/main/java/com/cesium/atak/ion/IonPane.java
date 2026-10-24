@@ -1118,7 +1118,19 @@ final class IonPane {
     private static final int SELECT_ATTEMPTS = 5;
     private static final int LOAD_FIRST_SCAN = 100;
 
+    /**
+     * The Mobile map source the user had before the first Cesium ion imagery
+     * was shown (e.g. an online source such as ESRI World Topo); restored when
+     * that imagery is removed. Null: automatic selection.
+     */
+    private String basemapBeforeImagery;
+
     void selectImagery(String selection) {
+        Object current = MapLayerNames.find(mapView, MapLayerNames.MOBILE);
+        String shown = current == null ? null : MapLayerNames.selection(current);
+        if (shown != null && !isIonImagery(shown)) {
+            basemapBeforeImagery = shown;
+        }
         // ATAK 5.7's LayersManagerBroadcastReceiver matches "layerName"
         // against a raster layer's name ("Mobile" holds map sources) and shows
         // that layer. It then calls setLocked, which resets the layer's
@@ -1161,9 +1173,27 @@ final class IonPane {
     private void deselectImagery(List<String> removed) {
         Object mobile = MapLayerNames.find(mapView, MapLayerNames.MOBILE);
         String current = mobile == null ? null : MapLayerNames.selection(mobile);
-        if (current != null && removed.contains(current) && MapLayerNames.select(mobile, null)) {
+        if (current == null || !removed.contains(current)) {
+            return;
+        }
+        String previous = basemapBeforeImagery;
+        if (previous != null && !removed.contains(previous)
+                && MapLayerNames.selectionOptions(mobile).contains(previous)
+                && MapLayerNames.select(mobile, previous)) {
+            append("Back to \"" + previous + "\" (Map Layers › Mobile).");
+        } else if (MapLayerNames.select(mobile, null)) {
             append("Map Layers › Mobile is back on automatic selection.");
         }
+    }
+
+    /** A map source name this plugin gave to Cesium ion imagery. */
+    private boolean isIonImagery(String mapSourceName) {
+        for (LoadedAssets.Entry entry : loader.loadedEntries()) {
+            if (entry.kind == LoadedAssets.Kind.IMAGERY && entry.name.equals(mapSourceName)) {
+                return true;
+            }
+        }
+        return LayerNames.isImageryLayerName(mapSourceName);
     }
 
     private String imageryName(long assetId) {
