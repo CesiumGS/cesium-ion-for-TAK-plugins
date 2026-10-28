@@ -18,6 +18,7 @@
 #include "Components/TextBlock.h"
 #include "UObject/UObjectIterator.h"
 #include "Engine/Engine.h"
+#include "Components/WidgetComponent.h"
 #include "Engine/GameInstance.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "Subsystems/WorldSubsystem.h"
@@ -161,8 +162,45 @@ namespace
 		return Result;
 	}
 
+	/** The actor class VR-TAK's UI subsystem uses for world panels (its default, or one of its per-widget settings). */
+	UClass* FindWorldUiActorClass(UObject* Core)
+	{
+		UClass* Found = nullptr;
+		if (FStructProperty* Default = Core ? FindFProperty<FStructProperty>(Core->GetClass(), TEXT("DefaultWorldSettings")) : nullptr)
+		{
+			if (FObjectPropertyBase* ClassProperty = FindFProperty<FObjectPropertyBase>(Default->Struct, TEXT("WorldUIActorClass")))
+			{
+				Found = Cast<UClass>(ClassProperty->GetObjectPropertyValue_InContainer(Default->ContainerPtrToValuePtr<void>(Core)));
+			}
+		}
+		UE_LOG(LogCesiumIonVrtak, Log, TEXT("VR-TAK's default world UI actor class: %s."), Found ? *Found->GetName() : TEXT("none"));
+		if (!Found)
+		{
+			if (FMapProperty* Map = FindFProperty<FMapProperty>(Core->GetClass(), TEXT("DefaultClassWorldSettings")))
+			{
+				FScriptMapHelper Helper(Map, Map->ContainerPtrToValuePtr<void>(Core));
+				FStructProperty* ValueProperty = CastField<FStructProperty>(Map->ValueProp);
+				FObjectPropertyBase* ClassProperty = ValueProperty ? FindFProperty<FObjectPropertyBase>(ValueProperty->Struct, TEXT("WorldUIActorClass")) : nullptr;
+				UE_LOG(LogCesiumIonVrtak, Log, TEXT("VR-TAK has per-widget world settings for %d widget classes."), Helper.Num());
+				for (int32 Index = 0; ClassProperty && Index < Helper.GetMaxIndex(); ++Index)
+				{
+					if (Helper.IsValidIndex(Index))
+					{
+						UClass* Each = Cast<UClass>(ClassProperty->GetObjectPropertyValue_InContainer(Helper.GetValuePtr(Index)));
+						if (Each && !Found)
+						{
+							Found = Each;
+							UE_LOG(LogCesiumIonVrtak, Log, TEXT("Using world UI actor class %s from a per-widget setting."), *Each->GetName());
+						}
+					}
+				}
+			}
+		}
+		return Found;
+	}
+
 	/** VR-TAK's UI subsystem, OpenInWorldByClass: a floating panel Size pixels across, Offset (cm) in front of the camera. */
-	UObject* OpenInWorldWithSettings(UObject* Core, UClass* WidgetClass, const FVector2D& Size, const FVector& Offset)
+	UObject* OpenInWorldWithSettings(UObject* Core, UClass* WidgetClass, UClass* ActorClass, const FVector2D& Size, const FVector& Offset)
 	{
 		UFunction* Function = Core ? Core->FindFunction(TEXT("OpenInWorldByClass")) : nullptr;
 		if (!Function)
@@ -183,6 +221,13 @@ namespace
 		if (FStructProperty* World = FindFProperty<FStructProperty>(Function, TEXT("worldSettings")))
 		{
 			void* Settings = World->ContainerPtrToValuePtr<void>(Params.GetData());
+			if (ActorClass)
+			{
+				if (FObjectPropertyBase* ActorClassProperty = FindFProperty<FObjectPropertyBase>(World->Struct, TEXT("WorldUIActorClass")))
+				{
+					ActorClassProperty->SetObjectPropertyValue_InContainer(Settings, ActorClass);
+				}
+			}
 			if (FStructProperty* SizeProperty = FindFProperty<FStructProperty>(World->Struct, TEXT("Size")))
 			{
 				*SizeProperty->ContainerPtrToValuePtr<FVector2D>(Settings) = Size;
@@ -791,18 +836,17 @@ bool ACesiumIonVrtakActor::OpenPanelInWorld()
 	UObject* Core = FindGameInstanceSubsystem(TEXT("/Script/VH_UI.UI_Subsystem_Core"));
 	if (!Core)
 	{
-		UE_LOG(LogCesiumIonVrtak, Warning, TEXT("VR-TAK's UI subsystem was not found; the panel stays a screen widget."));
-		return false;
+		UE_LOG(LogCesiumIonVrtak, Warning, TEXT("VR-TAK's UI subsystem was not found; using the plugin's own floating panel."));
+		return OpenPanelAsWidgetComponent();
 	}
 	// The panel is created by VR-TAK from its class, so it is given its owner here.
-	// A floating panel (the defaults put it on the face in the headset): 1.2 m ahead of the
-	// camera (cm; +X is forward), 560 x 820 px.
+	// A floating panel: 1.2 m ahead of the camera (cm; +X is forward), 560 x 820 px.
 	UCesiumIonVrtakPanel* Opened = Cast<UCesiumIonVrtakPanel>(OpenInWorldWithSettings(
-		Core, UCesiumIonVrtakPanel::StaticClass(), FVector2D(560.0, 820.0), FVector(120.0, 0.0, 0.0)));
+		Core, UCesiumIonVrtakPanel::StaticClass(), FindWorldUiActorClass(Core), FVector2D(560.0, 820.0), FVector(120.0, 0.0, 0.0)));
 	if (!Opened)
 	{
-		UE_LOG(LogCesiumIonVrtak, Warning, TEXT("VR-TAK's UI subsystem did not open the panel."));
-		return false;
+		UE_LOG(LogCesiumIonVrtak, Warning, TEXT("VR-TAK's UI subsystem did not open the panel; using the plugin's own floating panel."));
+		return OpenPanelAsWidgetComponent();
 	}
 	Opened->SetOwnerActor(this);
 	Opened->Refresh();
@@ -812,9 +856,58 @@ bool ACesiumIonVrtakActor::OpenPanelInWorld()
 	return true;
 }
 
+bool ACesiumIonVrtakActor::OpenPanelAsWidgetComponent()
+{
+	APlayerController* Player = GetWorld() ? GetWorld()->GetFirstPlayerController() : nullptr;
+	APlayerCameraManager* Camera = Player ? Player->PlayerCameraManager : nullptr;
+	if (!Camera)
+	{
+		return false;
+	}
+	UCesiumIonVrtakPanel* NewPanel = CreateWidget<UCesiumIonVrtakPanel>(Player);
+	if (!NewPanel)
+	{
+		return false;
+	}
+	NewPanel->SetOwnerActor(this);
+	// 120 cm ahead of the camera, facing it (a widget component shows its face toward -X).
+	const FVector CameraLocation = Camera->GetCameraLocation();
+	const FVector Forward = Camera->GetCameraRotation().Vector();
+	const FVector Location = CameraLocation + Forward * 120.0;
+	const FRotator Rotation = (Location - CameraLocation).Rotation();
+	FActorSpawnParameters Params;
+	Params.ObjectFlags |= RF_Transient;
+	AActor* Holder = GetWorld()->SpawnActor<AActor>(AActor::StaticClass(), Location, Rotation, Params);
+	if (!Holder)
+	{
+		return false;
+	}
+	UWidgetComponent* Component = NewObject<UWidgetComponent>(Holder, TEXT("CesiumIonPanel"));
+	Holder->SetRootComponent(Component);
+	Component->RegisterComponent();
+	Component->SetWidgetSpace(EWidgetSpace::World);
+	Component->SetDrawSize(FVector2D(560.0, 820.0));
+	Component->SetTwoSided(true);
+	Component->SetWidget(NewPanel);
+	// 560 x 820 px is 5.6 x 8.2 m at 1 px per cm: scale it to about 0.56 x 0.82 m.
+	Component->SetRelativeScale3D(FVector(0.1, 0.1, 0.1));
+	Holder->SetActorLocationAndRotation(Location, Rotation);
+	NewPanel->Refresh();
+	PanelHolder = Holder;
+	Panel = NewPanel;
+	bPanelInWorld = true;
+	UE_LOG(LogCesiumIonVrtak, Log, TEXT("Cesium ion panel opened as the plugin's own floating panel, 120 cm ahead."));
+	return true;
+}
+
 void ACesiumIonVrtakActor::ClosePanelInWorld()
 {
-	if (Panel)
+	if (PanelHolder)
+	{
+		PanelHolder->Destroy();
+		PanelHolder = nullptr;
+	}
+	else if (Panel)
 	{
 		CallWithObject(FindGameInstanceSubsystem(TEXT("/Script/VH_UI.UI_Subsystem_Core")), TEXT("CloseUserWidget"), Panel);
 	}

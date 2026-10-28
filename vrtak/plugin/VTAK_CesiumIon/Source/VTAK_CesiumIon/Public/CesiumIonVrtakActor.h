@@ -168,12 +168,16 @@ private:
 	void RegisterRibbonButton();
 	bool OpenPanelInWorld();
 	void ClosePanelInWorld();
+	bool OpenPanelAsWidgetComponent();
 	void MovePanelForView(bool bVr);
 	UObject* FindWorldSubsystem(const TCHAR* ClassPath) const;
 	UObject* FindGameInstanceSubsystem(const TCHAR* ClassPath) const;
 
 	UPROPERTY()
 	UUserWidget* RibbonButton = nullptr;
+	/** The actor holding the plugin's own floating panel (when VR-TAK's UI system does not open it). */
+	UPROPERTY()
+	AActor* PanelHolder = nullptr;
 	bool bRibbonButtonRegistered = false;
 	int32 RibbonTries = 0;
 	double NextRibbonTryAt = 5.0;
