@@ -1,0 +1,122 @@
+
+==== Build the plugin (GameEditor, incremental) ====  [19:06:33]
+
+==== Install VTAK_CesiumIon ====  [19:06:33]
+   \VTAK_CesiumIon.uplugin  653 B
+   \Resources\cesium_ion_logo.png  20,275 B
+   [1/4] Compile [x64] CesiumIonVrtakActor.cpp
+   Total execution time: 31.69 seconds
+Build exit code: 0
+
+==== Start VR-TAK (detached) ====  [19:07:05]
+C:\Program Files\Epic Games\VR-TAK\Engine\Binaries\Win64\UnrealEditor.exe "C:\Program Files\Epic Games\VR-TAK\Game\Game.uproject" -game -windowed -ResX=1920 -ResY=1080 -log -CesiumIonOrigin=39.9526,-75.1635,0 -CesiumIonEnterWorld=20 -CesiumIonScreenshots=840 -CesiumIonShowSettings=855 -CesiumIonQuitAfter=900 -CesiumIonLoad=2275207 -CesiumIonSignIn
+Started pid 22164 at 10/28/2026 19:07:05. Run this task again for progress and screenshots.
+
+==== VR-TAK run ====  [19:24:05]
+Log: C:\Program Files\Epic Games\VR-TAK\Game\Saved\Logs\Game.log (updated 10/28/2026 19:17:42)
+-- Cesium ion plugin
+[2026.10.28-23.07.38:846][145]LogCesiumIonVrtak: Registered the Cesium ion ribbon button (Home > Application) with widget class WBP_RibbonButton_C.
+[2026.10.28-23.07.44:597][404]LogCesiumIonVrtak: Panel: in viewport 1, visible 1, tree 1, root Border, desired X=993.667 Y=6455.667, size X=540.000 Y=900.000 at X=1580.000 Y=140.000; viewport X=1920.000 Y=1080.000.
+[2026.10.28-23.07.49:844][719]LogCesiumIonVrtak: Moved the view to 39.95260, -75.16350, 0 m (as VR-TAK's Go To does).
+[2026.10.28-23.07.53:850][884]LogCesiumIonVrtak: Entering VR-TAK's world (ce GoToWorld).
+[2026.10.28-23.07.53:870][884]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 15.334158, -125.121012, 0.0 m; 100.0 units/m; yaw -144.9.
+[2026.10.28-23.08.03:835][577]LogCesiumIonVrtak: Diagnostics: camera at X=35566248971.018 Y=-50566224866.946 Z=16950947295.514; georeference at X=353957433.118 Y=-503238088.755 Z=167578682.368, scale X=1.000 Y=0.994 Z=1.000.
+[2026.10.28-23.08.03:835][577]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 794 components, hidden 0, content X=298310.650 Y=-421411.765 Z=-321872996.122 (size X=1739759270.302 Y=1731802996.303 Z=2187010290.699), 64188687837 units from the camera.
+[2026.10.28-23.08.04:085][619]LogCesiumIonVrtak: Moved the view to 39.94260, -75.16350, 350 m (as VR-TAK's Go To does), bearing 0, pitch -35.
+[2026.10.28-23.08.04:365][630]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 39.942600, -75.163500, 0.0 m; 100.1 units/m; yaw 165.2.
+[2026.10.28-23.08.25:379][686]LogCesiumIonVrtak: VR-TAK's UI subsystem OpenInWorldByClass returned nothing.
+[2026.10.28-23.08.25:380][686]LogCesiumIonVrtak: Warning: VR-TAK's UI subsystem did not open the panel.
+[2026.10.28-23.08.25:410][686]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.28-23.08.25:410][686]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: yes.
+[2026.10.28-23.08.33:866][932]LogCesiumIonVrtak: Diagnostics: camera at X=-125395195.206 Y=-473380516.748 Z=407332598.887; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.28-23.08.33:867][932]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 2052 components, hidden 0, content X=14107531.686 Y=-11357876.309 Z=-220037417.380 (size X=1769779538.678 Y=1757232526.663 Z=1985805998.059), 791529575 units from the camera.
+[2026.10.28-23.08.34:317][948]LogCesiumIonVrtak: Ribbon button clicked (VR: yes).
+[2026.10.28-23.08.34:323][948]LogCesiumIonVrtak: VR-TAK's UI subsystem OpenInWorldByClass returned nothing.
+[2026.10.28-23.08.34:323][948]LogCesiumIonVrtak: Warning: VR-TAK's UI subsystem did not open the panel.
+[2026.10.28-23.08.34:371][948]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.28-23.08.38:396][ 99]LogCesiumIonVrtak: Ribbon button clicked (VR: yes).
+[2026.10.28-23.08.38:402][ 99]LogCesiumIonVrtak: VR-TAK's UI subsystem OpenInWorldByClass returned nothing.
+[2026.10.28-23.08.38:402][ 99]LogCesiumIonVrtak: Warning: VR-TAK's UI subsystem did not open the panel.
+[2026.10.28-23.08.38:450][ 99]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.28-23.08.39:348][133]LogCesiumIonVrtak: Ribbon button clicked (VR: yes).
+[2026.10.28-23.08.39:354][133]LogCesiumIonVrtak: VR-TAK's UI subsystem OpenInWorldByClass returned nothing.
+[2026.10.28-23.08.39:355][133]LogCesiumIonVrtak: Warning: VR-TAK's UI subsystem did not open the panel.
+[2026.10.28-23.08.39:403][133]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.28-23.08.46:088][383]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.09.04:089][490]LogCesiumIonVrtak: Diagnostics: camera at X=-125395171.256 Y=-473380415.047 Z=407332695.374; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.28-23.09.04:090][490]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 1879 components, hidden 0, content X=336750.408 Y=-2438079.120 Z=-356130022.268 (size X=1797321101.234 Y=1775072121.039 Z=2257991207.837), 905798278 units from the camera.
+[2026.10.28-23.09.34:091][396]LogCesiumIonVrtak: Diagnostics: camera at X=-125395171.256 Y=-473380415.047 Z=407332695.374; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.28-23.09.34:091][396]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 1879 components, hidden 0, content X=336750.408 Y=-2438079.120 Z=-356130022.268 (size X=1797321101.234 Y=1775072121.039 Z=2257991207.837), 905798278 units from the camera.
+[2026.10.28-23.09.47:838][268]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.10.48:844][288]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.11.50:344][452]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.12.52:337][637]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.13.53:595][797]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.14.55:343][984]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.15.57:091][223]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.16.58:844][462]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+-- errors
+[2026.10.28-23.07.24:878][  0]LogClass: Error: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.28-23.07.24:880][  0]LogClass: Error: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.28-23.07.24:953][  0]LogAutomationTest: Error: UObject.Class AttemptToFindUninitializedScriptStructMembers will be marked as failing due to errors being logged
+[2026.10.28-23.07.24:955][  0]LogAutomationTest: Error: LogClass: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.28-23.07.24:955][  0]LogAutomationTest: Error: LogClass: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+-- shader compilation
+[2026.10.28-23.07.10:993][  0]LogShaderCompilers: Display: Compiling shader autogen file: ../../../Game/Intermediate/ShaderAutogen/PCD3D_SM5/AutogenShaderHeaders.ush
+[2026.10.28-23.07.10:993][  0]LogShaderCompilers: Display: Autogen file is unchanged, skipping write.
+[2026.10.28-23.07.26:173][  0]LogShaderCompilers: Warning: Failed to compile Material /CesiumForUnreal/Materials/M_CesiumBaseMaterial.M_CesiumBaseMaterial (MI:/CesiumForUnreal/Materials/Instances/MI_CesiumThreeOverlaysAndClippingAndWater.MI_CesiumThreeOverlaysAndClippingAndWater) for platform PCD3D_SM6, Default Material will be used in game.
+-- last log lines
+[2026.10.28-23.08.25:380][686]LogCesiumIonVrtak: Warning: VR-TAK's UI subsystem did not open the panel.
+[2026.10.28-23.08.25:410][686]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.28-23.08.25:410][686]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: yes.
+[2026.10.28-23.08.33:866][932]LogCesiumIonVrtak: Diagnostics: camera at X=-125395195.206 Y=-473380516.748 Z=407332598.887; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.28-23.08.33:867][932]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 2052 components, hidden 0, content X=14107531.686 Y=-11357876.309 Z=-220037417.380 (size X=1769779538.678 Y=1757232526.663 Z=1985805998.059), 791529575 units from the camera.
+[2026.10.28-23.08.34:317][948]LogCesiumIonVrtak: Ribbon button clicked (VR: yes).
+[2026.10.28-23.08.34:322][948]VH_UI: Warning: -- UUI_Subsystem_Core::GetUIWorldActor | WorldUIActor and WorldUIActorClass are nullptr | returning nullptr
+[2026.10.28-23.08.34:323][948]LogCesiumIonVrtak: VR-TAK's UI subsystem OpenInWorldByClass returned nothing.
+[2026.10.28-23.08.34:323][948]LogCesiumIonVrtak: Warning: VR-TAK's UI subsystem did not open the panel.
+[2026.10.28-23.08.34:371][948]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.28-23.08.38:396][ 99]LogCesiumIonVrtak: Ribbon button clicked (VR: yes).
+[2026.10.28-23.08.38:401][ 99]VH_UI: Warning: -- UUI_Subsystem_Core::GetUIWorldActor | WorldUIActor and WorldUIActorClass are nullptr | returning nullptr
+[2026.10.28-23.08.38:402][ 99]LogCesiumIonVrtak: VR-TAK's UI subsystem OpenInWorldByClass returned nothing.
+[2026.10.28-23.08.38:402][ 99]LogCesiumIonVrtak: Warning: VR-TAK's UI subsystem did not open the panel.
+[2026.10.28-23.08.38:450][ 99]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.28-23.08.39:348][133]LogCesiumIonVrtak: Ribbon button clicked (VR: yes).
+[2026.10.28-23.08.39:354][133]VH_UI: Warning: -- UUI_Subsystem_Core::GetUIWorldActor | WorldUIActor and WorldUIActorClass are nullptr | returning nullptr
+[2026.10.28-23.08.39:354][133]LogCesiumIonVrtak: VR-TAK's UI subsystem OpenInWorldByClass returned nothing.
+[2026.10.28-23.08.39:355][133]LogCesiumIonVrtak: Warning: VR-TAK's UI subsystem did not open the panel.
+[2026.10.28-23.08.39:403][133]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.28-23.08.44:489][324]LogSlate: Slate User Unregistered.  User Index 8
+[2026.10.28-23.08.44:493][324]PIE: UWidget::RemoveFromParent() called on '/Engine/Transient.GameEngine_0:VTak_GameInstance_BP_C_0.10E4E1F54CD9A7C898C10989705567CE' which has no UMG parent (if it was added directly to a native Slate widget via TakeWidget() then it must be removed explicitly rather than via RemoveFromParent())
+[2026.10.28-23.08.44:494][324]LogSlate: New Slate User Created. Platform User Id 8, User Index 8, Is Virtual User: 0
+[2026.10.28-23.08.44:494][324]LogSlate: Slate User Registered.  User Index 8, Is Virtual User: 0
+[2026.10.28-23.08.44:494][324]LogSlate: Slate User Destroyed.  User Index 8, Is Virtual User: 1
+[2026.10.28-23.08.46:088][383]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.09.04:089][490]LogCesiumIonVrtak: Diagnostics: camera at X=-125395171.256 Y=-473380415.047 Z=407332695.374; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.28-23.09.04:090][490]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 1879 components, hidden 0, content X=336750.408 Y=-2438079.120 Z=-356130022.268 (size X=1797321101.234 Y=1775072121.039 Z=2257991207.837), 905798278 units from the camera.
+[2026.10.28-23.09.13:464][ 79]LogDerivedDataCache: ../../../Engine/DerivedDataCache: Maintenance finished in +00:00:05.147 and deleted 0 files with total size 0 MiB and 0 empty folders. Scanned 3452 files in 4702 folders with total size 865 MiB.
+[2026.10.28-23.09.34:091][396]LogCesiumIonVrtak: Diagnostics: camera at X=-125395171.256 Y=-473380415.047 Z=407332695.374; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.28-23.09.34:091][396]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 1879 components, hidden 0, content X=336750.408 Y=-2438079.120 Z=-356130022.268 (size X=1797321101.234 Y=1775072121.039 Z=2257991207.837), 905798278 units from the camera.
+[2026.10.28-23.09.47:838][268]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.10.48:844][288]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.11.50:344][452]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.12.52:337][637]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.13.53:595][797]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.14.55:343][984]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.15.57:091][223]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.16.58:844][462]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.17.42:470][448]LogCore: Engine exit requested (reason: ConsoleCtrl RequestExit)
+
+==== VR-TAK processes and windows ====  [19:24:06]
+No screenshots yet.
+
+==== Regression checks ====  [19:24:06]
+PASS  LogCesiumIonVrtak: Found \d+ assets
+PASS  LogCesiumIonVrtak: Added .+ to VR-TAK's world
+PASS  LogCesiumIonVrtak: Georeference aligned
+PASS  LogCesiumIonVrtak: Cesium ion panel on screen
+FAIL  LogCesiumIonVrtak: Screenshot requested
+FAIL  LogCesiumIonVrtak: Quitting after the test run
+PASS  LogCesiumIonVrtak: XR system
+PASS  no fatal errors
+REGRESSION: FAIL (2)
