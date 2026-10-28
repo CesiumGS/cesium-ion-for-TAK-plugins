@@ -12,7 +12,7 @@ Unreal, the GPU and an attached headset need the logged-in user's session.
 Close the window (or Ctrl+C) to stop it; run "$HOME\actions-runner-vrtak\run.cmd"
 to start it again.
 
-It needs a short-lived registration token. With the GitHub CLI logged in
+It needs a short-lived registration token. Set $env:RUNNER_TOKEN to it, or with the GitHub CLI logged in
 (gh auth login) the script fetches one; otherwise open the repository on
 GitHub > Settings > Actions > Runners > New self-hosted runner, copy the
 token shown after --token, and paste it when asked (it is not echoed).
@@ -32,10 +32,17 @@ function Get-RunnerToken([string]$Kind) {
     if (Get-Command gh -ErrorAction SilentlyContinue) {
         try { $token = (gh api -X POST "repos/$Repo/actions/runners/$Kind-token" --jq .token 2>$null) } catch { $token = '' }
     }
+    # No gh login: a token in $env:RUNNER_TOKEN, else the hidden prompt. Some consoles paste
+    # only one character into the hidden prompt, so a short result falls back to a visible one.
+    if (-not $token -and $env:RUNNER_TOKEN) { $token = $env:RUNNER_TOKEN }
     if (-not $token) {
         $secure = Read-Host "Paste the $Kind token from GitHub > $Repo > Settings > Actions > Runners" -AsSecureString
         $token = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
             [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure))
+        if ($token.Trim().Length -lt 20) {
+            Write-Host "That is only $($token.Trim().Length) character(s); a token has about 29. Paste it again (it will show on screen; it expires within the hour):"
+            $token = Read-Host 'Token'
+        }
     }
     if (-not $token) { throw 'No token.' }
     return $token.Trim()
