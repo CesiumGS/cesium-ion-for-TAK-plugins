@@ -161,6 +161,55 @@ namespace
 		return Result;
 	}
 
+	/** VR-TAK's UI subsystem, OpenInWorldByClass: a floating panel Size pixels across, Offset (cm) in front of the camera. */
+	UObject* OpenInWorldWithSettings(UObject* Core, UClass* WidgetClass, const FVector2D& Size, const FVector& Offset)
+	{
+		UFunction* Function = Core ? Core->FindFunction(TEXT("OpenInWorldByClass")) : nullptr;
+		if (!Function)
+		{
+			return nullptr;
+		}
+		TArray<uint8> Params;
+		Params.SetNumZeroed(Function->ParmsSize);
+		for (TFieldIterator<FProperty> It(Function); It && It->HasAnyPropertyFlags(CPF_Parm); ++It)
+		{
+			It->InitializeValue_InContainer(Params.GetData());
+		}
+		if (FObjectPropertyBase* ClassProperty = FindFProperty<FObjectPropertyBase>(Function, TEXT("userWidgetClass")))
+		{
+			ClassProperty->SetObjectPropertyValue_InContainer(Params.GetData(), WidgetClass);
+		}
+		if (FStructProperty* World = FindFProperty<FStructProperty>(Function, TEXT("worldSettings")))
+		{
+			void* Settings = World->ContainerPtrToValuePtr<void>(Params.GetData());
+			if (FStructProperty* SizeProperty = FindFProperty<FStructProperty>(World->Struct, TEXT("Size")))
+			{
+				*SizeProperty->ContainerPtrToValuePtr<FVector2D>(Settings) = Size;
+			}
+			if (FStructProperty* OffsetProperty = FindFProperty<FStructProperty>(World->Struct, TEXT("LocalSpawnOffset")))
+			{
+				*OffsetProperty->ContainerPtrToValuePtr<FVector>(Settings) = Offset;
+			}
+		}
+		Core->ProcessEvent(Function, Params.GetData());
+		UObject* Result = nullptr;
+		for (TFieldIterator<FProperty> It(Function); It && It->HasAnyPropertyFlags(CPF_Parm); ++It)
+		{
+			if (It->HasAnyPropertyFlags(CPF_ReturnParm))
+			{
+				if (FObjectPropertyBase* Return = CastField<FObjectPropertyBase>(*It))
+				{
+					Result = Return->GetObjectPropertyValue_InContainer(Params.GetData());
+				}
+			}
+		}
+		for (TFieldIterator<FProperty> It(Function); It && It->HasAnyPropertyFlags(CPF_Parm); ++It)
+		{
+			It->DestroyValue_InContainer(Params.GetData());
+		}
+		return Result;
+	}
+
 	void SetStringProperty(UObject* Object, const TCHAR* Name, const FString& Value)
 	{
 		if (FStrProperty* Property = FindFProperty<FStrProperty>(Object->GetClass(), Name))
@@ -742,10 +791,11 @@ bool ACesiumIonVrtakActor::OpenPanelInWorld()
 		UE_LOG(LogCesiumIonVrtak, Warning, TEXT("VR-TAK's UI subsystem was not found; the panel stays a screen widget."));
 		return false;
 	}
-	// VR-TAK's defaults put the widget in front of the person in VR and where it belongs on
-	// the desktop; the panel is created by VR-TAK from its class, so it is given its owner here.
-	UCesiumIonVrtakPanel* Opened = Cast<UCesiumIonVrtakPanel>(
-		CallWithObject(Core, TEXT("OpenWithDefaultsByClass"), UCesiumIonVrtakPanel::StaticClass()));
+	// The panel is created by VR-TAK from its class, so it is given its owner here.
+	// A floating panel (the defaults put it on the face in the headset): 1.2 m ahead of the
+	// camera (cm; +X is forward), 560 x 820 px.
+	UCesiumIonVrtakPanel* Opened = Cast<UCesiumIonVrtakPanel>(OpenInWorldWithSettings(
+		Core, UCesiumIonVrtakPanel::StaticClass(), FVector2D(560.0, 820.0), FVector(120.0, 0.0, 0.0)));
 	if (!Opened)
 	{
 		UE_LOG(LogCesiumIonVrtak, Warning, TEXT("VR-TAK's UI subsystem did not open the panel."));
