@@ -54,6 +54,10 @@ public class MapSourceXmlTest {
         TileTemplate sentinel = new TileTemplate("https://assets.ion.cesium.com/3954/{z}/{x}/{y}.jpg",
                 TileTemplate.Scheme.TMS, 0, 16, "jpg", true, true);
         assertEquals(null, MapSourceXml.resolutionNote("Sentinel-2", sentinel));
+        // Sentinel-2 on ion stops at level 13 (about 10 m per pixel): fine, no note.
+        TileTemplate sentinelIon = new TileTemplate("https://assets.ion.cesium.com/3954/{z}/{x}/{y}.jpg",
+                TileTemplate.Scheme.TMS, 0, 13, "jpg", true, true);
+        assertEquals(null, MapSourceXml.resolutionNote("Sentinel-2", sentinelIon));
         TileTemplate bing = new TileTemplate("https://ecn.t0.tiles.virtualearth.net/tiles/a{q}.jpeg",
                 TileTemplate.Scheme.QUADKEY, 1, 21, "jpg", false, false);
         assertEquals(null, MapSourceXml.resolutionNote("Bing Maps Aerial", bing));

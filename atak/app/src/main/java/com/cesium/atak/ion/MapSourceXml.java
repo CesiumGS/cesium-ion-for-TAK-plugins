@@ -47,8 +47,8 @@ final class MapSourceXml {
                 .toString();
     }
 
-    /** Below this many metres per pixel at the sharpest level, imagery looks fine at street level. */
-    private static final double COARSE_METRES_PER_PIXEL = 5.0;
+    /** Sharper than this at its finest level (Sentinel-2: about 10 m), imagery holds up when zoomed in. */
+    private static final double COARSE_METRES_PER_PIXEL = 30.0;
 
     /**
      * A note for imagery whose sharpest level is coarse (e.g. Blue Marble,
