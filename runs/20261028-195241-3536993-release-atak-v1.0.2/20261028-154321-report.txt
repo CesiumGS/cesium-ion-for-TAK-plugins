@@ -1,0 +1,66 @@
+Cesium ion ATAK release smoke test 20261028-154321, commit 3536993
+Device: R5GL5381L9F SM-X730
+ATAK: 5.7.0.16 (b9d3ede9), signed by: CN=Unknown, OU=Unknown, O=ATAK Development Group, L=Unknown, ST=Unknown, C=US
+Signed APK: ATAK-Plugin-CesiumIon-1.0.2-5.7.0-civ-signed.apk, signed by: CN=TAK Product Center ATAK Untrusted Plugin Release, OU=Product Center, O=TAK, L=Fort Belvoir, ST=Virginia, C=US
+APK: ATAK-Plugin-CesiumIon-1.0.2-5.7.0-civ-signed.apk (  164717 bytes)
+Uninstall earlier plugin: Success
+Install: Success
+Installed plugin: 1.0.2 (local) - [5.7.0], signed by: CN=TAK Product Center ATAK Untrusted Plugin Release, OU=Product Center, O=TAK, L=Fort Belvoir, ST=Virginia, C=US
+Package Mgmt: no Plugins item in ATAK's menu.
+Plugin started after about 300 s: 0
+tr: stdout: Broken pipe
+In front: com.atakmap.app.civ/com.atakmap.app.ATAKActivityCiv}
+No Cesium ion item in ATAK's menu (a dialog in the way?).
+No Cesium ion item in ATAK's menu (a dialog in the way?).
+No Add to map button found for Google Photorealistic 3D Tiles.
+---- plugin log ----
+10-28 15:43:44.993 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:43:45.417  6537  6847 D AtakPluginRegistry: Successfully loaded plugin descriptor for com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin], 
+10-28 15:43:45.417  6537  6847 D AtakPluginRegistry: com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin],  will NOT load
+10-28 15:43:45.527  6537  6847 D AtakPluginRegistry: !should load, skipping Lifecycle plugins extensions: com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin], 
+10-28 15:43:45.527  6537  6847 D AtakPluginRegistry: !should load, skipping IToolbarItem plugin extensions: com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin], 
+10-28 15:43:45.527  6537  6847 D AtakPluginRegistry: !should load, skipping Lifecycle plugins extensions: com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin], 
+10-28 15:43:45.594  6537  6568 D AtakPluginRegistry: Successfully loaded plugin descriptor for com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin], 
+10-28 15:43:45.594  6537  6568 D AtakPluginRegistry: com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin],  will NOT load
+10-28 15:43:45.604  6537  6568 D AtakPluginRegistry: !should load, skipping Lifecycle plugins extensions: com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin], 
+10-28 15:43:45.604  6537  6568 D AtakPluginRegistry: !should load, skipping IToolbarItem plugin extensions: com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin], 
+10-28 15:43:45.604  6537  6568 D AtakPluginRegistry: !should load, skipping Lifecycle plugins extensions: com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin], 
+10-28 15:43:50.073 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:43:55.165 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:44:02.457 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:44:09.755 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:44:17.083 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:44:24.431 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:44:31.809 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:44:39.145 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:44:46.448 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:44:53.767 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:45:01.076 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:45:11.547 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:45:18.866 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:45:26.183 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:45:33.508 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:45:40.837 11793 11793 I adbd    : adbd service requested 'shell,v2:export ANDROID_LOG_TAGS=''; exec logcat '-d' '-s' 'CesiumIon:I''
+10-28 15:45:41.808 17641  7534 W System.err: java.util.concurrent.CancellationException: Finish coroutine session
+10-28 15:45:42.060 17641  7531 W System.err: java.util.concurrent.CancellationException: Finish coroutine session
+10-28 15:45:42.283 17641  7527 W System.err: java.util.concurrent.CancellationException: Finish coroutine session
+10-28 15:45:42.320 14385 14931 W System.err: java.util.concurrent.CancellationException: Finish coroutine session
+10-28 15:45:42.321 14385 14931 W System.err: 	at androidx.glance.session.g.h(r8-map-id-8c946a663a25bc3d79b166b47c44780b098fddf05cbe617ed061e66554a78810:246)
+10-28 15:45:42.321 14385 14931 W System.err: 	at androidx.glance.appwidget.multiprocess.CoroutineSession$runComposition$3.invokeSuspend(r8-map-id-8c946a663a25bc3d79b166b47c44780b098fddf05cbe617ed061e66554a78810:492)
+10-28 15:45:42.321 14385 14931 W System.err: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(r8-map-id-8c946a663a25bc3d79b166b47c44780b098fddf05cbe617ed061e66554a78810:8)
+10-28 15:45:42.362 14064 14389 W System.err: java.util.concurrent.CancellationException: Finish coroutine session
+10-28 15:45:42.582 14064 14392 W System.err: java.util.concurrent.CancellationException: Finish coroutine session
+10-28 15:45:42.778 17641  7536 W System.err: java.util.concurrent.CancellationException: Finish coroutine session
+10-28 15:45:42.790 14064 14391 W System.err: java.util.concurrent.CancellationException: Finish coroutine session
+10-28 15:45:43.196 14064  7807 W System.err: java.util.concurrent.CancellationException: Finish coroutine session
+10-28 15:45:43.226 17641 17681 W System.err: java.util.concurrent.CancellationException: Finish coroutine session
+---- checks ----
+FAIL  plugin running
+FAIL  pane open (Your assets, Add to map or Remove on screen)
+FAIL  assets listed (log, or asset rows on screen)
+FAIL  Google Photorealistic 3D Tiles on the map
+PASS  the TAK-signed plugin is the one installed
+PASS  ATAK-CIV 5.7 installed
+PASS  no crash in the plugin
+PASS  no missing classes or methods (R8)
+REGRESSION: FAIL (4)
