@@ -1,0 +1,124 @@
+
+==== Build the plugin (GameEditor, incremental) ====  [16:35:56]
+
+==== Install VTAK_CesiumIon ====  [16:35:56]
+   \VTAK_CesiumIon.uplugin  653 B
+   \Resources\cesium_ion_logo.png  20,275 B
+   [1/7] Compile [x64] CesiumIonVrtakActor.gen.cpp
+   [3/7] Compile [x64] CesiumIonVrtakPanel.cpp
+   [4/7] Compile [x64] CesiumIonVrtakActor.cpp
+   Total execution time: 42.55 seconds
+Build exit code: 0
+
+==== Start VR-TAK (detached) ====  [16:36:39]
+C:\Program Files\Epic Games\VR-TAK\Engine\Binaries\Win64\UnrealEditor.exe "C:\Program Files\Epic Games\VR-TAK\Game\Game.uproject" -game -windowed -ResX=1920 -ResY=1080 -log -CesiumIonOrigin=39.9526,-75.1635,0 -CesiumIonEnterWorld=20 -CesiumIonScreenshots=840 -CesiumIonShowSettings=855 -CesiumIonQuitAfter=900 -CesiumIonServer=http://192.168.1.247:32470 -CesiumIonApi=http://192.168.1.247:31813 -CesiumIonLoad=9,12,21,11
+Started pid 25152 at 10/28/2026 16:36:40. Run this task again for progress and screenshots.
+
+==== VR-TAK run ====  [16:53:40]
+Log: C:\Program Files\Epic Games\VR-TAK\Game\Saved\Logs\Game.log (updated 10/28/2026 16:39:20)
+-- Cesium ion plugin
+[2026.10.28-20.37.34:422][  1]LogCesiumIonVrtak: VR-TAK's own terrain is off while Cesium terrain is in the world.
+[2026.10.28-20.37.34:422][  1]LogCesiumIonVrtak: Added Mapzen Philly elevation (terrain test) to VR-TAK's world.
+[2026.10.28-20.37.34:431][  1]LogCesiumIonVrtak: Added USGS Philly aerial PNG (imagery test) over the Cesium terrain.
+[2026.10.28-20.37.34:440][  1]LogCesium: Loading tileset for asset ID 0
+[2026.10.28-20.37.34:440][  1]LogCesium: Loading tileset for asset ID 0 done
+[2026.10.28-20.37.34:440][  1]LogCesiumIonVrtak: Added Philadelphia Box Elevated Diagnostic 75m to VR-TAK's world.
+[2026.10.28-20.37.34:450][  1]LogCesium: Loading tileset for asset ID 0
+[2026.10.28-20.37.34:450][  1]LogCesium: Loading tileset for asset ID 0 done
+[2026.10.28-20.37.34:451][  1]LogCesiumIonVrtak: Added Philadelphia box 3D Tiles CC BY 4.0 to VR-TAK's world.
+[2026.10.28-20.37.34:743][  1]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-20.37.34:746][  1]LogCesiumIonVrtak: Aligning with Game_GlobeReferenceActor_Ellipsoid_0. Globes: Game_GlobeReferenceActor_Ellipsoid_0(ellipsoid, scale 1.00, player at 39.9426, -75.1635, 350 m) Game_GlobeReferenceActor_ENU_0(ENU, scale 0.01, player at 15.3278, -125.1289, 634691020 m)
+[2026.10.28-20.37.34:748][  1]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 39.942600, -75.163500, 0.0 m; 100.1 units/m; yaw 165.2.
+[2026.10.28-20.37.34:810][  1]LogCesium: Loading tileset for asset ID 11
+[2026.10.28-20.37.34:810][  1]LogCesium: Loading tileset for asset ID 11 done
+[2026.10.28-20.37.34:812][  1]LogCesium: Loading tileset for asset ID 21
+[2026.10.28-20.37.34:818][  1]LogCesium: Loading tileset for asset ID 21 done
+[2026.10.28-20.37.34:819][  1]LogCesium: Loading tileset for asset ID 9
+[2026.10.28-20.37.34:819][  1]LogCesium: Loading tileset for asset ID 9 done
+[2026.10.28-20.37.45:091][918]LogCesiumIonVrtak: Panel: in viewport 1, visible 1, tree 1, root Border, desired X=547.000 Y=1548.333, size X=540.000 Y=900.000 at X=1580.000 Y=140.000; viewport X=1920.000 Y=1080.000.
+[2026.10.28-20.37.50:107][ 39]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: yes.
+[2026.10.28-20.37.50:356][ 57]LogCesiumIonVrtak: Moved the view to 39.95260, -75.16350, 0 m (as VR-TAK's Go To does).
+[2026.10.28-20.37.54:389][206]LogCesiumIonVrtak: Entering VR-TAK's world (ce GoToWorld).
+[2026.10.28-20.37.54:391][206]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 15.334150, -125.121021, 0.0 m; 100.0 units/m; yaw -144.9.
+[2026.10.28-20.38.04:363][884]LogCesiumIonVrtak: Diagnostics: camera at X=35566259506.446 Y=-50566222025.407 Z=16950938985.747; georeference at X=353957529.894 Y=-503238048.935 Z=167578598.106, scale X=1.000 Y=0.994 Z=1.000.
+[2026.10.28-20.38.04:364][884]LogCesiumIonVrtak: Diagnostics: #9 loaded 100%, 230 components, hidden 0, content X=-26754480.603 Y=1590337.340 Z=-448160585.784 (size X=1723774695.546 Y=1723147060.092 Z=2429230301.494), 64239356766 units from the camera.
+[2026.10.28-20.38.04:366][884]LogCesiumIonVrtak: Diagnostics: #21 loaded 100%, 3 components, hidden 0, content X=-125157902.670 Y=-473742942.792 Z=405599811.419 (size X=600.032 Y=600.032 Z=600.032), 63693657343 units from the camera.
+[2026.10.28-20.38.04:366][884]LogCesiumIonVrtak: Diagnostics: #11 loaded 100%, 3 components, hidden 0, content X=-125156432.998 Y=-473737379.823 Z=405595016.476 (size X=600.032 Y=600.032 Z=600.032), 63693662140 units from the camera.
+[2026.10.28-20.38.04:605][900]LogCesiumIonVrtak: Moved the view to 39.94260, -75.16350, 350 m (as VR-TAK's Go To does), bearing 0, pitch -35.
+[2026.10.28-20.38.05:358][954]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 39.942600, -75.163500, 0.0 m; 100.1 units/m; yaw 165.2.
+[2026.10.28-20.38.31:590][111]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-20.38.34:588][748]LogCesiumIonVrtak: Diagnostics: camera at X=-125406903.719 Y=-473380625.394 Z=407326630.032; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.28-20.38.34:589][748]LogCesiumIonVrtak: Diagnostics: #9 loaded 100%, 238 components, hidden 0, content X=-55874860.647 Y=-55164619.202 Z=-437426876.220 (size X=1671507980.072 Y=1870017741.940 Z=2411103425.240), 945170788 units from the camera.
+[2026.10.28-20.38.34:589][748]LogCesiumIonVrtak: Diagnostics: #21 loaded 100%, 3 components, hidden 0, content X=-125371100.175 Y=-473292888.127 Z=407398145.507 (size X=600.731 Y=600.731 Z=600.731), 118719 units from the camera.
+[2026.10.28-20.38.34:590][748]LogCesiumIonVrtak: Diagnostics: #11 loaded 100%, 3 components, hidden 0, content X=-125369627.983 Y=-473287330.489 Z=407393329.356 (size X=600.731 Y=600.731 Z=600.731), 120591 units from the camera.
+[2026.10.28-20.39.02:606][505]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: yes.
+[2026.10.28-20.39.04:607][649]LogCesiumIonVrtak: Diagnostics: camera at X=-125406924.052 Y=-473380709.271 Z=407326553.782; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.28-20.39.04:607][649]LogCesiumIonVrtak: Diagnostics: #9 loaded 100%, 238 components, hidden 0, content X=-55874860.647 Y=-55164619.202 Z=-437426876.220 (size X=1671507980.072 Y=1870017741.940 Z=2411103425.240), 945170759 units from the camera.
+[2026.10.28-20.39.04:608][649]LogCesiumIonVrtak: Diagnostics: #21 loaded 100%, 3 components, hidden 0, content X=-125371100.175 Y=-473292888.127 Z=407398145.507 (size X=600.731 Y=600.731 Z=600.731), 118833 units from the camera.
+[2026.10.28-20.39.04:608][649]LogCesiumIonVrtak: Diagnostics: #11 loaded 100%, 3 components, hidden 0, content X=-125369627.983 Y=-473287330.489 Z=407393329.356 (size X=600.731 Y=600.731 Z=600.731), 120704 units from the camera.
+[2026.10.28-20.39.17:817][587]LogCesiumIonVrtak: VR-TAK's own terrain is back on.
+-- errors
+[2026.10.28-20.37.21:807][  0]LogClass: Error: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.28-20.37.21:807][  0]LogClass: Error: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.28-20.37.21:850][  0]LogAutomationTest: Error: UObject.Class AttemptToFindUninitializedScriptStructMembers will be marked as failing due to errors being logged
+[2026.10.28-20.37.21:851][  0]LogAutomationTest: Error: LogClass: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.28-20.37.21:851][  0]LogAutomationTest: Error: LogClass: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+-- shader compilation
+[2026.10.28-20.39.19:421][587]LogShaderCompilers: Display:        TBasePassPSFCachedPointIndirectLightingPolicySkylight - 9.11% of total time (compiled    5 times, average 2.35 sec, max 2.57 sec, min 2.19 sec)
+[2026.10.28-20.39.19:421][587]LogShaderCompilers: Display: ================================================
+[2026.10.28-20.39.19:457][587]LogShaderCompilers: Display: Shaders left to compile 0
+-- last log lines
+[2026.10.28-20.39.19:943][587]LogModuleManager: Shutting down and abandoning module RenderDocPlugin (68)
+[2026.10.28-20.39.19:943][587]RenderDocPlugin: plugin has been unloaded.
+[2026.10.28-20.39.19:943][587]LogModuleManager: Shutting down and abandoning module PixWinPlugin (66)
+[2026.10.28-20.39.19:943][587]LogModuleManager: Shutting down and abandoning module DesktopPlatform (64)
+[2026.10.28-20.39.19:944][587]LogModuleManager: Shutting down and abandoning module PythonScriptPluginPreload (62)
+[2026.10.28-20.39.19:944][587]LogModuleManager: Shutting down and abandoning module PlatformCryptoOpenSSL (60)
+[2026.10.28-20.39.19:944][587]LogModuleManager: Shutting down and abandoning module PlatformCryptoTypes (58)
+[2026.10.28-20.39.19:944][587]LogModuleManager: Shutting down and abandoning module PlatformCrypto (56)
+[2026.10.28-20.39.19:944][587]LogModuleManager: Shutting down and abandoning module PerforceSourceControl (54)
+[2026.10.28-20.39.19:945][587]LogModuleManager: Shutting down and abandoning module PlasticSourceControl (52)
+[2026.10.28-20.39.19:945][587]LogModuleManager: Shutting down and abandoning module SourceControl (51)
+[2026.10.28-20.39.19:945][587]LogModuleManager: Shutting down and abandoning module XGEController (48)
+[2026.10.28-20.39.19:945][587]LogXGEController: Cleaning working directory: C:/Users/Cesium/AppData/Local/Temp/UnrealXGEWorkingDir/
+[2026.10.28-20.39.19:945][587]LogModuleManager: Shutting down and abandoning module FastBuildController (46)
+[2026.10.28-20.39.19:945][587]LogModuleManager: Shutting down and abandoning module IoStoreOnDemand (44)
+[2026.10.28-20.39.19:946][587]LogModuleManager: Shutting down and abandoning module AnimationModifiers (42)
+[2026.10.28-20.39.19:947][587]LogModuleManager: Shutting down and abandoning module AudioEditor (40)
+[2026.10.28-20.39.19:947][587]LogModuleManager: Shutting down and abandoning module PropertyEditor (39)
+[2026.10.28-20.39.19:948][587]LogModuleManager: Shutting down and abandoning module Virtualization (36)
+[2026.10.28-20.39.19:948][587]LogModuleManager: Shutting down and abandoning module MessageLog (35)
+[2026.10.28-20.39.19:948][587]LogModuleManager: Shutting down and abandoning module TextureCompressor (32)
+[2026.10.28-20.39.19:948][587]LogModuleManager: Shutting down and abandoning module OpenColorIOWrapper (31)
+[2026.10.28-20.39.19:948][587]LogModuleManager: Shutting down and abandoning module RenderCore (28)
+[2026.10.28-20.39.19:948][587]LogModuleManager: Shutting down and abandoning module Landscape (26)
+[2026.10.28-20.39.19:949][587]LogModuleManager: Shutting down and abandoning module SlateRHIRenderer (24)
+[2026.10.28-20.39.19:949][587]LogModuleManager: Shutting down and abandoning module AnimGraphRuntime (22)
+[2026.10.28-20.39.19:949][587]LogModuleManager: Shutting down and abandoning module Renderer (20)
+[2026.10.28-20.39.19:949][587]LogModuleManager: Shutting down and abandoning module Engine (18)
+[2026.10.28-20.39.19:949][587]LogModuleManager: Shutting down and abandoning module CoreUObject (16)
+[2026.10.28-20.39.19:949][587]LogModuleManager: Shutting down and abandoning module SandboxFile (14)
+[2026.10.28-20.39.19:950][587]LogModuleManager: Shutting down and abandoning module PakFile (12)
+[2026.10.28-20.39.19:950][587]LogPakFile: Destroying PakPlatformFile
+[2026.10.28-20.39.19:950][587]LogModuleManager: Shutting down and abandoning module RSA (11)
+[2026.10.28-20.39.19:950][587]LogModuleManager: Shutting down and abandoning module NetworkFile (8)
+[2026.10.28-20.39.19:950][587]LogModuleManager: Shutting down and abandoning module StreamingFile (6)
+[2026.10.28-20.39.19:950][587]LogModuleManager: Shutting down and abandoning module CookOnTheFly (4)
+[2026.10.28-20.39.19:950][587]LogModuleManager: Shutting down and abandoning module StorageServerClient (2)
+[2026.10.28-20.39.19:994][587]LogD3D12RHI: ~FD3D12DynamicRHI
+[2026.10.28-20.39.20:016][587]LogExit: Exiting.
+[2026.10.28-20.39.20:029][587]Log file closed, 10/28/26 16:39:20
+
+==== VR-TAK processes and windows ====  [16:53:40]
+No screenshots yet.
+
+==== Regression checks ====  [16:53:40]
+PASS  LogCesiumIonVrtak: Found \d+ assets
+PASS  LogCesiumIonVrtak: Added .+ to VR-TAK's world
+PASS  LogCesiumIonVrtak: Georeference aligned
+PASS  LogCesiumIonVrtak: Cesium ion panel on screen
+FAIL  LogCesiumIonVrtak: Screenshot requested
+FAIL  LogCesiumIonVrtak: Quitting after the test run
+PASS  LogCesiumIonVrtak: XR system
+PASS  no fatal errors
+REGRESSION: FAIL (2)
