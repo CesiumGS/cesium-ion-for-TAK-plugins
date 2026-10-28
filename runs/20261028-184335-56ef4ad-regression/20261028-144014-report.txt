@@ -1,0 +1,822 @@
+Cesium ion ATAK device report 20261028-144014
+Device: R5GL5381L9F SM-X730, Android 16, arm64-v8a
+ATAK: versionName=5.7.0.10 (e0d26f0e)
+Plugin: ATAK-Plugin-CesiumIon-1.0.2-56ef4ad-5.7.0-civ-debug.apk  commit 56ef4ad
+Plugin lines: 118   Crashes: 0   ANRs: 0
+Scenario: regression.txt   Plugin failures: 0
+---- scenario steps ----
+Map drawing at 57.65899529819352 57.82178217821782 58.47373637264619  frames/s after waiting 0s.
++ 14s  step 1: removeAll
++ 14s  step 2: wait 3
++ 17s  step 3: tap Cancel
+        no "Cancel" on screen
++ 19s  step 4: wait 2
++ 22s  step 5: pane
++ 22s  step 6: wait 10
++ 32s  step 7: screenshot pane
+        saved 20261028-144014-pane.png
++ 32s  step 8: expect Found [0-9]+ assets
++ 32s  step 9: settings open
++ 33s  step 10: wait 3
++ 36s  step 11: screenshot settings
+        saved 20261028-144014-settings.png
++ 36s  step 12: settings close
++ 36s  step 13: wait 2
++ 39s  step 14: load 96188 Cesium OSM Buildings
++ 39s  step 15: wait 8
++ 47s  step 16: fly 39.9526 -75.1635 1500 55
++ 47s  step 17: wait 20
++ 67s  step 18: screenshot osm-buildings
+        saved 20261028-144014-osm-buildings.png
++ 67s  step 19: expect Added\. In ATAK: Overlay Manager
++ 67s  step 20: remove 96188
++ 68s  step 21: wait 3
++ 71s  step 22: expect Removal requested
++ 71s  step 23: load 2275207 Google Photorealistic 3D Tiles
++ 71s  step 24: wait 8
++ 79s  step 25: fly 39.9526 -75.1635 1500 55
++ 79s  step 26: wait 25
++104s  step 27: screenshot google-3d
+        saved 20261028-144014-google-3d.png
++105s  step 28: removeAll
++105s  step 29: wait 3
++108s  step 30: load 2 Bing Maps Aerial
++108s  step 31: wait 5
++113s  step 32: fly 39.9526 -75.1635 3000 0
++113s  step 33: wait 15
++128s  step 34: screenshot bing
+        saved 20261028-144014-bing.png
++129s  step 35: expect Showing "Cesium ion - Bing Maps Aerial"
++129s  step 36: load 1 Cesium World Terrain
++130s  step 37: fly 46.8523 -121.7603 20000 60
++130s  step 38: wait 30
++160s  step 39: screenshot terrain
+        saved 20261028-144014-terrain.png
++161s  step 40: expect Added as ATAK's elevation
++161s  step 41: pane
++161s  step 42: wait 3
++164s  step 43: screenshot pane-loaded
+        saved 20261028-144014-pane-loaded.png
++165s  step 44: removeAll
++165s  step 45: wait 5
++170s  step 46: expect Removed [0-9]+ layers
+---- regression checks ----
+PASS  Found [0-9]+ assets
+PASS  Added\. In ATAK: Overlay Manager
+PASS  Removal requested
+PASS  Showing "Cesium ion - Bing Maps Aerial"
+PASS  Added as ATAK's elevation
+PASS  Removed [0-9]+ layers
+PASS  no crashes
+PASS  no ANRs
+REGRESSION: PASS
+---- plugin log (credentials redacted) ----
+10-28 14:40:46.684 I/CesiumIon(29297): Test commands enabled (debug build; adb shell only).
+10-28 14:40:46.684 I/CesiumIon(29297): Cesium ion plugin started.
+10-28 14:40:46.686 I/CesiumIon(29297): Tile proxy listening on 127.0.0.1:38735
+10-28 14:40:55.507 I/CesiumIon(29297): TEST 1 command: removeAll
+10-28 14:40:55.534 I/CesiumIon(29297): > List assets
+10-28 14:40:55.534 I/CesiumIon(29297): > Remove all Cesium ion layers
+10-28 14:40:55.896 I/CesiumIon(29297): Signed in as CesiumBD.
+10-28 14:40:55.938 I/CesiumIon(29297): Workspace: personal (no teams on this account).
+10-28 14:40:55.938 I/CesiumIon(29297): Found 50 assets (more available).
+10-28 14:40:55.940 I/CesiumIon(29297): Nothing to remove.
+10-28 14:40:55.949 I/CesiumIon(29297): MapRenderer3 via MapView.getRenderer3()
+10-28 14:40:55.951 I/CesiumIon(29297): ATAK basemap opacity 100%: enabled=true, factor=1.0, surface draw modes: Points=false Triangles=true TriangleStrip=false Lines=false LineStrip=false, com.atakmap.map.opengl.GLMapView$SurfaceTerrainBlendControl
+10-28 14:40:55.951 I/CesiumIon(29297): ATAK basemap at 100%.
+10-28 14:41:02.909 I/CesiumIon(29297): TEST 5 command: pane
+10-28 14:41:13.856 I/CesiumIon(29297): TEST 9 command: settings
+10-28 14:41:17.780 I/CesiumIon(29297): TEST 12 command: settings
+10-28 14:41:19.958 I/CesiumIon(29297): TEST 14 command: load
+10-28 14:41:19.958 I/CesiumIon(29297): > Add Cesium OSM Buildings (#96188)
+10-28 14:41:20.047 I/CesiumIon(29297): Attribution: <span><a href="https://cesium.com" target="_blank"><img src="https://assets.ion.cesium.com/ion-credit.png" alt="Cesium ion"></a></span>
+10-28 14:41:20.047 I/CesiumIon(29297): Attribution: <span>© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors</span>
+10-28 14:41:20.216 I/CesiumIon(29297): Tileset location: TilesetBounds[-0.60030, -0.00135, h=2786 m, r=20036258 m]
+10-28 14:41:20.217 I/CesiumIon(29297): The tileset covers the globe; the map stays where it is.
+10-28 14:41:20.219 I/CesiumIon(29297): Broadcast com.atakmap.android.importexport.IMPORT_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-96188.json content=Streaming Mesh Configuration
+10-28 14:41:20.220 I/CesiumIon(29297): 3D Tiles import requested (through the local proxy).
+10-28 14:41:20.221 I/CesiumIon(29297): Added. In ATAK: Overlay Manager › 3D Models.
+10-28 14:41:20.281 I/CesiumIon(29297): Rotate & tilt gestures: userRotation=true, tiltState=0 (enabled=0), maxTilt=89.0. Twist two fingers to rotate; drag two fingers up or down to tilt.
+10-28 14:41:20.281 I/CesiumIon(29297): The tileset has no georeferenced root volume; pan to it manually.
+10-28 14:41:20.394 I/CesiumIon(29297): Proxy #96188 /us-east-1/asset_depot/96188/OpenStreetMap/CWT/2026-06-08/tileset.json -> 200, 1244 bytes, 61 ms
+10-28 14:41:20.530 I/CesiumIon(29297): Proxy #96188 /us-east-1/asset_depot/96188/OpenStreetMap/CWT/2026-06-08/tileset.json -> 200, 1244 bytes, 79 ms
+10-28 14:41:20.676 I/CesiumIon(29297): Proxy #96188 /us-east-1/asset_depot/96188/OpenStreetMap/CWT/2026-06-08/0-0-0.json -> 200, 343054 bytes, 138 ms
+10-28 14:41:28.090 I/CesiumIon(29297): TEST 16 command: fly
+10-28 14:41:28.090 I/CesiumIon(29297): Rotate & tilt gestures: userRotation=true, tiltState=0 (enabled=0), maxTilt=89.0. Twist two fingers to rotate; drag two fingers up or down to tilt.
+10-28 14:41:28.122 I/CesiumIon(29297): Camera to 39.9526, -75.1635, ground 43 m, 1500 m across, tilt 55
+10-28 14:41:48.872 I/CesiumIon(29297): TEST 20 command: remove
+10-28 14:41:48.873 I/CesiumIon(29297): > Remove asset 96188 (#96188)
+10-28 14:41:48.875 I/CesiumIon(29297): Broadcast com.atakmap.android.importexport.DELETE_DATA uri=http://127.0.0.1:38735/PROXY_SECRET/a/96188/us-east-1/asset_depot/96188/OpenStreetMap/CWT/2026-06-08/tileset.json content=3D Model
+10-28 14:41:48.875 I/CesiumIon(29297): Broadcast com.atakmap.android.importexport.DELETE_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-96188.json content=Streaming Mesh Configuration
+10-28 14:41:48.875 I/CesiumIon(29297): Removal requested.
+10-28 14:41:52.069 I/CesiumIon(29297): TEST 23 command: load
+10-28 14:41:52.069 I/CesiumIon(29297): > Add Google Photorealistic 3D Tiles (#2275207)
+10-28 14:41:52.476 I/CesiumIon(29297): Attribution: <span><a href="https://cesium.com" target="_blank"><img src="https://assets.ion.cesium.com/ion-credit.png" alt="Cesium ion"></a></span>
+10-28 14:41:52.477 I/CesiumIon(29297): Attribution: <img alt="Google" src="https://assets.ion.cesium.com/google-credit.png" style="vertical-align:-6px">
+10-28 14:41:52.573 I/CesiumIon(29297): Broadcast com.atakmap.android.importexport.IMPORT_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-2275207.json content=Streaming Mesh Configuration
+10-28 14:41:52.574 I/CesiumIon(29297): 3D Tiles import requested (through the local proxy).
+10-28 14:41:52.575 I/CesiumIon(29297): Added. In ATAK: Overlay Manager › 3D Models.
+10-28 14:41:52.662 I/CesiumIon(29297): Rotate & tilt gestures: userRotation=true, tiltState=0 (enabled=0), maxTilt=89.0. Twist two fingers to rotate; drag two fingers up or down to tilt.
+10-28 14:41:52.663 I/CesiumIon(29297): ATAK basemap opacity 0%: enabled=true, factor=0.0, surface draw modes: Points=false Triangles=true TriangleStrip=false Lines=false LineStrip=false, com.atakmap.map.opengl.GLMapView$SurfaceTerrainBlendControl
+10-28 14:41:52.663 I/CesiumIon(29297): ATAK basemap at 0%.
+10-28 14:41:52.663 I/CesiumIon(29297): Zoom to street level over a city to see the photorealistic tiles.
+10-28 14:41:52.899 I/CesiumIon(29297): Proxy #2275207 /v1/3dtiles/root.json -> 200, 71105 bytes, 233 ms
+10-28 14:41:53.073 I/CesiumIon(29297): Proxy #2275207 /v1/3dtiles/root.json -> 200, 71105 bytes, 122 ms
+10-28 14:41:53.154 I/CesiumIon(29297): Credits #2275207: Google; Data SIO, NOAA, U.S. Navy, NGA, GEBCO; IBCAO
+10-28 14:41:53.154 I/CesiumIon(29297): Proxy #2275207 /v1/3dtiles/datasets/CgIYAQ/files/AJVsH2weckNDivJFuETUXcUHJ25nf3EEn2Qj_HasYStCy1xhZRVVxt3bfox2oaYhahj-WaphnSns-lFSrf76tLx5pasnWODfZOXShPezqCQhZOttRl6tJfq9ou3nqzzH2GeGzmc.glb -> 200, 13396 bytes, 70 ms
+10-28 14:41:55.697 I/CesiumIon(29297): Map credits overlay added (bottom centre).
+10-28 14:41:55.700 I/CesiumIon(29297): Credit logo icon: com.atakmap.coremap.maps.assets.Icon, 196x36 px.
+10-28 14:41:55.702 I/CesiumIon(29297): Map credits show google-credit.png.
+10-28 14:41:56.524 I/CesiumIon(29297): Proxy #2275207: 100 requests, 0 failed.
+10-28 14:41:58.703 I/CesiumIon(29297): Map credits placement: row at 0.0,31.0 size 1174.6666x51.0 visible true; text at 277.66666,0.0 size 881.0x24.0 visible true; bottom layout at 0.0,1288.0 size 1174.0x90.0 visible true; map view 1280x1504.
+10-28 14:41:59.796 I/CesiumIon(29297): Proxy #2275207: 200 requests, 0 failed.
+10-28 14:42:00.171 I/CesiumIon(29297): TEST 25 command: fly
+10-28 14:42:00.171 I/CesiumIon(29297): Rotate & tilt gestures: userRotation=true, tiltState=0 (enabled=0), maxTilt=89.0. Twist two fingers to rotate; drag two fingers up or down to tilt.
+10-28 14:42:00.192 I/CesiumIon(29297): Camera to 39.9526, -75.1635, ground 43 m, 1500 m across, tilt 55
+10-28 14:42:02.744 I/CesiumIon(29297): Proxy #2275207: 300 requests, 0 failed.
+10-28 14:42:03.258 I/CesiumIon(29297): Credits #2275207: Google; Data SIO, NOAA, U.S. Navy, NGA, GEBCO; IBCAO; Landsat / Copernicus
+10-28 14:42:26.282 I/CesiumIon(29297): TEST 28 command: removeAll
+10-28 14:42:26.282 I/CesiumIon(29297): > Remove all Cesium ion layers
+10-28 14:42:26.283 I/CesiumIon(29297): Broadcast com.atakmap.android.importexport.DELETE_DATA uri=http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json content=3D Model
+10-28 14:42:26.283 I/CesiumIon(29297): Broadcast com.atakmap.android.importexport.DELETE_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-2275207.json content=Streaming Mesh Configuration
+10-28 14:42:26.284 I/CesiumIon(29297): Removed Google Photorealistic 3D Tiles (#2275207).
+10-28 14:42:26.290 I/CesiumIon(29297): Removed 1 layers.
+10-28 14:42:26.336 I/CesiumIon(29297): ATAK basemap opacity 100%: enabled=true, factor=1.0, surface draw modes: Points=false Triangles=true TriangleStrip=false Lines=true LineStrip=false, com.atakmap.map.opengl.GLMapView$SurfaceTerrainBlendControl
+10-28 14:42:26.336 I/CesiumIon(29297): ATAK basemap at 100%.
+10-28 14:42:29.474 I/CesiumIon(29297): TEST 30 command: load
+10-28 14:42:29.475 I/CesiumIon(29297): > Add Bing Maps Aerial (#2)
+10-28 14:42:29.986 I/CesiumIon(29297): Attribution: <span><a href="https://cesium.com" target="_blank"><img src="https://assets.ion.cesium.com/ion-credit.png" alt="Cesium ion"></a></span>
+10-28 14:42:30.132 I/CesiumIon(29297): Imagery: TileTemplate[QUADKEY https://ecn.t0.tiles.virtualearth.net/tiles/a{q}.jpeg?g=15646 z1-21.jpg]
+10-28 14:42:30.134 I/CesiumIon(29297): Broadcast com.atakmap.android.importexport.IMPORT_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml content=External Native Data
+10-28 14:42:30.190 I/CesiumIon(29297): Map layers: [Raster Layers, Native, Mobile, Contour Lines Overlay]
+10-28 14:42:31.193 I/CesiumIon(29297): Showing "Cesium ion - Bing Maps Aerial" (Map Layers › Mobile).
+10-28 14:42:34.614 I/CesiumIon(29297): TEST 32 command: fly
+10-28 14:42:34.614 I/CesiumIon(29297): Rotate & tilt gestures: userRotation=true, tiltState=0 (enabled=0), maxTilt=89.0. Twist two fingers to rotate; drag two fingers up or down to tilt.
+10-28 14:42:34.655 I/CesiumIon(29297): Camera to 39.9526, -75.1635, ground 43 m, 3000 m across, tilt 0
+10-28 14:42:50.840 I/CesiumIon(29297): TEST 36 command: load
+10-28 14:42:50.841 I/CesiumIon(29297): > Add Cesium World Terrain (#1)
+10-28 14:42:50.955 I/CesiumIon(29297): TEST 37 command: fly
+10-28 14:42:50.955 I/CesiumIon(29297): Rotate & tilt gestures: userRotation=true, tiltState=0 (enabled=0), maxTilt=89.0. Twist two fingers to rotate; drag two fingers up or down to tilt.
+10-28 14:42:50.970 I/CesiumIon(29297): Attribution: <span><a href="https://cesium.com" target="_blank"><img src="https://assets.ion.cesium.com/ion-credit.png" alt="Cesium ion"></a></span>
+10-28 14:42:50.970 I/CesiumIon(29297): Attribution: <span>Data available from the U.S. Geological Survey, © CGIAR-CSI, Produced using Copernicus data and information funded by the European Union - EU-DEM layers, Data available from Land Information New Zealand, Data available from data.gov.uk, Data courtesy Geoscience Australia</span>
+10-28 14:42:50.990 I/CesiumIon(29297): Camera to 46.8523, -121.7603, ground 4352 m, 20000 m across, tilt 60
+10-28 14:42:51.323 I/CesiumIon(29297): Terrain attached: levels 0-19. Tiles download as ATAK asks for them.
+10-28 14:42:51.323 I/CesiumIon(29297): Added as ATAK's elevation. Tilt the map over hills or mountains to see it.
+10-28 14:42:51.351 I/CesiumIon(29297): Terrain #1 attached in 27 ms on the main thread.
+10-28 14:42:51.351 I/CesiumIon(29297): ATAK elevation sources (5):
+10-28 14:42:51.351 I/CesiumIon(29297):   QME Envelope {minX=-180.0,minY=-90.0,minZ=0.0,maxX=180.0,maxY=90.0,maxZ=0.0}
+10-28 14:42:51.351 I/CesiumIon(29297):   DTED Envelope {minX=-180.0,minY=-90.0,minZ=0.0,maxX=180.0,maxY=90.0,maxZ=0.0}
+10-28 14:42:51.351 I/CesiumIon(29297):   DTED Envelope {minX=0.0,minY=0.0,minZ=0.0,maxX=0.0,maxY=0.0,maxZ=0.0}
+10-28 14:42:51.351 I/CesiumIon(29297):   TAK Bathy Envelope {minX=-180.0,minY=-90.0,minZ=0.0,maxX=180.0,maxY=90.0,maxZ=0.0}
+10-28 14:42:51.351 I/CesiumIon(29297):   TAK Terrain Envelope {minX=-180.0,minY=-90.0,minZ=0.0,maxX=180.0,maxY=90.0,maxZ=0.0}
+10-28 14:42:54.323 I/CesiumIon(29297): Map camera readable: 46.9202, -121.7603, 15.6 m/px
+10-28 14:42:54.428 I/CesiumIon(29297): Terrain #1: 1 tiles cached (latest 11/660/1557, 17448 bytes).
+10-28 14:42:54.489 I/CesiumIon(29297): Terrain #1: 2 tiles cached (latest 11/660/1556, 18172 bytes).
+10-28 14:42:54.491 I/CesiumIon(29297): Terrain #1: 3 tiles cached (latest 11/660/1558, 15840 bytes).
+10-28 14:43:22.037 I/CesiumIon(29297): TEST 41 command: pane
+10-28 14:43:26.104 I/CesiumIon(29297): TEST 44 command: removeAll
+10-28 14:43:26.104 I/CesiumIon(29297): > Remove all Cesium ion layers
+10-28 14:43:26.109 I/CesiumIon(29297): Removed Cesium World Terrain (#1).
+10-28 14:43:26.109 I/CesiumIon(29297): Broadcast com.atakmap.android.importexport.DELETE_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml content=External Native Data
+10-28 14:43:26.109 I/CesiumIon(29297): Removed Cesium ion - Bing Maps Aerial (#2).
+10-28 14:43:26.110 I/CesiumIon(29297): Removed 2 layers.
+10-28 14:43:26.141 I/CesiumIon(29297): ATAK basemap opacity 100%: enabled=true, factor=1.0, surface draw modes: Points=false Triangles=true TriangleStrip=false Lines=false LineStrip=false, com.atakmap.map.opengl.GLMapView$SurfaceTerrainBlendControl
+10-28 14:43:26.141 I/CesiumIon(29297): ATAK basemap at 100%.
+10-28 14:43:26.219 I/CesiumIon(29297): Back to "NRL Open Street Map" (Map Layers › Mobile).
+---- other relevant logcat, stack frames omitted ----
+10-28 14:40:46.665 V/AtakPluginRegistry(29297): Could not open plugin.xml asset in android
+10-28 14:40:46.667 V/AtakPluginRegistry(29297): Could not open plugin.xml asset in com.samsung.android.scs
+10-28 14:40:46.668 V/AtakPluginRegistry(29297): Could not open plugin.xml asset in com.samsung.aasaservice
+10-28 14:40:46.668 D/AtakPluginRegistry(29297): loadPlugins
+10-28 14:40:46.673 D/AtakPluginRegistry(29297): Loading com.atak.plugins.impl.IToolbarItem extensions for com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin], 
+10-28 14:40:46.673 D/AtakPluginRegistry(29297): Found 0 plugin extensions matching IToolbarItem in 1 plugins
+10-28 14:40:46.673 D/AtakPluginRegistry(29297): Loading gov.tak.api.plugin.IPlugin extensions for com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin], 
+10-28 14:40:46.674 D/AtakPluginRegistry(29297): api matches[ com.cesium.atak.ion]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:40:46.676 D/AtakPluginRegistry(29297): SDK skipping signature check[com.cesium.atak.ion]
+10-28 14:40:46.682 D/AtakPluginRegistry(29297): Loaded com.cesium.atak.ion.CesiumIonPlugin, for plugin: com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin], 
+10-28 14:40:46.682 D/AtakPluginRegistry(29297): Found 1 plugin extensions matching IPlugin in 1 plugins
+10-28 14:40:46.682 D/AtakPluginRegistry(29297): Loading new Kernel plugin: com.cesium.atak.ion.CesiumIonPlugin@e33b920
+10-28 14:40:46.683 D/AtakPluginRegistry(29297): loadPlugins complete
+10-28 14:40:46.694 D/ImportExportMapComponent(29297): Import/Export ready
+10-28 14:40:46.708 D/ProductRepository(29297): Parsed: Android,plugin,com.cesium.atak.ion,Cesium ion,1.0.1 (7912ffd) - [5.7.0],1793211650,,,Stream Cesium ion imagery\u002c terrain\u002c and 3D Tiles (Cloud or Self-Hosted) into ATAK.,,26,com.atakmap.app@5.7.0.CIV,-1
+10-28 14:40:47.044 V/HashingUtils(29297): Computing SHA256 for: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Auto.xml
+10-28 14:40:47.045 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Auto.xml content=External Native Data mime=application/xml
+10-28 14:40:47.046 D/ImportReceiver(29297): processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Auto.xml}]
+10-28 14:40:47.046 D/ExternalLayerDataImporter(29297): call to remove: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Auto.xml from class com.atakmap.map.layer.raster.PersistentRasterDataStore
+10-28 14:40:47.136 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Auto.xml
+10-28 14:40:47.136 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Auto.xml
+10-28 14:40:47.136 W/KmzLayerInfoSpi(29297): Unable to open KMZ as a zip file: not a zip file. /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Auto.xml
+10-28 14:40:47.171 W/CotStreamListener(29297): ImportExportMapComponent:Couldn't find stream 224.10.10.1:17012:udp to remove
+10-28 14:40:47.198 D/ExternalLayerDataImporter(29297): import: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Auto.xml in 90ms
+10-28 14:40:47.199 D/ImportReceiver(29297): class com.atakmap.android.layers.ExternalLayerDataImporter import: file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Auto.xml
+10-28 14:40:47.199 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Auto.xml}]
+10-28 14:40:47.259 V/HashingUtils(29297): Computing SHA256 for: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Mosaic.xml
+10-28 14:40:47.261 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Mosaic.xml content=External Native Data mime=application/xml
+10-28 14:40:47.261 D/ImportReceiver(29297): processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Mosaic.xml}]
+10-28 14:40:47.262 D/ExternalLayerDataImporter(29297): call to remove: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Mosaic.xml from class com.atakmap.map.layer.raster.PersistentRasterDataStore
+10-28 14:40:47.336 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Mosaic.xml
+10-28 14:40:47.336 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Mosaic.xml
+10-28 14:40:47.336 W/KmzLayerInfoSpi(29297): Unable to open KMZ as a zip file: not a zip file. /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Mosaic.xml
+10-28 14:40:47.402 D/ExternalLayerDataImporter(29297): import: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Mosaic.xml in 86ms
+10-28 14:40:47.402 D/ImportReceiver(29297): class com.atakmap.android.layers.ExternalLayerDataImporter import: file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Mosaic.xml
+10-28 14:40:47.402 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-DRG-Mosaic.xml}]
+10-28 14:40:47.475 V/HashingUtils(29297): Computing SHA256 for: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-Sectionals.xml
+10-28 14:40:47.476 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-Sectionals.xml content=External Native Data mime=application/xml
+10-28 14:40:47.476 D/ImportReceiver(29297): processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-Sectionals.xml}]
+10-28 14:40:47.477 D/ExternalLayerDataImporter(29297): call to remove: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-Sectionals.xml from class com.atakmap.map.layer.raster.PersistentRasterDataStore
+10-28 14:40:47.545 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-Sectionals.xml
+10-28 14:40:47.545 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-Sectionals.xml
+10-28 14:40:47.545 W/KmzLayerInfoSpi(29297): Unable to open KMZ as a zip file: not a zip file. /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-Sectionals.xml
+10-28 14:40:47.611 D/ExternalLayerDataImporter(29297): import: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-Sectionals.xml in 78ms
+10-28 14:40:47.611 D/ImportReceiver(29297): class com.atakmap.android.layers.ExternalLayerDataImporter import: file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-Sectionals.xml
+10-28 14:40:47.611 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-Sectionals.xml}]
+10-28 14:40:47.688 V/HashingUtils(29297): Computing SHA256 for: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-TACs.xml
+10-28 14:40:47.690 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-TACs.xml content=External Native Data mime=application/xml
+10-28 14:40:47.690 D/ImportReceiver(29297): processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-TACs.xml}]
+10-28 14:40:47.691 D/ExternalLayerDataImporter(29297): call to remove: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-TACs.xml from class com.atakmap.map.layer.raster.PersistentRasterDataStore
+10-28 14:40:47.749 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-TACs.xml
+10-28 14:40:47.749 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-TACs.xml
+10-28 14:40:47.749 W/KmzLayerInfoSpi(29297): Unable to open KMZ as a zip file: not a zip file. /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-TACs.xml
+10-28 14:40:47.799 D/ExternalLayerDataImporter(29297): import: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-TACs.xml in 62ms
+10-28 14:40:47.799 D/ImportReceiver(29297): class com.atakmap.android.layers.ExternalLayerDataImporter import: file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-TACs.xml
+10-28 14:40:47.799 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-FAA-TACs.xml}]
+10-28 14:40:47.905 V/HashingUtils(29297): Computing SHA256 for: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-OpenStreetMap.xml
+10-28 14:40:47.907 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-OpenStreetMap.xml content=External Native Data mime=application/xml
+10-28 14:40:47.907 D/ImportReceiver(29297): processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-OpenStreetMap.xml}]
+10-28 14:40:47.908 D/ExternalLayerDataImporter(29297): call to remove: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-OpenStreetMap.xml from class com.atakmap.map.layer.raster.PersistentRasterDataStore
+10-28 14:40:47.972 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-OpenStreetMap.xml
+10-28 14:40:47.972 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-OpenStreetMap.xml
+10-28 14:40:47.972 W/KmzLayerInfoSpi(29297): Unable to open KMZ as a zip file: not a zip file. /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-OpenStreetMap.xml
+10-28 14:40:48.039 D/ExternalLayerDataImporter(29297): import: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-OpenStreetMap.xml in 81ms
+10-28 14:40:48.040 D/ImportReceiver(29297): class com.atakmap.android.layers.ExternalLayerDataImporter import: file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-OpenStreetMap.xml
+10-28 14:40:48.040 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/NRL-OpenStreetMap.xml}]
+10-28 14:40:48.119 V/HashingUtils(29297): Computing SHA256 for: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-bathy.json
+10-28 14:40:48.120 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-bathy.json content=Tiled Geospatial Content - terrain mime=appliation/octet-stream+terrain
+10-28 14:40:48.120 D/ImportReceiver(29297): processing: IMPORT Bundle[{mimeType=appliation/octet-stream+terrain, advanced=true, contentType=Tiled Geospatial Content - terrain, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-bathy.json}]
+10-28 14:40:48.121 D/ImportReceiver(29297): class com.atakmap.android.elev.tiles.TiledElevationImporter import: file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-bathy.json
+10-28 14:40:48.121 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{mimeType=appliation/octet-stream+terrain, advanced=true, contentType=Tiled Geospatial Content - terrain, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-bathy.json}]
+10-28 14:40:48.332 V/HashingUtils(29297): Computing SHA256 for: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-maps.json
+10-28 14:40:48.334 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-maps.json content=External Native Data mime=application/xml
+10-28 14:40:48.334 D/ImportReceiver(29297): processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-maps.json}]
+10-28 14:40:48.335 D/ExternalLayerDataImporter(29297): call to remove: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-maps.json from class com.atakmap.map.layer.raster.PersistentRasterDataStore
+10-28 14:40:48.414 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-maps.json
+10-28 14:40:48.414 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-maps.json
+10-28 14:40:48.414 W/KmzLayerInfoSpi(29297): Unable to open KMZ as a zip file: not a zip file. /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-maps.json
+10-28 14:40:48.458 E/MobacTileClient2(29297): Timeout during tile download, USGS NAIP Plus (1, 0, 1)
+10-28 14:40:48.459 E/MobacTileClient2(29297): Timeout during tile download, USGS NAIP Plus (0, 0, 0)
+10-28 14:40:48.459 E/MobacTileClient2(29297): Timeout during tile download, USGS NAIP Plus (0, 0, 1)
+10-28 14:40:48.476 D/ExternalLayerDataImporter(29297): import: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-maps.json in 76ms
+10-28 14:40:48.476 D/ImportReceiver(29297): class com.atakmap.android.layers.ExternalLayerDataImporter import: file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-maps.json
+10-28 14:40:48.476 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-maps.json}]
+10-28 14:40:48.547 V/HashingUtils(29297): Computing SHA256 for: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-landcover.json
+10-28 14:40:48.549 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-landcover.json content=Tiled Geospatial Content - terrain mime=appliation/octet-stream+terrain
+10-28 14:40:48.549 D/ImportReceiver(29297): processing: IMPORT Bundle[{mimeType=appliation/octet-stream+terrain, advanced=true, contentType=Tiled Geospatial Content - terrain, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-landcover.json}]
+10-28 14:40:48.549 D/ImportReceiver(29297): class com.atakmap.android.elev.tiles.TiledElevationImporter import: file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-landcover.json
+10-28 14:40:48.549 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{mimeType=appliation/octet-stream+terrain, advanced=true, contentType=Tiled Geospatial Content - terrain, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/t3-landcover.json}]
+10-28 14:40:48.764 V/HashingUtils(29297): Computing SHA256 for: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryOnly.xml
+10-28 14:40:48.764 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryOnly.xml content=External Native Data mime=application/xml
+10-28 14:40:48.766 D/ImportReceiver(29297): processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryOnly.xml}]
+10-28 14:40:48.766 D/ExternalLayerDataImporter(29297): call to remove: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryOnly.xml from class com.atakmap.map.layer.raster.PersistentRasterDataStore
+10-28 14:40:48.842 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryOnly.xml
+10-28 14:40:48.842 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryOnly.xml
+10-28 14:40:48.842 W/KmzLayerInfoSpi(29297): Unable to open KMZ as a zip file: not a zip file. /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryOnly.xml
+10-28 14:40:48.900 D/ExternalLayerDataImporter(29297): import: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryOnly.xml in 78ms
+10-28 14:40:48.900 D/ImportReceiver(29297): class com.atakmap.android.layers.ExternalLayerDataImporter import: file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryOnly.xml
+10-28 14:40:48.900 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryOnly.xml}]
+10-28 14:40:48.982 V/HashingUtils(29297): Computing SHA256 for: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryTopo.xml
+10-28 14:40:48.983 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryTopo.xml content=External Native Data mime=application/xml
+10-28 14:40:48.984 D/ImportReceiver(29297): processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryTopo.xml}]
+10-28 14:40:48.984 D/ExternalLayerDataImporter(29297): call to remove: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryTopo.xml from class com.atakmap.map.layer.raster.PersistentRasterDataStore
+10-28 14:40:49.057 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryTopo.xml
+10-28 14:40:49.057 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryTopo.xml
+10-28 14:40:49.057 W/KmzLayerInfoSpi(29297): Unable to open KMZ as a zip file: not a zip file. /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryTopo.xml
+10-28 14:40:49.106 D/ExternalLayerDataImporter(29297): import: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryTopo.xml in 69ms
+10-28 14:40:49.106 D/ImportReceiver(29297): class com.atakmap.android.layers.ExternalLayerDataImporter import: file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryTopo.xml
+10-28 14:40:49.106 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSImageryTopo.xml}]
+10-28 14:40:49.193 V/HashingUtils(29297): Computing SHA256 for: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSNAIPPlus.xml
+10-28 14:40:49.194 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSNAIPPlus.xml content=External Native Data mime=application/xml
+10-28 14:40:49.194 D/ImportReceiver(29297): processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSNAIPPlus.xml}]
+10-28 14:40:49.195 D/ExternalLayerDataImporter(29297): call to remove: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSNAIPPlus.xml from class com.atakmap.map.layer.raster.PersistentRasterDataStore
+10-28 14:40:49.265 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSNAIPPlus.xml
+10-28 14:40:49.265 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSNAIPPlus.xml
+10-28 14:40:49.265 W/KmzLayerInfoSpi(29297): Unable to open KMZ as a zip file: not a zip file. /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSNAIPPlus.xml
+10-28 14:40:49.330 D/ExternalLayerDataImporter(29297): import: /data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSNAIPPlus.xml in 82ms
+10-28 14:40:49.330 D/ImportReceiver(29297): class com.atakmap.android.layers.ExternalLayerDataImporter import: file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSNAIPPlus.xml
+10-28 14:40:49.330 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=file:///data/user/0/com.atakmap.app.civ/files/linked-user-resources/mapsources/USGSNAIPPlus.xml}]
+10-28 14:40:51.501 E/MobacTileClient2(29297): Timeout during tile download, USGS NAIP Plus (21, 16, 6)
+10-28 14:40:51.504 E/MobacTileClient2(29297): Timeout during tile download, USGS NAIP Plus (1, 1, 2)
+10-28 14:40:51.508 E/MobacTileClient2(29297): Timeout during tile download, USGS NAIP Plus (21, 15, 6)
+10-28 14:40:58.645 I/adbd    (11793): adbd service requested 'shell,v2,raw:uiautomator dump /sdcard/cesium-ion-ui.xml'
+10-28 14:40:58.733 D/AndroidRuntime(29843): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+10-28 14:40:58.736 I/AndroidRuntime(29843): Using default boot image
+10-28 14:40:58.736 I/AndroidRuntime(29843): Leaving lock profiling enabled
+10-28 14:40:58.736 D/AndroidRuntime(29843): addProductProperty not brand or 7
+10-28 14:40:58.793 D/AndroidRuntime(29843): Calling main entry com.android.commands.uiautomator.Launcher
+10-28 14:40:59.838 D/AndroidRuntime(29843): Shutting down VM
+10-28 14:41:00.735 I/adbd    (11793): adbd service requested 'exec:cat '/sdcard/cesium-ion-ui.xml''
+10-28 14:41:20.237 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-96188.json content=Streaming Mesh Configuration mime=application/json
+10-28 14:41:20.238 D/ImportReceiver(29297): processing: IMPORT Bundle[{mimeType=application/json, datasetName=Cesium OSM Buildings, advanced=true, contentType=Streaming Mesh Configuration, streaming=true, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-96188.json}]
+10-28 14:41:20.238 D/ImportReceiver(29297): class com.atakmap.android.model.StreamingMeshServiceImportUtil$2 import: /data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-96188.json
+10-28 14:41:20.238 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{mimeType=application/json, datasetName=Cesium OSM Buildings, advanced=true, contentType=Streaming Mesh Configuration, streaming=true, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-96188.json}]
+10-28 14:41:20.325 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=http://127.0.0.1:38735/PROXY_SECRET/a/96188/us-east-1/asset_depot/96188/OpenStreetMap/CWT/2026-06-08/tileset.json?v=20 content=3D Model mime=null
+10-28 14:41:20.326 I/ContextCaptureModelInfoSpi(29297): isSupported in 0
+10-28 14:41:20.326 E/ATAKMapEngineJNI(29297): return /tmp/builds/core/takkernel/engine/src/main/jni/interop/model/ManagedModelInfoSpi.cpp@76 code=2
+10-28 14:41:20.326 E/ATAKMapEngineJNI(29297): return /tmp/builds/core/takkernel/engine/src/main/jni/interop/model/ManagedModelInfoSpi.cpp@76 code=2
+10-28 14:41:20.326 E/ATAKMapEngineJNI(29297): return /tmp/builds/core/takkernel/engine/src/main/jni/interop/model/ManagedModelInfoSpi.cpp@76 code=2
+10-28 14:41:20.326 E/ATAKMapEngineJNI(29297): return /tmp/builds/core/takkernel/engine/src/main/jni/interop/model/ManagedModelInfoSpi.cpp@76 code=2
+10-28 14:41:20.416 D/ImportReceiver(29297): class com.atakmap.android.model.ModelImporter import: http://127.0.0.1:38735/PROXY_SECRET/a/96188/us-east-1/asset_depot/96188/OpenStreetMap/CWT/2026-06-08/tileset.json?v=20
+10-28 14:41:48.937 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.DELETE_DATA uri=http://127.0.0.1:38735/PROXY_SECRET/a/96188/us-east-1/asset_depot/96188/OpenStreetMap/CWT/2026-06-08/tileset.json?v=20 content=3D Model mime=null
+10-28 14:41:48.937 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.DELETE_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-96188.json content=Streaming Mesh Configuration mime=application/json
+10-28 14:41:48.937 D/ImportReceiver(29297): processing: DELETE Bundle[{mimeType=application/json, advanced=true, contentType=Streaming Mesh Configuration, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-96188.json}]
+10-28 14:41:48.937 D/ImportReceiver(29297): class com.atakmap.android.model.StreamingMeshServiceImportUtil$2 delete from database: /data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-96188.json scheme: null
+10-28 14:41:48.937 I/ContextCaptureModelInfoSpi(29297): isSupported in 0
+10-28 14:41:48.937 D/ImportReceiver(29297): cannot delete non-file: /data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-96188.json
+10-28 14:41:48.937 D/ImportReceiver(29297): finished processing: DELETE Bundle[{mimeType=application/json, advanced=true, contentType=Streaming Mesh Configuration, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-96188.json}]
+10-28 14:41:48.957 D/ImportReceiver(29297): class com.atakmap.android.model.ModelImporter delete from database: http://127.0.0.1:38735/PROXY_SECRET/a/96188/us-east-1/asset_depot/96188/OpenStreetMap/CWT/2026-06-08/tileset.json?v=20 scheme: http
+10-28 14:41:52.039 I/adbd    (11793): adbd service requested 'shell,v2,raw:am broadcast -a com.cesium.atak.ion.TEST -p com.atakmap.app.civ --es step 23 --es cmd load --el asset 2275207 --es name 'Google Photorealistic 3D Tiles''
+10-28 14:41:52.574 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-2275207.json content=Streaming Mesh Configuration mime=application/json
+10-28 14:41:52.574 D/ImportReceiver(29297): processing: IMPORT Bundle[{mimeType=application/json, datasetName=Google Photorealistic 3D Tiles, advanced=true, contentType=Streaming Mesh Configuration, streaming=true, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-2275207.json}]
+10-28 14:41:52.575 D/ImportReceiver(29297): class com.atakmap.android.model.StreamingMeshServiceImportUtil$2 import: /data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-2275207.json
+10-28 14:41:52.575 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{mimeType=application/json, datasetName=Google Photorealistic 3D Tiles, advanced=true, contentType=Streaming Mesh Configuration, streaming=true, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-2275207.json}]
+10-28 14:41:52.663 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json content=3D Model mime=null
+10-28 14:41:52.663 D/ImportReceiver(29297): processing: IMPORT Bundle[{datasetName=Google Photorealistic 3D Tiles, advanced=true, contentType=3D Model, streaming=true, uri=http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json}]
+10-28 14:41:52.663 I/ContextCaptureModelInfoSpi(29297): isSupported in 0
+10-28 14:41:52.663 E/ATAKMapEngineJNI(29297): return /tmp/builds/core/takkernel/engine/src/main/jni/interop/model/ManagedModelInfoSpi.cpp@76 code=2
+10-28 14:41:52.663 E/ATAKMapEngineJNI(29297): return /tmp/builds/core/takkernel/engine/src/main/jni/interop/model/ManagedModelInfoSpi.cpp@76 code=2
+10-28 14:41:52.663 E/ATAKMapEngineJNI(29297): return /tmp/builds/core/takkernel/engine/src/main/jni/interop/model/ManagedModelInfoSpi.cpp@76 code=2
+10-28 14:41:52.663 E/ATAKMapEngineJNI(29297): return /tmp/builds/core/takkernel/engine/src/main/jni/interop/model/ManagedModelInfoSpi.cpp@76 code=2
+10-28 14:41:52.912 D/ImportReceiver(29297): class com.atakmap.android.model.ModelImporter import: http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json
+10-28 14:41:52.912 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{datasetName=Google Photorealistic 3D Tiles, advanced=true, contentType=3D Model, streaming=true, uri=http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json}]
+10-28 14:42:26.315 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.DELETE_DATA uri=http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json content=3D Model mime=null
+10-28 14:42:26.315 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.DELETE_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-2275207.json content=Streaming Mesh Configuration mime=application/json
+10-28 14:42:26.315 D/ImportReceiver(29297): processing: DELETE Bundle[{mimeType=null, advanced=true, contentType=3D Model, uri=http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json}]
+10-28 14:42:26.315 I/ContextCaptureModelInfoSpi(29297): isSupported in 0
+10-28 14:42:26.317 D/ImportReceiver(29297): processing: DELETE Bundle[{mimeType=application/json, advanced=true, contentType=Streaming Mesh Configuration, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-2275207.json}]
+10-28 14:42:26.317 D/ImportReceiver(29297): class com.atakmap.android.model.StreamingMeshServiceImportUtil$2 delete from database: /data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-2275207.json scheme: null
+10-28 14:42:26.317 D/ImportReceiver(29297): cannot delete non-file: /data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-2275207.json
+10-28 14:42:26.317 D/ImportReceiver(29297): finished processing: DELETE Bundle[{mimeType=application/json, advanced=true, contentType=Streaming Mesh Configuration, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/streaming/cesium-ion-2275207.json}]
+10-28 14:42:26.318 W/SecureDelete(29297): Does not exist: /http:/127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json
+10-28 14:42:26.318 W/FileSystemUtils(29297): Failed to delete file: /http:/127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json
+10-28 14:42:26.340 D/ImportReceiver(29297): class com.atakmap.android.model.ModelImporter delete from database: http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json scheme: http
+10-28 14:42:26.340 E/FileSystemUtils(29297): hard warning, file name did not pass whitelist check: /REDACTED/a/2275207/v1/3dtiles/root.json
+10-28 14:42:26.340 D/FileSystemUtils(29297): validity scan failed: invalid root path, failed whitelist check: /REDACTED/a/2275207/v1/3dtiles/root.json
+10-28 14:42:26.340 E/ImportReceiver(29297): failed to open Uri for import http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json
+10-28 14:42:26.340 E/ImportReceiver(29297): com.atakmap.coremap.filesystem.FileSystemUtils$FileNameInvalid: invalid root path, failed whitelist check: /REDACTED/a/2275207/v1/3dtiles/root.json
+10-28 14:42:26.340 D/ImportReceiver(29297): finished processing: DELETE Bundle[{mimeType=null, advanced=true, contentType=3D Model, uri=http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json}]
+10-28 14:42:30.161 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml content=External Native Data mime=application/xml
+10-28 14:42:30.161 D/ImportReceiver(29297): processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml}]
+10-28 14:42:30.183 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml
+10-28 14:42:30.183 W/ZipVirtualFile(29297): Not a zip archive /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml
+10-28 14:42:30.183 W/KmzLayerInfoSpi(29297): Unable to open KMZ as a zip file: not a zip file. /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml
+10-28 14:42:30.219 D/LayersManagerBroadcastReceiver(29297): ACTION_SELECT_LAYER: com.atakmap.android.layers.MobileLayerSelectionAdapter@f31c048
+10-28 14:42:30.220 D/AbstractRasterLayer2(29297): [Mobile] SET SELECTION null
+10-28 14:42:30.248 D/FileContentResolver(29297): External Native Data: Added handler for cesium-ion-2.xml
+10-28 14:42:30.248 D/ExternalLayerDataImporter(29297): import: /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml in 84ms
+10-28 14:42:30.248 D/ImportReceiver(29297): class com.atakmap.android.layers.ExternalLayerDataImporter import: /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml
+10-28 14:42:30.248 D/ImportReceiver(29297): finished processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml}]
+10-28 14:42:31.192 D/AbstractRasterLayer2(29297): [Mobile] SET SELECTION Cesium ion - Bing Maps Aerial
+10-28 14:42:36.901 E/MobacTileClient2(29297): Timeout during tile download, Cesium ion - Bing Maps Aerial (38166, 49642, 17)
+10-28 14:43:26.127 D/ImportReceiver(29297): import intent received: com.atakmap.android.importexport.DELETE_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml content=External Native Data mime=application/xml
+10-28 14:43:26.127 D/ImportReceiver(29297): processing: DELETE Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml}]
+10-28 14:43:26.128 D/ExternalLayerDataImporter(29297): call to remove: /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml from class com.atakmap.map.layer.raster.PersistentRasterDataStore
+10-28 14:43:26.213 D/FileContentResolver(29297): External Native Data: Removed handler for cesium-ion-2.xml
+10-28 14:43:26.217 D/ImportReceiver(29297): class com.atakmap.android.layers.ExternalLayerDataImporter delete from database: /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml scheme: null
+10-28 14:43:26.217 D/ImportReceiver(29297): cannot delete non-file: /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml
+10-28 14:43:26.217 D/ImportReceiver(29297): finished processing: DELETE Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-2.xml}]
+10-28 14:43:26.218 D/AbstractRasterLayer2(29297): [Mobile] SET SELECTION NRL Open Street Map
+---- ATAK map readiness: framerate and 3D model loading ----
+10-28 14:40:43.117 V/GLMapRenderer(29297): map framerate (f/s) = 24.390243902439025
+10-28 14:40:44.420 V/GLMapRenderer(29297): map framerate (f/s) = 10.416666666666666
+10-28 14:40:45.776 V/GLMapRenderer(29297): map framerate (f/s) = 17.037037037037038
+10-28 14:40:45.973 W/AssetAccessor(29297): Could not load content at http://localhost:3001/api/native/REDACTED/tilesets/5098966/Cologne-Cathedral-K-lner-Dom-Germany-YouTube-mesh/tileset.json
+10-28 14:40:45.973 F/ATAKMapEngineJNI(29297): [2026-10-28 14:40:45.973] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:40:45.973 F/ATAKMapEngineJNI(29297): - Received status code 404 for tileset http://localhost:3001/api/native/REDACTED/tilesets/5098966/Cologne-Cathedral-K-lner-Dom-Germany-YouTube-mesh/tileset.json
+10-28 14:40:45.975 W/AssetAccessor(29297): Could not load content at http://localhost:3001/api/native/REDACTED/tilesets/75343/REDACTED/tileset.json
+10-28 14:40:45.975 F/ATAKMapEngineJNI(29297): [2026-10-28 14:40:45.975] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:40:45.975 F/ATAKMapEngineJNI(29297): - Received status code 404 for tileset http://localhost:3001/api/native/REDACTED/tilesets/75343/REDACTED/tileset.json
+10-28 14:40:45.976 W/AssetAccessor(29297): Could not load content at http://localhost:3001/api/native/REDACTED/tilesets/4684986/Westminster-presbyterian-church-drone-scan/tileset.json
+10-28 14:40:45.976 F/ATAKMapEngineJNI(29297): [2026-10-28 14:40:45.976] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:40:45.976 F/ATAKMapEngineJNI(29297): - Received status code 404 for tileset http://localhost:3001/api/native/REDACTED/tilesets/4684986/Westminster-presbyterian-church-drone-scan/tileset.json
+10-28 14:40:45.979 W/AssetAccessor(29297): Could not load content at http://localhost:3001/api/native/REDACTED/tilesets/5098966/Cologne-Cathedral-K-lner-Dom-Germany-YouTube-mesh/tileset.json
+10-28 14:40:45.979 F/ATAKMapEngineJNI(29297): [2026-10-28 14:40:45.979] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:40:45.979 F/ATAKMapEngineJNI(29297): - Received status code 404 for tileset http://localhost:3001/api/native/REDACTED/tilesets/5098966/Cologne-Cathedral-K-lner-Dom-Germany-YouTube-mesh/tileset.json
+10-28 14:40:45.981 W/AssetAccessor(29297): Could not load content at http://localhost:3001/api/native/REDACTED/tilesets/75343/REDACTED/tileset.json
+10-28 14:40:45.981 F/ATAKMapEngineJNI(29297): [2026-10-28 14:40:45.981] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:40:45.981 F/ATAKMapEngineJNI(29297): - Received status code 404 for tileset http://localhost:3001/api/native/REDACTED/tilesets/75343/REDACTED/tileset.json
+10-28 14:40:45.984 W/AssetAccessor(29297): Could not load content at http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json
+10-28 14:40:45.984 F/ATAKMapEngineJNI(29297): [2026-10-28 14:40:45.984] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:40:45.984 F/ATAKMapEngineJNI(29297): - Received status code 404 for tileset http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json
+10-28 14:40:45.986 W/AssetAccessor(29297): Could not load content at http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json
+10-28 14:40:45.986 F/ATAKMapEngineJNI(29297): [2026-10-28 14:40:45.986] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:40:45.986 F/ATAKMapEngineJNI(29297): - Received status code 404 for tileset http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json
+10-28 14:40:46.779 V/GLMapRenderer(29297): map framerate (f/s) = 27.27518228463408
+10-28 14:40:47.795 V/GLMapRenderer(29297): map framerate (f/s) = 33.905488450943
+10-28 14:40:48.807 V/GLMapRenderer(29297): map framerate (f/s) = 38.21989528795812
+10-28 14:40:49.813 V/GLMapRenderer(29297): map framerate (f/s) = 55.66600397614314
+10-28 14:40:50.827 V/GLMapRenderer(29297): map framerate (f/s) = 56.93069306930693
+10-28 14:40:51.836 V/GLMapRenderer(29297): map framerate (f/s) = 57.44470122152526
+10-28 14:40:52.847 V/GLMapRenderer(29297): map framerate (f/s) = 57.65899529819352
+10-28 14:40:53.857 V/GLMapRenderer(29297): map framerate (f/s) = 57.82178217821782
+10-28 14:40:54.867 V/GLMapRenderer(29297): map framerate (f/s) = 58.47373637264619
+10-28 14:40:55.873 V/GLMapRenderer(29297): map framerate (f/s) = 58.56079404466501
+10-28 14:40:56.875 V/GLMapRenderer(29297): map framerate (f/s) = 58.3360954590653
+10-28 14:40:57.881 V/GLMapRenderer(29297): map framerate (f/s) = 57.66840666169525
+10-28 14:40:59.518 V/GLMapRenderer(29297): map framerate (f/s) = 46.81978798586572
+10-28 14:41:01.175 V/GLMapRenderer(29297): map framerate (f/s) = 4.224502112251056
+10-28 14:41:02.434 V/GLMapRenderer(29297): map framerate (f/s) = 7.547169811320755
+10-28 14:41:03.452 V/GLMapRenderer(29297): map framerate (f/s) = 13.472292831723436
+10-28 14:41:04.461 V/GLMapRenderer(29297): map framerate (f/s) = 17.604208822339135
+10-28 14:41:05.476 V/GLMapRenderer(29297): map framerate (f/s) = 20.480107436629176
+10-28 14:41:06.491 V/GLMapRenderer(29297): map framerate (f/s) = 12.795275590551181
+10-28 14:41:08.096 V/GLMapRenderer(29297): map framerate (f/s) = 7.630675314765357
+10-28 14:41:09.150 V/GLMapRenderer(29297): map framerate (f/s) = 6.802721088435374
+10-28 14:41:10.406 V/GLMapRenderer(29297): map framerate (f/s) = 7.302231237322515
+10-28 14:41:11.463 V/GLMapRenderer(29297): map framerate (f/s) = 6.348145673237554
+10-28 14:41:12.517 V/GLMapRenderer(29297): map framerate (f/s) = 4.748338081671415
+10-28 14:41:14.116 V/GLMapRenderer(29297): map framerate (f/s) = 3.770739064856712
+10-28 14:41:15.171 V/GLMapRenderer(29297): map framerate (f/s) = 4.0453074433656955
+10-28 14:41:16.430 V/GLMapRenderer(29297): map framerate (f/s) = 5.2356020942408374
+10-28 14:41:17.481 V/GLMapRenderer(29297): map framerate (f/s) = 4.985044865403789
+10-28 14:41:19.087 V/GLMapRenderer(29297): map framerate (f/s) = 4.35865504358655
+10-28 14:41:20.139 V/GLMapRenderer(29297): map framerate (f/s) = 4.516371847948815
+10-28 14:41:20.416 D/ImportReceiver(29297): class com.atakmap.android.model.ModelImporter import: http://127.0.0.1:38735/PROXY_SECRET/a/96188/us-east-1/asset_depot/96188/OpenStreetMap/CWT/2026-06-08/tileset.json?v=20
+10-28 14:41:21.153 V/GLMapRenderer(29297): map framerate (f/s) = 16.884531590413943
+10-28 14:41:22.159 V/GLMapRenderer(29297): map framerate (f/s) = 25.871285011759674
+10-28 14:41:23.164 V/GLMapRenderer(29297): map framerate (f/s) = 31.678986272439282
+10-28 14:41:24.174 V/GLMapRenderer(29297): map framerate (f/s) = 58.415841584158414
+10-28 14:41:25.188 V/GLMapRenderer(29297): map framerate (f/s) = 55.8300395256917
+10-28 14:41:26.201 V/GLMapRenderer(29297): map framerate (f/s) = 56.61619486504279
+10-28 14:41:27.211 V/GLMapRenderer(29297): map framerate (f/s) = 57.07931801334322
+10-28 14:41:28.215 V/GLMapRenderer(29297): map framerate (f/s) = 56.61124307205068
+10-28 14:41:28.326 W/AssetAccessor(29297): Could not load content at http://localhost:3001/api/native/REDACTED/tilesets/75343/REDACTED/tileset.json
+10-28 14:41:28.326 F/ATAKMapEngineJNI(29297): [2026-10-28 14:41:28.326] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:41:28.326 F/ATAKMapEngineJNI(29297): - Received status code 404 for tileset http://localhost:3001/api/native/REDACTED/tilesets/75343/REDACTED/tileset.json
+10-28 14:41:28.328 W/AssetAccessor(29297): Could not load content at http://localhost:3001/api/native/REDACTED/tilesets/75343/REDACTED/tileset.json
+10-28 14:41:28.329 F/ATAKMapEngineJNI(29297): [2026-10-28 14:41:28.329] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:41:28.329 F/ATAKMapEngineJNI(29297): - Received status code 404 for tileset http://localhost:3001/api/native/REDACTED/tilesets/75343/REDACTED/tileset.json
+10-28 14:41:29.230 V/GLMapRenderer(29297): map framerate (f/s) = 58.12807881773399
+10-28 14:41:30.235 V/GLMapRenderer(29297): map framerate (f/s) = 57.92079207920792
+10-28 14:41:31.237 V/GLMapRenderer(29297): map framerate (f/s) = 57.92783846408474
+10-28 14:41:32.251 V/GLMapRenderer(29297): map framerate (f/s) = 57.99256505576208
+10-28 14:41:33.261 V/GLMapRenderer(29297): map framerate (f/s) = 57.4826560951437
+10-28 14:41:34.267 V/GLMapRenderer(29297): map framerate (f/s) = 47.713717693836976
+10-28 14:41:35.269 V/GLMapRenderer(29297): map framerate (f/s) = 41.31408661025386
+10-28 14:41:36.275 V/GLMapRenderer(29297): map framerate (f/s) = 43.463835434638355
+10-28 14:41:37.285 V/GLMapRenderer(29297): map framerate (f/s) = 43.22981366459627
+10-28 14:41:38.300 V/GLMapRenderer(29297): map framerate (f/s) = 44.642857142857146
+10-28 14:41:39.310 V/GLMapRenderer(29297): map framerate (f/s) = 58.47373637264619
+10-28 14:41:40.313 V/GLMapRenderer(29297): map framerate (f/s) = 54.67196819085487
+10-28 14:41:41.330 V/GLMapRenderer(29297): map framerate (f/s) = 55.13370749422251
+10-28 14:41:42.334 V/GLMapRenderer(29297): map framerate (f/s) = 54.78433316807139
+10-28 14:41:43.338 V/GLMapRenderer(29297): map framerate (f/s) = 54.585152838427945
+10-28 14:41:44.346 V/GLMapRenderer(29297): map framerate (f/s) = 57.59682224428997
+10-28 14:41:45.348 V/GLMapRenderer(29297): map framerate (f/s) = 55.251368840219016
+10-28 14:41:46.349 V/GLMapRenderer(29297): map framerate (f/s) = 52.806376619063435
+10-28 14:41:47.351 V/GLMapRenderer(29297): map framerate (f/s) = 50.34895314057827
+10-28 14:41:48.356 V/GLMapRenderer(29297): map framerate (f/s) = 49.621363092865685
+10-28 14:41:48.957 D/ImportReceiver(29297): class com.atakmap.android.model.ModelImporter delete from database: http://127.0.0.1:38735/PROXY_SECRET/a/96188/us-east-1/asset_depot/96188/OpenStreetMap/CWT/2026-06-08/tileset
+10-28 14:41:49.371 V/GLMapRenderer(29297): map framerate (f/s) = 57.19921104536489
+10-28 14:41:50.381 V/GLMapRenderer(29297): map framerate (f/s) = 54.84189723320158
+10-28 14:41:51.395 V/GLMapRenderer(29297): map framerate (f/s) = 55.62870309414088
+10-28 14:41:52.402 V/GLMapRenderer(29297): map framerate (f/s) = 54.88257107540173
+10-28 14:41:52.912 D/ImportReceiver(29297): class com.atakmap.android.model.ModelImporter import: http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json
+10-28 14:41:53.408 V/GLMapRenderer(29297): map framerate (f/s) = 53.65274203128094
+10-28 14:41:54.432 V/GLMapRenderer(29297): map framerate (f/s) = 46.9208211143695
+10-28 14:41:55.441 V/GLMapRenderer(29297): map framerate (f/s) = 47.22085587801279
+10-28 14:41:56.514 V/GLMapRenderer(29297): map framerate (f/s) = 42.820347714101736
+10-28 14:41:57.529 V/GLMapRenderer(29297): map framerate (f/s) = 42.47572815533981
+10-28 14:41:58.545 V/GLMapRenderer(29297): map framerate (f/s) = 41.27725856697819
+10-28 14:41:59.574 V/GLMapRenderer(29297): map framerate (f/s) = 33.04178814382896
+10-28 14:42:00.583 V/GLMapRenderer(29297): map framerate (f/s) = 37.29146221786065
+10-28 14:42:01.599 V/GLMapRenderer(29297): map framerate (f/s) = 38.9652914210871
+10-28 14:42:02.602 V/GLMapRenderer(29297): map framerate (f/s) = 38.689009364218826
+10-28 14:42:03.634 V/GLMapRenderer(29297): map framerate (f/s) = 38.12143839654156
+10-28 14:42:04.718 V/GLMapRenderer(29297): map framerate (f/s) = 46.08294930875576
+10-28 14:42:05.721 V/GLMapRenderer(29297): map framerate (f/s) = 47.43651173933876
+10-28 14:42:07.044 V/GLMapRenderer(29297): map framerate (f/s) = 36.36363636363637
+10-28 14:42:08.098 V/GLMapRenderer(29297): map framerate (f/s) = 28.67383512544803
+10-28 14:42:09.151 V/GLMapRenderer(29297): map framerate (f/s) = 24.284160927872417
+10-28 14:42:10.404 V/GLMapRenderer(29297): map framerate (f/s) = 7.182761372705507
+10-28 14:42:11.460 V/GLMapRenderer(29297): map framerate (f/s) = 6.4963187527068
+10-28 14:42:12.517 V/GLMapRenderer(29297): map framerate (f/s) = 6.240713224368499
+10-28 14:42:14.121 V/GLMapRenderer(29297): map framerate (f/s) = 4.82994566311129
+10-28 14:42:15.176 V/GLMapRenderer(29297): map framerate (f/s) = 4.979253112033195
+10-28 14:42:16.435 V/GLMapRenderer(29297): map framerate (f/s) = 10.325655281969818
+10-28 14:42:17.489 V/GLMapRenderer(29297): map framerate (f/s) = 7.349762213575443
+10-28 14:42:19.090 V/GLMapRenderer(29297): map framerate (f/s) = 5.620848237097598
+10-28 14:42:20.144 V/GLMapRenderer(29297): map framerate (f/s) = 5.636070853462158
+10-28 14:42:21.399 V/GLMapRenderer(29297): map framerate (f/s) = 6.107360977177756
+10-28 14:42:22.454 V/GLMapRenderer(29297): map framerate (f/s) = 5.692599620493358
+10-28 14:42:23.510 V/GLMapRenderer(29297): map framerate (f/s) = 5.684509711037423
+10-28 14:42:25.114 V/GLMapRenderer(29297): map framerate (f/s) = 4.577275175013463
+10-28 14:42:26.166 V/GLMapRenderer(29297): map framerate (f/s) = 3.986571548468317
+10-28 14:42:26.340 D/ImportReceiver(29297): class com.atakmap.android.model.ModelImporter delete from database: http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json scheme: http
+10-28 14:42:28.127 V/GLMapRenderer(29297): map framerate (f/s) = 4.3109855804965065
+10-28 14:42:29.180 V/GLMapRenderer(29297): map framerate (f/s) = 6.647673314339981
+10-28 14:42:30.240 V/GLMapRenderer(29297): map framerate (f/s) = 8.514664143803216
+10-28 14:42:31.255 V/GLMapRenderer(29297): map framerate (f/s) = 9.268136784915308
+10-28 14:42:32.259 V/GLMapRenderer(29297): map framerate (f/s) = 21.292039680619403
+10-28 14:42:33.275 V/GLMapRenderer(29297): map framerate (f/s) = 28.554778554778554
+10-28 14:42:34.280 V/GLMapRenderer(29297): map framerate (f/s) = 52.7363184079602
+10-28 14:42:35.306 V/GLMapRenderer(29297): map framerate (f/s) = 52.19103889709503
+10-28 14:42:36.318 V/GLMapRenderer(29297): map framerate (f/s) = 44.36411436082813
+10-28 14:42:37.321 V/GLMapRenderer(29297): map framerate (f/s) = 42.26396440929313
+10-28 14:42:38.326 V/GLMapRenderer(29297): map framerate (f/s) = 41.96357878068092
+10-28 14:42:39.334 V/GLMapRenderer(29297): map framerate (f/s) = 39.72194637537239
+10-28 14:42:40.347 V/GLMapRenderer(29297): map framerate (f/s) = 43.06930693069307
+10-28 14:42:42.123 V/GLMapRenderer(29297): map framerate (f/s) = 26.08008429926238
+10-28 14:42:43.178 V/GLMapRenderer(29297): map framerate (f/s) = 20.820449391877965
+10-28 14:42:44.434 V/GLMapRenderer(29297): map framerate (f/s) = 17.684624201735712
+10-28 14:42:45.487 V/GLMapRenderer(29297): map framerate (f/s) = 4.752851711026616
+10-28 14:42:46.540 V/GLMapRenderer(29297): map framerate (f/s) = 4.275534441805226
+10-28 14:42:48.144 V/GLMapRenderer(29297): map framerate (f/s) = 3.7735849056603774
+10-28 14:42:49.400 V/GLMapRenderer(29297): map framerate (f/s) = 4.2287555376560615
+10-28 14:42:50.453 V/GLMapRenderer(29297): map framerate (f/s) = 4.153513872736335
+10-28 14:42:51.456 V/GLMapRenderer(29297): map framerate (f/s) = 29.91026919242273
+10-28 14:42:52.468 V/GLMapRenderer(29297): map framerate (f/s) = 44.168734491315135
+10-28 14:42:53.485 V/GLMapRenderer(29297): map framerate (f/s) = 48.8287693830419
+10-28 14:42:54.495 V/GLMapRenderer(29297): map framerate (f/s) = 51.21227115289461
+10-28 14:42:55.506 V/GLMapRenderer(29297): map framerate (f/s) = 52.652414885193984
+10-28 14:42:57.173 V/GLMapRenderer(29297): map framerate (f/s) = 23.995200959808038
+10-28 14:42:58.425 V/GLMapRenderer(29297): map framerate (f/s) = 17.129153819801303
+10-28 14:42:59.481 V/GLMapRenderer(29297): map framerate (f/s) = 14.091595369904379
+10-28 14:43:00.534 V/GLMapRenderer(29297): map framerate (f/s) = 12.333399641933559
+10-28 14:43:02.138 V/GLMapRenderer(29297): map framerate (f/s) = 4.366812227074236
+10-28 14:43:03.143 V/GLMapRenderer(29297): map framerate (f/s) = 5.368098159509202
+10-28 14:43:04.145 V/GLMapRenderer(29297): map framerate (f/s) = 6.648199445983379
+10-28 14:43:05.151 V/GLMapRenderer(29297): map framerate (f/s) = 5.847953216374269
+10-28 14:43:06.408 V/GLMapRenderer(29297): map framerate (f/s) = 5.617977528089888
+10-28 14:43:07.465 V/GLMapRenderer(29297): map framerate (f/s) = 5.681818181818182
+10-28 14:43:08.517 V/GLMapRenderer(29297): map framerate (f/s) = 4.74158368895211
+10-28 14:43:10.121 V/GLMapRenderer(29297): map framerate (f/s) = 4.579741379310345
+10-28 14:43:11.173 V/GLMapRenderer(29297): map framerate (f/s) = 4.826862539349423
+10-28 14:43:12.188 V/GLMapRenderer(29297): map framerate (f/s) = 5.883370825402319
+10-28 14:43:13.195 V/GLMapRenderer(29297): map framerate (f/s) = 5.964214711729622
+10-28 14:43:14.195 V/GLMapRenderer(29297): map framerate (f/s) = 4.484304932735426
+10-28 14:43:15.444 V/GLMapRenderer(29297): map framerate (f/s) = 4.606879606879607
+10-28 14:43:16.497 V/GLMapRenderer(29297): map framerate (f/s) = 4.874651810584958
+10-28 14:43:18.100 V/GLMapRenderer(29297): map framerate (f/s) = 4.566982408660352
+10-28 14:43:19.153 V/GLMapRenderer(29297): map framerate (f/s) = 5.698005698005698
+10-28 14:43:20.409 V/GLMapRenderer(29297): map framerate (f/s) = 6.063230835859679
+10-28 14:43:21.464 V/GLMapRenderer(29297): map framerate (f/s) = 5.648038049940547
+10-28 14:43:22.518 V/GLMapRenderer(29297): map framerate (f/s) = 5.659950192438306
+10-28 14:43:24.122 V/GLMapRenderer(29297): map framerate (f/s) = 5.148646404251785
+10-28 14:43:25.375 V/GLMapRenderer(29297): map framerate (f/s) = 7.987220447284345
+10-28 14:43:26.379 V/GLMapRenderer(29297): map framerate (f/s) = 12.848914488258751
+10-28 14:43:27.381 V/GLMapRenderer(29297): map framerate (f/s) = 25.78268876611418
+10-28 14:43:28.390 V/GLMapRenderer(29297): map framerate (f/s) = 31.39643861293346
+10-28 14:43:29.403 V/GLMapRenderer(29297): map framerate (f/s) = 36.167392539291804
+10-28 14:43:30.406 V/GLMapRenderer(29297): map framerate (f/s) = 49.9001996007984
+10-28 14:43:31.422 V/GLMapRenderer(29297): map framerate (f/s) = 53.5183349851338
+10-28 14:43:32.448 V/GLMapRenderer(29297): map framerate (f/s) = 50.26281208935611
+10-28 14:43:33.501 V/GLMapRenderer(29297): map framerate (f/s) = 38.80888454967049
+---- ATAK process tag timeline (first and last time, line count per tag) ----
+14:40:40.714 14:40:40.714 1 I/Zygote
+14:40:40.715 14:41:29.524 8 I/atakmap.app.civ
+14:40:40.730 14:40:45.092 26 D/nativeloader
+14:40:40.731 14:40:41.009 3 D/ActivityThread
+14:40:40.753 14:40:45.071 3 D/ApplicationLoaders
+14:40:40.880 14:40:43.966 5 D/CompatChangeReporter
+14:40:40.884 14:40:40.884 7 V/GraphicsEnvironment
+14:40:40.898 14:40:41.005 2 D/ATAKApplication
+14:40:40.900 14:40:40.907 2 D/ACRA
+14:40:40.921 14:40:40.921 1 D/RemovableStorageHelper
+14:40:40.922 14:42:26.340 30 D/FileSystemUtils
+14:40:40.931 14:42:26.340 42 E/FileSystemUtils
+14:40:40.939 14:40:41.095 2 V/FileSystemUtils
+14:40:40.940 14:40:41.056 2 D/ATAKCrashHandler
+14:40:40.946 14:40:40.946 1 W/linker
+14:40:41.009 14:40:43.007 7 D/HWUI
+14:40:41.010 14:40:41.010 1 I/DisplayManager
+14:40:41.010 14:40:41.011 4 D/vulkan
+14:40:41.013 14:40:41.013 1 I/MMUD
+14:40:41.013 14:40:43.058 3 D/MMUD
+14:40:41.016 14:40:41.016 2 D/MTK_COMPILER_OPT
+14:40:41.018 14:40:41.018 1 D/DesktopExperienceFlags
+14:40:41.020 14:40:41.020 1 E/ashmem
+14:40:41.023 14:40:46.686 14 D/ATAKActivity
+14:40:41.041 14:40:41.041 1 D/DesktopModeFlags
+14:40:41.042 14:40:42.966 2 I/DecorView
+14:40:41.056 14:40:41.056 4 D/SystemComponentLoader
+14:40:41.059 14:40:41.059 1 D/Permissions
+14:40:41.060 14:40:41.060 1 E/MigrationShim
+14:40:41.060 14:40:41.520 2 D/ATAKConstants
+14:40:41.062 14:40:41.062 1 I/NotificationUtil
+14:40:41.063 14:40:41.063 1 D/LocaleUtil
+14:40:41.063 14:40:41.063 1 D/NotificationFader
+14:40:41.096 14:40:41.096 1 D/PreferenceControl
+14:40:41.097 14:40:45.997 3 D/AtakPreferenceFragment
+14:40:41.107 14:40:42.970 2 D/ViewRootImpl
+14:40:41.111 14:40:42.970 2 I/ViewRootImpl
+14:40:41.112 14:40:41.112 2 D/HardwareRenderer
+14:40:41.112 14:40:42.971 2 D/NativeCustomFrequencyManager
+14:40:41.115 14:40:42.981 2 I/InsetsController
+14:40:41.115 14:40:46.349 6 D/InputTransport
+14:40:41.116 14:40:41.117 6 I/IDS_TAG
+14:40:41.116 14:41:17.794 23 I/VRI[ATAKActivityCiv]@4f81f6c
+14:40:41.117 14:40:46.044 4 D/WindowOnBackDispatcher
+14:40:41.118 14:40:46.063 9 D/VRI[ATAKActivityCiv]@4f81f6c
+14:40:41.121 14:40:46.046 4 D/BufferQueueConsumer
+14:40:41.121 14:41:02.949 14 I/BLASTBufferQueue
+14:40:41.121 14:41:02.949 9 I/BLASTBufferQueue_Java
+14:40:41.124 14:40:41.131 2 I/GrallocExtra
+14:40:41.124 14:40:41.490 5 D/atakmap.app.civ
+14:40:41.147 14:40:46.061 6 I/InsetsSourceConsumer
+14:40:41.160 14:40:46.063 2 D/InputMethodManagerUtils
+14:40:41.160 14:40:46.063 2 I/InputMethodManager
+14:40:41.161 14:40:46.065 2 D/InsetsController
+14:40:41.161 14:40:46.065 6 I/ImeTracker
+14:40:41.350 14:40:47.182 115 D/CertificateManagerBase
+14:40:41.470 14:40:41.479 34 D/ActionMenuData
+14:40:41.485 14:40:41.485 1 I/HidlServiceManagement
+14:40:41.485 14:40:41.485 1 W/HidlServiceManagement
+14:40:41.485 14:40:41.490 4 D/RenderScript
+14:40:41.493 14:40:45.854 2 I/HWUI
+14:40:41.506 14:41:02.957 15 D/ScrollView
+14:40:41.508 14:40:49.369 13 D/BackgroundServices
+14:40:41.524 14:40:41.897 6 I/TextToSpeech
+14:40:42.280 14:40:45.068 4 W/libgdaljni
+14:40:42.310 14:40:42.310 1 I/ATAKMapEngineJNI
+14:40:42.326 14:40:42.326 1 D/GLSurfaceView
+14:40:42.349 14:41:02.962 16 I/SV[185674078
+14:40:42.350 14:41:02.961 7 D/SurfaceView
+14:40:42.939 14:40:42.959 6 D/AppVersionUpgrade
+14:40:42.940 14:40:42.940 1 E/AppVersionUpgrade
+14:40:42.942 14:40:42.950 18 I/AppVersionUpgrade
+14:40:42.952 14:42:26.318 10 W/SecureDelete
+14:40:42.952 14:42:26.318 7 W/FileSystemUtils
+14:40:42.958 14:40:45.806 4 I/Dialog
+14:40:42.968 14:40:42.968 1 W/Settings
+14:40:42.970 14:40:46.044 2 I/WindowManager
+14:40:42.981 14:40:42.981 1 V/GLMapComponent
+14:40:42.981 14:40:46.046 9 I/VRI[ATAK
+14:40:42.982 14:41:02.926 76 D/MapActivity
+14:40:42.986 14:40:42.986 1 D/MapView
+14:40:43.002 14:40:43.134 7 D/VRI[ATAK
+14:40:43.009 14:41:02.956 2 D/GLWidgetsMapComponent
+14:40:43.054 14:40:43.054 19 W/View
+14:40:43.054 14:41:02.987 11 I/SurfaceView
+14:40:43.057 14:41:02.953 2 V/SurfaceView
+14:40:43.060 14:40:43.060 1 V/WMM
+14:40:43.087 14:40:43.087 1 E/Kumiho-Kumiho
+14:40:43.087 14:40:43.087 8 D/Kumiho-Kumiho
+14:40:43.087 14:43:32.166 16681 I/Kumiho-Kumiho
+14:40:43.090 14:40:43.090 1 I/Unsafe
+14:40:43.090 14:40:45.161 13 E/atakmap.app.civ
+14:40:43.105 14:40:49.138 7 D/LocationMapComponent
+14:40:43.107 14:40:43.107 2 D/InternalGPSLocationProvider
+14:40:43.116 14:40:43.118 2 D/SensorManager
+14:40:43.117 14:43:33.501 154 V/GLMapRenderer
+14:40:43.119 14:40:43.119 1 D/DeadReckoningManager
+14:40:43.129 14:40:45.161 12 D/LayoutInflaterHelper
+14:40:43.129 14:40:45.161 12 E/LayoutInflaterHelper
+14:40:43.132 14:40:44.424 23 D/LocationInputManagerDropDownReceiver
+14:40:43.133 14:40:44.424 27 D/LocationManager
+14:40:43.134 14:40:43.134 4 I/ImeFocusController
+14:40:43.138 14:40:47.204 24 D/CommsMapComponent
+14:40:43.157 14:40:43.157 1 D/DefaultCommsProvider
+14:40:43.157 14:40:47.209 16 I/CommsMapComponentCommo
+14:40:43.158 14:40:47.209 13 D/CommsMapComponentCommo
+14:40:43.164 14:40:43.164 1 E/CommsMapComponent
+14:40:43.226 14:40:43.229 188 D/MilStd2525dSymbolTable
+14:40:43.664 14:40:46.707 17 D/AppMgmtUtils
+14:40:43.917 14:40:43.917 1 I/CotService
+14:40:43.923 14:40:43.923 1 D/CotService
+14:40:43.924 14:40:47.184 22 D/CotServiceRemote
+14:40:43.936 14:40:43.936 1 D/ImportManagerMapOverlay
+14:40:43.936 14:40:43.936 1 D/KmlImportExportHandler
+14:40:43.938 14:40:46.694 14 D/ImportExportMapComponent
+14:40:43.947 14:40:43.947 1 D/MapOverlayFilters
+14:40:43.950 14:40:44.418 2 D/UserIconDatabase
+14:40:43.956 14:40:43.956 1 D/GLBitmapLoader
+14:40:43.960 14:40:43.990 5 D/MapOverlayConfig
+14:40:43.990 14:40:43.990 5 D/FilterMapOverlay
+14:40:44.009 14:40:44.009 1 D/ImportResolverWrapper
+14:40:44.009 14:40:46.183 23 D/ImportFilesTask
+14:40:44.011 14:40:44.011 1 D/CotMapComponent
+14:40:44.014 14:40:53.895 4 W/atakmap.app.civ
+14:40:44.015 14:40:44.015 1 W/ExternalGPSInput
+14:40:44.020 14:43:14.061 6 V/NetworkUtils
+14:40:44.362 14:40:44.856 4 I/InputMethodManager_LC
+14:40:44.365 14:40:44.419 13 D/EnterLocationDropDownReceiver
+14:40:44.365 14:40:44.856 2 W/InputMethodManager
+14:40:44.365 14:40:44.856 2 W/InputMethodManager_LC
+14:40:44.422 14:40:45.850 3 I/Choreographer
+14:40:44.430 14:43:00.500 17 D/io_stats
+14:40:44.465 14:40:44.465 2 D/NadirElevationToggle
+14:40:44.472 14:40:44.472 1 D/MunitionDatasetProvider
+14:40:44.489 14:40:45.820 7 D/ExporterManager
+14:40:44.504 14:40:44.504 1 D/ChatManagerMapComponent
+14:40:44.506 14:40:44.515 21 D/ATAKMapEngineJNI
+14:40:44.506 14:40:44.517 25 D/ContactStore
+14:40:44.506 14:40:44.876 49 W/AbstractHierarchyListItem2
+14:40:44.517 14:40:45.806 2 D/ContactConnectorManager
+14:40:44.521 14:43:26.360 17 D/Dt2FileWatcher
+14:40:44.568 14:40:44.568 2 D/CoTAutoBroadcaster
+14:40:44.866 14:40:44.867 4 D/CoTInfoBroadcastReceiver
+14:40:44.870 14:40:44.870 1 D/HostileManagerDropDownReceiver
+14:40:44.873 14:40:45.020 2 D/ScanLayersService
+14:40:44.885 14:40:45.031 4 D/PersistentRasterDataStore
+14:40:44.929 14:40:45.037 2 D/GenericLayerScanner
+14:40:44.930 14:40:44.930 1 D/GRGDiscovery
+14:40:45.020 14:40:45.020 1 D/LayersMapComponent
+14:40:45.026 14:43:26.213 29 D/FileContentResolver
+14:40:45.036 14:40:45.059 2 D/ImageryScanner
+14:40:45.038 14:40:45.039 2 I/Toast
+14:40:45.038 14:40:45.054 2 V/ImageryScanner
+14:40:45.040 14:42:30.183 42 W/ZipVirtualFile
+14:40:45.041 14:40:45.056 33 E/KmzLayerInfoSpi
+14:40:45.047 14:40:45.047 1 D/LocalRangeFinderInput
+14:40:45.053 14:40:45.053 1 E/libgdaljni
+14:40:45.067 14:40:45.100 4 D/WktMapComponent
+14:40:45.069 14:40:45.069 1 I/WebViewFactory
+14:40:45.070 14:40:45.070 3 W/ResourcesManager
+14:40:45.071 14:40:45.071 1 V/ResourcesManager
+14:40:45.072 14:40:45.072 1 D/CrumbDatabase
+14:40:45.075 14:40:45.075 1 D/RouteToolbarBroadcastReceiver
+14:40:45.082 14:40:45.082 1 I/cr_WVCFactoryProvider
+14:40:45.115 14:40:45.115 1 D/RangeAndBearingMapComponent
+14:40:45.449 14:40:45.733 20 E/TranslationUtils
+14:40:45.790 14:40:45.790 1 D/HarrisSA
+14:40:45.791 14:40:45.791 4 D/HarrisHelper
+14:40:45.792 14:40:45.792 1 D/RadioDropDownReceiver
+14:40:45.803 14:40:45.803 1 D/WaveRelayControlLite
+14:40:45.824 14:40:45.824 1 D/GeoFenceDatabase
+14:40:45.830 14:40:45.831 2 D/GeoFenceManager
+14:40:45.832 14:40:45.832 1 I/EmergencyManager
+14:40:45.840 14:40:45.840 1 D/NightVisionMapWidgetComponent
+14:40:45.840 14:40:45.840 1 D/NightVisionNotification
+14:40:45.851 14:40:45.851 1 D/MobileLayerSelectionAdapter
+14:40:45.883 14:40:45.883 1 I/cr_LibraryLoader
+14:40:45.884 14:40:45.884 1 I/cr_CachingUmaRecorder
+14:40:45.884 14:40:45.884 1 I/cr_ChildProcLH
+14:40:45.885 14:40:45.885 1 I/cr_DisplayManager
+14:40:45.885 14:40:45.926 3 I/cr_PolicyProvider
+14:40:45.885 14:40:45.926 6 I/cr_CombinedPProvider
+14:40:45.886 14:40:45.886 1 I/cr_policy
+14:40:45.891 14:40:45.926 2 I/cr_AppResProvider
+14:40:45.925 14:40:45.925 1 D/FeaturesDetailsDropdownReceiver
+14:40:45.927 14:40:45.931 9 I/CameraManagerGlobal
+14:40:45.928 14:40:45.928 1 D/VendorTagDescriptor
+14:40:45.931 14:40:45.931 1 I/CameraManager
+14:40:45.944 14:41:02.924 7 D/StateSaverListener
+14:40:45.973 14:41:28.328 9 W/AssetAccessor
+14:40:45.973 14:41:28.329 18 F/ATAKMapEngineJNI
+14:40:45.975 14:40:45.975 1 D/VehicleModelCache
+14:40:45.977 14:40:45.977 1 D/ImportResolver
+14:40:45.995 14:40:46.683 16 D/AtakPluginRegistry
+14:40:45.995 14:40:46.684 5 D/PluginMapComponent
+14:40:46.021 14:40:46.668 348 V/AtakPluginRegistry
+14:40:46.038 14:40:46.038 1 D/CoordinatedTime
+14:40:46.042 14:40:46.043 3 D/DozeManagement
+14:40:46.043 14:40:46.043 1 I/ATAKActivity
+14:40:46.166 14:40:46.166 1 D/CotMapServerListener
+14:40:46.169 14:40:46.169 1 D/GeoChatService
+14:40:46.619 14:40:46.619 1 D/ProfileInstaller
+14:40:46.677 14:40:49.193 12 V/HashingUtils
+14:40:46.678 14:40:46.678 1 D/PluginValidator
+14:40:46.684 14:43:26.219 112 I/CesiumIon
+14:40:46.685 14:40:46.685 2 D/NavBarPluginReceiver
+14:40:46.687 14:40:46.703 2 I/FileSystemUtils
+14:40:46.690 14:40:46.692 2 D/BluetoothDevicesConfig
+14:40:46.693 14:40:46.693 1 D/BluetoothManager
+14:40:46.701 14:40:46.708 9 D/ProductProviderManager
+14:40:46.704 14:40:46.708 8 D/ProductInformation
+14:40:46.704 14:40:46.708 8 D/ProductRepository
+14:40:46.706 14:40:46.706 1 D/BaseProductProvider
+14:40:46.706 14:40:46.707 8 D/BundledProductProvider
+14:40:46.708 14:40:46.708 1 D/FileSystemProductProvider
+14:40:46.708 14:40:46.708 1 D/RemoteProductProvider
+14:40:46.708 14:40:46.708 1 D/SideloadedPluginProvider
+14:40:46.708 14:40:46.708 1 I/ProductRepository
+14:40:46.708 14:40:46.708 1 I/RemoteProductProvider
+14:40:46.708 14:40:46.708 1 W/ProductProviderManager
+14:40:46.710 14:40:46.710 1 D/StateSaverPublisher
+14:40:47.045 14:43:26.217 87 D/ImportReceiver
+14:40:47.046 14:43:26.128 20 D/ExternalLayerDataImporter
+14:40:47.136 14:42:30.183 10 W/KmzLayerInfoSpi
+14:40:47.170 14:40:47.171 4 W/CotStreamListener
+14:40:47.184 14:40:47.184 1 D/SelfCoordOverlayUpdater
+14:40:47.184 14:40:47.184 1 I/MissionPackageMapComponent
+14:40:47.184 14:40:47.184 2 D/MissionPackageMapComponent
+14:40:47.209 14:40:47.209 2 D/MissionPackageFileIO
+14:40:47.211 14:40:47.212 2 D/FileInfoPersistanceHelper
+14:40:47.211 14:40:52.214 6 D/DirectoryCleanup
+14:40:48.458 14:42:36.901 7 E/MobacTileClient2
+14:40:49.138 14:40:49.138 3 D/BreadcrumbReceiver
+14:40:49.575 14:42:31.344 12 D/CentralTrustManager
+14:40:57.225 14:40:57.226 4 D/DirectoryWatcher
+14:41:02.927 14:41:02.927 4 D/DropDownManager
+14:41:02.931 14:41:02.931 2 D/GenericFragmentAdapter
+14:41:02.933 14:41:02.957 5 D/AutofillManager
+14:41:03.966 14:41:03.984 4 E/FilePhenotypeFlags
+14:41:14.211 14:43:17.936 25 V/CommsMapComponentCommo
+14:41:20.326 14:42:26.315 14 E/ATAKMapEngineJNI
+14:41:20.326 14:42:26.315 4 I/ContextCaptureModelInfoSpi
+14:41:20.400 14:41:52.914 4 I/NotificationManager
+14:41:20.401 14:41:20.401 1 D/NotificationManager
+14:41:48.957 14:42:26.340 16 E/ImportReceiver
+14:42:30.219 14:42:30.219 1 D/LayersManagerBroadcastReceiver
+14:42:30.220 14:43:26.218 3 D/AbstractRasterLayer2
+---- ATAK SDK API scan: /Users/jake.steinerman/Documents/TAK/ATAK-CIV-5.7.0.10-SDK/main.jar ----
+-- classes referring to NOTHING

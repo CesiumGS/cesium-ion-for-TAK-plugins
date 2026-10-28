@@ -1,0 +1,55 @@
+Map drawing at 57.65899529819352 57.82178217821782 58.47373637264619  frames/s after waiting 0s.
++ 14s  step 1: removeAll
++ 14s  step 2: wait 3
++ 17s  step 3: tap Cancel
+        no "Cancel" on screen
++ 19s  step 4: wait 2
++ 22s  step 5: pane
++ 22s  step 6: wait 10
++ 32s  step 7: screenshot pane
+        saved 20261028-144014-pane.png
++ 32s  step 8: expect Found [0-9]+ assets
++ 32s  step 9: settings open
++ 33s  step 10: wait 3
++ 36s  step 11: screenshot settings
+        saved 20261028-144014-settings.png
++ 36s  step 12: settings close
++ 36s  step 13: wait 2
++ 39s  step 14: load 96188 Cesium OSM Buildings
++ 39s  step 15: wait 8
++ 47s  step 16: fly 39.9526 -75.1635 1500 55
++ 47s  step 17: wait 20
++ 67s  step 18: screenshot osm-buildings
+        saved 20261028-144014-osm-buildings.png
++ 67s  step 19: expect Added\. In ATAK: Overlay Manager
++ 67s  step 20: remove 96188
++ 68s  step 21: wait 3
++ 71s  step 22: expect Removal requested
++ 71s  step 23: load 2275207 Google Photorealistic 3D Tiles
++ 71s  step 24: wait 8
++ 79s  step 25: fly 39.9526 -75.1635 1500 55
++ 79s  step 26: wait 25
++104s  step 27: screenshot google-3d
+        saved 20261028-144014-google-3d.png
++105s  step 28: removeAll
++105s  step 29: wait 3
++108s  step 30: load 2 Bing Maps Aerial
++108s  step 31: wait 5
++113s  step 32: fly 39.9526 -75.1635 3000 0
++113s  step 33: wait 15
++128s  step 34: screenshot bing
+        saved 20261028-144014-bing.png
++129s  step 35: expect Showing "Cesium ion - Bing Maps Aerial"
++129s  step 36: load 1 Cesium World Terrain
++130s  step 37: fly 46.8523 -121.7603 20000 60
++130s  step 38: wait 30
++160s  step 39: screenshot terrain
+        saved 20261028-144014-terrain.png
++161s  step 40: expect Added as ATAK's elevation
++161s  step 41: pane
++161s  step 42: wait 3
++164s  step 43: screenshot pane-loaded
+        saved 20261028-144014-pane-loaded.png
++165s  step 44: removeAll
++165s  step 45: wait 5
++170s  step 46: expect Removed [0-9]+ layers
