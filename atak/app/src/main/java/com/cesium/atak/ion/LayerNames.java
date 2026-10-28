@@ -17,8 +17,15 @@ final class LayerNames {
      * ATAK names each imagery layer's tile cache file after the layer, so the
      * name must be a valid file name (a colon made the cache fail to open).
      */
+    private static final String IMAGERY_PREFIX = "Cesium ion - ";
+
     static String imageryLayerName(String assetName) {
-        return "Cesium ion - " + safeName(assetName, "imagery");
+        return IMAGERY_PREFIX + safeName(assetName, "imagery");
+    }
+
+    /** Whether ATAK's map source {@code name} is one {@link #imageryLayerName} made. */
+    static boolean isImageryLayerName(String name) {
+        return name != null && name.startsWith(IMAGERY_PREFIX);
     }
 
     /** {@code .geojson}, {@code .kml}, or {@code .kmz} (zip content). */

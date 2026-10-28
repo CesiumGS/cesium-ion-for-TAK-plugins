@@ -567,6 +567,10 @@ final class AssetLoader {
             url = template.url();
         }
         String layerName = LayerNames.imageryLayerName(name);
+        String note = MapSourceXml.resolutionNote(name, template);
+        if (note != null) {
+            log.accept(note);
+        }
         File source = AtakImports.importMapSource(
                 mapSourcesDirectory, assetId, MapSourceXml.xml(layerName, template, url));
         LoadedAssets.Entry entry = new LoadedAssets.Entry(
