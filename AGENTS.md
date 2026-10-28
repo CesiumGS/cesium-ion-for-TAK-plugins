@@ -37,10 +37,10 @@ put tokens or personal data in them) under `runs/<time>-<sha>-<scenario>/report.
 - Shared core: `cd core && ./gradlew test` (197 tests). The ATAK build needs the ATAK
   SDK, so it only builds on the Mac runner.
 
-## Current state (2026-10-22)
+## Current state (2026-10-28)
 
-**ATAK plugin v1.0.1 is released** (GitHub release `atak-v1.0.1`, TAK.gov-signed, for
-standard ATAK-CIV 5.7). v1.0.0 was signed but not released because ATAK froze (ANR).
+**ATAK plugin v1.0.2 is released** (GitHub release `atak-v1.0.2`, TAK.gov-signed, for
+standard ATAK-CIV 5.7; 1.0.1 fixed the ANR below, 1.0.2 the imagery/basemap report). v1.0.0 was signed but not released because ATAK froze (ANR).
 The tablet now has standard ATAK 5.7.0.16 with the signed plugin; test builds need the
 developer ATAK again (`[device-test: atak-install-dev]`).
 On the Mac, quit Unity during device tests: its adb (v36) and Homebrew's (v37) kill each other.
@@ -60,7 +60,7 @@ terrain-stress]` at 32df853: `ANRs: 0`, terrain visible. If a freeze comes back,
 
 ## Next steps (in order)
 
-1. Done: v1.0.1 released (22 October).
+1. Done: v1.0.1 (22 October) and v1.0.2 (28 October) released.
 2. Later: ATAK 5.6 build (Play Store ATAK is 5.6.0.12; needs the 5.6 SDK); VR-TAK
    toolbar button and headset panel; TAKX plugin; features in `docs/architecture-and-plan.md`.
 

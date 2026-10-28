@@ -12,7 +12,7 @@ Self-Hosted server.
 
 | TAK app | Platform | Status | Get it | Guide |
 |---|---|---|---|---|
-| **ATAK** | Android | v1.0.1 released (ATAK-CIV 5.7, signed by TAK.gov) | [Releases](../../releases) (`atak-v…`) | [`atak/`](atak/README.md) |
+| **ATAK** | Android | v1.0.2 released (ATAK-CIV 5.7, signed by TAK.gov) | [Releases](../../releases) (`atak-v…`) | [`atak/`](atak/README.md) |
 | **VR-TAK** | Windows, desktop and VR headset | Early version; not released yet | Coming | [`vrtak/`](vrtak/README.md) |
 | **TAKX** | Windows (successor to WinTAK) | Planned | Coming | [`takx/`](takx/README.md) |
 
