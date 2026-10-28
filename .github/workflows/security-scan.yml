@@ -1,0 +1,41 @@
+# Security checks that run on GitHub-hosted runners: a scan for committed credentials, a
+# C++ static analysis of the VR-TAK plugin (cppcheck), and a third-party inventory. The
+# results are the "security-report" artifact of each run, for whoever reviews a release.
+name: Security scan
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Credentials in tracked files
+        run: python3 scripts/scan-secrets.py | tee security-secrets.txt
+      - name: Static analysis of the VR-TAK plugin (cppcheck)
+        if: always()
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq cppcheck
+          cppcheck --enable=warning,portability --inconclusive --quiet \
+            --suppress=missingInclude --suppress=unknownMacro --inline-suppr \
+            --template='{file}:{line}: [{severity}] {id}: {message}' \
+            vrtak/plugin 2> security-cppcheck.txt || true
+          echo "cppcheck findings: $(wc -l < security-cppcheck.txt)"
+          head -40 security-cppcheck.txt
+      - name: Third-party inventory
+        if: always()
+        run: python3 scripts/inventory.py | tee security-inventory.md
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-report
+          path: |
+            security-secrets.txt
+            security-cppcheck.txt
+            security-inventory.md
