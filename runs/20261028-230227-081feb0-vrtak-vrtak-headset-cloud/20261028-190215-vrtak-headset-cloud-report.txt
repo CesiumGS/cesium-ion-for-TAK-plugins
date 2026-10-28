@@ -1,0 +1,18 @@
+
+==== Build the plugin (GameEditor, incremental) ====  [19:02:15]
+
+==== Install VTAK_CesiumIon ====  [19:02:15]
+   \VTAK_CesiumIon.uplugin  653 B
+   \Resources\cesium_ion_logo.png  20,275 B
+   Total execution time: 11.04 seconds
+Build exit code: 6
+-- build errors:
+   Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" GameEditor Win64 Development -Project="C:\Program Files\Epic Games\VR-TAK\Game\Game.uproject" -WaitMutex -NoHotReload -CompilerVersion=14.36.32532 -CompilerArguments=/wd4756
+-- end of the build log:
+   Using bundled DotNet SDK version: 6.0.302
+   Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" GameEditor Win64 Development -Project="C:\Program Files\Epic Games\VR-TAK\Game\Game.uproject" -WaitMutex -NoHotReload -CompilerVersion=14.36.32532 -CompilerArguments=/wd4756
+   Log file: C:\Program Files\Epic Games\VR-TAK\Engine\Programs\UnrealBuildTool\Log.txt
+   Using 'git status' to determine working set for adaptive non-unity build (C:\Program Files\Epic Games\VR-TAK).
+   Total execution time: 11.04 seconds
+   Unable to build while Live Coding is active. Exit the editor and game, or press Ctrl+Alt+F11 if iterating on code in the editor or game
+The plugin did not build; VR-TAK not started.
