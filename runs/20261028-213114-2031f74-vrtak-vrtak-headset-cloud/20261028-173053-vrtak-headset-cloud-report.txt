@@ -1,0 +1,9 @@
+
+==== Build the plugin (GameEditor, incremental) ====  [17:30:53]
+
+==== Install VTAK_CesiumIon ====  [17:30:53]
+   \VTAK_CesiumIon.uplugin  653 B
+   \Resources\cesium_ion_logo.png  20,275 B
+   Total execution time: 20.36 seconds
+Build exit code: 6
+The plugin did not build; VR-TAK not started.
