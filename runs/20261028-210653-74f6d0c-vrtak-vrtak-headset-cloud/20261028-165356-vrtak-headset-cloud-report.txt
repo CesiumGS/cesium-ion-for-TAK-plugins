@@ -1,0 +1,12 @@
+
+==== Build the plugin (GameEditor, incremental) ====  [16:53:56]
+
+==== Install VTAK_CesiumIon ====  [16:53:56]
+   \VTAK_CesiumIon.uplugin  653 B
+   \Resources\cesium_ion_logo.png  20,275 B
+   Total execution time: 12.49 seconds
+Build exit code: 0
+
+==== Start VR-TAK (detached) ====  [16:54:09]
+C:\Program Files\Epic Games\VR-TAK\Engine\Binaries\Win64\UnrealEditor.exe "C:\Program Files\Epic Games\VR-TAK\Game\Game.uproject" -game -windowed -ResX=1920 -ResY=1080 -log -CesiumIonOrigin=39.9526,-75.1635,0 -CesiumIonEnterWorld=20 -CesiumIonScreenshots=840 -CesiumIonShowSettings=855 -CesiumIonQuitAfter=900 -CesiumIonLoad=2275207 -CesiumIonSignIn
+Started pid 17468 at 10/28/2026 16:54:09. Run this task again for progress and screenshots.
