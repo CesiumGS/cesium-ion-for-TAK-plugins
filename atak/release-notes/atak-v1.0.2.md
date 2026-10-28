@@ -19,7 +19,15 @@ Third-Party Pipeline, so it loads in **standard ATAK-CIV 5.7** (tak.gov). Instal
 
 ## Tested
 
-TO BE FILLED IN AFTER THE SIGNED APK'S RELEASE CHECK.
+- This signed APK in standard ATAK-CIV 5.7.0.16 on a Samsung Galaxy Tab (Android 16):
+  loads, signs in, lists assets, adds Google Photorealistic 3D Tiles, no crashes. The
+  release is only published when these checks pass.
+- The same code passed the full automatic regression on the tablet (sign-in, asset
+  list, OSM Buildings, Google Photorealistic 3D Tiles, Bing imagery, terrain, removal,
+  no crashes or freezes), and ion-hosted Sentinel-2 and Blue Marble imagery: the map
+  you had before comes back when the imagery is removed.
+- TAK.gov's security scan (Fortify) and dependency check: findings and how each is
+  handled are in [atak/SECURITY-NOTES.md](../../blob/atak-v1.0.2/atak/SECURITY-NOTES.md).
 
 ## Changes since 1.0.1
 

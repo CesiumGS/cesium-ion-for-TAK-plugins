@@ -143,3 +143,18 @@ on the map, no crash, no missing classes. The check's own UI steps needed
 fixes for a fresh ATAK (open the pane from ATAK's menu, search the asset list).
 Mac note: a second adb (Unity's) on the Mac kills the tests' adb server; quit
 Unity while device tests run, or point Unity at the same Android SDK.
+
+## 1.0.2 (28 October): imagery fixes
+
+Found by a tester on 1.0.1: ion-hosted imagery (Sentinel-2, Blue Marble) replaced their
+online map with flat colour, and removing it left the map blank until ATAK restarted.
+Fixed: the plugin remembers the Mobile map source that was showing and selects it
+again when its imagery is removed; imagery coarser than 30 m per pixel (Blue Marble,
+about 300 m) says to zoom out. Debug build, device scenario `imagery-ion-hosted-signin`:
+Sentinel-2 draws, Blue Marble is flat colour zoomed in and fine zoomed out, removal returns
+to the previous map. Regression passed.
+
+TAK.gov submission 5 (the first for 1.0.2): signed, Fortify 17 findings as before. APK
+SHA-256 `db677e3b376809884bdd29137de79e8dd561d62269750f1af30a2221ccb833a9`. Release check in
+standard ATAK 5.7.0.16 with `[atak-release: atak-v1.0.2]`; the signed APK is removed from the
+repository afterwards.
