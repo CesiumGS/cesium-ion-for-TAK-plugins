@@ -158,3 +158,5 @@ TAK.gov submission 5 (the first for 1.0.2): signed, Fortify 17 findings as befor
 SHA-256 `db677e3b376809884bdd29137de79e8dd561d62269750f1af30a2221ccb833a9`. Release check in
 standard ATAK 5.7.0.16 with `[atak-release: atak-v1.0.2]`; the signed APK is removed from the
 repository afterwards.
+
+Released 28 October as the GitHub release `atak-v1.0.2`. The first release check stopped before testing (the plugin was not loaded in ATAK and the script could not find ATAK's Plugins menu item on a freshly reinstalled ATAK); after loading it by hand, the rerun passed: signed plugin in standard ATAK 5.7.0.16, pane, sign-in as CesiumBD, assets, Google Photorealistic 3D Tiles on the map, no crash, no missing classes.
