@@ -1,0 +1,59 @@
+Tapping "Done" (first-run screen).
+Tapping "OK" (first-run screen).
+Package Mgmt: Cesium ion is ""; tapping it to load.
+Package Mgmt: confirming the load.
+Tapping "OK" (first-run screen).
+Plugin loaded by hand after 44s.
+Map drawing at 15.949554896142434 15.097052480230051 14.728682170542635  frames/s after waiting 0s.
++ 94s  step 1: tap Cancel
+        no "Cancel" on screen
++ 97s  step 2: wait 2
++ 99s  step 3: pane
++ 99s  step 4: wait 8
++107s  step 5: signIn
++107s  step 6: wait 15
++122s  step 7: screenshot signin-page
+        saved 20261028-142333-signin-page.png
++123s  step 8: note The owner signs in on the tablet now (the run waits about 4 minutes).
++123s  step 9: wait 120
++243s  step 10: screenshot signin-2min
+        saved 20261028-142333-signin-2min.png
++243s  step 11: wait 110
++353s  step 12: atak
+        Starting: Intent { cmp=com.atakmap.app.civ/com.atakmap.app.ATAKActivityCiv }
+        Warning: Activity not started, intent has been delivered to currently running top-most instance.
+        Status: ok
+        Activity: com.atakmap.app.civ/com.atakmap.app.ATAKActivity
++353s  step 13: wait 8
++361s  step 14: pane close
++362s  step 15: wait 2
++364s  step 16: removeAll
++364s  step 17: wait 3
++367s  step 18: fly 52.0907 5.1214 20000 0 jump
++367s  step 19: load 3954 Sentinel-2
++367s  step 20: wait 5
++372s  step 21: expect Showing "
++372s  step 22: wait 20
++392s  step 23: screenshot sentinel2-20km
+        saved 20261028-142333-sentinel2-20km.png
++394s  step 24: fly 52.0907 5.1214 300000 0 jump
++394s  step 25: wait 20
++414s  step 26: screenshot sentinel2-300km
+        saved 20261028-142333-sentinel2-300km.png
++416s  step 27: removeAll
++416s  step 28: wait 5
++421s  step 29: expect Removed [0-9]+ layers
++421s  step 30: screenshot after-remove
+        saved 20261028-142333-after-remove.png
++422s  step 31: load 3845 Blue Marble
++422s  step 32: wait 5
++427s  step 33: expect detail down to about
++427s  step 34: wait 15
++442s  step 35: screenshot bluemarble-20km
+        saved 20261028-142333-bluemarble-20km.png
++443s  step 36: fly 52.0907 5.1214 4000000 0 jump
++443s  step 37: wait 20
++463s  step 38: screenshot bluemarble-4000km
+        saved 20261028-142333-bluemarble-4000km.png
++465s  step 39: removeAll
++465s  step 40: wait 3

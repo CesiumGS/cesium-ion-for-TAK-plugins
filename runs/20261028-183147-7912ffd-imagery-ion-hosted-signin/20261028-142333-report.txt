@@ -1,0 +1,931 @@
+Cesium ion ATAK device report 20261028-142333
+Device: R5GL5381L9F SM-X730, Android 16, arm64-v8a
+ATAK: versionName=5.7.0.10 (e0d26f0e)
+Plugin: ATAK-Plugin-CesiumIon-1.0.1-7912ffd-5.7.0-civ-debug.apk  commit 7912ffd
+Plugin lines: 79   Crashes: 0   ANRs: 0
+Scenario: imagery-ion-hosted-signin.txt   Plugin failures: 0
+---- scenario steps ----
+Tapping "Done" (first-run screen).
+Tapping "OK" (first-run screen).
+Package Mgmt: Cesium ion is ""; tapping it to load.
+Package Mgmt: confirming the load.
+Tapping "OK" (first-run screen).
+Plugin loaded by hand after 44s.
+Map drawing at 15.949554896142434 15.097052480230051 14.728682170542635  frames/s after waiting 0s.
++ 94s  step 1: tap Cancel
+        no "Cancel" on screen
++ 97s  step 2: wait 2
++ 99s  step 3: pane
++ 99s  step 4: wait 8
++107s  step 5: signIn
++107s  step 6: wait 15
++122s  step 7: screenshot signin-page
+        saved 20261028-142333-signin-page.png
++123s  step 8: note The owner signs in on the tablet now (the run waits about 4 minutes).
++123s  step 9: wait 120
++243s  step 10: screenshot signin-2min
+        saved 20261028-142333-signin-2min.png
++243s  step 11: wait 110
++353s  step 12: atak
+        Starting: Intent { cmp=com.atakmap.app.civ/com.atakmap.app.ATAKActivityCiv }
+        Warning: Activity not started, intent has been delivered to currently running top-most instance.
+        Status: ok
+        Activity: com.atakmap.app.civ/com.atakmap.app.ATAKActivity
++353s  step 13: wait 8
++361s  step 14: pane close
++362s  step 15: wait 2
++364s  step 16: removeAll
++364s  step 17: wait 3
++367s  step 18: fly 52.0907 5.1214 20000 0 jump
++367s  step 19: load 3954 Sentinel-2
++367s  step 20: wait 5
++372s  step 21: expect Showing "
++372s  step 22: wait 20
++392s  step 23: screenshot sentinel2-20km
+        saved 20261028-142333-sentinel2-20km.png
++394s  step 24: fly 52.0907 5.1214 300000 0 jump
++394s  step 25: wait 20
++414s  step 26: screenshot sentinel2-300km
+        saved 20261028-142333-sentinel2-300km.png
++416s  step 27: removeAll
++416s  step 28: wait 5
++421s  step 29: expect Removed [0-9]+ layers
++421s  step 30: screenshot after-remove
+        saved 20261028-142333-after-remove.png
++422s  step 31: load 3845 Blue Marble
++422s  step 32: wait 5
++427s  step 33: expect detail down to about
++427s  step 34: wait 15
++442s  step 35: screenshot bluemarble-20km
+        saved 20261028-142333-bluemarble-20km.png
++443s  step 36: fly 52.0907 5.1214 4000000 0 jump
++443s  step 37: wait 20
++463s  step 38: screenshot bluemarble-4000km
+        saved 20261028-142333-bluemarble-4000km.png
++465s  step 39: removeAll
++465s  step 40: wait 3
+---- regression checks ----
+PASS  Showing "
+PASS  Removed [0-9]+ layers
+PASS  detail down to about
+PASS  no crashes
+PASS  no ANRs
+REGRESSION: PASS
+---- plugin log (credentials redacted) ----
+10-28 14:25:15.585 I/CesiumIon(25734): Test commands enabled (debug build; adb shell only).
+10-28 14:25:15.585 I/CesiumIon(25734): Cesium ion plugin started.
+10-28 14:25:15.586 I/CesiumIon(25734): Tile proxy listening on 127.0.0.1:38735
+10-28 14:25:30.106 I/CesiumIon(25734): TEST 3 command: pane
+10-28 14:25:38.296 I/CesiumIon(25734): TEST 5 command: signIn
+10-28 14:25:38.297 I/CesiumIon(25734): > Sign in to Cesium ion Cloud
+10-28 14:25:38.334 I/CesiumIon(25734): Sign in to Cesium ion in the browser; you will come back here afterwards.
+10-28 14:25:45.817 I/CesiumIon(25734): Signed in to Cesium ion (Cesium ion Cloud).
+10-28 14:25:50.517 I/CesiumIon(25734): > List assets
+10-28 14:25:50.530 I/CesiumIon(25734): > List assets
+10-28 14:25:50.799 I/CesiumIon(25734): Signed in as CesiumBD.
+10-28 14:25:50.848 I/CesiumIon(25734): Workspace: personal (no teams on this account).
+10-28 14:25:50.848 I/CesiumIon(25734): Found 50 assets (more available).
+10-28 14:25:50.949 I/CesiumIon(25734): Found 50 assets (more available).
+10-28 14:29:52.840 I/CesiumIon(25734): TEST 14 command: pane
+10-28 14:29:55.056 I/CesiumIon(25734): TEST 16 command: removeAll
+10-28 14:29:55.056 I/CesiumIon(25734): > Remove all Cesium ion layers
+10-28 14:29:55.059 I/CesiumIon(25734): Nothing to remove.
+10-28 14:29:55.069 I/CesiumIon(25734): MapRenderer3 via MapView.getRenderer3()
+10-28 14:29:55.071 I/CesiumIon(25734): ATAK basemap opacity 100%: enabled=true, factor=1.0, surface draw modes: Points=false Triangles=true TriangleStrip=false Lines=false LineStrip=false, com.atakmap.map.opengl.GLMapView$SurfaceTerrainBlendControl
+10-28 14:29:55.072 I/CesiumIon(25734): ATAK basemap at 100%.
+10-28 14:29:58.237 I/CesiumIon(25734): TEST 18 command: fly
+10-28 14:29:58.242 I/CesiumIon(25734): Rotate & tilt gestures: userRotation=true, tiltState=0 (enabled=0), maxTilt=89.0. Twist two fingers to rotate; drag two fingers up or down to tilt.
+10-28 14:29:58.258 I/CesiumIon(25734): Camera to 52.0907, 5.1214, ground 54 m, 20000 m across, tilt 0
+10-28 14:29:58.342 I/CesiumIon(25734): TEST 19 command: load
+10-28 14:29:58.343 I/CesiumIon(25734): > Add Sentinel-2 (#3954)
+10-28 14:29:58.629 I/CesiumIon(25734): Attribution: <span><a href="https://cesium.com" target="_blank"><img src="https://assets.ion.cesium.com/ion-credit.png" alt="Cesium ion"></a></span>
+10-28 14:29:58.629 I/CesiumIon(25734): Attribution: <span><a href="https://s2maps.eu" target="_blank">Sentinel-2 cloudless - https://s2maps.eu</a> by <a href="https://eox.at" target="_blank">EOX IT Services GmbH</a><br>
+10-28 14:29:58.629 I/CesiumIon(25734): (Contains modified Copernicus Sentinel data 2021).</span>
+10-28 14:29:58.914 I/CesiumIon(25734): Imagery: TileTemplate[TMS https://assets.ion.cesium.com/us-east-1/asset_depot/3954/Sentinel-2/2021/{z}/{x}/{y}.jpg z0-13.jpg geographic proxied]
+10-28 14:29:58.914 I/CesiumIon(25734): Sentinel-2 has detail down to about 10 m per pixel. Zoomed in closer, ATAK enlarges it into flat colour: zoom out to see it.
+10-28 14:29:58.916 I/CesiumIon(25734): Broadcast com.atakmap.android.importexport.IMPORT_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml content=External Native Data
+10-28 14:29:58.917 I/CesiumIon(25734): Map layers: [Raster Layers, Native, Mobile, Contour Lines Overlay]
+10-28 14:29:59.926 I/CesiumIon(25734): Showing "Cesium ion - Sentinel-2" (Map Layers › Mobile).
+10-28 14:30:00.260 I/CesiumIon(25734): Proxy #3954 /us-east-1/asset_depot/3954/Sentinel-2/2021/0/1/0.jpg -> 200, 10145 bytes, 90 ms
+10-28 14:30:00.299 I/CesiumIon(25734): Proxy #3954 /us-east-1/asset_depot/3954/Sentinel-2/2021/10/1052/808.jpg -> 200, 13892 bytes, 122 ms
+10-28 14:30:00.300 I/CesiumIon(25734): Proxy #3954 /us-east-1/asset_depot/3954/Sentinel-2/2021/10/1053/808.jpg -> 200, 14603 bytes, 124 ms
+10-28 14:30:07.929 I/CesiumIon(25734): Proxy #3954: 100 requests, 0 failed.
+10-28 14:30:25.322 I/CesiumIon(25734): TEST 24 command: fly
+10-28 14:30:25.322 I/CesiumIon(25734): Rotate & tilt gestures: userRotation=true, tiltState=0 (enabled=0), maxTilt=89.0. Twist two fingers to rotate; drag two fingers up or down to tilt.
+10-28 14:30:25.327 I/CesiumIon(25734): Camera to 52.0907, 5.1214, ground 59 m, 300000 m across, tilt 0
+10-28 14:30:28.717 I/CesiumIon(25734): Proxy #3954: 200 requests, 0 failed.
+10-28 14:30:35.954 I/CesiumIon(25734): Proxy #3954: 300 requests, 0 failed.
+10-28 14:30:42.850 I/CesiumIon(25734): Proxy #3954: 400 requests, 0 failed.
+10-28 14:30:47.138 I/CesiumIon(25734): TEST 27 command: removeAll
+10-28 14:30:47.138 I/CesiumIon(25734): > Remove all Cesium ion layers
+10-28 14:30:47.139 I/CesiumIon(25734): Broadcast com.atakmap.android.importexport.DELETE_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml content=External Native Data
+10-28 14:30:47.139 I/CesiumIon(25734): Removed Cesium ion - Sentinel-2 (#3954).
+10-28 14:30:47.141 I/CesiumIon(25734): Removed 1 layers.
+10-28 14:30:47.141 I/CesiumIon(25734): ATAK basemap opacity 100%: enabled=true, factor=1.0, surface draw modes: Points=false Triangles=true TriangleStrip=false Lines=false LineStrip=false, com.atakmap.map.opengl.GLMapView$SurfaceTerrainBlendControl
+10-28 14:30:47.141 I/CesiumIon(25734): ATAK basemap at 100%.
+10-28 14:30:47.221 I/CesiumIon(25734): Back to "NRL DRG" (Map Layers › Mobile).
+10-28 14:30:47.258 I/CesiumIon(25734): Proxy #3954 /us-east-1/asset_depot/3954/Sentinel-2/2021/10/1043/804.jpg -> 404, 32 bytes, 0 ms: Asset not enabled in the plugin.
+10-28 14:30:53.301 I/CesiumIon(25734): TEST 31 command: load
+10-28 14:30:53.301 I/CesiumIon(25734): > Add Blue Marble (#3845)
+10-28 14:30:53.611 W/CesiumIon(25734): Add Blue Marble (#3845) failed (NOT_FOUND)
+10-28 14:30:53.611 I/CesiumIon(25734): Cesium ion could not find the endpoint for asset 3845. (Resource Not Found: /v1/assets/3845/endpoint?assetRegion=us-east-1)
+10-28 14:31:14.522 I/CesiumIon(25734): TEST 36 command: fly
+10-28 14:31:14.523 I/CesiumIon(25734): Rotate & tilt gestures: userRotation=true, tiltState=0 (enabled=0), maxTilt=89.0. Twist two fingers to rotate; drag two fingers up or down to tilt.
+10-28 14:31:14.530 I/CesiumIon(25734): Camera to 52.0907, 5.1214, ground 59 m, 4000000 m across, tilt 0
+10-28 14:31:35.911 I/CesiumIon(25734): TEST 39 command: removeAll
+10-28 14:31:35.911 I/CesiumIon(25734): > Remove all Cesium ion layers
+10-28 14:31:35.915 I/CesiumIon(25734): Nothing to remove.
+10-28 14:31:35.917 I/CesiumIon(25734): ATAK basemap opacity 100%: enabled=true, factor=1.0, surface draw modes: Points=false Triangles=true TriangleStrip=false Lines=false LineStrip=false, com.atakmap.map.opengl.GLMapView$SurfaceTerrainBlendControl
+10-28 14:31:35.917 I/CesiumIon(25734): ATAK basemap at 100%.
+---- other relevant logcat, stack frames omitted ----
+10-28 14:24:30.624 D/AndroidRuntime(26511): Calling main entry com.android.commands.uiautomator.Launcher
+10-28 14:24:31.664 D/AndroidRuntime(26511): Shutting down VM
+10-28 14:24:32.535 I/adbd    (11793): adbd service requested 'exec:cat '/sdcard/cesium-ion-ui.xml''
+10-28 14:24:32.588 I/adbd    (11793): adbd service requested 'shell,v2,raw:rm -f /sdcard/cesium-ion-ui.xml'
+10-28 14:24:32.655 I/adbd    (11793): adbd service requested 'shell,v2,raw:uiautomator dump /sdcard/cesium-ion-ui.xml'
+10-28 14:24:32.731 D/AndroidRuntime(26532): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+10-28 14:24:32.734 I/AndroidRuntime(26532): Using default boot image
+10-28 14:24:32.734 I/AndroidRuntime(26532): Leaving lock profiling enabled
+10-28 14:24:32.734 D/AndroidRuntime(26532): addProductProperty not brand or 7
+10-28 14:24:32.792 D/AndroidRuntime(26532): Calling main entry com.android.commands.uiautomator.Launcher
+10-28 14:24:33.834 D/AndroidRuntime(26532): Shutting down VM
+10-28 14:24:34.705 I/adbd    (11793): adbd service requested 'exec:cat '/sdcard/cesium-ion-ui.xml''
+10-28 14:24:40.989 I/adbd    (11793): adbd service requested 'shell,v2,raw:uiautomator dump /sdcard/cesium-ion-ui.xml'
+10-28 14:24:41.070 D/AndroidRuntime(26561): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+10-28 14:24:41.073 I/AndroidRuntime(26561): Using default boot image
+10-28 14:24:41.073 I/AndroidRuntime(26561): Leaving lock profiling enabled
+10-28 14:24:41.074 D/AndroidRuntime(26561): addProductProperty not brand or 7
+10-28 14:24:41.132 D/AndroidRuntime(26561): Calling main entry com.android.commands.uiautomator.Launcher
+10-28 14:24:42.173 D/AndroidRuntime(26561): Shutting down VM
+10-28 14:24:43.061 I/adbd    (11793): adbd service requested 'exec:cat '/sdcard/cesium-ion-ui.xml''
+10-28 14:24:50.923 D/AndroidRuntime(26607): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+10-28 14:24:50.925 I/AndroidRuntime(26607): Using default boot image
+10-28 14:24:50.925 I/AndroidRuntime(26607): Leaving lock profiling enabled
+10-28 14:24:50.926 D/AndroidRuntime(26607): addProductProperty not brand or 7
+10-28 14:24:50.981 D/AndroidRuntime(26607): Calling main entry com.android.commands.uiautomator.Launcher
+10-28 14:24:52.072 D/AndroidRuntime(26607): Shutting down VM
+10-28 14:24:53.113 D/ActivityTaskManager( 1587): scheduleTopResumedActivityChanged, onTop=false, r=ActivityRecord{158625682 u0 com.atakmap.app.civ/com.atakmap.app.ATAKActivityCiv t391}, caller=com.android.server.wm.ActivityTaskSupervisor.scheduleTopResumedActivityStateLossIfNeeded:19 com.android.server.wm.ActivityTaskSupervisor.updateTopResumedActivityIfNeeded:44 com.android.server.wm.TaskFragment.setResumedActivity:29 com.android.server.wm.ActivityRecord.setState:91 com.android.server.wm.TaskFragment.startPausing$1:231 com.android.server.wm.TaskFragment.resumeTopActivity:772 
+10-28 14:24:53.118 I/ActivityTaskManager( 1587): START u0 {xflg=0x4 cmp=com.atakmap.app.civ/com.atakmap.android.update.AppMgmtActivity} with LAUNCH_MULTIPLE from uid 10393 (com.atakmap.app.civ) (rr=158625682) (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+10-28 14:24:53.132 D/ActivityTaskManager( 1587): scheduleTopResumedActivityChanged, onTop=true, r=ActivityRecord{142656436 u0 com.atakmap.app.civ/com.atakmap.android.update.AppMgmtActivity t391}, caller=com.android.server.wm.ActivityTaskSupervisor.scheduleTopResumedActivityStateIfNeeded:18 com.android.server.wm.ActivityTaskSupervisor.handleTopResumedStateReleasedIfNeeded:57 com.android.server.wm.ActivityRecord.activityPaused:94 com.android.server.wm.ActivityClientController.activityPaused:26 android.app.IActivityClientController$Stub.onTransact:812 com.android.server.wm.ActivityClientController.onTransact:1 
+10-28 14:24:53.218 D/AtakPluginRegistry(25734): SDK skipping signature check[com.cesium.atak.ion]
+10-28 14:24:53.219 D/AtakPluginRegistry(25734): api matches[ com.cesium.atak.ion]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.219 D/AtakPluginRegistry(25734): SDK skipping signature check[com.cesium.atak.ion]
+10-28 14:24:53.219 D/AtakPluginRegistry(25734): api matches[ com.cesium.atak.ion]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.224 D/AtakPluginRegistry(25734): SDK skipping signature check[com.cesium.atak.ion]
+10-28 14:24:53.224 D/AtakPluginRegistry(25734): api matches[ com.cesium.atak.ion]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.224 D/AtakPluginRegistry(25734): api matches[ com.cesium.atak.ion]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.224 D/AtakPluginRegistry(25734): SDK skipping signature check[com.cesium.atak.ion]
+10-28 14:24:53.224 D/AtakPluginRegistry(25734): api matches[ com.cesium.atak.ion]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.226 D/AtakPluginRegistry(25734): api matches[ com.atakmap.helmcam]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.232 D/AtakPluginRegistry(25734): api matches[ com.atakmap.helmcam]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.232 D/AtakPluginRegistry(25734): api matches[ com.atakmap.helmcam]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.232 D/AtakPluginRegistry(25734): unable to find: com.atakmap.helmcam
+10-28 14:24:53.234 D/AtakPluginRegistry(25734): api matches[ com.par.imagemarkup]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.237 D/AtakPluginRegistry(25734): api matches[ com.par.imagemarkup]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.237 D/AtakPluginRegistry(25734): api matches[ com.par.imagemarkup]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.237 D/AtakPluginRegistry(25734): unable to find: com.par.imagemarkup
+10-28 14:24:53.238 D/AtakPluginRegistry(25734): api matches[ com.partech.networkmonitor]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.241 D/AtakPluginRegistry(25734): api matches[ com.partech.networkmonitor]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.241 D/AtakPluginRegistry(25734): api matches[ com.partech.networkmonitor]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.241 D/AtakPluginRegistry(25734): unable to find: com.partech.networkmonitor
+10-28 14:24:53.242 D/AtakPluginRegistry(25734): api matches[ com.atak.nightvision]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.245 D/AtakPluginRegistry(25734): api matches[ com.atak.nightvision]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.245 D/AtakPluginRegistry(25734): api matches[ com.atak.nightvision]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.245 D/AtakPluginRegistry(25734): unable to find: com.atak.nightvision
+10-28 14:24:53.246 D/AtakPluginRegistry(25734): api matches[ com.partech.serialmanager]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.249 D/AtakPluginRegistry(25734): api matches[ com.partech.serialmanager]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.249 D/AtakPluginRegistry(25734): api matches[ com.partech.serialmanager]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.249 D/AtakPluginRegistry(25734): unable to find: com.partech.serialmanager
+10-28 14:24:53.250 D/AtakPluginRegistry(25734): api matches[ com.partech.geocamera]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.253 D/AtakPluginRegistry(25734): api matches[ com.partech.geocamera]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.253 D/AtakPluginRegistry(25734): api matches[ com.partech.geocamera]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.253 D/AtakPluginRegistry(25734): unable to find: com.partech.geocamera
+10-28 14:24:53.254 D/AtakPluginRegistry(25734): api matches[ com.atakmap.takcam]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.257 D/AtakPluginRegistry(25734): api matches[ com.atakmap.takcam]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.257 D/AtakPluginRegistry(25734): api matches[ com.atakmap.takcam]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:24:53.258 D/AtakPluginRegistry(25734): unable to find: com.atakmap.takcam
+10-28 14:24:53.280 I/ActivityTaskManager( 1587): done cause=notifyTransitionStarting drawn timestamp=23262945683229 info=TransitionInfo{7912cca a=ActivityRecord{142656436 u0 com.atakmap.app.civ/com.atakmap.android.update.AppMgmtActivity t391} r=null d=true}
+10-28 14:24:53.280 I/ActivityTaskManager( 1587): Displayed com.atakmap.app.civ/com.atakmap.android.update.AppMgmtActivity for user 0: +170ms
+10-28 14:24:58.284 D/AndroidRuntime(26659): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+10-28 14:24:58.286 I/AndroidRuntime(26659): Using default boot image
+10-28 14:24:58.286 I/AndroidRuntime(26659): Leaving lock profiling enabled
+10-28 14:24:58.287 D/AndroidRuntime(26659): addProductProperty not brand or 7
+10-28 14:24:58.342 D/AndroidRuntime(26659): Calling main entry com.android.commands.uiautomator.Launcher
+10-28 14:24:59.497 D/AndroidRuntime(26659): Shutting down VM
+10-28 14:25:03.972 D/AndroidRuntime(26696): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+10-28 14:25:03.975 I/AndroidRuntime(26696): Using default boot image
+10-28 14:25:03.975 I/AndroidRuntime(26696): Leaving lock profiling enabled
+10-28 14:25:03.975 D/AndroidRuntime(26696): addProductProperty not brand or 7
+10-28 14:25:04.031 D/AndroidRuntime(26696): Calling main entry com.android.commands.uiautomator.Launcher
+10-28 14:25:05.063 D/AndroidRuntime(26696): Shutting down VM
+10-28 14:25:06.036 D/AtakPluginRegistry(25734): SDK skipping signature check[com.cesium.atak.ion]
+10-28 14:25:06.036 D/AtakPluginRegistry(25734): api matches[ com.cesium.atak.ion]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:09.210 D/AndroidRuntime(26731): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+10-28 14:25:09.213 I/AndroidRuntime(26731): Using default boot image
+10-28 14:25:09.213 I/AndroidRuntime(26731): Leaving lock profiling enabled
+10-28 14:25:09.213 D/AndroidRuntime(26731): addProductProperty not brand or 7
+10-28 14:25:09.269 D/AndroidRuntime(26731): Calling main entry com.android.commands.uiautomator.Launcher
+10-28 14:25:10.313 D/AndroidRuntime(26731): Shutting down VM
+10-28 14:25:13.359 I/adbd    (11793): adbd service requested 'shell,v2,raw:uiautomator dump /sdcard/cesium-ion-ui.xml'
+10-28 14:25:13.443 D/AndroidRuntime(26755): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+10-28 14:25:13.446 I/AndroidRuntime(26755): Using default boot image
+10-28 14:25:13.446 I/AndroidRuntime(26755): Leaving lock profiling enabled
+10-28 14:25:13.446 D/AndroidRuntime(26755): addProductProperty not brand or 7
+10-28 14:25:13.503 D/AndroidRuntime(26755): Calling main entry com.android.commands.uiautomator.Launcher
+10-28 14:25:14.553 D/AndroidRuntime(26755): Shutting down VM
+10-28 14:25:15.433 I/adbd    (11793): adbd service requested 'exec:cat '/sdcard/cesium-ion-ui.xml''
+10-28 14:25:15.555 D/AtakPluginRegistry(25734): Loading plugin: com.cesium.atak.ion
+10-28 14:25:15.555 D/AtakPluginRegistry(25734): Plugin was previously scanned: com.cesium.atak.ion
+10-28 14:25:15.557 D/AtakPluginRegistry(25734): Plugin was previously scanned: com.cesium.atak.ion
+10-28 14:25:15.575 D/AtakPluginRegistry(25734): Loading com.atak.plugins.impl.IToolbarItem extensions for com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin], 
+10-28 14:25:15.575 D/AtakPluginRegistry(25734): Found 0 plugin extensions matching IToolbarItem in 1 plugins
+10-28 14:25:15.575 D/AtakPluginRegistry(25734): Loading gov.tak.api.plugin.IPlugin extensions for com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin], 
+10-28 14:25:15.575 D/AtakPluginRegistry(25734): api matches[ com.cesium.atak.ion]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.575 D/AtakPluginRegistry(25734): SDK skipping signature check[com.cesium.atak.ion]
+10-28 14:25:15.582 D/AtakPluginRegistry(25734): Loaded com.cesium.atak.ion.CesiumIonPlugin, for plugin: com.cesium.atak.ion: [Extension type=gov.tak.api.plugin.IPlugin, impl=com.cesium.atak.ion.CesiumIonPlugin], 
+10-28 14:25:15.583 D/AtakPluginRegistry(25734): Found 1 plugin extensions matching IPlugin in 1 plugins
+10-28 14:25:15.583 D/AtakPluginRegistry(25734): Loading new Kernel plugin: com.cesium.atak.ion.CesiumIonPlugin@9185a3
+10-28 14:25:15.585 D/AtakPluginRegistry(25734): Loaded plugin: com.cesium.atak.ion, with extension count: 2
+10-28 14:25:15.593 D/AtakPluginRegistry(25734): Plugin was previously scanned: com.cesium.atak.ion
+10-28 14:25:15.602 D/AtakPluginRegistry(25734): SDK skipping signature check[com.cesium.atak.ion]
+10-28 14:25:15.602 D/AtakPluginRegistry(25734): api matches[ com.cesium.atak.ion]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.602 D/AtakPluginRegistry(25734): SDK skipping signature check[com.cesium.atak.ion]
+10-28 14:25:15.602 D/AtakPluginRegistry(25734): api matches[ com.cesium.atak.ion]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.604 D/AtakPluginRegistry(25734): SDK skipping signature check[com.cesium.atak.ion]
+10-28 14:25:15.604 D/AtakPluginRegistry(25734): api matches[ com.cesium.atak.ion]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.604 D/AtakPluginRegistry(25734): api matches[ com.cesium.atak.ion]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.604 D/AtakPluginRegistry(25734): SDK skipping signature check[com.cesium.atak.ion]
+10-28 14:25:15.604 D/AtakPluginRegistry(25734): api matches[ com.cesium.atak.ion]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.604 D/AtakPluginRegistry(25734): api matches[ com.atakmap.helmcam]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.611 D/AtakPluginRegistry(25734): api matches[ com.atakmap.helmcam]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.611 D/AtakPluginRegistry(25734): api matches[ com.atakmap.helmcam]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.612 D/AtakPluginRegistry(25734): unable to find: com.atakmap.helmcam
+10-28 14:25:15.612 D/AtakPluginRegistry(25734): api matches[ com.par.imagemarkup]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.614 D/AtakPluginRegistry(25734): api matches[ com.par.imagemarkup]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.614 D/AtakPluginRegistry(25734): api matches[ com.par.imagemarkup]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.614 D/AtakPluginRegistry(25734): unable to find: com.par.imagemarkup
+10-28 14:25:15.615 D/AtakPluginRegistry(25734): api matches[ com.partech.networkmonitor]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.617 D/AtakPluginRegistry(25734): api matches[ com.partech.networkmonitor]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.617 D/AtakPluginRegistry(25734): api matches[ com.partech.networkmonitor]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.617 D/AtakPluginRegistry(25734): unable to find: com.partech.networkmonitor
+10-28 14:25:15.617 D/AtakPluginRegistry(25734): api matches[ com.atak.nightvision]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.619 D/AtakPluginRegistry(25734): api matches[ com.atak.nightvision]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.619 D/AtakPluginRegistry(25734): api matches[ com.atak.nightvision]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.619 D/AtakPluginRegistry(25734): unable to find: com.atak.nightvision
+10-28 14:25:15.619 D/AtakPluginRegistry(25734): api matches[ com.partech.serialmanager]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.621 D/AtakPluginRegistry(25734): api matches[ com.partech.serialmanager]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.622 D/AtakPluginRegistry(25734): api matches[ com.partech.serialmanager]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.622 D/AtakPluginRegistry(25734): unable to find: com.partech.serialmanager
+10-28 14:25:15.622 D/AtakPluginRegistry(25734): api matches[ com.partech.geocamera]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.624 D/AtakPluginRegistry(25734): api matches[ com.partech.geocamera]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.624 D/AtakPluginRegistry(25734): api matches[ com.partech.geocamera]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.624 D/AtakPluginRegistry(25734): unable to find: com.partech.geocamera
+10-28 14:25:15.624 D/AtakPluginRegistry(25734): api matches[ com.atakmap.takcam]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.627 D/AtakPluginRegistry(25734): api matches[ com.atakmap.takcam]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.627 D/AtakPluginRegistry(25734): api matches[ com.atakmap.takcam]; pluginApiVersion:com.atakmap.app@5.7.0.CIV
+10-28 14:25:15.627 D/AtakPluginRegistry(25734): unable to find: com.atakmap.takcam
+10-28 14:25:25.759 I/adbd    (11793): adbd service requested 'shell,v2,raw:uiautomator dump /sdcard/cesium-ion-ui.xml'
+10-28 14:25:25.840 D/AndroidRuntime(26791): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+10-28 14:25:25.843 I/AndroidRuntime(26791): Using default boot image
+10-28 14:25:25.843 I/AndroidRuntime(26791): Leaving lock profiling enabled
+10-28 14:25:25.843 D/AndroidRuntime(26791): addProductProperty not brand or 7
+10-28 14:25:25.898 D/AndroidRuntime(26791): Calling main entry com.android.commands.uiautomator.Launcher
+10-28 14:25:27.009 D/AndroidRuntime(26791): Shutting down VM
+10-28 14:25:27.919 I/adbd    (11793): adbd service requested 'exec:cat '/sdcard/cesium-ion-ui.xml''
+10-28 14:25:38.329 D/ActivityTaskManager( 1587): scheduleTopResumedActivityChanged, onTop=false, r=ActivityRecord{142656436 u0 com.atakmap.app.civ/com.atakmap.android.update.AppMgmtActivity t391}, caller=com.android.server.wm.ActivityTaskSupervisor.scheduleTopResumedActivityStateLossIfNeeded:19 com.android.server.wm.ActivityTaskSupervisor.updateTopResumedActivityIfNeeded:44 com.android.server.wm.TaskDisplayArea.positionChildAt:253 com.android.server.wm.Task.moveToFront:40 com.android.server.wm.ActivityStarter.startActivityInner:2431 com.android.server.wm.ActivityStarter.startActivityUnchecked:111 
+10-28 14:25:38.333 I/ActivityTaskManager( 1587): START u0 {act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=https://ion.cesium.com/... flg=0x10000000 xflg=0x4 cmp=com.android.chrome/com.google.android.apps.chrome.IntentDispatcher} with LAUNCH_MULTIPLE from uid 10393 (com.atakmap.app.civ) (sr=158625682) (BAL_ALLOW_VISIBLE_WINDOW) result code=0
+10-28 14:25:38.894 I/ActivityManager( 1587): Process com.samsung.android.scs (pid 14846) has died: cch+95 CEM (387,4710)
+10-28 14:25:40.886 I/ActivityManager( 1587): Process com.samsung.android.samsungpass (pid 16096) has died: cch+95 CEM (163,4707)
+10-28 14:25:45.803 E/keystore2(  772): system/security/keystore2/src/error.rs:186 - Rc(r#KEY_NOT_FOUND), "system/security/keystore2/src/service.rs:179: In get_key_entry, while trying to load key info. AppUid(10393), Some(\"cesium-ion-token-key\")"
+10-28 14:25:45.805 I/keystore2(  772): system/security/keystore2/src/security_level.rs:785 - In generate_key. AppUid(10393), Some("cesium-ion-token-key"), r#TRUSTED_ENVIRONMENT
+10-28 14:25:45.806 I/keystore2(  772): system/security/keystore2/src/database.rs:2522 - In store_new_key "cesium-ion-token-key", uid=10393, cert=false, cert_chain=false rebound=false
+10-28 14:25:45.822 E/ActivityTaskManager( 1587): Background activity launch blocked! goo.gle/android-bal [callingPackage: com.atakmap.app.civ; callingPackageTargetSdk: 35; callingUid: 10393; callingPid: 25734; appSwitchState: 2; callingUidHasVisibleActivity: false; callingUidHasVisibleNotPinnedActivity: false; callingUidHasNonAppVisibleWindow: false; callingUidProcState: FOREGROUND_SERVICE; isCallingUidPersistentSystemProcess: false; allowBalExemptionForSystemProcess: false; intent: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10020000 xflg=0x4 pkg=com.atakmap.app.civ cmp=com.atakmap.app.civ/com.atakmap.app.ATAKActivityCiv }; callerApp: ProcessRecord{798e389 25734:com.atakmap.app.civ/u0a393}; inVisibleTask: false; balAllowedByPiCreator: BSP.ALLOW_BAL; resultIfPiCreatorAllowsBal: BAL_BLOCK; callerStartMode: MODE_BACKGROUND_ACTIVITY_START_SYSTEM_DEFINED; hasRealCaller: true; isCallForResult: false; isPendingIntent: false; autoOptInReason: notPendingIntent; realCallingPackage: com.atakmap.app.civ; realCallingPackageTargetSdk: 35; realCallingUid: 10393; realCallingPid: 25734; realCallingUidHasVisibleActivity: false; realCallingUidHasVisibleNotPinnedActivity: false; realCallingUidHasNonAppVisibleWindow: false; realCallingUidProcState: FOREGROUND_SERVICE; isRealCallingUidPersistentSystemProcess: false; originatingPendingIntent: null; realCallerApp: ProcessRecord{798e389 25734:com.atakmap.app.civ/u0a393}; realInVisibleTask: false; balAllowedByPiSender: BSP.ALLOW_BAL; resultIfPiSenderAllowsBal: BAL_BLOCK; realCallerStartMode: MODE_BACKGROUND_ACTIVITY_START_SYSTEM_DEFINED; balDontBringExistingBackgroundTaskStackToFg: true]
+10-28 14:25:45.827 I/ActivityTaskManager( 1587):    ChangeInfo{917d616 container=Task{2904219 #391 type=standard A=10393:com.atakmap.app.civ} flags=0x0}
+10-28 14:25:45.827 I/ActivityTaskManager( 1587):    ChangeInfo{d650b97 container=ActivityRecord{63651515 u0 com.atakmap.app.civ/com.atakmap.app.ATAKActivityCiv t-1} flags=0x0}
+10-28 14:25:45.827 I/ActivityTaskManager( 1587):    ChangeInfo{cb33da2 container=ActivityRecord{142656436 u0 com.atakmap.app.civ/com.atakmap.android.update.AppMgmtActivity t391 f}} flags=0x0}
+10-28 14:25:45.827 I/ActivityTaskManager( 1587): } of invisible launch ActivityRecord{63651515 u0 com.atakmap.app.civ/com.atakmap.app.ATAKActivityCiv t-1}
+10-28 14:25:45.829 I/ActivityTaskManager( 1587): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10020000 xflg=0x4 pkg=com.atakmap.app.civ cmp=com.atakmap.app.civ/com.atakmap.app.ATAKActivityCiv} with LAUNCH_SINGLE_TASK from uid 10393 (com.atakmap.app.civ) (sr=158625682) (BAL_BLOCK) result code=3
+10-28 14:25:50.397 D/ActivityTaskManager( 1587): scheduleTopResumedActivityChanged, onTop=true, r=ActivityRecord{158625682 u0 com.atakmap.app.civ/com.atakmap.app.ATAKActivityCiv t391}, caller=com.android.server.wm.ActivityTaskSupervisor.scheduleTopResumedActivityStateIfNeeded:18 com.android.server.wm.ActivityTaskSupervisor.updateTopResumedActivityIfNeeded:94 com.android.server.wm.TaskFragment.setResumedActivity:29 com.android.server.wm.ActivityRecord.setState:100 com.android.server.wm.TaskFragment.resumeTopActivity:1996 com.android.server.wm.Task.resumeTopActivityInnerLocked:125 
+10-28 14:29:44.680 I/ActivityTaskManager( 1587): START u0 {flg=0x10000000 xflg=0x5 cmp=com.atakmap.app.civ/com.atakmap.app.ATAKActivityCiv} with LAUNCH_SINGLE_TASK from uid 2000 (com.android.shell) (BAL_ALLOW_PERMISSION) result code=3
+10-28 14:29:58.916 D/ImportReceiver(25734): import intent received: com.atakmap.android.importexport.IMPORT_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml content=External Native Data mime=application/xml
+10-28 14:29:58.916 D/ImportReceiver(25734): processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml}]
+10-28 14:29:58.918 D/LayersManagerBroadcastReceiver(25734): ACTION_SELECT_LAYER: com.atakmap.android.layers.MobileLayerSelectionAdapter@22db9cc
+10-28 14:29:58.918 D/AbstractRasterLayer2(25734): [Mobile] SET SELECTION null
+10-28 14:29:58.935 W/ZipVirtualFile(25734): Not a zip archive /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml
+10-28 14:29:58.935 W/ZipVirtualFile(25734): Not a zip archive /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml
+10-28 14:29:58.936 W/KmzLayerInfoSpi(25734): Unable to open KMZ as a zip file: not a zip file. /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml
+10-28 14:29:58.997 D/FileContentResolver(25734): External Native Data: Added handler for cesium-ion-3954.xml
+10-28 14:29:58.997 D/ExternalLayerDataImporter(25734): import: /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml in 79ms
+10-28 14:29:58.997 D/ImportReceiver(25734): class com.atakmap.android.layers.ExternalLayerDataImporter import: /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml
+10-28 14:29:58.997 D/ImportReceiver(25734): finished processing: IMPORT Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml}]
+10-28 14:29:59.926 D/AbstractRasterLayer2(25734): [Mobile] SET SELECTION Cesium ion - Sentinel-2
+10-28 14:30:00.227 E/MobacTileClient2(25734): IO Error during tile download, NRL DRG (4210, 2702, 13)
+10-28 14:30:00.227 E/MobacTileClient2(25734): java.io.InterruptedIOException: thread interrupted
+10-28 14:30:00.307 E/MobacTileClient2(25734): IO Error during tile download, NRL DRG (4212, 2700, 13)
+10-28 14:30:00.307 E/MobacTileClient2(25734): java.io.InterruptedIOException: thread interrupted
+10-28 14:30:47.139 D/ImportReceiver(25734): import intent received: com.atakmap.android.importexport.DELETE_DATA uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml content=External Native Data mime=application/xml
+10-28 14:30:47.139 D/ImportReceiver(25734): processing: DELETE Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml}]
+10-28 14:30:47.140 D/ExternalLayerDataImporter(25734): call to remove: /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml from class com.atakmap.map.layer.raster.PersistentRasterDataStore
+10-28 14:30:47.216 D/FileContentResolver(25734): External Native Data: Removed handler for cesium-ion-3954.xml
+10-28 14:30:47.218 D/ImportReceiver(25734): class com.atakmap.android.layers.ExternalLayerDataImporter delete from database: /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml scheme: null
+10-28 14:30:47.218 D/ImportReceiver(25734): cannot delete non-file: /data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml
+10-28 14:30:47.218 D/ImportReceiver(25734): finished processing: DELETE Bundle[{mimeType=application/xml, advanced=true, contentType=External Native Data, uri=/data/user/0/com.atakmap.app.civ/files/cesium-ion/mapsources/cesium-ion-3954.xml}]
+10-28 14:30:47.219 D/AbstractRasterLayer2(25734): [Mobile] SET SELECTION NRL DRG
+10-28 14:30:47.258 E/MobacTileClient2(25734): FileNotFound during tile download, Cesium ion - Sentinel-2 (1043, 219, 10)
+10-28 14:30:47.259 E/MobacTileClient2(25734): IO Error during tile download, Cesium ion - Sentinel-2 (1061, 209, 10)
+10-28 14:30:47.259 E/MobacTileClient2(25734): java.io.InterruptedIOException: thread interrupted
+10-28 14:30:47.324 E/MobacTileClient2(25734): IO Error during tile download, Cesium ion - Sentinel-2 (1063, 215, 10)
+10-28 14:30:47.324 E/MobacTileClient2(25734): java.io.InterruptedIOException: thread interrupted
+10-28 14:31:17.518 I/ActivityManager( 1587): Process com.google.android.syncadapters.calendar (pid 20275) has died: cch+35 CEM (569,4095)
+10-28 14:31:17.568 I/ActivityManager( 1587): Process com.google.android.youtube (pid 18040) has died: cch+5 CEM (617,4095)
+---- ATAK map readiness: framerate and 3D model loading ----
+10-28 14:23:52.790 V/GLMapRenderer(25734): map framerate (f/s) = 8.928571428571429
+10-28 14:23:54.316 V/GLMapRenderer(25734): map framerate (f/s) = 3.050640634533252
+10-28 14:23:55.484 V/GLMapRenderer(25734): map framerate (f/s) = 11.760513186029936
+10-28 14:23:56.495 V/GLMapRenderer(25734): map framerate (f/s) = 15.719151165837046
+10-28 14:23:56.999 W/AssetAccessor(25734): Could not load content at http://localhost:3001/api/native/REDACTED/tilesets/5098966/Cologne-Cathedral-K-lner-Dom-Germany-YouTube-mesh/tileset.json
+10-28 14:23:56.999 F/ATAKMapEngineJNI(25734): [2026-10-28 14:23:56.999] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:23:56.999 F/ATAKMapEngineJNI(25734): - Received status code 404 for tileset http://localhost:3001/api/native/REDACTED/tilesets/5098966/Cologne-Cathedral-K-lner-Dom-Germany-YouTube-mesh/tileset.json
+10-28 14:23:57.003 W/AssetAccessor(25734): Could not load content at http://localhost:3001/api/native/REDACTED/tilesets/75343/REDACTED/tileset.json
+10-28 14:23:57.003 F/ATAKMapEngineJNI(25734): [2026-10-28 14:23:57.003] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:23:57.003 F/ATAKMapEngineJNI(25734): - Received status code 404 for tileset http://localhost:3001/api/native/REDACTED/tilesets/75343/REDACTED/tileset.json
+10-28 14:23:57.006 W/AssetAccessor(25734): Could not load content at http://localhost:3001/api/native/REDACTED/tilesets/4684986/Westminster-presbyterian-church-drone-scan/tileset.json
+10-28 14:23:57.006 F/ATAKMapEngineJNI(25734): [2026-10-28 14:23:57.006] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:23:57.006 F/ATAKMapEngineJNI(25734): - Received status code 404 for tileset http://localhost:3001/api/native/REDACTED/tilesets/4684986/Westminster-presbyterian-church-drone-scan/tileset.json
+10-28 14:23:57.009 W/AssetAccessor(25734): Could not load content at http://localhost:3001/api/native/REDACTED/tilesets/5098966/Cologne-Cathedral-K-lner-Dom-Germany-YouTube-mesh/tileset.json
+10-28 14:23:57.009 F/ATAKMapEngineJNI(25734): [2026-10-28 14:23:57.009] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:23:57.009 F/ATAKMapEngineJNI(25734): - Received status code 404 for tileset http://localhost:3001/api/native/REDACTED/tilesets/5098966/Cologne-Cathedral-K-lner-Dom-Germany-YouTube-mesh/tileset.json
+10-28 14:23:57.010 W/AssetAccessor(25734): Could not load content at http://localhost:3001/api/native/REDACTED/tilesets/75343/REDACTED/tileset.json
+10-28 14:23:57.010 F/ATAKMapEngineJNI(25734): [2026-10-28 14:23:57.010] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:23:57.010 F/ATAKMapEngineJNI(25734): - Received status code 404 for tileset http://localhost:3001/api/native/REDACTED/tilesets/75343/REDACTED/tileset.json
+10-28 14:23:57.012 W/AssetAccessor(25734): Could not load content at http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json
+10-28 14:23:57.012 F/ATAKMapEngineJNI(25734): [2026-10-28 14:23:57.012] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:23:57.012 F/ATAKMapEngineJNI(25734): - Received status code 404 for tileset http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json
+10-28 14:23:57.013 W/AssetAccessor(25734): Could not load content at http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json
+10-28 14:23:57.014 F/ATAKMapEngineJNI(25734): [2026-10-28 14:23:57.014] [taklogger] [error] [ErrorList.h:72] Errors when loading tileset:
+10-28 14:23:57.014 F/ATAKMapEngineJNI(25734): - Received status code 404 for tileset http://127.0.0.1:38735/PROXY_SECRET/a/2275207/v1/3dtiles/root.json
+10-28 14:23:58.259 V/GLMapRenderer(25734): map framerate (f/s) = 13.796810607418026
+10-28 14:23:59.275 V/GLMapRenderer(25734): map framerate (f/s) = 20.669291338582678
+10-28 14:24:00.281 V/GLMapRenderer(25734): map framerate (f/s) = 35.59070687098369
+10-28 14:24:04.787 V/GLMapRenderer(25734): map framerate (f/s) = 15.0099555827845
+10-28 14:24:06.191 V/GLMapRenderer(25734): map framerate (f/s) = 15.680684248039915
+10-28 14:24:07.751 V/GLMapRenderer(25734): map framerate (f/s) = 15.862301721228485
+10-28 14:24:09.068 V/GLMapRenderer(25734): map framerate (f/s) = 15.650548937164213
+10-28 14:24:10.082 V/GLMapRenderer(25734): map framerate (f/s) = 16.811484699659992
+10-28 14:24:11.111 V/GLMapRenderer(25734): map framerate (f/s) = 11.661807580174926
+10-28 14:24:12.120 V/GLMapRenderer(25734): map framerate (f/s) = 14.236622484045164
+10-28 14:24:13.135 V/GLMapRenderer(25734): map framerate (f/s) = 13.761467889908257
+10-28 14:24:14.151 V/GLMapRenderer(25734): map framerate (f/s) = 13.028515240904621
+10-28 14:24:15.381 V/GLMapRenderer(25734): map framerate (f/s) = 16.418192111719193
+10-28 14:24:16.390 V/GLMapRenderer(25734): map framerate (f/s) = 10.901883052527255
+10-28 14:24:17.491 V/GLMapRenderer(25734): map framerate (f/s) = 10.905642484589853
+10-28 14:24:19.093 V/GLMapRenderer(25734): map framerate (f/s) = 8.353543519267044
+10-28 14:24:20.111 V/GLMapRenderer(25734): map framerate (f/s) = 8.033826638477802
+10-28 14:24:21.398 V/GLMapRenderer(25734): map framerate (f/s) = 9.971746717633373
+10-28 14:24:22.453 V/GLMapRenderer(25734): map framerate (f/s) = 7.590132827324478
+10-28 14:24:24.056 V/GLMapRenderer(25734): map framerate (f/s) = 10.538200978547234
+10-28 14:24:25.112 V/GLMapRenderer(25734): map framerate (f/s) = 12.388903851333154
+10-28 14:24:26.165 V/GLMapRenderer(25734): map framerate (f/s) = 12.37675687014894
+10-28 14:24:28.123 V/GLMapRenderer(25734): map framerate (f/s) = 10.707911957168353
+10-28 14:24:29.175 V/GLMapRenderer(25734): map framerate (f/s) = 6.647673314339981
+10-28 14:24:30.184 V/GLMapRenderer(25734): map framerate (f/s) = 15.033947623666343
+10-28 14:24:31.199 V/GLMapRenderer(25734): map framerate (f/s) = 12.35370611183355
+10-28 14:24:32.217 V/GLMapRenderer(25734): map framerate (f/s) = 11.968734733756717
+10-28 14:24:33.441 V/GLMapRenderer(25734): map framerate (f/s) = 12.41068070703272
+10-28 14:24:34.492 V/GLMapRenderer(25734): map framerate (f/s) = 12.369172216936251
+10-28 14:24:35.545 V/GLMapRenderer(25734): map framerate (f/s) = 13.789824060865431
+10-28 14:24:36.550 V/GLMapRenderer(25734): map framerate (f/s) = 13.8308137664844
+10-28 14:24:38.052 V/GLMapRenderer(25734): map framerate (f/s) = 13.449023861171366
+10-28 14:24:39.108 V/GLMapRenderer(25734): map framerate (f/s) = 12.175754367390153
+10-28 14:24:40.161 V/GLMapRenderer(25734): map framerate (f/s) = 10.456273764258555
+10-28 14:24:41.231 V/GLMapRenderer(25734): map framerate (f/s) = 13.666352497643732
+10-28 14:24:42.471 V/GLMapRenderer(25734): map framerate (f/s) = 16.949152542372882
+10-28 14:24:43.525 V/GLMapRenderer(25734): map framerate (f/s) = 14.489472492642065
+10-28 14:24:45.126 V/GLMapRenderer(25734): map framerate (f/s) = 11.966096061160046
+10-28 14:24:46.179 V/GLMapRenderer(25734): map framerate (f/s) = 11.396011396011396
+10-28 14:24:47.433 V/GLMapRenderer(25734): map framerate (f/s) = 10.836584308625921
+10-28 14:24:48.442 V/GLMapRenderer(25734): map framerate (f/s) = 16.28468033775633
+10-28 14:24:49.510 V/GLMapRenderer(25734): map framerate (f/s) = 16.195255474452555
+10-28 14:24:50.518 V/GLMapRenderer(25734): map framerate (f/s) = 15.949554896142434
+10-28 14:24:51.910 V/GLMapRenderer(25734): map framerate (f/s) = 15.097052480230051
+10-28 14:24:53.099 V/GLMapRenderer(25734): map framerate (f/s) = 14.728682170542635
+10-28 14:25:50.439 V/GLMapRenderer(25734): map framerate (f/s) = 0.9345638423924835
+10-28 14:25:51.671 V/GLMapRenderer(25734): map framerate (f/s) = 34.11860276198213
+10-28 14:25:53.150 V/GLMapRenderer(25734): map framerate (f/s) = 27.675276752767527
+10-28 14:25:54.203 V/GLMapRenderer(25734): map framerate (f/s) = 24.714323677916557
+10-28 14:25:55.456 V/GLMapRenderer(25734): map framerate (f/s) = 22.129186602870814
+10-28 14:25:56.515 V/GLMapRenderer(25734): map framerate (f/s) = 6.616257088846881
+10-28 14:25:58.120 V/GLMapRenderer(25734): map framerate (f/s) = 5.632745024408562
+10-28 14:25:59.172 V/GLMapRenderer(25734): map framerate (f/s) = 5.920344456404736
+10-28 14:26:00.191 V/GLMapRenderer(25734): map framerate (f/s) = 7.1805702217529035
+10-28 14:26:01.391 V/GLMapRenderer(25734): map framerate (f/s) = 7.0766638584667225
+10-28 14:26:02.535 V/GLMapRenderer(25734): map framerate (f/s) = 13.99825021872266
+10-28 14:26:04.141 V/GLMapRenderer(25734): map framerate (f/s) = 10.913059294288832
+10-28 14:26:05.194 V/GLMapRenderer(25734): map framerate (f/s) = 9.731720147290899
+10-28 14:26:06.455 V/GLMapRenderer(25734): map framerate (f/s) = 9.875567845151096
+10-28 14:26:07.507 V/GLMapRenderer(25734): map framerate (f/s) = 6.660323501427212
+10-28 14:26:09.107 V/GLMapRenderer(25734): map framerate (f/s) = 6.787330316742081
+10-28 14:26:10.161 V/GLMapRenderer(25734): map framerate (f/s) = 8.367071524966262
+10-28 14:26:11.214 V/GLMapRenderer(25734): map framerate (f/s) = 7.774742592981719
+10-28 14:26:12.472 V/GLMapRenderer(25734): map framerate (f/s) = 8.311170212765957
+10-28 14:26:13.476 V/GLMapRenderer(25734): map framerate (f/s) = 15.92039800995025
+10-28 14:26:15.127 V/GLMapRenderer(25734): map framerate (f/s) = 12.801204819277109
+10-28 14:26:16.183 V/GLMapRenderer(25734): map framerate (f/s) = 11.048234977095122
+10-28 14:26:17.438 V/GLMapRenderer(25734): map framerate (f/s) = 10.873942811115587
+10-28 14:26:18.494 V/GLMapRenderer(25734): map framerate (f/s) = 11.790102955828628
+10-28 14:26:20.095 V/GLMapRenderer(25734): map framerate (f/s) = 4.372267332916927
+10-28 14:26:21.151 V/GLMapRenderer(25734): map framerate (f/s) = 5.271084337349397
+10-28 14:26:23.107 V/GLMapRenderer(25734): map framerate (f/s) = 5.853024062432256
+10-28 14:26:24.160 V/GLMapRenderer(25734): map framerate (f/s) = 6.001765225066196
+10-28 14:26:25.414 V/GLMapRenderer(25734): map framerate (f/s) = 9.569377990430622
+10-28 14:26:26.473 V/GLMapRenderer(25734): map framerate (f/s) = 8.214440121054906
+10-28 14:26:27.524 V/GLMapRenderer(25734): map framerate (f/s) = 7.731192387749034
+10-28 14:26:29.128 V/GLMapRenderer(25734): map framerate (f/s) = 6.843800322061192
+10-28 14:26:30.382 V/GLMapRenderer(25734): map framerate (f/s) = 7.555055457321974
+10-28 14:26:31.439 V/GLMapRenderer(25734): map framerate (f/s) = 6.628787878787879
+10-28 14:26:32.491 V/GLMapRenderer(25734): map framerate (f/s) = 6.641366223908919
+10-28 14:26:33.676 V/GLMapRenderer(25734): map framerate (f/s) = 10.321797207043108
+10-28 14:26:35.149 V/GLMapRenderer(25734): map framerate (f/s) = 10.071338648762065
+10-28 14:26:36.405 V/GLMapRenderer(25734): map framerate (f/s) = 10.127843267474681
+10-28 14:26:37.459 V/GLMapRenderer(25734): map framerate (f/s) = 16.144349477682812
+10-28 14:26:38.512 V/GLMapRenderer(25734): map framerate (f/s) = 18.04368471035138
+10-28 14:26:39.797 V/GLMapRenderer(25734): map framerate (f/s) = 13.56132075471698
+10-28 14:26:41.171 V/GLMapRenderer(25734): map framerate (f/s) = 13.011542497376706
+10-28 14:26:42.426 V/GLMapRenderer(25734): map framerate (f/s) = 12.458471760797343
+10-28 14:26:43.481 V/GLMapRenderer(25734): map framerate (f/s) = 6.641366223908919
+10-28 14:26:44.498 V/GLMapRenderer(25734): map framerate (f/s) = 11.10574601641719
+10-28 14:26:46.137 V/GLMapRenderer(25734): map framerate (f/s) = 10.512129380053908
+10-28 14:26:47.188 V/GLMapRenderer(25734): map framerate (f/s) = 12.179756404871902
+10-28 14:26:48.449 V/GLMapRenderer(25734): map framerate (f/s) = 11.790102955828628
+10-28 14:26:49.504 V/GLMapRenderer(25734): map framerate (f/s) = 12.333965844402277
+10-28 14:26:50.598 V/GLMapRenderer(25734): map framerate (f/s) = 11.638733705772811
+10-28 14:26:52.157 V/GLMapRenderer(25734): map framerate (f/s) = 9.981116806042621
+10-28 14:26:53.419 V/GLMapRenderer(25734): map framerate (f/s) = 11.471120949889313
+10-28 14:26:54.469 V/GLMapRenderer(25734): map framerate (f/s) = 11.629838843661737
+10-28 14:26:55.525 V/GLMapRenderer(25734): map framerate (f/s) = 12.31060606060606
+10-28 14:26:56.543 V/GLMapRenderer(25734): map framerate (f/s) = 14.46480231436837
+10-28 14:26:58.182 V/GLMapRenderer(25734): map framerate (f/s) = 10.50363587395637
+10-28 14:26:59.194 V/GLMapRenderer(25734): map framerate (f/s) = 11.216931216931217
+10-28 14:27:00.205 V/GLMapRenderer(25734): map framerate (f/s) = 12.552301255230125
+10-28 14:27:01.209 V/GLMapRenderer(25734): map framerate (f/s) = 3.988035892323031
+10-28 14:27:02.451 V/GLMapRenderer(25734): map framerate (f/s) = 7.12694877505568
+10-28 14:27:03.466 V/GLMapRenderer(25734): map framerate (f/s) = 7.668711656441718
+10-28 14:27:05.106 V/GLMapRenderer(25734): map framerate (f/s) = 8.571428571428571
+10-28 14:27:06.161 V/GLMapRenderer(25734): map framerate (f/s) = 7.892527287993283
+10-28 14:27:07.419 V/GLMapRenderer(25734): map framerate (f/s) = 10.35031847133758
+10-28 14:27:08.474 V/GLMapRenderer(25734): map framerate (f/s) = 6.4878892733564015
+10-28 14:27:09.527 V/GLMapRenderer(25734): map framerate (f/s) = 6.537890044576523
+10-28 14:27:11.130 V/GLMapRenderer(25734): map framerate (f/s) = 6.037432078889113
+10-28 14:27:12.185 V/GLMapRenderer(25734): map framerate (f/s) = 8.135480657479661
+10-28 14:27:13.437 V/GLMapRenderer(25734): map framerate (f/s) = 10.383386581469649
+10-28 14:27:14.497 V/GLMapRenderer(25734): map framerate (f/s) = 10.813148788927336
+10-28 14:27:16.101 V/GLMapRenderer(25734): map framerate (f/s) = 10.980592441266598
+10-28 14:27:17.154 V/GLMapRenderer(25734): map framerate (f/s) = 11.87122736418511
+10-28 14:27:18.408 V/GLMapRenderer(25734): map framerate (f/s) = 12.532133676092545
+10-28 14:27:19.464 V/GLMapRenderer(25734): map framerate (f/s) = 6.628787878787879
+10-28 14:27:20.520 V/GLMapRenderer(25734): map framerate (f/s) = 6.631927996210327
+10-28 14:27:22.122 V/GLMapRenderer(25734): map framerate (f/s) = 5.925127928898465
+10-28 14:27:23.176 V/GLMapRenderer(25734): map framerate (f/s) = 6.083490664988462
+10-28 14:27:24.433 V/GLMapRenderer(25734): map framerate (f/s) = 6.970954356846473
+10-28 14:27:25.488 V/GLMapRenderer(25734): map framerate (f/s) = 12.333965844402277
+10-28 14:27:26.542 V/GLMapRenderer(25734): map framerate (f/s) = 14.705882352941176
+10-28 14:27:28.144 V/GLMapRenderer(25734): map framerate (f/s) = 10.512129380053908
+10-28 14:27:29.399 V/GLMapRenderer(25734): map framerate (f/s) = 10.26983487716472
+10-28 14:27:30.453 V/GLMapRenderer(25734): map framerate (f/s) = 9.634551495016611
+10-28 14:27:31.508 V/GLMapRenderer(25734): map framerate (f/s) = 6.6350710900473935
+10-28 14:27:33.109 V/GLMapRenderer(25734): map framerate (f/s) = 5.273069679849341
+10-28 14:27:34.158 V/GLMapRenderer(25734): map framerate (f/s) = 5.669546436285097
+10-28 14:27:35.357 V/GLMapRenderer(25734): map framerate (f/s) = 8.770140730165204
+10-28 14:27:36.474 V/GLMapRenderer(25734): map framerate (f/s) = 10.132890365448505
+10-28 14:27:37.529 V/GLMapRenderer(25734): map framerate (f/s) = 6.641366223908919
+10-28 14:27:39.131 V/GLMapRenderer(25734): map framerate (f/s) = 5.647590361445783
+10-28 14:27:40.181 V/GLMapRenderer(25734): map framerate (f/s) = 6.2044780145670355
+10-28 14:27:41.357 V/GLMapRenderer(25734): map framerate (f/s) = 8.398197460057354
+10-28 14:27:42.496 V/GLMapRenderer(25734): map framerate (f/s) = 8.802524497591762
+10-28 14:27:44.097 V/GLMapRenderer(25734): map framerate (f/s) = 4.372267332916927
+10-28 14:27:45.151 V/GLMapRenderer(25734): map framerate (f/s) = 5.271084337349397
+10-28 14:27:46.410 V/GLMapRenderer(25734): map framerate (f/s) = 6.642820643842616
+10-28 14:27:47.461 V/GLMapRenderer(25734): map framerate (f/s) = 6.646525679758308
+10-28 14:27:49.063 V/GLMapRenderer(25734): map framerate (f/s) = 5.9378806333739345
+10-28 14:27:50.117 V/GLMapRenderer(25734): map framerate (f/s) = 6.647673314339981
+10-28 14:27:51.124 V/GLMapRenderer(25734): map framerate (f/s) = 11.16504854368932
+10-28 14:27:52.128 V/GLMapRenderer(25734): map framerate (f/s) = 15.66068515497553
+10-28 14:27:53.130 V/GLMapRenderer(25734): map framerate (f/s) = 12.788981800295131
+10-28 14:27:54.180 V/GLMapRenderer(25734): map framerate (f/s) = 13.096168881939015
+10-28 14:27:55.433 V/GLMapRenderer(25734): map framerate (f/s) = 24.76038338658147
+10-28 14:27:56.493 V/GLMapRenderer(25734): map framerate (f/s) = 16.43598615916955
+10-28 14:27:57.546 V/GLMapRenderer(25734): map framerate (f/s) = 13.37295690936107
+10-28 14:27:59.146 V/GLMapRenderer(25734): map framerate (f/s) = 10.67257349979863
+10-28 14:28:00.198 V/GLMapRenderer(25734): map framerate (f/s) = 10.137942496260594
+10-28 14:28:01.397 V/GLMapRenderer(25734): map framerate (f/s) = 15.025041736227045
+10-28 14:28:02.511 V/GLMapRenderer(25734): map framerate (f/s) = 15.570934256055363
+10-28 14:28:04.112 V/GLMapRenderer(25734): map framerate (f/s) = 12.522361359570661
+10-28 14:28:05.168 V/GLMapRenderer(25734): map framerate (f/s) = 11.269873213926344
+10-28 14:28:07.036 V/GLMapRenderer(25734): map framerate (f/s) = 12.430535244223456
+10-28 14:28:08.178 V/GLMapRenderer(25734): map framerate (f/s) = 15.761821366024519
+10-28 14:28:09.433 V/GLMapRenderer(25734): map framerate (f/s) = 10.846891948268668
+10-28 14:28:10.486 V/GLMapRenderer(25734): map framerate (f/s) = 8.115942028985508
+10-28 14:28:11.543 V/GLMapRenderer(25734): map framerate (f/s) = 7.767421216156236
+10-28 14:28:13.145 V/GLMapRenderer(25734): map framerate (f/s) = 7.038795220166967
+10-28 14:28:14.199 V/GLMapRenderer(25734): map framerate (f/s) = 6.647673314339981
+10-28 14:28:15.453 V/GLMapRenderer(25734): map framerate (f/s) = 3.9011703511053315
+10-28 14:28:16.510 V/GLMapRenderer(25734): map framerate (f/s) = 6.539833531510107
+10-28 14:28:17.717 V/GLMapRenderer(25734): map framerate (f/s) = 7.875738350470357
+10-28 14:28:19.157 V/GLMapRenderer(25734): map framerate (f/s) = 10.14806188654134
+10-28 14:28:20.416 V/GLMapRenderer(25734): map framerate (f/s) = 15.091342335186656
+10-28 14:28:21.474 V/GLMapRenderer(25734): map framerate (f/s) = 11.221406991799741
+10-28 14:28:22.529 V/GLMapRenderer(25734): map framerate (f/s) = 9.786476868327401
+10-28 14:28:24.132 V/GLMapRenderer(25734): map framerate (f/s) = 9.047044632086852
+10-28 14:28:25.188 V/GLMapRenderer(25734): map framerate (f/s) = 8.623548922056385
+10-28 14:28:26.201 V/GLMapRenderer(25734): map framerate (f/s) = 13.820335636722605
+10-28 14:28:27.207 V/GLMapRenderer(25734): map framerate (f/s) = 11.887072808320951
+10-28 14:28:28.397 V/GLMapRenderer(25734): map framerate (f/s) = 9.660330320972266
+10-28 14:28:29.452 V/GLMapRenderer(25734): map framerate (f/s) = 8.913910391742904
+10-28 14:28:30.507 V/GLMapRenderer(25734): map framerate (f/s) = 9.588268471517203
+10-28 14:28:32.108 V/GLMapRenderer(25734): map framerate (f/s) = 1.2492192379762648
+10-28 14:28:33.163 V/GLMapRenderer(25734): map framerate (f/s) = 3.389830508474576
+10-28 14:28:34.275 V/GLMapRenderer(25734): map framerate (f/s) = 7.165605095541402
+10-28 14:28:35.476 V/GLMapRenderer(25734): map framerate (f/s) = 8.051529790660226
+10-28 14:28:36.531 V/GLMapRenderer(25734): map framerate (f/s) = 8.632138114209827
+10-28 14:28:38.133 V/GLMapRenderer(25734): map framerate (f/s) = 7.495315427857589
+10-28 14:28:39.184 V/GLMapRenderer(25734): map framerate (f/s) = 12.820512820512821
+10-28 14:28:40.186 V/GLMapRenderer(25734): map framerate (f/s) = 11.76792556102901
+10-28 14:28:41.191 V/GLMapRenderer(25734): map framerate (f/s) = 10.944206008583691
+10-28 14:28:42.200 V/GLMapRenderer(25734): map framerate (f/s) = 9.703599153140438
+10-28 14:28:43.277 V/GLMapRenderer(25734): map framerate (f/s) = 12.059369202226344
+10-28 14:28:44.512 V/GLMapRenderer(25734): map framerate (f/s) = 11.678200692041523
+10-28 14:28:45.677 V/GLMapRenderer(25734): map framerate (f/s) = 9.7757331799885
+10-28 14:28:47.166 V/GLMapRenderer(25734): map framerate (f/s) = 11.67706865311053
+10-28 14:28:48.421 V/GLMapRenderer(25734): map framerate (f/s) = 11.089681774349083
+10-28 14:28:49.480 V/GLMapRenderer(25734): map framerate (f/s) = 6.616257088846881
+10-28 14:28:50.533 V/GLMapRenderer(25734): map framerate (f/s) = 6.631927996210327
+10-28 14:28:51.798 V/GLMapRenderer(25734): map framerate (f/s) = 6.516587677725118
+10-28 14:28:52.876 V/GLMapRenderer(25734): map framerate (f/s) = 9.205208801077683
+10-28 14:28:54.088 V/GLMapRenderer(25734): map framerate (f/s) = 9.354041651959054
+10-28 14:28:55.145 V/GLMapRenderer(25734): map framerate (f/s) = 17.992424242424242
+10-28 14:28:56.236 V/GLMapRenderer(25734): map framerate (f/s) = 17.22532588454376
+10-28 14:28:57.453 V/GLMapRenderer(25734): map framerate (f/s) = 15.160523186682521
+10-28 14:28:58.509 V/GLMapRenderer(25734): map framerate (f/s) = 13.122171945701357
+10-28 14:29:00.109 V/GLMapRenderer(25734): map framerate (f/s) = 10.13120744062448
+10-28 14:29:01.165 V/GLMapRenderer(25734): map framerate (f/s) = 6.6350710900473935
+10-28 14:29:02.958 V/GLMapRenderer(25734): map framerate (f/s) = 7.022471910112359
+10-28 14:29:04.175 V/GLMapRenderer(25734): map framerate (f/s) = 9.348093480934809
+10-28 14:29:05.429 V/GLMapRenderer(25734): map framerate (f/s) = 8.646616541353383
+10-28 14:29:06.487 V/GLMapRenderer(25734): map framerate (f/s) = 6.622516556291391
+10-28 14:29:07.537 V/GLMapRenderer(25734): map framerate (f/s) = 6.641366223908919
+10-28 14:29:09.141 V/GLMapRenderer(25734): map framerate (f/s) = 4.580975478307733
+10-28 14:29:10.195 V/GLMapRenderer(25734): map framerate (f/s) = 5.036726128016789
+10-28 14:29:11.452 V/GLMapRenderer(25734): map framerate (f/s) = 6.144138160079708
+10-28 14:29:12.506 V/GLMapRenderer(25734): map framerate (f/s) = 19.943019943019944
+10-28 14:29:13.562 V/GLMapRenderer(25734): map framerate (f/s) = 16.121384542437173
+10-28 14:29:15.167 V/GLMapRenderer(25734): map framerate (f/s) = 11.308562197092083
+10-28 14:29:16.396 V/GLMapRenderer(25734): map framerate (f/s) = 12.338187702265373
+10-28 14:29:17.478 V/GLMapRenderer(25734): map framerate (f/s) = 12.116182572614107
+10-28 14:29:18.532 V/GLMapRenderer(25734): map framerate (f/s) = 6.647673314339981
+10-28 14:29:20.136 V/GLMapRenderer(25734): map framerate (f/s) = 9.40910801656003
+10-28 14:29:21.317 V/GLMapRenderer(25734): map framerate (f/s) = 11.203751954142783
+10-28 14:29:22.454 V/GLMapRenderer(25734): map framerate (f/s) = 12.462311557788945
+10-28 14:29:23.506 V/GLMapRenderer(25734): map framerate (f/s) = 11.614401858304298
+10-28 14:29:24.557 V/GLMapRenderer(25734): map framerate (f/s) = 13.320647002854423
+10-28 14:29:26.161 V/GLMapRenderer(25734): map framerate (f/s) = 10.546139359698682
+10-28 14:29:27.419 V/GLMapRenderer(25734): map framerate (f/s) = 16.359918200409
+10-28 14:29:28.473 V/GLMapRenderer(25734): map framerate (f/s) = 15.304067660088602
+10-28 14:29:29.525 V/GLMapRenderer(25734): map framerate (f/s) = 13.791957460950481
+10-28 14:29:31.130 V/GLMapRenderer(25734): map framerate (f/s) = 4.984423676012461
+10-28 14:29:32.146 V/GLMapRenderer(25734): map framerate (f/s) = 8.393742846241892
+10-28 14:29:33.156 V/GLMapRenderer(25734): map framerate (f/s) = 10.187224669603523
+10-28 14:29:34.173 V/GLMapRenderer(25734): map framerate (f/s) = 9.036144578313253
+10-28 14:29:35.197 V/GLMapRenderer(25734): map framerate (f/s) = 8.286318758815232
+10-28 14:29:36.454 V/GLMapRenderer(25734): map framerate (f/s) = 6.364359586316627
+10-28 14:29:37.506 V/GLMapRenderer(25734): map framerate (f/s) = 6.4963187527068
+10-28 14:29:39.075 V/GLMapRenderer(25734): map framerate (f/s) = 5.93089221248066
+10-28 14:29:40.161 V/GLMapRenderer(25734): map framerate (f/s) = 7.452165156092649
+10-28 14:29:41.418 V/GLMapRenderer(25734): map framerate (f/s) = 8.037293039704227
+10-28 14:29:42.472 V/GLMapRenderer(25734): map framerate (f/s) = 6.641366223908919
+10-28 14:29:43.526 V/GLMapRenderer(25734): map framerate (f/s) = 6.641366223908919
+10-28 14:29:45.125 V/GLMapRenderer(25734): map framerate (f/s) = 5.66495818721338
+10-28 14:29:46.178 V/GLMapRenderer(25734): map framerate (f/s) = 4.831932773109243
+10-28 14:29:47.432 V/GLMapRenderer(25734): map framerate (f/s) = 5.985037406483791
+10-28 14:29:48.489 V/GLMapRenderer(25734): map framerate (f/s) = 1.893939393939394
+10-28 14:29:49.544 V/GLMapRenderer(25734): map framerate (f/s) = 4.261363636363637
+10-28 14:29:51.146 V/GLMapRenderer(25734): map framerate (f/s) = 2.9617662897145935
+10-28 14:29:52.276 V/GLMapRenderer(25734): map framerate (f/s) = 4.955606029320669
+10-28 14:29:53.458 V/GLMapRenderer(25734): map framerate (f/s) = 7.3029045643153525
+10-28 14:29:54.511 V/GLMapRenderer(25734): map framerate (f/s) = 6.653992395437262
+10-28 14:29:56.114 V/GLMapRenderer(25734): map framerate (f/s) = 5.649717514124294
+10-28 14:29:57.167 V/GLMapRenderer(25734): map framerate (f/s) = 5.93311758360302
+10-28 14:29:58.260 V/GLMapRenderer(25734): map framerate (f/s) = 9.373047281816289
+10-28 14:29:59.271 V/GLMapRenderer(25734): map framerate (f/s) = 18.06607019958706
+10-28 14:30:00.285 V/GLMapRenderer(25734): map framerate (f/s) = 49.26108374384236
+10-28 14:30:01.291 V/GLMapRenderer(25734): map framerate (f/s) = 53.43889163780307
+10-28 14:30:02.292 V/GLMapRenderer(25734): map framerate (f/s) = 54.930509596293845
+10-28 14:30:03.305 V/GLMapRenderer(25734): map framerate (f/s) = 55.77590480912246
+10-28 14:30:04.319 V/GLMapRenderer(25734): map framerate (f/s) = 56.24876213111507
+10-28 14:30:05.334 V/GLMapRenderer(25734): map framerate (f/s) = 58.12807881773399
+10-28 14:30:06.345 V/GLMapRenderer(25734): map framerate (f/s) = 58.24284304047384
+10-28 14:30:07.356 V/GLMapRenderer(25734): map framerate (f/s) = 58.30039525691699
+10-28 14:30:08.371 V/GLMapRenderer(25734): map framerate (f/s) = 58.24284304047384
+10-28 14:30:09.373 V/GLMapRenderer(25734): map framerate (f/s) = 58.18325747080942
+10-28 14:30:10.389 V/GLMapRenderer(25734): map framerate (f/s) = 58.12807881773399
+10-28 14:30:11.399 V/GLMapRenderer(25734): map framerate (f/s) = 58.27160493827161
+10-28 14:30:12.409 V/GLMapRenderer(25734): map framerate (f/s) = 58.30039525691699
+10-28 14:30:13.421 V/GLMapRenderer(25734): map framerate (f/s) = 58.30039525691699
+10-28 14:30:15.206 V/GLMapRenderer(25734): map framerate (f/s) = 49.71712669295388
+10-28 14:30:16.461 V/GLMapRenderer(25734): map framerate (f/s) = 5.577689243027889
+10-28 14:30:17.519 V/GLMapRenderer(25734): map framerate (f/s) = 3.8927335640138407
+10-28 14:30:19.124 V/GLMapRenderer(25734): map framerate (f/s) = 3.3188664794485576
+10-28 14:30:20.173 V/GLMapRenderer(25734): map framerate (f/s) = 3.0205396697543296
+10-28 14:30:21.433 V/GLMapRenderer(25734): map framerate (f/s) = 3.0517185994217795
+10-28 14:30:22.489 V/GLMapRenderer(25734): map framerate (f/s) = 3.7914691943127963
+10-28 14:30:24.087 V/GLMapRenderer(25734): map framerate (f/s) = 3.391107761868877
+10-28 14:30:25.143 V/GLMapRenderer(25734): map framerate (f/s) = 3.50498786734969
+---- ATAK process tag timeline (first and last time, line count per tag) ----
+14:23:50.647 14:23:50.647 1 I/Zygote
+14:23:50.648 14:24:14.664 7 I/atakmap.app.civ
+14:23:50.661 14:23:55.788 26 D/nativeloader
+14:23:50.662 14:24:53.164 4 D/ActivityThread
+14:23:50.673 14:23:55.765 3 D/ApplicationLoaders
+14:23:50.795 14:24:53.197 6 D/CompatChangeReporter
+14:23:50.798 14:23:50.799 7 V/GraphicsEnvironment
+14:23:50.813 14:23:50.898 2 D/ATAKApplication
+14:23:50.815 14:23:50.820 2 D/ACRA
+14:23:50.831 14:23:50.831 1 D/RemovableStorageHelper
+14:23:50.831 14:30:00.085 28 D/FileSystemUtils
+14:23:50.843 14:23:52.534 14 E/FileSystemUtils
+14:23:50.851 14:23:50.977 2 V/FileSystemUtils
+14:23:50.852 14:23:50.944 2 D/ATAKCrashHandler
+14:23:50.855 14:23:50.855 1 W/linker
+14:23:50.902 14:25:45.833 20 D/HWUI
+14:23:50.903 14:23:50.903 1 I/DisplayManager
+14:23:50.904 14:23:50.904 4 D/vulkan
+14:23:50.906 14:23:52.662 3 D/MMUD
+14:23:50.907 14:23:50.907 1 I/MMUD
+14:23:50.909 14:23:50.909 1 D/DesktopExperienceFlags
+14:23:50.909 14:23:50.909 2 D/MTK_COMPILER_OPT
+14:23:50.912 14:23:50.912 1 E/ashmem
+14:23:50.913 14:29:44.690 25 D/ATAKActivity
+14:23:50.931 14:23:50.931 1 D/DesktopModeFlags
+14:23:50.932 14:25:06.039 7 I/DecorView
+14:23:50.944 14:23:50.945 4 D/SystemComponentLoader
+14:23:50.947 14:23:50.947 1 D/Permissions
+14:23:50.947 14:23:50.947 1 E/MigrationShim
+14:23:50.947 14:23:51.412 2 D/ATAKConstants
+14:23:50.949 14:23:50.949 1 I/NotificationUtil
+14:23:50.950 14:23:50.950 1 D/LocaleUtil
+14:23:50.950 14:23:50.950 1 D/NotificationFader
+14:23:50.978 14:23:50.978 1 D/PreferenceControl
+14:23:50.979 14:29:44.690 9 D/AtakPreferenceFragment
+14:23:50.986 14:23:50.986 2 D/HardwareRenderer
+14:23:50.986 14:25:06.042 7 I/ViewRootImpl
+14:23:50.986 14:25:50.403 8 D/ViewRootImpl
+14:23:50.987 14:25:06.042 7 D/NativeCustomFrequencyManager
+14:23:50.990 14:25:06.048 7 I/InsetsController
+14:23:50.990 14:26:00.240 22 D/InputTransport
+14:23:50.991 14:23:50.992 6 I/IDS_TAG
+14:23:50.991 14:29:52.865 62 I/VRI[ATAKActivityCiv]@440301f
+14:23:50.993 14:25:50.407 17 D/WindowOnBackDispatcher
+14:23:50.993 14:25:50.607 26 D/VRI[ATAKActivityCiv]@440301f
+14:23:50.996 14:25:50.439 18 D/BufferQueueConsumer
+14:23:50.997 14:29:52.854 30 I/BLASTBufferQueue_Java
+14:23:50.997 14:29:52.854 51 I/BLASTBufferQueue
+14:23:51.000 14:23:51.021 2 I/GrallocExtra
+14:23:51.000 14:23:51.374 5 D/atakmap.app.civ
+14:23:51.023 14:25:50.542 22 I/InsetsSourceConsumer
+14:23:51.043 14:25:50.608 5 D/InputMethodManagerUtils
+14:23:51.043 14:25:50.608 5 I/InputMethodManager
+14:23:51.045 14:25:50.612 5 D/InsetsController
+14:23:51.045 14:25:50.612 9 I/ImeTracker
+14:23:51.235 14:23:58.306 115 D/CertificateManagerBase
+14:23:51.354 14:23:51.363 34 D/ActionMenuData
+14:23:51.370 14:23:51.370 1 I/HidlServiceManagement
+14:23:51.370 14:23:51.370 1 W/HidlServiceManagement
+14:23:51.370 14:23:51.374 4 D/RenderScript
+14:23:51.378 14:23:51.378 1 I/HWUI
+14:23:51.395 14:25:50.437 24 D/ScrollView
+14:23:51.398 14:24:04.291 13 D/BackgroundServices
+14:23:51.415 14:23:51.941 6 I/TextToSpeech
+14:23:52.166 14:23:55.756 4 W/libgdaljni
+14:23:52.195 14:23:52.195 1 I/ATAKMapEngineJNI
+14:23:52.210 14:23:52.210 1 D/GLSurfaceView
+14:23:52.233 14:29:52.863 14 D/SurfaceView
+14:23:52.233 14:29:52.864 49 I/SV[69485209
+14:23:52.352 14:23:52.523 9 D/sqlcipher
+14:23:52.352 14:23:55.152 25 D/ATAKMapEngineJNI
+14:23:52.526 14:23:52.526 13 D/ATAKDatabaseHelper
+14:23:52.526 14:23:56.979 2 E/ATAKMapEngineJNI
+14:23:52.531 14:23:52.559 6 D/AppVersionUpgrade
+14:23:52.532 14:23:52.533 2 E/AppVersionUpgrade
+14:23:52.536 14:23:52.536 1 D/MapView
+14:23:52.538 14:23:52.557 9 W/FileSystemUtils
+14:23:52.538 14:23:58.306 11 W/SecureDelete
+14:23:52.542 14:23:52.552 18 I/AppVersionUpgrade
+14:23:52.560 14:25:06.038 18 I/Dialog
+14:23:52.573 14:25:06.041 5 W/Settings
+14:23:52.577 14:25:15.585 10 I/WindowManager
+14:23:52.585 14:23:52.585 1 V/GLMapComponent
+14:23:52.585 14:23:57.075 9 I/VRI[ATAK
+14:23:52.585 14:29:52.841 82 D/MapActivity
+14:23:52.604 14:23:52.767 7 D/VRI[ATAK
+14:23:52.610 14:29:52.862 5 D/GLWidgetsMapComponent
+14:23:52.658 14:24:47.786 20 W/View
+14:23:52.658 14:29:52.878 31 I/SurfaceView
+14:23:52.667 14:23:52.667 1 V/WMM
+14:23:52.668 14:29:52.856 6 V/SurfaceView
+14:23:52.716 14:23:52.716 1 E/Kumiho-Kumiho
+14:23:52.716 14:23:52.716 8 D/Kumiho-Kumiho
+14:23:52.716 14:31:28.989 20894 I/Kumiho-Kumiho
+14:23:52.719 14:23:52.719 1 I/Unsafe
+14:23:52.719 14:23:55.853 13 E/atakmap.app.civ
+14:23:52.724 14:29:44.689 13 D/LocationMapComponent
+14:23:52.726 14:23:52.726 2 D/InternalGPSLocationProvider
+14:23:52.744 14:23:52.745 2 D/SensorManager
+14:23:52.746 14:23:52.746 1 D/DeadReckoningManager
+14:23:52.751 14:23:55.853 12 D/LayoutInflaterHelper
+14:23:52.751 14:23:55.853 12 E/LayoutInflaterHelper
+14:23:52.766 14:23:54.863 23 D/LocationInputManagerDropDownReceiver
+14:23:52.766 14:23:54.863 27 D/LocationManager
+14:23:52.767 14:25:38.348 20 I/ImeFocusController
+14:23:52.770 14:23:58.331 25 D/CommsMapComponent
+14:23:52.790 14:31:42.133 350 V/GLMapRenderer
+14:23:52.795 14:23:52.795 1 D/DefaultCommsProvider
+14:23:52.795 14:23:58.334 15 I/CommsMapComponentCommo
+14:23:52.797 14:23:58.334 14 D/CommsMapComponentCommo
+14:23:52.803 14:23:52.803 1 E/CommsMapComponent
+14:23:52.832 14:23:52.836 188 D/MilStd2525dSymbolTable
+14:23:53.303 14:29:44.789 61 D/AppMgmtUtils
+14:23:53.553 14:23:53.553 1 I/CotService
+14:23:53.553 14:23:54.301 2 D/CotService
+14:23:54.303 14:23:58.307 22 D/CotServiceRemote
+14:23:54.329 14:23:54.329 1 D/ImportManagerMapOverlay
+14:23:54.330 14:23:54.330 1 D/KmlImportExportHandler
+14:23:54.334 14:23:58.259 14 D/ImportExportMapComponent
+14:23:54.349 14:23:54.349 1 D/MapOverlayFilters
+14:23:54.352 14:23:57.379 12 D/UserIconDatabase
+14:23:54.372 14:23:54.372 1 D/GLBitmapLoader
+14:23:54.378 14:23:54.415 5 D/MapOverlayConfig
+14:23:54.414 14:23:54.415 5 D/FilterMapOverlay
+14:23:54.425 14:23:54.429 2 D/FilteredContactsDatabase
+14:23:54.451 14:30:01.773 3 W/atakmap.app.civ
+14:23:54.597 14:23:54.597 1 D/ImportResolverWrapper
+14:23:54.597 14:23:57.450 23 D/ImportFilesTask
+14:23:54.599 14:23:54.599 1 D/CotMapComponent
+14:23:54.604 14:23:54.604 1 W/ExternalGPSInput
+14:23:54.608 14:31:35.760 17 V/NetworkUtils
+14:23:54.798 14:23:55.479 4 I/InputMethodManager_LC
+14:23:54.803 14:23:55.479 2 W/InputMethodManager
+14:23:54.804 14:23:55.479 2 W/InputMethodManager_LC
+14:23:54.804 14:23:57.444 18 D/EnterLocationDropDownReceiver
+14:23:54.861 14:23:56.547 3 I/Choreographer
+14:23:54.907 14:23:54.907 2 D/NadirElevationToggle
+14:23:54.914 14:23:54.914 1 D/MunitionDatasetProvider
+14:23:54.924 14:23:56.525 7 D/ExporterManager
+14:23:54.936 14:23:54.936 1 D/ChatManagerMapComponent
+14:23:54.937 14:23:54.943 2 D/ChatDatabase
+14:23:55.022 14:31:41.078 47 D/Dt2FileWatcher
+14:23:55.138 14:23:55.159 25 D/ContactStore
+14:23:55.139 14:23:55.168 46 W/AbstractHierarchyListItem2
+14:23:55.159 14:23:56.512 2 D/ContactConnectorManager
+14:23:55.201 14:23:55.201 2 D/CoTAutoBroadcaster
+14:23:55.486 14:23:55.487 4 D/CoTInfoBroadcastReceiver
+14:23:55.489 14:23:55.489 1 D/HostileManagerDropDownReceiver
+14:23:55.492 14:23:55.673 2 D/ScanLayersService
+14:23:55.510 14:23:57.437 55 D/IconsMapAdapter
+14:23:55.520 14:23:57.355 5 D/ImportUserIconSetSort
+14:23:55.525 14:23:57.355 5 D/UserIconSet
+14:23:55.529 14:23:55.707 4 D/PersistentRasterDataStore
+14:23:55.576 14:23:55.713 2 D/GenericLayerScanner
+14:23:55.580 14:23:55.580 1 D/GRGDiscovery
+14:23:55.673 14:23:55.673 1 D/LayersMapComponent
+14:23:55.701 14:23:57.443 5 D/AddIconsetTask
+14:23:55.703 14:23:57.444 5 D/IconManagerDropdown
+14:23:55.703 14:23:57.444 5 W/IconPalletAdapter
+14:23:55.709 14:23:55.709 2 I/Toast
+14:23:55.713 14:23:55.733 2 D/ImageryScanner
+14:23:55.714 14:23:55.728 2 V/ImageryScanner
+14:23:55.715 14:30:25.380 42 W/ZipVirtualFile
+14:23:55.717 14:23:55.730 33 E/KmzLayerInfoSpi
+14:23:55.724 14:23:55.724 1 E/libgdaljni
+14:23:55.732 14:23:55.732 1 D/LocalRangeFinderInput
+14:23:55.755 14:23:56.115 6 D/CrumbDatabase
+14:23:55.756 14:23:55.800 4 D/WktMapComponent
+14:23:55.758 14:23:55.758 1 D/RouteToolbarBroadcastReceiver
+14:23:55.762 14:23:55.762 1 I/WebViewFactory
+14:23:55.762 14:23:55.762 3 W/ResourcesManager
+14:23:55.764 14:23:55.764 1 V/ResourcesManager
+14:23:55.783 14:23:55.783 1 I/cr_WVCFactoryProvider
+14:23:55.797 14:23:55.797 2 I/chromium
+14:23:55.811 14:23:55.811 1 D/RangeAndBearingMapComponent
+14:23:55.854 14:31:16.097 15 D/io_stats
+14:23:55.981 14:23:56.900 4 W/ATAKMapEngineJNI
+14:23:56.158 14:23:56.455 20 E/TranslationUtils
+14:23:56.502 14:23:56.502 1 D/HarrisSA
+14:23:56.503 14:23:56.503 1 D/RadioDropDownReceiver
+14:23:56.503 14:23:56.503 4 D/HarrisHelper
+14:23:56.509 14:23:56.509 1 D/WaveRelayControlLite
+14:23:56.524 14:23:58.341 6 D/FileInfoPersistanceHelper
+14:23:56.528 14:23:56.528 1 D/GeoFenceDatabase
+14:23:56.535 14:23:56.535 2 D/GeoFenceManager
+14:23:56.536 14:23:56.536 1 I/EmergencyManager
+14:23:56.543 14:29:44.686 5 D/NightVisionNotification
+14:23:56.543 14:29:44.689 5 D/NightVisionMapWidgetComponent
+14:23:56.548 14:23:56.552 2 D/StateSaver
+14:23:56.549 14:23:56.549 1 D/MobileLayerSelectionAdapter
+14:23:56.561 14:23:56.561 1 I/cr_LibraryLoader
+14:23:56.562 14:23:56.562 1 I/cr_CachingUmaRecorder
+14:23:56.562 14:23:56.562 1 I/cr_ChildProcLH
+14:23:56.563 14:23:56.563 1 I/cr_DisplayManager
+14:23:56.563 14:23:56.622 3 I/cr_PolicyProvider
+14:23:56.563 14:23:56.622 6 I/cr_CombinedPProvider
+14:23:56.564 14:23:56.564 1 I/cr_policy
+14:23:56.570 14:23:56.622 2 I/cr_AppResProvider
+14:23:56.620 14:23:56.620 1 D/FeaturesDetailsDropdownReceiver
+14:23:56.623 14:23:56.628 9 I/CameraManagerGlobal
+14:23:56.625 14:23:56.625 1 D/VendorTagDescriptor
+14:23:56.628 14:23:56.628 1 I/CameraManager
+14:23:56.768 14:23:56.768 1 D/ProfileInstaller
+14:23:56.979 14:23:56.979 1 D/StickyHashtags
+14:23:56.984 14:23:56.984 1 D/VehicleModelCache
+14:23:56.987 14:23:56.987 1 D/ImportResolver
+14:23:56.999 14:30:25.380 18 F/ATAKMapEngineJNI
+14:23:56.999 14:30:25.380 9 W/AssetAccessor
+14:23:57.007 14:25:15.627 115 D/AtakPluginRegistry
+14:23:57.007 14:25:50.405 5 D/PluginMapComponent
+14:23:57.029 14:23:58.353 696 V/AtakPluginRegistry
+14:23:57.052 14:23:57.052 1 D/CoordinatedTime
+14:23:57.055 14:23:57.063 3 D/DozeManagement
+14:23:57.063 14:24:13.953 17 I/VRI[ATAKActivityCiv]@ef8532
+14:23:57.064 14:23:57.064 1 I/ATAKActivity
+14:23:57.072 14:24:05.570 17 I/VRI[ATAKActivityCiv]@bbf78c0
+14:23:57.078 14:23:57.078 1 D/CotMapServerListener
+14:23:57.085 14:24:05.597 12 D/VRI[ATAKActivityCiv]@ef8532
+14:23:57.100 14:23:57.136 12 D/VRI[ATAKActivityCiv]@bbf78c0
+14:23:57.306 14:23:57.306 1 D/GeoChatService
+14:23:57.445 14:23:57.451 5 D/DefaultIconsetChangeTask
+14:23:58.253 14:23:58.253 1 I/FileSystemUtils
+14:23:58.256 14:23:58.257 2 D/BluetoothDevicesConfig
+14:23:58.258 14:23:58.258 1 D/BluetoothManager
+14:23:58.259 14:25:15.593 15 D/ProductProviderManager
+14:23:58.260 14:25:15.594 10 D/RemoteProductProvider
+14:23:58.265 14:25:15.595 26 D/ProductRepository
+14:23:58.265 14:25:15.626 43 D/ProductInformation
+14:23:58.270 14:25:15.593 3 D/BaseProductProvider
+14:23:58.271 14:23:58.287 24 D/BundledProductProvider
+14:23:58.276 14:23:58.276 1 W/ProductProviderManager
+14:23:58.276 14:23:58.297 2 I/ProductRepository
+14:23:58.276 14:23:58.297 7 D/FileSystemProductProvider
+14:23:58.276 14:25:15.594 8 I/RemoteProductProvider
+14:23:58.278 14:25:15.555 5 D/SideloadedPluginProvider
+14:23:58.279 14:23:58.355 11 D/RepoSyncTask
+14:23:58.280 14:23:58.280 1 D/NotificationManager
+14:23:58.280 14:23:58.280 1 D/StateSaverPublisher
+14:23:58.280 14:23:58.371 28 I/NotificationManager
+14:23:58.294 14:23:58.294 1 W/FileSystemProductProvider
+14:23:58.305 14:23:58.305 4 W/CotStreamListener
+14:23:58.307 14:23:58.307 1 I/MissionPackageMapComponent
+14:23:58.307 14:23:58.307 2 D/MissionPackageMapComponent
+14:23:58.308 14:23:58.308 1 D/SelfCoordOverlayUpdater
+14:23:58.334 14:23:58.336 2 D/MissionPackageFileIO
+14:23:58.335 14:30:47.218 53 D/ImportReceiver
+14:23:58.341 14:24:03.344 6 D/DirectoryCleanup
+14:23:58.350 14:29:58.936 10 W/KmzLayerInfoSpi
+14:23:58.368 14:23:58.368 1 W/NotificationManager
+14:23:58.419 14:30:47.140 11 D/ExternalLayerDataImporter
+14:23:58.419 14:30:47.216 11 D/FileContentResolver
+14:23:59.125 14:23:59.129 6 D/CentralTrustManager
+14:24:04.784 14:24:04.784 3 D/BreadcrumbReceiver
+14:24:04.796 14:24:04.796 1 D/ReportingRate
+14:24:05.554 14:29:03.791 18 I/InputDispatcher
+14:24:08.375 14:24:08.377 4 D/DirectoryWatcher
+14:24:14.667 14:24:14.678 4 E/FilePhenotypeFlags
+14:24:22.265 14:29:44.690 3 D/DisplayManager
+14:24:23.848 14:31:29.645 75 V/CommsMapComponentCommo
+14:24:47.761 14:29:52.852 11 D/GenericFragmentAdapter
+14:24:47.761 14:29:52.853 27 D/DropDownManager
+14:24:47.786 14:24:53.258 2 D/AbsListView
+14:24:53.194 14:25:15.594 5 D/AppMgmtActivity
+14:24:53.198 14:25:15.595 14 D/ProductInformationAdapter
+14:24:53.203 14:25:45.835 17 I/VRI[AppMgmtActivity]@58d4a9a
+14:24:53.205 14:25:39.225 12 D/VRI[AppMgmtActivity]@58d4a9a
+14:24:53.220 14:24:53.220 1 V/HashingUtils
+14:24:53.220 14:25:15.603 3 D/PluginValidator
+14:24:53.781 14:24:53.781 1 E/libEGL
+14:24:53.786 14:25:50.416 4 D/SV[69485209
+14:25:00.793 14:25:06.049 12 I/VRI[AppMgmtActivity]@d0bb7b9
+14:25:00.816 14:25:00.855 7 D/VRI[AppMgmtActivity]@d0bb7b9
+14:25:06.048 14:25:15.586 17 I/VRI[AppMgmtActivity]@fe3b2a4
+14:25:06.062 14:25:06.099 12 D/VRI[AppMgmtActivity]@fe3b2a4
+14:25:11.203 14:25:11.204 8 W/System
+14:25:15.585 14:31:35.917 64 I/CesiumIon
+14:25:30.164 14:25:30.164 1 D/StateSaverListener
+14:25:39.240 14:25:50.404 2 D/BBA2
+14:25:45.844 14:25:45.844 1 D/Choreographer
+14:25:50.412 14:29:52.845 6 D/AutofillManager
+14:25:50.515 14:25:50.515 2 D/NavBarPluginReceiver
+14:25:50.516 14:25:50.516 2 D/ImageGalleryReceiver
+14:25:50.516 14:25:50.516 2 D/ImportManagerView
+14:29:58.918 14:29:58.918 1 D/LayersManagerBroadcastReceiver
+14:29:58.918 14:30:47.219 3 D/AbstractRasterLayer2
+14:30:00.227 14:30:47.324 74 E/MobacTileClient2
+14:30:53.611 14:30:53.611 1 W/CesiumIon
+---- ATAK SDK API scan: /Users/jake.steinerman/Documents/TAK/ATAK-CIV-5.7.0.10-SDK/main.jar ----
+-- classes referring to NOTHING
