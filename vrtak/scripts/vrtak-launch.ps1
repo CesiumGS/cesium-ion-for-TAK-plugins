@@ -143,6 +143,13 @@ $build = Join-Path $VrTak 'Engine\Build\BatchFiles\Build.bat'
 $buildExit = $LASTEXITCODE
 Get-Content $buildLog | Select-String -Pattern ': error |: fatal error|Result: |Total execution time|CesiumIonVrtak' | Select-Object -First 30 | ForEach-Object { '   ' + $_.Line.Trim() }
 "Build exit code: $buildExit"
+if ($buildExit -ne 0) {
+    # Why it failed: error lines, and the end of the build log.
+    '-- build errors:'
+    Get-Content $buildLog | Select-String -Pattern 'error|Error|ERROR|Failed|failed|Fab|mutex|Mutex' | Select-Object -First 25 | ForEach-Object { '   ' + $_.Line.Trim() }
+    '-- end of the build log:'
+    Get-Content $buildLog -Tail 15 | ForEach-Object { '   ' + $_.Trim() }
+}
 if ($buildExit -ne 0) { 'The plugin did not build; VR-TAK not started.'; return }
 
 Get-ChildItem $shots -Recurse -Filter 'CesiumIon-*.png' -ErrorAction SilentlyContinue | Remove-Item -Force

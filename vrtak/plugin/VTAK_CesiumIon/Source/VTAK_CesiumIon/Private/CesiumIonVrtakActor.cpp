@@ -167,6 +167,7 @@ namespace
 		UFunction* Function = Core ? Core->FindFunction(TEXT("OpenInWorldByClass")) : nullptr;
 		if (!Function)
 		{
+			UE_LOG(LogCesiumIonVrtak, Warning, TEXT("VR-TAK's UI subsystem has no OpenInWorldByClass."));
 			return nullptr;
 		}
 		TArray<uint8> Params;
@@ -207,6 +208,8 @@ namespace
 		{
 			It->DestroyValue_InContainer(Params.GetData());
 		}
+		UE_LOG(LogCesiumIonVrtak, Log, TEXT("VR-TAK's UI subsystem OpenInWorldByClass returned %s."),
+			Result ? *Result->GetClass()->GetName() : TEXT("nothing"));
 		return Result;
 	}
 
