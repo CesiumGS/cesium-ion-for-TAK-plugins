@@ -33,6 +33,9 @@ param(
     [string[]]$Expect = @(),
     # More plugin test switches (for example -CesiumIonRaise=60).
     [string[]]$ExtraArgs = @(),
+    # Leave the headset enabled (no -nohmd): with Quest Link running and the headset worn,
+    # "Switch To VR" in VR-TAK's ribbon enters VR.
+    [switch]$Headset,
     [switch]$Restart
 )
 $ErrorActionPreference = 'Continue'
@@ -143,9 +146,10 @@ Get-Content $buildLog | Select-String -Pattern ': error |: fatal error|Result: |
 if ($buildExit -ne 0) { 'The plugin did not build; VR-TAK not started.'; return }
 
 Get-ChildItem $shots -Recurse -Filter 'CesiumIon-*.png' -ErrorAction SilentlyContinue | Remove-Item -Force
-$args_ = @("`"$uproject`"", '-game', '-windowed', '-ResX=1920', '-ResY=1080', '-nohmd', '-log',
+$args_ = @("`"$uproject`"", '-game', '-windowed', '-ResX=1920', '-ResY=1080', '-log',
     "-CesiumIonOrigin=$Origin", "-CesiumIonEnterWorld=$EnterWorld",
     "-CesiumIonScreenshots=$ScreenshotAt", "-CesiumIonShowSettings=$($ScreenshotAt + 15)", "-CesiumIonQuitAfter=$QuitAfter")
+if (-not $Headset) { $args_ += '-nohmd' }
 if ($Mode -eq 'cloud') {
     # Google Photorealistic 3D Tiles; signs in if there is no saved access.
     $args_ += @('-CesiumIonLoad=' + $(if ($PSBoundParameters.ContainsKey('Load')) { $Load } else { '2275207' }), '-CesiumIonSignIn')

@@ -149,6 +149,9 @@ private:
 	FDelegateHandle OverlayFailureHandle;
 	double EnterWorldAt = -1.0;
 	double ShowSettingsAt = -1.0;
+	/** When the headset state is next written to the log (see Tick), and the last one written. */
+	double NextXrLogAt = 0.0;
+	FString LastXrState;
 	double HideSettingsAt = -1.0;
 	bool bStartSignIn = false;
 	double EnteredWorldAt = -1.0;

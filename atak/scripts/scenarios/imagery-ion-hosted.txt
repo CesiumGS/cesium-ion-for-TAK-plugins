@@ -1,5 +1,5 @@
 # Cesium ion-hosted imagery (geographic TMS through the plugin's proxy):
-# Sentinel-2 and Blue Marble over the Netherlands, close in and far out,
+# Sentinel-2 and Blue Marble over Utrecht, close in and far out,
 # and the map source after removal (user report: imagery never showed, and
 # the map stayed blank after removing it). ~4 minutes after the map draws.
 removeAll

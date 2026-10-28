@@ -391,6 +391,26 @@ void ACesiumIonVrtakActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	ElapsedSeconds += DeltaSeconds;
+	if (ElapsedSeconds >= NextXrLogAt)
+	{
+		// Headset diagnostics: whether an XR system exists, whether the view is stereoscopic
+		// (the person is in VR), and whether the panel is a screen widget (which a headset does
+		// not show). Written when it changes, and every minute.
+		const bool bXrSystem = GEngine && GEngine->XRSystem.IsValid();
+		const bool bStereo = GEngine && GEngine->IsStereoscopic3D();
+		const bool bPanelOnScreen = Panel && Panel->IsInViewport();
+		const FString XrState = FString::Printf(TEXT("XR system %s; stereoscopic 3D %s; panel is a screen widget: %s."),
+			bXrSystem ? TEXT("present") : TEXT("none"), bStereo ? TEXT("ON (in VR)") : TEXT("off"),
+			bPanelOnScreen ? TEXT("yes") : TEXT("no"));
+		NextXrLogAt = ElapsedSeconds + 5.0;
+		static double LastWrittenAt = -100.0;
+		if (XrState != LastXrState || ElapsedSeconds - LastWrittenAt >= 60.0)
+		{
+			LastXrState = XrState;
+			LastWrittenAt = ElapsedSeconds;
+			UE_LOG(LogCesiumIonVrtak, Log, TEXT("%s"), *XrState);
+		}
+	}
 	if (Tilesets.Num() > 0 && ElapsedSeconds >= NextDiagnosticsAt && DiagnosticsLogged < 4)
 	{
 		NextDiagnosticsAt = ElapsedSeconds + 30.0;
