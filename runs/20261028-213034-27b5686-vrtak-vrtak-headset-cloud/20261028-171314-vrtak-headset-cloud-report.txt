@@ -1,0 +1,146 @@
+
+==== Build the plugin (GameEditor, incremental) ====  [17:13:14]
+
+==== Install VTAK_CesiumIon ====  [17:13:14]
+   \VTAK_CesiumIon.uplugin  653 B
+   \Resources\cesium_ion_logo.png  20,275 B
+   Total execution time: 16.99 seconds
+Build exit code: 0
+
+==== Start VR-TAK (detached) ====  [17:13:32]
+C:\Program Files\Epic Games\VR-TAK\Engine\Binaries\Win64\UnrealEditor.exe "C:\Program Files\Epic Games\VR-TAK\Game\Game.uproject" -game -windowed -ResX=1920 -ResY=1080 -log -CesiumIonOrigin=39.9526,-75.1635,0 -CesiumIonEnterWorld=20 -CesiumIonScreenshots=840 -CesiumIonShowSettings=855 -CesiumIonQuitAfter=900 -CesiumIonLoad=2275207 -CesiumIonSignIn
+Started pid 2476 at 10/28/2026 17:13:32. Run this task again for progress and screenshots.
+
+==== VR-TAK run ====  [17:30:32]
+Log: C:\Program Files\Epic Games\VR-TAK\Game\Saved\Logs\Game.log (updated 10/28/2026 17:20:03)
+-- Cesium ion plugin
+[2026.10.28-21.14.04:733][  0]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.28-21.14.07:980][  1]LogCesiumIonVrtak: Found 100 assets.
+[2026.10.28-21.14.08:005][  1]LogCesium: Display: Caching Cesium requests in C:/Program Files/Epic Games/VR-TAK/Game/cesium-request-cache.sqlite
+[2026.10.28-21.14.08:009][  1]LogCesium: Loading tileset for asset ID 0
+[2026.10.28-21.14.08:010][  1]LogCesium: Loading tileset for asset ID 0 done
+[2026.10.28-21.14.08:011][  1]LogCesiumIonVrtak: Added Google Photorealistic 3D Tiles to VR-TAK's world.
+[2026.10.28-21.14.08:266][  1]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-21.14.08:266][  1]LogCesiumIonVrtak: Aligning with Game_GlobeReferenceActor_Ellipsoid_0. Globes: Game_GlobeReferenceActor_Ellipsoid_0(ellipsoid, scale 1.00, player at 39.9426, -75.1635, 350 m) Game_GlobeReferenceActor_ENU_0(ENU, scale 0.01, player at 15.3278, -125.1289, 634691020 m)
+[2026.10.28-21.14.08:268][  1]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 39.942600, -75.163500, 0.0 m; 100.1 units/m; yaw 165.2.
+[2026.10.28-21.14.08:335][  1]LogCesium: Loading tileset for asset ID 2275207
+[2026.10.28-21.14.08:335][  1]LogCesium: Loading tileset for asset ID 2275207 done
+[2026.10.28-21.14.08:429][  2]LogCesiumIonVrtak: Signed in as Jake.Steinerman.
+[2026.10.28-21.14.20:040][104]LogCesiumIonVrtak: Registered the Cesium ion ribbon button (Home > Application) with widget class WBP_RibbonButton_C.
+[2026.10.28-21.14.25:902][211]LogCesiumIonVrtak: Warning: VR-TAK's UI subsystem did not open the panel.
+[2026.10.28-21.14.25:965][211]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.28-21.14.25:966][211]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: yes.
+[2026.10.28-21.14.25:968][211]LogCesiumIonVrtak: Panel: in viewport 1, visible 1, tree 1, root Border, desired X=0.000 Y=0.000, size X=0.000 Y=0.000 at X=0.000 Y=0.000; viewport X=1920.000 Y=1080.000.
+[2026.10.28-21.14.31:358][251]LogCesiumIonVrtak: Moved the view to 39.95260, -75.16350, 0 m (as VR-TAK's Go To does).
+[2026.10.28-21.14.35:266][310]LogCesiumIonVrtak: Entering VR-TAK's world (ce GoToWorld).
+[2026.10.28-21.14.35:998][329]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 15.334658, -125.120653, 0.0 m; 100.0 units/m; yaw -144.9.
+[2026.10.28-21.14.45:241][952]LogCesiumIonVrtak: Diagnostics: camera at X=35565939468.567 Y=-50566475068.420 Z=16951531905.511; georeference at X=353953434.955 Y=-503239110.590 Z=167584022.539, scale X=1.000 Y=0.994 Z=1.000.
+[2026.10.28-21.14.45:242][952]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 801 components, hidden 0, content X=202856537.949 Y=-347365.414 Z=-321872398.737 (size X=1334642853.279 Y=1731654938.128 Z=2187009162.950), 64076917853 units from the camera.
+[2026.10.28-21.14.45:491][969]LogCesiumIonVrtak: Moved the view to 39.94260, -75.16350, 350 m (as VR-TAK's Go To does), bearing 0, pitch -35.
+[2026.10.28-21.14.46:273][986]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 39.942600, -75.163500, 0.0 m; 100.1 units/m; yaw 165.2.
+[2026.10.28-21.14.52:764][112]LogCesiumIonVrtak: Ribbon button clicked (VR: yes).
+[2026.10.28-21.14.52:779][112]LogCesiumIonVrtak: Warning: VR-TAK's UI subsystem did not open the panel.
+[2026.10.28-21.14.52:848][112]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.28-21.14.55:184][157]LogCesium: Error: [2026-10-28 17:14:55.185] [error] [TilesetContentManager.cpp:1163] An unexpected error occurred when loading tile: Connection failed.
+[2026.10.28-21.15.15:267][560]LogCesiumIonVrtak: Diagnostics: camera at X=-125395199.821 Y=-473380508.839 Z=407332598.160; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.28-21.15.15:267][560]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 2048 components, hidden 0, content X=14107531.686 Y=-11357876.309 Z=-220037417.380 (size X=1769779538.678 Y=1757232526.663 Z=1985805998.059), 791529571 units from the camera.
+[2026.10.28-21.15.27:778][809]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: yes.
+[2026.10.28-21.15.45:533][243]LogCesiumIonVrtak: Diagnostics: camera at X=-125395200.089 Y=-473380504.986 Z=407332610.581; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.28-21.15.45:534][243]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 2113 components, hidden 0, content X=14107531.686 Y=-11357876.309 Z=-220037417.380 (size X=1769779538.678 Y=1757232526.663 Z=1985805998.059), 791529578 units from the camera.
+[2026.10.28-21.16.15:752][975]LogCesiumIonVrtak: Diagnostics: camera at X=-125395180.698 Y=-473380506.216 Z=407332599.661; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.28-21.16.15:753][975]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 2078 components, hidden 0, content X=14107531.686 Y=-11357876.309 Z=-220037417.380 (size X=1769779538.678 Y=1757232526.663 Z=1985805998.059), 791529567 units from the camera.
+[2026.10.28-21.16.29:524][235]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: yes.
+[2026.10.28-21.16.36:213][360]LogCesium: Error: [2026-10-28 17:16:36.213] [error] [TilesetContentManager.cpp:1163] An unexpected error occurred when loading tile: Connection failed.
+[2026.10.28-21.17.31:504][605]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: yes.
+[2026.10.28-21.18.39:611][506]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: yes.
+[2026.10.28-21.19.39:632][106]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: yes.
+-- errors
+[2026.10.28-21.13.57:573][  0]LogClass: Error: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.28-21.13.57:574][  0]LogClass: Error: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.28-21.13.57:658][  0]LogAutomationTest: Error: UObject.Class AttemptToFindUninitializedScriptStructMembers will be marked as failing due to errors being logged
+[2026.10.28-21.13.57:659][  0]LogAutomationTest: Error: LogClass: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.28-21.13.57:660][  0]LogAutomationTest: Error: LogClass: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.28-21.14.55:135][157]LogHttp: Warning: 000006C4E8823700: request failed, libcurl error: 35 (SSL connect error)
+[2026.10.28-21.14.55:184][157]LogCesium: Error: [2026-10-28 17:14:55.185] [error] [TilesetContentManager.cpp:1163] An unexpected error occurred when loading tile: Connection failed.
+[2026.10.28-21.16.36:167][360]LogHttp: Warning: 000006C4E8822D00: request failed, libcurl error: 35 (SSL connect error)
+[2026.10.28-21.16.36:213][360]LogCesium: Error: [2026-10-28 17:16:36.213] [error] [TilesetContentManager.cpp:1163] An unexpected error occurred when loading tile: Connection failed.
+[2026.10.28-21.17.51:517][ 73]LogOutputDevice: Error: === Handled ensure: ===
+[2026.10.28-21.17.51:519][ 73]LogOutputDevice: Error:
+[2026.10.28-21.17.51:519][ 73]LogOutputDevice: Error: Ensure condition failed: ((Result) >= 0)  [File:C:\Program Files\Epic Games\VR-TAK\Engine\Plugins\Runtime\OpenXR\Source\OpenXRHMD\Private\OpenXRHMD.cpp] [Line: 670]
+[2026.10.28-21.17.51:520][ 73]LogOutputDevice: Error: OpenXR call failed with result XR_ERROR_TIME_INVALID
+[2026.10.28-21.17.51:520][ 73]LogOutputDevice: Error: Stack:
+[2026.10.28-21.17.51:521][ 73]LogOutputDevice: Error: [Callstack] 0x00007fff29efe484 UnrealEditor-OpenXRHMD.dll!FOpenXRHMD::GetPoseForTime() [C:\Program Files\Epic Games\VR-TAK\Engine\Plugins\Runtime\OpenXR\Source\OpenXRHMD\Private\OpenXRHMD.cpp:670]
+[2026.10.28-21.17.51:521][ 73]LogOutputDevice: Error: [Callstack] 0x000002b135a6eb1b UnrealEditor-OpenXRInput.dll!FOpenXRInputPlugin::FOpenXRInput::GetControllerOrientationAndPositionForTime() [C:\Program Files\Epic Games\VR-TAK\Engine\Plugins\Runtime\OpenXR\Source\OpenXRInput\Private\OpenXRInput.cpp:1239]
+[2026.10.28-21.17.51:522][ 73]LogOutputDevice: Error: [Callstack] 0x000002b135a6e9e9 UnrealEditor-OpenXRInput.dll!FOpenXRInputPlugin::FOpenXRInput::GetControllerOrientationAndPositionForTime() [C:\Program Files\Epic Games\VR-TAK\Engine\Plugins\Runtime\OpenXR\Source\OpenXRInput\Private\OpenXRInput.cpp:1244]
+[2026.10.28-21.17.51:522][ 73]LogOutputDevice: Error: [Callstack] 0x000002b135a6e332 UnrealEditor-OpenXRInput.dll!FOpenXRInputPlugin::FOpenXRInput::GetControllerOrientationAndPosition() [C:\Program Files\Epic Games\VR-TAK\Engine\Plugins\Runtime\OpenXR\Source\OpenXRInput\Private\OpenXRInput.cpp:1183]
+[2026.10.28-21.17.51:522][ 73]LogOutputDevice: Error: [Callstack] 0x00007fff94966ee8 UnrealEditor-HeadMountedDisplay.dll!UMotionControllerComponent::PollControllerState_GameThread() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\HeadMountedDisplay\Private\MotionControllerComponent.cpp:342]
+[2026.10.28-21.17.51:523][ 73]LogOutputDevice: Error: [Callstack] 0x00007fff94969dd9 UnrealEditor-HeadMountedDisplay.dll!UMotionControllerComponent::TickComponent() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\HeadMountedDisplay\Private\MotionControllerComponent.cpp:122]
+[2026.10.28-21.17.51:523][ 73]LogOutputDevice: Error: [Callstack] 0x00007ffef61808b0 UnrealEditor-VH_VR.dll!UnknownFunction []
+[2026.10.28-21.17.51:523][ 73]LogOutputDevice: Error: [Callstack] 0x00007ffef5bdfab4 UnrealEditor-Game.dll!UGame_MotionControllerComponent::TickComponent() [C:\Program Files\Epic Games\VR-TAK\Game\Source\Game\Components\Private\Game_MotionControllerComponent.cpp:88]
+[2026.10.28-21.17.51:524][ 73]LogOutputDevice: Error: [Callstack] 0x00007fff6b913178 UnrealEditor-Engine.dll!FActorComponentTickFunction::ExecuteTickHelper<`FActorComponentTickFunction::ExecuteTick'::`2'::<lambda_1> >() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Engine\Classes\GameFramework\Actor.h:4490]
+[2026.10.28-21.17.51:525][ 73]LogOutputDevice: Error: [Callstack] 0x00007fff6b920175 UnrealEditor-Engine.dll!FActorComponentTickFunction::ExecuteTick() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Engine\Private\Components\ActorComponent.cpp:1088]
+[2026.10.28-21.17.51:525][ 73]LogOutputDevice: Error: [Callstack] 0x00007fff6b1f6c0b UnrealEditor-Engine.dll!FTickFunctionTask::DoTask() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Engine\Private\TickTaskManager.cpp:278]
+-- shader compilation
+[2026.10.28-21.13.42:866][  0]LogShaderCompilers: Display: Compiling shader autogen file: ../../../Game/Intermediate/ShaderAutogen/PCD3D_SM5/AutogenShaderHeaders.ush
+[2026.10.28-21.13.42:866][  0]LogShaderCompilers: Display: Autogen file is unchanged, skipping write.
+[2026.10.28-21.14.04:087][  0]LogShaderCompilers: Warning: Failed to compile Material /CesiumForUnreal/Materials/M_CesiumBaseMaterial.M_CesiumBaseMaterial (MI:/CesiumForUnreal/Materials/Instances/MI_CesiumThreeOverlaysAndClippingAndWater.MI_CesiumThreeOverlaysAndClippingAndWater) for platform PCD3D_SM6, Default Material will be used in game.
+-- last log lines
+[2026.10.28-21.20.00:863][318]LogOnlineVoice: OSS: StartLocalProcessing(0) returned 0x00000000
+[2026.10.28-21.20.00:864][318]LogOnlineVoice: OSS: Starting networked voice for user: 0
+[2026.10.28-21.20.00:870][318]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2026.10.28-21.20.00:871][318]LogEngine: All Windows Closed
+[2026.10.28-21.20.00:875][319]LogWindows: FPlatformMisc::RequestExit(0, UGameEngine::Tick.ViewportClosed)
+[2026.10.28-21.20.00:879][319]LogWindows: FPlatformMisc::RequestExitWithStatus(0, 0, UGameEngine::Tick.ViewportClosed)
+[2026.10.28-21.20.00:880][319]LogCore: Engine exit requested (reason: Win RequestExit)
+[2026.10.28-21.20.00:880][319]LogCore: Engine exit requested (reason: EngineExit() was called; note: exit was already requested)
+[2026.10.28-21.20.00:882][319]LogStaticMesh: Abandoning remaining async distance field tasks for shutdown
+[2026.10.28-21.20.00:885][319]LogStaticMesh: Abandoning remaining async card representation tasks for shutdown
+[2026.10.28-21.20.00:886][319]LogInit: Display: PreExit Game.
+[2026.10.28-21.20.00:888][319]LogWorld: BeginTearingDown for /Game/VTAK/Maps/MainMap_P
+[2026.10.28-21.20.01:175][319]LogWebBrowser: Closing browser during destruction, this may cause a later crash.
+[2026.10.28-21.20.01:175][319]LogWebBrowser: Deleting browser for Url=https://virtualheroes.com/capabilities/#overview.
+[2026.10.28-21.20.01:178][319]LogWebBrowser: Closing browser during destruction, this may cause a later crash.
+[2026.10.28-21.20.01:185][319]LogWebBrowser: Deleting browser for Url=https://x.com/VirtualHeroes.
+[2026.10.28-21.20.01:186][319]LogWebBrowser: Closing browser during destruction, this may cause a later crash.
+[2026.10.28-21.20.01:190][319]LogWebBrowser: Deleting browser for Url=https://virtualheroes.com/cs-virtual-tactical-assault-kit/.
+[2026.10.28-21.20.01:191][319]LogWebBrowser: Closing browser during destruction, this may cause a later crash.
+[2026.10.28-21.20.01:191][319]LogWebBrowser: Deleting browser for Url=https://www.ara.com/.
+[2026.10.28-21.20.01:192][319]LogWebBrowser: Closing browser during destruction, this may cause a later crash.
+[2026.10.28-21.20.01:193][319]LogWebBrowser: Deleting browser for Url=https://x.com/ProductCtr.
+[2026.10.28-21.20.01:193][319]LogWebBrowser: Closing browser during destruction, this may cause a later crash.
+[2026.10.28-21.20.01:193][319]LogWebBrowser: Deleting browser for Url=https://tak.gov/.
+[2026.10.28-21.20.01:195][319]LogWorld: UWorld::CleanupWorld for MainMap_P, bSessionEnded=true, bCleanupResources=true
+[2026.10.28-21.20.01:195][319]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2026.10.28-21.20.01:195][319]LogWorld: UWorld::CleanupWorld for DynamicTerrainMap, bSessionEnded=true, bCleanupResources=true
+[2026.10.28-21.20.01:196][319]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2026.10.28-21.20.01:762][319]LogAudio: Display: Beginning Audio Device Manager Shutdown (Module: AudioMixerXAudio2)...
+[2026.10.28-21.20.01:762][319]LogAudio: Display: Destroying 1 Remaining Audio Device(s)...
+[2026.10.28-21.20.01:762][319]LogAudio: Display: Audio Device unregistered from world 'MainMap_P'.
+[2026.10.28-21.20.01:763][319]LogAudioMixer: Deinitializing Audio Bus Subsystem for audio device with ID 1
+[2026.10.28-21.20.01:789][319]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=1
+[2026.10.28-21.20.01:793][319]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=1
+[2026.10.28-21.20.01:809][319]LogAudio: Display: Audio Device Manager Shutdown
+[2026.10.28-21.20.01:822][319]LogExit: Preparing to exit.
+[2026.10.28-21.20.01:853][319]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2026.10.28-21.20.01:979][319]LogUObjectHash: Compacting FUObjectHashTables data took   6.17ms
+[2026.10.28-21.20.02:090][319]LogMoviePlayer: Shutting down movie player
+[2026.10.28-21.20.03:640][319]LogCore: Engine exit requested (reason: ConsoleCtrl RequestExit; note: exit was already requested)
+
+==== VR-TAK processes and windows ====  [17:30:33]
+   CrashReportClientEditor x1
+   ShaderCompileWorker x8
+   UnrealEditor x1
+   CrashReportClientEditor pid 22164: responding True, CPU 2 s, window ""
+   UnrealEditor pid 10752: responding True, CPU 33 s, window ""
+No screenshots yet.
+
+==== Regression checks ====  [17:30:34]
+PASS  LogCesiumIonVrtak: Found \d+ assets
+PASS  LogCesiumIonVrtak: Added .+ to VR-TAK's world
+PASS  LogCesiumIonVrtak: Georeference aligned
+PASS  LogCesiumIonVrtak: Cesium ion panel on screen
+FAIL  LogCesiumIonVrtak: Screenshot requested
+FAIL  LogCesiumIonVrtak: Quitting after the test run
+PASS  LogCesiumIonVrtak: XR system
+PASS  no fatal errors
+REGRESSION: FAIL (2)
