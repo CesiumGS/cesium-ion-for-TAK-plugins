@@ -1,0 +1,56 @@
+ATAK-CIV install 20261028-152905 on R5GL5381L9F SM-X730
+---- ATAK files in ~/Downloads ----
+aapt: /Users/jake.steinerman/Library/Android/sdk/build-tools/37.0.0/aapt
+Downloads readable: 101 entries
+ATAK-5.7.0.16-b9d3ede9-civ-release.apk: com.atakmap.app.civ 5.7.0.16 (b9d3ede9)
+    signed by: CN=Unknown, OU=Unknown, O=ATAK Development Group, L=Unknown, ST=Unknown, C=US
+Installing: ATAK-5.7.0.16-b9d3ede9-civ-release.apk
+ATAK already installed: 5.7.0.10 (e0d26f0e)
+
+Replacing the installed ATAK (another signer): Success
+Success
+Installed: 5.7.0.16 (b9d3ede9)
+---- first start ----
++5s tapping "I agree."
++10s tapping "OK"
++15s tapping "OK"
++20s tapping "OK"
++25s tapping "OK"
++30s tapping "OK"
++35s tapping "OK"
++40s tapping "OK"
++45s tapping "OK"
++50s tapping "OK"
++55s tapping "OK"
++60s tapping "OK"
++65s tapping "OK"
++70s tapping "OK"
++75s tapping "OK"
++80s tapping "OK"
++85s tapping "OK"
++90s tapping "OK"
++95s tapping "OK"
++100s tapping "OK"
++105s tapping "OK"
+---- on screen ----
+  67°
+  Sunset at 6:01 PM
+  Medford Township
+  Wed
+  Thu
+  Fri
+  Sat
+  68° 43°
+  70° 51°
+  73° 40°
+  61° 37°
+  Apple TV
+  Good day
+  Have a special day.
+  YouTube
+  Gallery
+  Claude
+  Gemini
+  Play Store
+  Health
+ATAK INSTALL: ATAK is not running
