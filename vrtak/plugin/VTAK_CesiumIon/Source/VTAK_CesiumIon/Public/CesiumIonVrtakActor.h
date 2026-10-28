@@ -11,6 +11,7 @@ class UCesiumIonRasterOverlay;
 class AVH_GlobeReferenceActor;
 class UCesiumIonServer;
 class UCesiumIonVrtakPanel;
+class UUserWidget;
 class UCesiumIonVrtakSession;
 struct FCesiumIonVrtakAsset;
 struct FCesium3DTilesetLoadFailureDetails;
@@ -152,6 +153,35 @@ private:
 	/** When the headset state is next written to the log (see Tick), and the last one written. */
 	double NextXrLogAt = 0.0;
 	FString LastXrState;
+
+	// --- Ribbon button and headset panel
+	// The panel opens from a "Cesium ion" button in VR-TAK's ribbon. On the desktop it is a screen
+	// widget; in VR it opens through VR-TAK's UI subsystem as a world-space panel (a screen widget
+	// is not drawn in a headset). VR-TAK's classes are reached by name (reflection), as for the
+	// teleport, so the plugin does not link VR-TAK's Game module.
+public:
+	/** Bound to the ribbon button's OnClicked: shows or hides the panel. */
+	UFUNCTION()
+	void HandleRibbonButtonClicked(UUserWidget* Button);
+
+private:
+	void RegisterRibbonButton();
+	bool OpenPanelInWorld();
+	void ClosePanelInWorld();
+	void MovePanelForView(bool bVr);
+	UObject* FindWorldSubsystem(const TCHAR* ClassPath) const;
+	UObject* FindGameInstanceSubsystem(const TCHAR* ClassPath) const;
+
+	UPROPERTY()
+	UUserWidget* RibbonButton = nullptr;
+	bool bRibbonButtonRegistered = false;
+	int32 RibbonTries = 0;
+	double NextRibbonTryAt = 5.0;
+	/** The panel is a world-space panel (VR) rather than a screen widget. */
+	bool bPanelInWorld = false;
+	/** False after the person closed the panel with the ribbon button: it is not reopened by itself. */
+	bool bPanelWanted = true;
+	bool bWasStereo = false;
 	double HideSettingsAt = -1.0;
 	bool bStartSignIn = false;
 	double EnteredWorldAt = -1.0;

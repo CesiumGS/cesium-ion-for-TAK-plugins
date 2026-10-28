@@ -18,6 +18,9 @@
 #include "Components/TextBlock.h"
 #include "UObject/UObjectIterator.h"
 #include "Engine/Engine.h"
+#include "Engine/GameInstance.h"
+#include "Subsystems/GameInstanceSubsystem.h"
+#include "Subsystems/WorldSubsystem.h"
 #include "Engine/GameViewportClient.h"
 #include "EngineUtils.h"
 #include "GameFramework/Pawn.h"
@@ -114,6 +117,59 @@ ACesiumIonVrtakActor::ACesiumIonVrtakActor()
 	PrimaryActorTick.TickInterval = 0.25f;
 }
 
+namespace
+{
+	/** Calls UFUNCTION FunctionName on Target with one object (or class) argument; returns its object result, if any. */
+	UObject* CallWithObject(UObject* Target, const TCHAR* FunctionName, UObject* Argument)
+	{
+		UFunction* Function = Target ? Target->FindFunction(FunctionName) : nullptr;
+		if (!Function)
+		{
+			return nullptr;
+		}
+		TArray<uint8> Params;
+		Params.SetNumZeroed(Function->ParmsSize);
+		for (TFieldIterator<FProperty> It(Function); It && It->HasAnyPropertyFlags(CPF_Parm); ++It)
+		{
+			It->InitializeValue_InContainer(Params.GetData());
+		}
+		FObjectPropertyBase* Return = nullptr;
+		bool bArgumentSet = false;
+		for (TFieldIterator<FProperty> It(Function); It && It->HasAnyPropertyFlags(CPF_Parm); ++It)
+		{
+			FObjectPropertyBase* Object = CastField<FObjectPropertyBase>(*It);
+			if (!Object)
+			{
+				continue;
+			}
+			if (It->HasAnyPropertyFlags(CPF_ReturnParm))
+			{
+				Return = Object;
+			}
+			else if (!bArgumentSet)
+			{
+				Object->SetObjectPropertyValue_InContainer(Params.GetData(), Argument);
+				bArgumentSet = true;
+			}
+		}
+		Target->ProcessEvent(Function, Params.GetData());
+		UObject* Result = Return ? Return->GetObjectPropertyValue_InContainer(Params.GetData()) : nullptr;
+		for (TFieldIterator<FProperty> It(Function); It && It->HasAnyPropertyFlags(CPF_Parm); ++It)
+		{
+			It->DestroyValue_InContainer(Params.GetData());
+		}
+		return Result;
+	}
+
+	void SetStringProperty(UObject* Object, const TCHAR* Name, const FString& Value)
+	{
+		if (FStrProperty* Property = FindFProperty<FStrProperty>(Object->GetClass(), Name))
+		{
+			Property->SetPropertyValue_InContainer(Object, Value);
+		}
+	}
+}
+
 void ACesiumIonVrtakActor::BeginPlay()
 {
 	Super::BeginPlay();
@@ -162,9 +218,18 @@ void ACesiumIonVrtakActor::EndPlay(const EEndPlayReason::Type Reason)
 	{
 		Georeference->Destroy();
 	}
+	if (bPanelInWorld)
+	{
+		ClosePanelInWorld();
+	}
 	if (Panel)
 	{
 		Panel->RemoveFromParent();
+	}
+	if (RibbonButton)
+	{
+		CallWithObject(FindWorldSubsystem(TEXT("/Script/Game.Game_Subsystem_Ribbon")), TEXT("UnregisterButton"), RibbonButton);
+		RibbonButton = nullptr;
 	}
 	Super::EndPlay(Reason);
 }
@@ -260,6 +325,10 @@ bool ACesiumIonVrtakActor::TeleportPlayer(double Latitude, double Longitude, dou
 
 void ACesiumIonVrtakActor::EnsurePanel()
 {
+	if (bPanelInWorld || !bPanelWanted)
+	{
+		return;
+	}
 	if (!Panel)
 	{
 		OpenPanel();
@@ -391,6 +460,13 @@ void ACesiumIonVrtakActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	ElapsedSeconds += DeltaSeconds;
+	if (!bRibbonButtonRegistered && RibbonTries < 12 && ElapsedSeconds >= NextRibbonTryAt)
+	{
+		// VR-TAK's ribbon is built after the world starts: try every 5 s, up to a minute.
+		++RibbonTries;
+		NextRibbonTryAt = ElapsedSeconds + 5.0;
+		RegisterRibbonButton();
+	}
 	if (ElapsedSeconds >= NextXrLogAt)
 	{
 		// Headset diagnostics: whether an XR system exists, whether the view is stereoscopic
@@ -404,6 +480,11 @@ void ACesiumIonVrtakActor::Tick(float DeltaSeconds)
 			bPanelOnScreen ? TEXT("yes") : TEXT("no"));
 		NextXrLogAt = ElapsedSeconds + 5.0;
 		static double LastWrittenAt = -100.0;
+		if (bStereo != bWasStereo)
+		{
+			bWasStereo = bStereo;
+			MovePanelForView(bStereo);
+		}
 		if (XrState != LastXrState || ElapsedSeconds - LastWrittenAt >= 60.0)
 		{
 			LastXrState = XrState;
@@ -530,12 +611,184 @@ void ACesiumIonVrtakActor::OpenPanel()
 		return;
 	}
 	Panel->SetOwnerActor(this);
-	// Desktop view: docked on the right. (In VR it opens through VR-TAK's UI
-	// subsystem as a world-space panel; see vrtak/docs/engineering-notes.md.)
+	bPanelInWorld = false;
+	// Desktop view: docked on the right. (In VR, OpenPanelInWorld uses VR-TAK's UI subsystem.)
 	Panel->AddToViewport(50);
 	PlacePanel();
 	Panel->Refresh();
 	UE_LOG(LogCesiumIonVrtak, Log, TEXT("Cesium ion panel on screen (top right, below the ribbon)."));
+}
+
+UObject* ACesiumIonVrtakActor::FindWorldSubsystem(const TCHAR* ClassPath) const
+{
+	UClass* Class = FindObject<UClass>(nullptr, ClassPath);
+	UWorld* World = GetWorld();
+	if (!Class || !World || !Class->IsChildOf(UWorldSubsystem::StaticClass()))
+	{
+		return nullptr;
+	}
+	return World->GetSubsystemBase(TSubclassOf<UWorldSubsystem>(Class));
+}
+
+UObject* ACesiumIonVrtakActor::FindGameInstanceSubsystem(const TCHAR* ClassPath) const
+{
+	UClass* Class = FindObject<UClass>(nullptr, ClassPath);
+	UGameInstance* Game = GetGameInstance();
+	if (!Class || !Game || !Class->IsChildOf(UGameInstanceSubsystem::StaticClass()))
+	{
+		return nullptr;
+	}
+	return Game->GetSubsystemBase(TSubclassOf<UGameInstanceSubsystem>(Class));
+}
+
+void ACesiumIonVrtakActor::RegisterRibbonButton()
+{
+	UClass* ButtonBase = FindObject<UClass>(nullptr, TEXT("/Script/Game.Game_UserWidget_RibbonButton"));
+	UObject* Ribbon = FindWorldSubsystem(TEXT("/Script/Game.Game_Subsystem_Ribbon"));
+	APlayerController* Player = GetWorld() ? GetWorld()->GetFirstPlayerController() : nullptr;
+	if (!ButtonBase || !Ribbon || !Player)
+	{
+		return; // not up yet: tried again
+	}
+	// VR-TAK's ribbon buttons are Blueprint widgets derived from the native button class (the
+	// native class draws nothing): use one that VR-TAK has loaded for its own buttons.
+	UClass* ButtonClass = nullptr;
+	for (TObjectIterator<UClass> It; It; ++It)
+	{
+		const FString Name = It->GetName();
+		if (*It != ButtonBase && It->IsChildOf(ButtonBase) && Name.EndsWith(TEXT("_C"))
+			&& !It->HasAnyClassFlags(CLASS_Abstract | CLASS_Deprecated | CLASS_NewerVersionExists)
+			&& !Name.StartsWith(TEXT("SKEL_")) && !Name.StartsWith(TEXT("REINST_")))
+		{
+			ButtonClass = *It;
+			if (Name.Contains(TEXT("Ribbon")) && !Name.Contains(TEXT("Tool")) && !Name.Contains(TEXT("Dropdown")))
+			{
+				break; // a plain ribbon button
+			}
+		}
+	}
+	if (!ButtonClass)
+	{
+		if (RibbonTries == 12)
+		{
+			UE_LOG(LogCesiumIonVrtak, Warning, TEXT("No ribbon button widget class is loaded in VR-TAK; no Cesium ion ribbon button."));
+		}
+		return;
+	}
+	UUserWidget* Button = CreateWidget<UUserWidget>(Player, ButtonClass);
+	if (!Button)
+	{
+		return;
+	}
+	SetStringProperty(Button, TEXT("ID"), TEXT("CesiumIon"));
+	SetStringProperty(Button, TEXT("Text"), TEXT("Cesium ion"));
+	SetStringProperty(Button, TEXT("RibbonToolTip"), TEXT("Add Cesium ion content: Google Photorealistic 3D Tiles, terrain, imagery and your own 3D Tiles"));
+	SetStringProperty(Button, TEXT("DefaultTab"), TEXT("Home"));
+	SetStringProperty(Button, TEXT("DefaultCategory"), TEXT("Application"));
+	if (FFloatProperty* Index = FindFProperty<FFloatProperty>(ButtonClass, TEXT("DefaultIndexInCategory")))
+	{
+		Index->SetPropertyValue_InContainer(Button, 100.0f);
+	}
+	if (FMulticastDelegateProperty* Clicked = FindFProperty<FMulticastDelegateProperty>(ButtonBase, TEXT("OnClicked")))
+	{
+		FScriptDelegate Handler;
+		Handler.BindUFunction(this, GET_FUNCTION_NAME_CHECKED(ACesiumIonVrtakActor, HandleRibbonButtonClicked));
+		Clicked->AddDelegate(Handler, Button);
+	}
+	CallWithObject(Ribbon, TEXT("RegisterButton"), Button);
+	RibbonButton = Button;
+	bRibbonButtonRegistered = true;
+	UE_LOG(LogCesiumIonVrtak, Log, TEXT("Registered the Cesium ion ribbon button (Home > Application) with widget class %s."), *ButtonClass->GetName());
+}
+
+void ACesiumIonVrtakActor::HandleRibbonButtonClicked(UUserWidget* Button)
+{
+	const bool bVr = GEngine && GEngine->IsStereoscopic3D();
+	UE_LOG(LogCesiumIonVrtak, Log, TEXT("Ribbon button clicked (VR: %s)."), bVr ? TEXT("yes") : TEXT("no"));
+	const bool bShown = Panel && (bPanelInWorld || Panel->IsInViewport());
+	if (bShown && !(bVr && !bPanelInWorld))
+	{
+		// Open: close it (and do not bring it back by itself).
+		if (bPanelInWorld)
+		{
+			ClosePanelInWorld();
+		}
+		else
+		{
+			Panel->RemoveFromParent();
+			Panel = nullptr;
+		}
+		bPanelWanted = false;
+		return;
+	}
+	if (bShown)
+	{
+		// A screen widget while in VR: open it in the world instead.
+		Panel->RemoveFromParent();
+		Panel = nullptr;
+	}
+	bPanelWanted = true;
+	if (!(bVr && OpenPanelInWorld()))
+	{
+		OpenPanel();
+	}
+}
+
+bool ACesiumIonVrtakActor::OpenPanelInWorld()
+{
+	UObject* Core = FindGameInstanceSubsystem(TEXT("/Script/VH_UI.UI_Subsystem_Core"));
+	if (!Core)
+	{
+		UE_LOG(LogCesiumIonVrtak, Warning, TEXT("VR-TAK's UI subsystem was not found; the panel stays a screen widget."));
+		return false;
+	}
+	// VR-TAK's defaults put the widget in front of the person in VR and where it belongs on
+	// the desktop; the panel is created by VR-TAK from its class, so it is given its owner here.
+	UCesiumIonVrtakPanel* Opened = Cast<UCesiumIonVrtakPanel>(
+		CallWithObject(Core, TEXT("OpenWithDefaultsByClass"), UCesiumIonVrtakPanel::StaticClass()));
+	if (!Opened)
+	{
+		UE_LOG(LogCesiumIonVrtak, Warning, TEXT("VR-TAK's UI subsystem did not open the panel."));
+		return false;
+	}
+	Opened->SetOwnerActor(this);
+	Opened->Refresh();
+	Panel = Opened;
+	bPanelInWorld = true;
+	UE_LOG(LogCesiumIonVrtak, Log, TEXT("Cesium ion panel opened through VR-TAK's UI subsystem (world-space in VR)."));
+	return true;
+}
+
+void ACesiumIonVrtakActor::ClosePanelInWorld()
+{
+	if (Panel)
+	{
+		CallWithObject(FindGameInstanceSubsystem(TEXT("/Script/VH_UI.UI_Subsystem_Core")), TEXT("CloseUserWidget"), Panel);
+	}
+	Panel = nullptr;
+	bPanelInWorld = false;
+}
+
+void ACesiumIonVrtakActor::MovePanelForView(bool bVr)
+{
+	if (!bPanelWanted || !Panel)
+	{
+		return;
+	}
+	if (bVr && !bPanelInWorld)
+	{
+		Panel->RemoveFromParent();
+		Panel = nullptr;
+		if (!OpenPanelInWorld())
+		{
+			OpenPanel();
+		}
+	}
+	else if (!bVr && bPanelInWorld)
+	{
+		ClosePanelInWorld();
+		OpenPanel();
+	}
 }
 
 void ACesiumIonVrtakActor::PlacePanel()
