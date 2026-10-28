@@ -1,0 +1,27 @@
+ATAK-CIV install 20261028-142100 on R5GL5381L9F SM-X730
+Developer ATAK from the SDK: /Users/jake.steinerman/Documents/TAK/ATAK-CIV-5.7.0.10-SDK/atak.apk
+Installing: atak.apk
+ATAK already installed: 5.7.0.16 (b9d3ede9)
+
+Replacing the installed ATAK (another signer): Success
+Success
+Installed: 5.7.0.10 (e0d26f0e)
+---- first start ----
++5s tapping "I agree."
+---- on screen ----
+  USB settings
+  USB controlled by
+  Connected device
+  This device
+  Use USB for
+  Transferring files
+  USB tethering
+  MIDI
+  Transferring images
+  Charging tablet only
+  File transfer options
+  Transcode exported video
+  Convert HEVC videos to AVC format so you can play them on your computer and other devices.
+  Power options
+  Charge connected device
+ATAK INSTALL: ATAK is not running
