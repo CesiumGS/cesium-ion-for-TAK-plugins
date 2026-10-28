@@ -7,7 +7,7 @@ Cesium ion Self-Hosted server.
 
 | | |
 |---|---|
-| **Status** | Version 1.0.1 released: signed by TAK.gov, loads in standard ATAK-CIV 5.7. A build for ATAK 5.6 (the Play Store's current version) is planned. |
+| **Status** | Version 1.0.2 released: signed by TAK.gov, loads in standard ATAK-CIV 5.7. A build for ATAK 5.6 (the Play Store's current version) is planned. |
 | **Download** | [Releases](../../../releases), files named `ATAK-Plugin-CesiumIon-…apk` (tags `atak-v…`) |
 | **Install** | [Step by step below](#install) |
 | **Build from source** | [For developers](#for-developers) |
@@ -50,12 +50,12 @@ Self-Hosted** server.
 ### What you need
 
 - An Android phone or tablet (Android 8 or later).
-- **ATAK-CIV 5.7**. v1.0.1 is built for ATAK 5.7 and ATAK only loads plugins
+- **ATAK-CIV 5.7**. v1.0.2 is built for ATAK 5.7 and ATAK only loads plugins
   built for its own version. The Play Store currently has ATAK-CIV 5.6; get
   5.7 from [tak.gov](https://tak.gov) (free account; Products › ATAK-CIV), the
   release APK, not the SDK. A build for ATAK 5.6 is planned.
 - The plugin from the [Releases](../../../releases) page:
-  `ATAK-Plugin-CesiumIon-1.0.1-5.7.0-civ-signed.apk` (signed by the TAK
+  `ATAK-Plugin-CesiumIon-1.0.2-5.7.0-civ-signed.apk` (signed by the TAK
   Product Center, so standard ATAK loads it).
 
 Test builds (`atak-v…-beta…`, prereleases) are signed with the SDK's
@@ -79,7 +79,7 @@ Open ATAK once and finish its first-start setup (callsign, permissions).
 Copy the plugin `.apk` to the device and open it the same way, or:
 
 ```bash
-adb install -r ATAK-Plugin-CesiumIon-1.0.1-5.7.0-civ-signed.apk
+adb install -r ATAK-Plugin-CesiumIon-1.0.2-5.7.0-civ-signed.apk
 ```
 
 ### 3. Load it in ATAK
