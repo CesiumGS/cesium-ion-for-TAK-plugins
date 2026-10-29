@@ -1,0 +1,131 @@
+
+==== Build the plugin (GameEditor, incremental) ====  [20:30:24]
+
+==== Install VTAK_CesiumIon ====  [20:30:24]
+   \VTAK_CesiumIon.uplugin  653 B
+   \Resources\cesium_ion_logo.png  20,275 B
+   Total execution time: 11.75 seconds
+Build exit code: 0
+
+==== Start VR-TAK (detached) ====  [20:30:36]
+C:\Program Files\Epic Games\VR-TAK\Engine\Binaries\Win64\UnrealEditor.exe "C:\Program Files\Epic Games\VR-TAK\Game\Game.uproject" -game -windowed -ResX=1920 -ResY=1080 -log -CesiumIonOrigin=39.9526,-75.1635,0 -CesiumIonEnterWorld=20 -CesiumIonScreenshots=840 -CesiumIonShowSettings=855 -CesiumIonQuitAfter=900 -CesiumIonLoad=2275207 -CesiumIonSignIn
+Started pid 17672 at 10/28/2026 20:30:36. Run this task again for progress and screenshots.
+
+==== VR-TAK run ====  [20:47:36]
+Log: C:\Program Files\Epic Games\VR-TAK\Game\Saved\Logs\Game.log (updated 10/28/2026 20:46:50)
+-- Cesium ion plugin
+[2026.10.29-00.31.44:414][469]LogCesium: Error: [2026-10-28 20:31:44.414] [error] [TilesetContentManager.cpp:1163] An unexpected error occurred when loading tile: Connection failed.
+[2026.10.29-00.31.45:044][484]LogCesiumIonVrtak: VR-TAK's default world UI actor class: BP_WorldUIActor_C.
+[2026.10.29-00.31.45:049][484]LogCesiumIonVrtak: VR-TAK's UI subsystem OpenInWorldByClass returned CesiumIonVrtakPanel.
+[2026.10.29-00.31.45:090][484]LogCesiumIonVrtak: Cesium ion panel opened through VR-TAK's UI subsystem (world-space in VR).
+[2026.10.29-00.31.45:090][484]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: yes.
+[2026.10.29-00.31.50:079][576]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: no.
+[2026.10.29-00.32.08:804][925]LogCesiumIonVrtak: Diagnostics: camera at X=-125411350.443 Y=-473377634.025 Z=407324674.691; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.29-00.32.08:805][925]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 98%, 2400 components, hidden 0, content X=14107531.686 Y=-11357876.309 Z=-220037417.380 (size X=1769779538.678 Y=1757232526.663 Z=1985805998.059), 791524459 units from the camera.
+[2026.10.29-00.32.26:942][307]LogCesium: Loading tileset for asset ID 0
+[2026.10.29-00.32.26:942][307]LogCesium: Loading tileset for asset ID 0 done
+[2026.10.29-00.32.26:943][307]LogCesiumIonVrtak: Added Adelaide to VR-TAK's world.
+[2026.10.29-00.32.27:051][307]LogCesium: Loading tileset for asset ID 5003809
+[2026.10.29-00.32.27:052][307]LogCesium: Loading tileset for asset ID 5003809 done
+[2026.10.29-00.32.34:975][482]LogCesiumIonVrtak: Removed Adelaide.
+[2026.10.29-00.32.38:825][567]LogCesiumIonVrtak: Diagnostics: camera at X=-125411350.214 Y=-473377635.365 Z=407324674.758; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.29-00.32.38:826][567]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 2372 components, hidden 0, content X=14107531.686 Y=-11357876.309 Z=-220037417.380 (size X=1769779538.678 Y=1757232526.663 Z=1985805998.059), 791524460 units from the camera.
+[2026.10.29-00.32.52:087][817]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: no.
+[2026.10.29-00.33.09:078][150]LogCesiumIonVrtak: Diagnostics: camera at X=-125471774.948 Y=-473366892.220 Z=407353221.052; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.29-00.33.09:078][150]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 80%, 1337 components, hidden 0, content X=14107531.686 Y=-11357876.309 Z=-220037417.380 (size X=1769779538.678 Y=1757232526.663 Z=1985805998.059), 791551468 units from the camera.
+[2026.10.29-00.33.35:646][723]LogCesium: Error: [2026-10-28 20:33:35.646] [error] [TilesetContentManager.cpp:1163] An unexpected error occurred when loading tile: Connection failed.
+[2026.10.29-00.34.02:364][957]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: no.
+[2026.10.29-00.35.19:101][894]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: no.
+[2026.10.29-00.36.23:623][985]LogCesium: Error: [2026-10-28 20:36:23.623] [error] [TilesetContentManager.cpp:1163] An unexpected error occurred when loading tile: Connection failed.
+[2026.10.29-00.36.26:704][995]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: no.
+[2026.10.29-00.37.30:763][803]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: no.
+[2026.10.29-00.37.47:050][ 39]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.29-00.37.47:051][ 39]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: no.
+[2026.10.29-00.37.52:024][124]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.29-00.38.53:502][249]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.29-00.39.56:009][701]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.29-00.40.58:006][153]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.29-00.42.03:552][572]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.29-00.43.04:773][  1]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.29-00.44.06:766][450]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.29-00.45.08:049][885]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.29-00.45.45:769][769]LogCesiumIonVrtak: Screenshot requested: ../../../Game/Saved/Screenshots/WindowsEditor/CesiumIon-1.png
+[2026.10.29-00.46.10:033][332]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.29-00.46.15:779][467]LogCesiumIonVrtak: Screenshot requested: ../../../Game/Saved/Screenshots/WindowsEditor/CesiumIon-2.png
+[2026.10.29-00.46.45:794][165]LogCesiumIonVrtak: Screenshot requested: ../../../Game/Saved/Screenshots/WindowsEditor/CesiumIon-3.png
+[2026.10.29-00.46.45:794][165]LogCesiumIonVrtak: Quitting after the test run.
+-- errors
+[2026.10.29-00.30.58:870][  0]LogClass: Error: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-00.30.58:871][  0]LogClass: Error: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-00.30.58:946][  0]LogAutomationTest: Error: UObject.Class AttemptToFindUninitializedScriptStructMembers will be marked as failing due to errors being logged
+[2026.10.29-00.30.58:947][  0]LogAutomationTest: Error: LogClass: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-00.30.58:948][  0]LogAutomationTest: Error: LogClass: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-00.31.44:374][469]LogHttp: Warning: 000006B30C820F00: request failed, libcurl error: 35 (SSL connect error)
+[2026.10.29-00.31.44:414][469]LogCesium: Error: [2026-10-28 20:31:44.414] [error] [TilesetContentManager.cpp:1163] An unexpected error occurred when loading tile: Connection failed.
+[2026.10.29-00.33.35:583][723]LogHttp: Warning: 000006B30C823C00: request failed, libcurl error: 35 (SSL connect error)
+[2026.10.29-00.33.35:646][723]LogCesium: Error: [2026-10-28 20:33:35.646] [error] [TilesetContentManager.cpp:1163] An unexpected error occurred when loading tile: Connection failed.
+[2026.10.29-00.36.23:560][985]LogHttp: Warning: 000006B30C820000: request failed, libcurl error: 35 (SSL connect error)
+[2026.10.29-00.36.23:623][985]LogCesium: Error: [2026-10-28 20:36:23.623] [error] [TilesetContentManager.cpp:1163] An unexpected error occurred when loading tile: Connection failed.
+[2026.10.29-00.46.50:527][166]LogUObjectBase: Error: Class pointer is invalid or CDO is invalid.
+[2026.10.29-00.46.50:527][166]LogUObjectBase: Error: Class pointer is invalid or CDO is invalid.
+-- shader compilation
+[2026.10.29-00.46.49:984][166]LogShaderCompilers: Display:                TBasePassPSFCachedPointIndirectLightingPolicy - 6.50% of total time (compiled    3 times, average 7.09 sec, max 9.47 sec, min 5.02 sec)
+[2026.10.29-00.46.49:985][166]LogShaderCompilers: Display: ================================================
+[2026.10.29-00.46.50:035][166]LogShaderCompilers: Display: Shaders left to compile 0
+-- last log lines
+[2026.10.29-00.46.50:573][166]RenderDocPlugin: plugin has been unloaded.
+[2026.10.29-00.46.50:573][166]LogModuleManager: Shutting down and abandoning module Water (68)
+[2026.10.29-00.46.50:573][166]LogModuleManager: Shutting down and abandoning module ChaosCloth (66)
+[2026.10.29-00.46.50:573][166]LogModuleManager: Shutting down and abandoning module DesktopPlatform (64)
+[2026.10.29-00.46.50:574][166]LogModuleManager: Shutting down and abandoning module PerforceSourceControl (62)
+[2026.10.29-00.46.50:574][166]LogModuleManager: Shutting down and abandoning module PlasticSourceControl (60)
+[2026.10.29-00.46.50:574][166]LogModuleManager: Shutting down and abandoning module SourceControl (59)
+[2026.10.29-00.46.50:574][166]LogModuleManager: Shutting down and abandoning module PythonScriptPluginPreload (56)
+[2026.10.29-00.46.50:575][166]LogModuleManager: Shutting down and abandoning module PlatformCryptoOpenSSL (54)
+[2026.10.29-00.46.50:575][166]LogModuleManager: Shutting down and abandoning module PlatformCryptoTypes (52)
+[2026.10.29-00.46.50:575][166]LogModuleManager: Shutting down and abandoning module PlatformCrypto (50)
+[2026.10.29-00.46.50:575][166]LogModuleManager: Shutting down and abandoning module XGEController (48)
+[2026.10.29-00.46.50:576][166]LogXGEController: Cleaning working directory: C:/Users/Cesium/AppData/Local/Temp/UnrealXGEWorkingDir/
+[2026.10.29-00.46.50:576][166]LogModuleManager: Shutting down and abandoning module FastBuildController (46)
+[2026.10.29-00.46.50:576][166]LogModuleManager: Shutting down and abandoning module IoStoreOnDemand (44)
+[2026.10.29-00.46.50:577][166]LogModuleManager: Shutting down and abandoning module AnimationModifiers (42)
+[2026.10.29-00.46.50:577][166]LogModuleManager: Shutting down and abandoning module AudioEditor (40)
+[2026.10.29-00.46.50:577][166]LogModuleManager: Shutting down and abandoning module PropertyEditor (39)
+[2026.10.29-00.46.50:577][166]LogModuleManager: Shutting down and abandoning module Virtualization (36)
+[2026.10.29-00.46.50:577][166]LogModuleManager: Shutting down and abandoning module MessageLog (35)
+[2026.10.29-00.46.50:577][166]LogModuleManager: Shutting down and abandoning module TextureCompressor (32)
+[2026.10.29-00.46.50:578][166]LogModuleManager: Shutting down and abandoning module OpenColorIOWrapper (31)
+[2026.10.29-00.46.50:578][166]LogModuleManager: Shutting down and abandoning module RenderCore (28)
+[2026.10.29-00.46.50:578][166]LogModuleManager: Shutting down and abandoning module Landscape (26)
+[2026.10.29-00.46.50:579][166]LogModuleManager: Shutting down and abandoning module SlateRHIRenderer (24)
+[2026.10.29-00.46.50:579][166]LogModuleManager: Shutting down and abandoning module AnimGraphRuntime (22)
+[2026.10.29-00.46.50:579][166]LogModuleManager: Shutting down and abandoning module Renderer (20)
+[2026.10.29-00.46.50:579][166]LogModuleManager: Shutting down and abandoning module Engine (18)
+[2026.10.29-00.46.50:580][166]LogModuleManager: Shutting down and abandoning module CoreUObject (16)
+[2026.10.29-00.46.50:580][166]LogModuleManager: Shutting down and abandoning module SandboxFile (14)
+[2026.10.29-00.46.50:581][166]LogModuleManager: Shutting down and abandoning module PakFile (12)
+[2026.10.29-00.46.50:583][166]LogPakFile: Destroying PakPlatformFile
+[2026.10.29-00.46.50:584][166]LogModuleManager: Shutting down and abandoning module RSA (11)
+[2026.10.29-00.46.50:584][166]LogModuleManager: Shutting down and abandoning module NetworkFile (8)
+[2026.10.29-00.46.50:584][166]LogModuleManager: Shutting down and abandoning module StreamingFile (6)
+[2026.10.29-00.46.50:584][166]LogModuleManager: Shutting down and abandoning module CookOnTheFly (4)
+[2026.10.29-00.46.50:585][166]LogModuleManager: Shutting down and abandoning module StorageServerClient (2)
+[2026.10.29-00.46.50:715][166]LogD3D12RHI: ~FD3D12DynamicRHI
+[2026.10.29-00.46.50:778][166]LogExit: Exiting.
+[2026.10.29-00.46.50:802][166]Log file closed, 10/28/26 20:46:50
+
+==== VR-TAK processes and windows ====  [20:47:37]
+Screenshot: vrtak-CesiumIon-1.png (171 KB, 10/28/2026 20:45:45)
+Screenshot: vrtak-CesiumIon-2.png (162 KB, 10/28/2026 20:46:15)
+Screenshot: vrtak-CesiumIon-3.png (171 KB, 10/28/2026 20:46:45)
+
+==== Regression checks ====  [20:47:37]
+PASS  LogCesiumIonVrtak: Found \d+ assets
+PASS  LogCesiumIonVrtak: Added .+ to VR-TAK's world
+PASS  LogCesiumIonVrtak: Georeference aligned
+PASS  LogCesiumIonVrtak: Cesium ion panel on screen
+PASS  LogCesiumIonVrtak: Screenshot requested
+PASS  LogCesiumIonVrtak: Quitting after the test run
+PASS  LogCesiumIonVrtak: XR system
+PASS  no fatal errors
+REGRESSION: PASS
