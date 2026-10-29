@@ -83,7 +83,8 @@ jobs:
           # Native git writes progress to stderr; judge it by exit codes.
           $ErrorActionPreference = 'Continue'
           function Invoke-Git { git @args; if ($LASTEXITCODE -ne 0) { throw "git $($args -join ' ') failed ($LASTEXITCODE)" } }
-          $files = @(Get-ChildItem vrtak\reports -File -ErrorAction SilentlyContinue)
+          # Text only: VR-TAK pictures (Distribution Statement F) stay on this PC.
+          $files = @(Get-ChildItem vrtak\reports -File -Filter *.txt -ErrorAction SilentlyContinue)
           if ($files.Count -eq 0) { 'No report.'; exit 0 }
           $task = if ($env:TASK) { $env:TASK } else { 'unknown' }
           $sha7 = $env:GITHUB_SHA.Substring(0, 7)
