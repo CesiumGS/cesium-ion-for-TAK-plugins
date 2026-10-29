@@ -1,0 +1,36 @@
+
+==== Build the plugin (GameEditor, incremental) ====  [21:42:35]
+
+==== Install VTAK_CesiumIon ====  [21:42:36]
+   \VTAK_CesiumIon.uplugin  653 B
+   \Resources\cesium_ion_logo.png  20,275 B
+   [2/9] Compile [x64] CesiumIonVrtakActor.gen.cpp
+   [4/9] Compile [x64] CesiumIonVrtakPanel.cpp
+   C:\Program Files\Epic Games\VR-TAK\Game\Plugins\VTAK_CesiumIon\Source\VTAK_CesiumIon\Private\CesiumIonVrtakPanel.cpp(670): error C2248: 'ACesiumIonVrtakActor::GoToAsset': cannot access private member declared in class 'ACesiumIonVrtakActor'
+   C:\Program Files\Epic Games\VR-TAK\Game\Plugins\VTAK_CesiumIon\Source\VTAK_CesiumIon\Public\CesiumIonVrtakActor.h(106): note: see declaration of 'ACesiumIonVrtakActor::GoToAsset'
+   C:\Program Files\Epic Games\VR-TAK\Game\Plugins\VTAK_CesiumIon\Source\VTAK_CesiumIon\Public\CesiumIonVrtakActor.h(50): note: see declaration of 'ACesiumIonVrtakActor'
+   [5/9] Compile [x64] CesiumIonVrtakPanel.gen.cpp
+   [6/9] Compile [x64] CesiumIonVrtakActor.cpp
+   Total execution time: 97.23 seconds
+Build exit code: 6
+-- build errors:
+   Running UnrealBuildTool: dotnet "..\..\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.dll" GameEditor Win64 Development -Project="C:\Program Files\Epic Games\VR-TAK\Game\Game.uproject" -WaitMutex -NoHotReload -CompilerVersion=14.36.32532 -CompilerArguments=/wd4756
+   Running Internal UnrealHeaderTool "C:\Program Files\Epic Games\VR-TAK\Game\Game.uproject" "C:\Program Files\Epic Games\VR-TAK\Game\Intermediate\Build\Win64\GameEditor\Development\GameEditor.uhtmanifest" -WarningsAsErrors
+   C:\Program Files\Epic Games\VR-TAK\Game\Plugins\VTAK_CesiumIon\Source\VTAK_CesiumIon\Private\CesiumIonVrtakPanel.cpp(670): error C2248: 'ACesiumIonVrtakActor::GoToAsset': cannot access private member declared in class 'ACesiumIonVrtakActor'
+-- end of the build log:
+   Using Visual Studio 2022 14.36.32548 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.36.32532) and Windows 10.0.26100.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+   Determining max actions to execute in parallel (8 physical cores, 16 logical cores)
+   Executing up to 8 processes, one per physical core
+   ------ Building 9 action(s) started ------
+   [1/9] Compile [x64] VTAK_CesiumIon.init.gen.cpp
+   [2/9] Compile [x64] CesiumIonVrtakActor.gen.cpp
+   [3/9] Compile [x64] VTAK_CesiumIon.cpp
+   [4/9] Compile [x64] CesiumIonVrtakPanel.cpp
+   C:\Program Files\Epic Games\VR-TAK\Game\Plugins\VTAK_CesiumIon\Source\VTAK_CesiumIon\Private\CesiumIonVrtakPanel.cpp(670): error C2248: 'ACesiumIonVrtakActor::GoToAsset': cannot access private member declared in class 'ACesiumIonVrtakActor'
+   C:\Program Files\Epic Games\VR-TAK\Game\Plugins\VTAK_CesiumIon\Source\VTAK_CesiumIon\Public\CesiumIonVrtakActor.h(106): note: see declaration of 'ACesiumIonVrtakActor::GoToAsset'
+   C:\Program Files\Epic Games\VR-TAK\Game\Plugins\VTAK_CesiumIon\Source\VTAK_CesiumIon\Public\CesiumIonVrtakActor.h(50): note: see declaration of 'ACesiumIonVrtakActor'
+   [5/9] Compile [x64] CesiumIonVrtakPanel.gen.cpp
+   [6/9] Compile [x64] CesiumIonVrtakActor.cpp
+   Total time in Parallel executor: 75.86 seconds
+   Total execution time: 97.23 seconds
+The plugin did not build; VR-TAK not started.
