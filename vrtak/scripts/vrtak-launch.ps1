@@ -12,9 +12,9 @@ a first call starts VR-TAK; later calls report progress, and once the
 screenshots exist they are added to this task's report.
 State: %USERPROFILE%\cesium-vrtak\vrtak-launch.*
 
-VR-TAK is marked Distribution Statement F (USSOCOM). The owner approved this
-private repository for VR-TAK material and the screenshots for the status
-page (20 October); copies also stay on the PC (%USERPROFILE%\cesium-vrtak\screens).
+VR-TAK is marked Distribution Statement F (USSOCOM). The owner approved keeping
+VR-TAK material in the public repository (29 October); CI publishes text logs only, and
+screenshots stay on the PC (%USERPROFILE%\cesium-vrtak\screens).
 #>
 param(
     [string]$VrTak = 'C:\Program Files\Epic Games\VR-TAK',

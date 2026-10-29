@@ -13,8 +13,8 @@ or a Cesium ion Self-Hosted server. Content sits in place on VR-TAK's globe.
 | **Install** | [Step by step below](#install) |
 | **Build from source** | [For developers](#for-developers) |
 
-> VR-TAK is marked Distribution Statement F. Screenshots of VR-TAK in this
-> folder are shared with the owner's approval.
+> VR-TAK is marked Distribution Statement F. The owner has approved keeping this
+> folder in the public repository for now; CI publishes only text logs for VR-TAK runs.
 
 ## Features
 

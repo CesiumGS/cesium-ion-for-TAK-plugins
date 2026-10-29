@@ -14,7 +14,9 @@ Plugin guides: `atak/README.md`, `vrtak/README.md`; plan: `docs/architecture-and
 - Never commit `local.properties`, keystores, ATAK/VR-TAK SDK files, the R8 mapping
   file, raw logcat or Android bug reports. Reports are redacted.
 - Releases ship only our plugin APK; never redistribute ATAK.
-- VR-TAK material is Distribution Statement F: keep it in this private repo.
+- VR-TAK material is Distribution Statement F (USSOCOM). The owner decided on 29 October to keep
+  `vrtak/` in this public repository for now. VR-TAK runs publish a text log only (no pictures);
+  never add VR-TAK screenshots or VR-TAK binaries/SDK files to this repo or to `device-reports`.
 - No empty commits to re-run CI; never skip or disable tests.
 - Don't break core function: sign-in (Cloud, team, Self-Hosted), asset list, adding
   3D Tiles, imagery and terrain.
