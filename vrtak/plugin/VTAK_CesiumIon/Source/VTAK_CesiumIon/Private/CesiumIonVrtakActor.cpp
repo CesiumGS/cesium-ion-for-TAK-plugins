@@ -1465,7 +1465,8 @@ void ACesiumIonVrtakActor::GoToAsset(int64 AssetId)
 				Cesium3DTilesSelection::getOrientedBoundingBoxFromBoundingVolume(Root->getBoundingVolume());
 			const glm::dvec3 Center = Box.getCenter();
 			const glm::dmat3& Axes = Box.getHalfAxes();
-			Where = Georeference->TransformEarthCenteredEarthFixedPositionToLongitudeLatitudeHeight(FVector(Center.x, Center.y, Center.z));
+			Where = Georeference->TransformUnrealPositionToLongitudeLatitudeHeight(
+				Georeference->TransformEarthCenteredEarthFixedPositionToUnreal(FVector(Center.x, Center.y, Center.z)));
 			RadiusMetres = glm::length(Axes[0] + Axes[1] + Axes[2]);
 			bHaveBounds = RadiusMetres > 0.0 && FMath::IsFinite(Where.X) && FMath::IsFinite(Where.Y);
 		}
