@@ -102,8 +102,6 @@ private:
 	 * (called by reflection), which in the TOC moves VR-TAK's area of operations and
 	 * in the world places the player. Optionally turns the view (bearing, pitch).
 	 */
-	/** Moves the view to look at a loaded 3D Tiles asset from outside it. */
-	void GoToAsset(int64 AssetId);
 	bool TeleportPlayer(double Latitude, double Longitude, double Height, double Bearing, double Pitch, bool bTurn);
 	/** Keeps the panel on screen (VR-TAK may clear viewport widgets while it starts). */
 	void EnsurePanel();
@@ -165,6 +163,8 @@ public:
 	/** The panel is the plugin's own floating panel (VR). */
 	bool IsPanelFloating() const { return PanelHolder != nullptr; }
 	bool IsFollowingPanel() const { return bFollowPanel; }
+	/** Moves the view to look at a loaded 3D Tiles asset from outside it. */
+	void GoToAsset(int64 AssetId);
 	/** Takes the panel off the screen (or out of the world); the ribbon button brings it back. */
 	void HidePanel();
 	/** Puts the floating panel 120 cm from the camera, YawDegrees to the side of where it looks. */
