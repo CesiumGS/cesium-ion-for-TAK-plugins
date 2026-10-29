@@ -170,7 +170,11 @@ public:
 	/** Puts the floating panel 120 cm from the camera, YawDegrees to the side of where it looks. */
 	void DockPanel(double YawDegrees);
 	void ToggleFollowPanel();
+	/** Resizes the floating panel by Factor, within half to two and a half times its opening size. */
 	void ScalePanel(float Factor);
+	/** Starts carrying the floating panel with the controller pointing at it (or with the head if none is found). */
+	void StartGrab();
+	void EndGrab();
 	/** Bound to the ribbon button's OnClicked: shows or hides the panel. */
 	UFUNCTION()
 	void HandleRibbonButtonClicked(UUserWidget* Button);
@@ -201,7 +205,12 @@ private:
 	bool bWasStereo = false;
 	bool bFollowPanel = false;
 	double PanelYawOffset = 0.0;
-	float PanelScale = 0.1f;
+	/** The holder's scale when the panel opened (what the resize steps are measured against). */
+	double PanelBaseScale = 1.0;
+	TWeakObjectPtr<class UWidgetInteractionComponent> GrabPointer;
+	FTransform GrabOffset;
+	double GrabStartedAt = 0.0;
+	bool bGrabbingWithHead = false;
 	double HideSettingsAt = -1.0;
 	bool bStartSignIn = false;
 	double EnteredWorldAt = -1.0;

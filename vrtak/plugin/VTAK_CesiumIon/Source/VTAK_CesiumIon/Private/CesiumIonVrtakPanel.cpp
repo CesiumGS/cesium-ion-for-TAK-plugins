@@ -447,10 +447,6 @@ void UCesiumIonVrtakPanel::Refresh()
 	{
 		PlacementRow->SetVisibility(OwnerActor->IsPanelFloating() ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
 	}
-	if (FollowLabel)
-	{
-		FollowLabel->SetText(FText::FromString(OwnerActor->IsFollowingPanel() ? TEXT("Follow: on") : TEXT("Follow: off")));
-	}
 }
 
 UWidget* UCesiumIonVrtakPanel::BuildAssetControls()
@@ -502,18 +498,16 @@ UWidget* UCesiumIonVrtakPanel::BuildPlacement()
 	{
 		PlacementRow->AddChildToHorizontalBox(Button)->SetPadding(FMargin(0.f, 0.f, bLast ? 0.f : 6.f, 0.f));
 	};
-	UButton* Left = MakeButton(TEXT("Left"), Card, Text);
-	Left->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleDockLeft);
-	Add(Left, false);
-	UButton* Front = MakeButton(TEXT("Front"), Card, Text);
-	Front->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleDockFront);
-	Add(Front, false);
-	UButton* Right = MakeButton(TEXT("Right"), Card, Text);
-	Right->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleDockRight);
-	Add(Right, false);
-	UButton* Follow = MakeButton(TEXT("Follow: off"), Card, Text, &FollowLabel);
-	Follow->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleFollow);
-	Add(Follow, false);
+	// Hold the trigger on the grip and move the controller to carry the panel; let go to leave it there.
+	UButton* Grip = MakeButton(TEXT("Hold to grab and move"), Blue, Ground);
+	Grip->OnPressed.AddDynamic(this, &UCesiumIonVrtakPanel::HandleGrabPressed);
+	Grip->OnReleased.AddDynamic(this, &UCesiumIonVrtakPanel::HandleGrabReleased);
+	UHorizontalBoxSlot* GripSlot = PlacementRow->AddChildToHorizontalBox(Grip);
+	GripSlot->SetSize(FSlateChildSize(ESlateSizeRule::Fill));
+	GripSlot->SetPadding(FMargin(0.f, 0.f, 6.f, 0.f));
+	UButton* Recenter = MakeButton(TEXT("Bring to me"), Card, Text);
+	Recenter->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleRecenter);
+	Add(Recenter, false);
 	UButton* Smaller = MakeButton(TEXT("-"), Card, Text);
 	Smaller->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleSmaller);
 	Add(Smaller, false);
@@ -648,20 +642,11 @@ void UCesiumIonVrtakPanel::HandleNextPage()
 	RebuildAssetList();
 }
 
-void UCesiumIonVrtakPanel::HandleDockLeft() { if (OwnerActor.IsValid()) { OwnerActor->DockPanel(-40.0); } }
-void UCesiumIonVrtakPanel::HandleDockFront() { if (OwnerActor.IsValid()) { OwnerActor->DockPanel(0.0); } }
-void UCesiumIonVrtakPanel::HandleDockRight() { if (OwnerActor.IsValid()) { OwnerActor->DockPanel(40.0); } }
+void UCesiumIonVrtakPanel::HandleGrabPressed() { if (OwnerActor.IsValid()) { OwnerActor->StartGrab(); } }
+void UCesiumIonVrtakPanel::HandleGrabReleased() { if (OwnerActor.IsValid()) { OwnerActor->EndGrab(); } }
+void UCesiumIonVrtakPanel::HandleRecenter() { if (OwnerActor.IsValid()) { OwnerActor->DockPanel(0.0); } }
 void UCesiumIonVrtakPanel::HandleSmaller() { if (OwnerActor.IsValid()) { OwnerActor->ScalePanel(0.85f); } }
 void UCesiumIonVrtakPanel::HandleBigger() { if (OwnerActor.IsValid()) { OwnerActor->ScalePanel(1.18f); } }
-
-void UCesiumIonVrtakPanel::HandleFollow()
-{
-	if (OwnerActor.IsValid())
-	{
-		OwnerActor->ToggleFollowPanel();
-		FollowLabel->SetText(FText::FromString(OwnerActor->IsFollowingPanel() ? TEXT("Follow: on") : TEXT("Follow: off")));
-	}
-}
 
 void UCesiumIonVrtakPanel::GoToAsset(int64 AssetId)
 {

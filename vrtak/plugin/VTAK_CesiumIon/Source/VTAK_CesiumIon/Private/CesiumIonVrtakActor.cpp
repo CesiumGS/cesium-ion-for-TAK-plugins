@@ -19,6 +19,7 @@
 #include "UObject/UObjectIterator.h"
 #include "Engine/Engine.h"
 #include "Components/WidgetComponent.h"
+#include "Components/WidgetInteractionComponent.h"
 #include "Engine/GameInstance.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "Subsystems/WorldSubsystem.h"
@@ -31,6 +32,11 @@
 #include "Misc/Parse.h"
 #include "Misc/Paths.h"
 #include "UnrealClient.h"
+THIRD_PARTY_INCLUDES_START
+#include <Cesium3DTilesSelection/BoundingVolume.h>
+#include <Cesium3DTilesSelection/Tile.h>
+#include <Cesium3DTilesSelection/Tileset.h>
+THIRD_PARTY_INCLUDES_END
 #include "VH_GeodeticCoord.h"
 #include "VH_GlobeReferenceActor.h"
 #include "VH_GlobeReferenceActor_ENU.h"
@@ -557,6 +563,23 @@ void ACesiumIonVrtakActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	ElapsedSeconds += DeltaSeconds;
+	if (GrabPointer.IsValid() && PanelHolder && GetWorld())
+	{
+		APlayerController* Player = GetWorld()->GetFirstPlayerController();
+		APlayerCameraManager* Camera = Player ? Player->PlayerCameraManager : nullptr;
+		if (Camera && ElapsedSeconds - GrabStartedAt < 120.0)
+		{
+			const FVector Location = (GrabOffset * GrabPointer->GetComponentTransform()).GetLocation();
+			FRotator Facing = (Location - Camera->GetCameraLocation()).Rotation();
+			Facing.Pitch = 0.0;
+			Facing.Roll = 0.0;
+			PanelHolder->SetActorLocationAndRotation(Location, Facing);
+		}
+		else
+		{
+			EndGrab();
+		}
+	}
 	if (bFollowPanel && PanelHolder && GetWorld())
 	{
 		// Glide after the view (a few cm behind the head's turns) instead of being nailed to it.
@@ -876,8 +899,8 @@ bool ACesiumIonVrtakActor::OpenPanelInWorld()
 	// The actor VR-TAK put the panel on (for docking and resizing); it stays VR-TAK's to destroy.
 	PanelHolder = Cast<AActor>(CallWithObject(Core, TEXT("GetUserWidgetWorldUIActor"), Opened));
 	bOwnPanelHolder = false;
-	PanelScale = 0.1f;
 	PanelYawOffset = 0.0;
+	PanelBaseScale = PanelHolder ? PanelHolder->GetActorScale3D().X : 1.0;
 	Opened->Refresh();
 	UE_LOG(LogCesiumIonVrtak, Log, TEXT("Cesium ion panel opened through VR-TAK's UI subsystem (world-space in VR), world UI actor %s."),
 		PanelHolder ? *PanelHolder->GetName() : TEXT("none"));
@@ -924,8 +947,8 @@ bool ACesiumIonVrtakActor::OpenPanelAsWidgetComponent()
 	bOwnPanelHolder = true;
 	Panel = NewPanel;
 	bPanelInWorld = true;
-	PanelScale = 0.1f;
 	PanelYawOffset = 0.0;
+	PanelBaseScale = Holder->GetActorScale3D().X;
 	NewPanel->Refresh();
 	UE_LOG(LogCesiumIonVrtak, Log, TEXT("Cesium ion panel opened as the plugin's own floating panel, 120 cm ahead."));
 	return true;
@@ -954,14 +977,72 @@ void ACesiumIonVrtakActor::ToggleFollowPanel()
 
 void ACesiumIonVrtakActor::ScalePanel(float Factor)
 {
-	if (PanelHolder)
+	if (!PanelHolder)
 	{
-		if (UWidgetComponent* Component = PanelHolder->FindComponentByClass<UWidgetComponent>())
+		return;
+	}
+	// Measured against the size the panel opened at (VR-TAK's own holder has its own scale).
+	const double Current = PanelHolder->GetActorScale3D().X;
+	const double Wanted = FMath::Clamp(Current * Factor, PanelBaseScale * 0.5, PanelBaseScale * 2.5);
+	PanelHolder->SetActorScale3D(FVector(Wanted));
+	UE_LOG(LogCesiumIonVrtak, Log, TEXT("Panel size x%.2f of its opening size."), Wanted / FMath::Max(PanelBaseScale, 1e-6));
+}
+
+void ACesiumIonVrtakActor::StartGrab()
+{
+	APlayerController* Player = GetWorld() ? GetWorld()->GetFirstPlayerController() : nullptr;
+	APlayerCameraManager* Camera = Player ? Player->PlayerCameraManager : nullptr;
+	if (!PanelHolder || !Camera)
+	{
+		return;
+	}
+	// The controller whose pointer is on the panel carries it, as if held at the end of a stick.
+	UWidgetInteractionComponent* Best = nullptr;
+	double BestDistance = TNumericLimits<double>::Max();
+	for (TObjectIterator<UWidgetInteractionComponent> It; It; ++It)
+	{
+		if (It->GetWorld() != GetWorld() || !It->IsActive())
 		{
-			PanelScale = FMath::Clamp(PanelScale * Factor, 0.03f, 0.4f);
-			Component->SetRelativeScale3D(FVector(PanelScale));
+			continue;
+		}
+		const UWidgetComponent* Hovered = It->GetHoveredWidgetComponent();
+		const bool bOnPanel = Hovered && Hovered->GetOwner() == PanelHolder;
+		const double Distance = bOnPanel ? 0.0 : FVector::Dist(It->GetComponentLocation(), PanelHolder->GetActorLocation());
+		if (Distance < BestDistance)
+		{
+			BestDistance = Distance;
+			Best = *It;
 		}
 	}
+	GrabStartedAt = ElapsedSeconds;
+	if (Best)
+	{
+		GrabPointer = Best;
+		GrabOffset = PanelHolder->GetActorTransform().GetRelativeTransform(Best->GetComponentTransform());
+		bGrabbingWithHead = false;
+		UE_LOG(LogCesiumIonVrtak, Log, TEXT("Panel grabbed with %s."), *Best->GetOwner()->GetName());
+	}
+	else
+	{
+		// No controller pointer found: carry it with the head (turn to move it).
+		bGrabbingWithHead = true;
+		bFollowPanel = true;
+		UE_LOG(LogCesiumIonVrtak, Log, TEXT("Panel grabbed with the head (no controller pointer found)."));
+	}
+}
+
+void ACesiumIonVrtakActor::EndGrab()
+{
+	if (bGrabbingWithHead)
+	{
+		bFollowPanel = false;
+		bGrabbingWithHead = false;
+	}
+	if (GrabPointer.IsValid())
+	{
+		UE_LOG(LogCesiumIonVrtak, Log, TEXT("Panel placed."));
+	}
+	GrabPointer.Reset();
 }
 
 void ACesiumIonVrtakActor::ClosePanelInWorld()
@@ -1371,23 +1452,33 @@ void ACesiumIonVrtakActor::GoToAsset(int64 AssetId)
 	{
 		return;
 	}
-	const FBox Box = Tileset->GetComponentsBoundingBox(true);
-	if (!Box.IsValid)
+	// The tileset's own bounding volume (known as soon as tileset.json has loaded), not the loaded
+	// meshes: a far-away tileset has loaded none, because nothing is in view.
+	FVector Where = FVector::ZeroVector;
+	double RadiusMetres = 0.0;
+	bool bHaveBounds = false;
+	if (const Cesium3DTilesSelection::Tileset* Native = Tileset->GetTileset())
 	{
+		if (const Cesium3DTilesSelection::Tile* Root = Native->getRootTile())
+		{
+			const CesiumGeometry::OrientedBoundingBox Box =
+				Cesium3DTilesSelection::getOrientedBoundingBoxFromBoundingVolume(Root->getBoundingVolume());
+			const glm::dvec3 Center = Box.getCenter();
+			const glm::dmat3& Axes = Box.getHalfAxes();
+			Where = Georeference->TransformEarthCenteredEarthFixedPositionToLongitudeLatitudeHeight(FVector(Center.x, Center.y, Center.z));
+			RadiusMetres = glm::length(Axes[0] + Axes[1] + Axes[2]);
+			bHaveBounds = RadiusMetres > 0.0 && FMath::IsFinite(Where.X) && FMath::IsFinite(Where.Y);
+		}
+	}
+	if (!bHaveBounds)
+	{
+		UE_LOG(LogCesiumIonVrtak, Log, TEXT("View: no bounding volume for asset %lld yet (tileset %s)."), AssetId,
+			Tileset->GetTileset() ? TEXT("created, no root tile") : TEXT("not created"));
 		Message(TEXT("Still loading: try again in a moment."));
 		return;
 	}
-	const FVector Center = Box.GetCenter();
-	const double RadiusUnits = Box.GetExtent().Size();
-	const FVector Where = Georeference->TransformUnrealPositionToLongitudeLatitudeHeight(Center);
-	// Metres per Unreal unit: the ground distance between two points 1000 units apart.
-	const FVector Next = Georeference->TransformUnrealPositionToLongitudeLatitudeHeight(Center + FVector(1000.0, 0.0, 0.0));
+	UE_LOG(LogCesiumIonVrtak, Log, TEXT("View: asset %lld centre %.5f, %.5f, %.0f m; radius %.0f m."), AssetId, Where.Y, Where.X, Where.Z, RadiusMetres);
 	const double MetresPerDegree = 111320.0;
-	const double DeltaNorth = (Next.Y - Where.Y) * MetresPerDegree;
-	const double DeltaEast = (Next.X - Where.X) * MetresPerDegree * FMath::Cos(FMath::DegreesToRadians(Where.Y));
-	const double DeltaUp = Next.Z - Where.Z;
-	const double MetresPerUnit = FMath::Sqrt(DeltaNorth * DeltaNorth + DeltaEast * DeltaEast + DeltaUp * DeltaUp) / 1000.0;
-	const double RadiusMetres = RadiusUnits * (MetresPerUnit > 0.0 ? MetresPerUnit : 0.01);
 	if (RadiusMetres > 30000.0)
 	{
 		Message(LoadedNames.FindRef(AssetId) + TEXT(" covers too large an area to frame; use VR-TAK's Go To."));

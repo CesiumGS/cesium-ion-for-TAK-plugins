@@ -96,15 +96,13 @@ private:
 	void HandlePrevPage();
 	UFUNCTION()
 	void HandleNextPage();
-	/** Placement of a floating panel (VR): dock left, in front, right; follow the view; smaller, bigger. */
+	/** Placement of a floating panel (VR): hold the grip to carry it, bring it back in front, smaller, bigger. */
 	UFUNCTION()
-	void HandleDockLeft();
+	void HandleGrabPressed();
 	UFUNCTION()
-	void HandleDockFront();
+	void HandleGrabReleased();
 	UFUNCTION()
-	void HandleDockRight();
-	UFUNCTION()
-	void HandleFollow();
+	void HandleRecenter();
 	UFUNCTION()
 	void HandleSmaller();
 	UFUNCTION()
@@ -160,7 +158,6 @@ private:
 	UPROPERTY()
 	UHorizontalBox* PlacementRow = nullptr;
 	UPROPERTY()
-	UTextBlock* FollowLabel = nullptr;
 	bool bFormSelfHosted = false;
 
 	UPROPERTY()
