@@ -102,6 +102,8 @@ private:
 	 * (called by reflection), which in the TOC moves VR-TAK's area of operations and
 	 * in the world places the player. Optionally turns the view (bearing, pitch).
 	 */
+	/** Moves the view to look at a loaded 3D Tiles asset from outside it. */
+	void GoToAsset(int64 AssetId);
 	bool TeleportPlayer(double Latitude, double Longitude, double Height, double Bearing, double Pitch, bool bTurn);
 	/** Keeps the panel on screen (VR-TAK may clear viewport widgets while it starts). */
 	void EnsurePanel();
@@ -187,6 +189,8 @@ private:
 	/** The actor holding the plugin's own floating panel (when VR-TAK's UI system does not open it). */
 	UPROPERTY()
 	AActor* PanelHolder = nullptr;
+	/** PanelHolder is the plugin's own actor (destroyed with the panel), not VR-TAK's world UI actor. */
+	bool bOwnPanelHolder = false;
 	bool bRibbonButtonRegistered = false;
 	int32 RibbonTries = 0;
 	double NextRibbonTryAt = 5.0;

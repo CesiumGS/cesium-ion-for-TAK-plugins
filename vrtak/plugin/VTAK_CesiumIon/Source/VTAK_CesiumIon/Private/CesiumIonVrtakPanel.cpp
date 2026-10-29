@@ -83,6 +83,14 @@ namespace
 	}
 }
 
+void UCesiumIonVrtakRowAction::GoTo()
+{
+	if (Panel.IsValid())
+	{
+		Panel->GoToAsset(AssetId);
+	}
+}
+
 void UCesiumIonVrtakRowAction::Click()
 {
 	if (Panel.IsValid())
@@ -189,6 +197,8 @@ TSharedRef<SWidget> UCesiumIonVrtakPanel::RebuildWidget()
 		Header->AddChildToHorizontalBox(HideButton)->SetPadding(FMargin(8.f, 0.f, 0.f, 0.f));
 		Column->AddChildToVerticalBox(Header)->SetPadding(FMargin(0.f, 0.f, 0.f, 12.f));
 
+		MessageText = MakeText(TEXT(""), 13, Amber);
+		Column->AddChildToVerticalBox(MessageText)->SetPadding(FMargin(0.f, 0.f, 0.f, 8.f));
 		Column->AddChildToVerticalBox(BuildPlacement())->SetPadding(FMargin(0.f, 0.f, 0.f, 8.f));
 		Column->AddChildToVerticalBox(BuildSettings())->SetPadding(FMargin(0.f, 0.f, 0.f, 12.f));
 		Column->AddChildToVerticalBox(BuildSignInCard())->SetPadding(FMargin(0.f, 0.f, 0.f, 8.f));
@@ -217,8 +227,6 @@ TSharedRef<SWidget> UCesiumIonVrtakPanel::RebuildWidget()
 		Content->AddChildToVerticalBox(AssetList);
 		Content->AddChildToVerticalBox(BuildPager())->SetPadding(FMargin(0.f, 8.f, 0.f, 0.f));
 
-		MessageText = MakeText(TEXT(""), 12, Muted);
-		Column->AddChildToVerticalBox(MessageText)->SetPadding(FMargin(0.f, 10.f, 0.f, 0.f));
 	}
 	return Super::RebuildWidget();
 }
@@ -343,6 +351,13 @@ UWidget* UCesiumIonVrtakPanel::MakeAssetRow(const FCesiumIonVrtakAsset& Asset, b
 	Action->Panel = this;
 	RowActions.Add(Action);
 	Button->OnClicked.AddDynamic(Action, &UCesiumIonVrtakRowAction::Click);
+	if (bOnMapList && Asset.Type == TEXT("3DTILES"))
+	{
+		// View it from outside (not at its own position).
+		UButton* View = MakeButton(TEXT("View"), Card, Blue);
+		View->OnClicked.AddDynamic(Action, &UCesiumIonVrtakRowAction::GoTo);
+		Row->AddChildToHorizontalBox(View)->SetPadding(FMargin(0.f, 0.f, 6.f, 0.f));
+	}
 	Row->AddChildToHorizontalBox(Button)->SetVerticalAlignment(VAlign_Center);
 
 	UBorder* Frame = WidgetTree->ConstructWidget<UBorder>(UBorder::StaticClass());
@@ -645,6 +660,14 @@ void UCesiumIonVrtakPanel::HandleFollow()
 	{
 		OwnerActor->ToggleFollowPanel();
 		FollowLabel->SetText(FText::FromString(OwnerActor->IsFollowingPanel() ? TEXT("Follow: on") : TEXT("Follow: off")));
+	}
+}
+
+void UCesiumIonVrtakPanel::GoToAsset(int64 AssetId)
+{
+	if (OwnerActor.IsValid())
+	{
+		OwnerActor->GoToAsset(AssetId);
 	}
 }
 

@@ -28,6 +28,8 @@ public:
 
 	UFUNCTION()
 	void Click();
+	UFUNCTION()
+	void GoTo();
 };
 
 /**
@@ -56,6 +58,7 @@ public:
 	void Refresh();
 	void ShowMessage(const FString& Message);
 	void ToggleAsset(int64 AssetId, const FString& Name);
+	void GoToAsset(int64 AssetId);
 	void ShowSettings(bool bShow);
 
 protected:

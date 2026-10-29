@@ -873,7 +873,14 @@ bool ACesiumIonVrtakActor::OpenPanelInWorld()
 	Opened->Refresh();
 	Panel = Opened;
 	bPanelInWorld = true;
-	UE_LOG(LogCesiumIonVrtak, Log, TEXT("Cesium ion panel opened through VR-TAK's UI subsystem (world-space in VR)."));
+	// The actor VR-TAK put the panel on (for docking and resizing); it stays VR-TAK's to destroy.
+	PanelHolder = Cast<AActor>(CallWithObject(Core, TEXT("GetUserWidgetWorldUIActor"), Opened));
+	bOwnPanelHolder = false;
+	PanelScale = 0.1f;
+	PanelYawOffset = 0.0;
+	Opened->Refresh();
+	UE_LOG(LogCesiumIonVrtak, Log, TEXT("Cesium ion panel opened through VR-TAK's UI subsystem (world-space in VR), world UI actor %s."),
+		PanelHolder ? *PanelHolder->GetName() : TEXT("none"));
 	return true;
 }
 
@@ -914,6 +921,7 @@ bool ACesiumIonVrtakActor::OpenPanelAsWidgetComponent()
 	Component->SetRelativeScale3D(FVector(0.1, 0.1, 0.1));
 	Holder->SetActorLocationAndRotation(Location, Rotation);
 	PanelHolder = Holder;
+	bOwnPanelHolder = true;
 	Panel = NewPanel;
 	bPanelInWorld = true;
 	PanelScale = 0.1f;
@@ -959,15 +967,15 @@ void ACesiumIonVrtakActor::ScalePanel(float Factor)
 void ACesiumIonVrtakActor::ClosePanelInWorld()
 {
 	bFollowPanel = false;
-	if (PanelHolder)
+	if (PanelHolder && bOwnPanelHolder)
 	{
 		PanelHolder->Destroy();
-		PanelHolder = nullptr;
 	}
 	else if (Panel)
 	{
 		CallWithObject(FindGameInstanceSubsystem(TEXT("/Script/VH_UI.UI_Subsystem_Core")), TEXT("CloseUserWidget"), Panel);
 	}
+	PanelHolder = nullptr;
 	Panel = nullptr;
 	bPanelInWorld = false;
 }
@@ -1209,9 +1217,14 @@ void ACesiumIonVrtakActor::ToggleAsset(const FCesiumIonVrtakAsset& Asset)
 	}
 	else if (TWeakObjectPtr<UCesiumIonRasterOverlay>* Overlay = Overlays.Find(Asset.Id))
 	{
+		ACesium3DTileset* OverlayOwner = Overlay->IsValid() ? Cast<ACesium3DTileset>((*Overlay)->GetOwner()) : nullptr;
 		if (Overlay->IsValid())
 		{
 			(*Overlay)->DestroyComponent();
+		}
+		if (IsValid(OverlayOwner))
+		{
+			OverlayOwner->RefreshTileset();
 		}
 		Overlays.Remove(Asset.Id);
 		LoadedNames.Remove(Asset.Id);
@@ -1351,16 +1364,64 @@ void ACesiumIonVrtakActor::ForgetOrphanedImagery()
 	}
 }
 
+void ACesiumIonVrtakActor::GoToAsset(int64 AssetId)
+{
+	ACesium3DTileset* Tileset = Tilesets.FindRef(AssetId);
+	if (!IsValid(Tileset) || !IsValid(Georeference))
+	{
+		return;
+	}
+	const FBox Box = Tileset->GetComponentsBoundingBox(true);
+	if (!Box.IsValid)
+	{
+		Message(TEXT("Still loading: try again in a moment."));
+		return;
+	}
+	const FVector Center = Box.GetCenter();
+	const double RadiusUnits = Box.GetExtent().Size();
+	const FVector Where = Georeference->TransformUnrealPositionToLongitudeLatitudeHeight(Center);
+	// Metres per Unreal unit: the ground distance between two points 1000 units apart.
+	const FVector Next = Georeference->TransformUnrealPositionToLongitudeLatitudeHeight(Center + FVector(1000.0, 0.0, 0.0));
+	const double MetresPerDegree = 111320.0;
+	const double DeltaNorth = (Next.Y - Where.Y) * MetresPerDegree;
+	const double DeltaEast = (Next.X - Where.X) * MetresPerDegree * FMath::Cos(FMath::DegreesToRadians(Where.Y));
+	const double DeltaUp = Next.Z - Where.Z;
+	const double MetresPerUnit = FMath::Sqrt(DeltaNorth * DeltaNorth + DeltaEast * DeltaEast + DeltaUp * DeltaUp) / 1000.0;
+	const double RadiusMetres = RadiusUnits * (MetresPerUnit > 0.0 ? MetresPerUnit : 0.01);
+	if (RadiusMetres > 30000.0)
+	{
+		Message(LoadedNames.FindRef(AssetId) + TEXT(" covers too large an area to frame; use VR-TAK's Go To."));
+		return;
+	}
+	// View it from the south, above and well back, looking north and down: never at its own position.
+	const double Distance = FMath::Clamp(RadiusMetres * 2.2, 50.0, 3000.0);
+	const double ViewLatitude = Where.Y - (Distance * 0.9) / MetresPerDegree;
+	const double ViewHeight = Where.Z + Distance * 0.7;
+	TeleportPlayer(ViewLatitude, Where.X, ViewHeight, 0.0, -35.0, true);
+	Message(TEXT("Moved to view ") + LoadedNames.FindRef(AssetId) + TEXT("."));
+}
+
 UCesiumIonRasterOverlay* ACesiumIonVrtakActor::AddImagery(int64 AssetId, const FString& Name)
 {
-	ACesium3DTileset* Terrain = nullptr;
-	for (const TPair<int64, FString>& Entry : LoadedTypes)
+	auto FindTerrain = [this]() -> ACesium3DTileset*
 	{
-		ACesium3DTileset* Candidate = Entry.Value == TEXT("TERRAIN") ? Tilesets.FindRef(Entry.Key) : nullptr;
-		if (IsValid(Candidate))
+		ACesium3DTileset* Found = nullptr;
+		for (const TPair<int64, FString>& Entry : LoadedTypes)
 		{
-			Terrain = Candidate;
+			ACesium3DTileset* Candidate = Entry.Value == TEXT("TERRAIN") ? Tilesets.FindRef(Entry.Key) : nullptr;
+			if (IsValid(Candidate))
+			{
+				Found = Candidate;
+			}
 		}
+		return Found;
+	};
+	ACesium3DTileset* Terrain = FindTerrain();
+	if (!Terrain && !Session->IsSelfHosted())
+	{
+		// Imagery drapes over Cesium terrain: add Cesium World Terrain for it.
+		AddTileset(1, TEXT("Cesium World Terrain"), TEXT("TERRAIN"));
+		Terrain = FindTerrain();
 	}
 	if (!Terrain)
 	{
@@ -1403,6 +1464,9 @@ UCesiumIonRasterOverlay* ACesiumIonVrtakActor::AddImagery(int64 AssetId, const F
 	Terrain->AddInstanceComponent(Overlay);
 	Overlay->RegisterComponent();
 	Overlay->Activate(true);
+	// Tiles that loaded before the overlay have no texture coordinates for it; Cesium asserts when
+	// it attaches the imagery to them (crash). Rebuild the tiles so they are made with the overlay.
+	Terrain->RefreshTileset();
 	Overlays.Add(AssetId, Overlay);
 	LoadedNames.Add(AssetId, Name);
 	LoadedTypes.Add(AssetId, TEXT("IMAGERY"));
