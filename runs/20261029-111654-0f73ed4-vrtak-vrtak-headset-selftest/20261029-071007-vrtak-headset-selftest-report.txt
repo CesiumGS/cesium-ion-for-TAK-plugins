@@ -1,0 +1,138 @@
+
+==== Build the plugin (GameEditor, incremental) ====  [07:10:07]
+
+==== Install VTAK_CesiumIon ====  [07:10:07]
+   \VTAK_CesiumIon.uplugin  653 B
+   \Resources\cesium_ion_logo.png  20,275 B
+   [1/7] Compile [x64] CesiumIonVrtakActor.gen.cpp
+   [3/7] Compile [x64] CesiumIonVrtakPanel.cpp
+   [4/7] Compile [x64] CesiumIonVrtakActor.cpp
+   Total execution time: 46.01 seconds
+Build exit code: 0
+
+==== Start VR-TAK (detached) ====  [07:10:54]
+C:\Program Files\Epic Games\VR-TAK\Engine\Binaries\Win64\UnrealEditor.exe "C:\Program Files\Epic Games\VR-TAK\Game\Game.uproject" -game -windowed -ResX=1920 -ResY=1080 -log -CesiumIonOrigin=39.9526,-75.1635,0 -CesiumIonEnterWorld=20 -CesiumIonScreenshots=180 -CesiumIonShowSettings=195 -CesiumIonQuitAfter=240 -CesiumIonServer=http://192.168.1.247:32470 -CesiumIonApi=http://192.168.1.247:31813 -CesiumIonLoad=9,12,21,11 -CesiumIonSelfTest=90
+Started pid 28988 at 10/29/2026 07:10:54. Run this task again for progress and screenshots.
+
+==== VR-TAK run ====  [07:16:54]
+Log: C:\Program Files\Epic Games\VR-TAK\Game\Saved\Logs\Game.log (updated 10/29/2026 07:16:51)
+-- Cesium ion plugin
+[2026.10.29-11.14.21:936][829]LogCesiumIonVrtak: Panel size x2.25 of its opening size.
+[2026.10.29-11.14.21:937][829]LogCesiumIonVrtak: Panel size x2.02 of its opening size.
+[2026.10.29-11.14.21:937][829]LogCesiumIonVrtak: Panel size x1.82 of its opening size.
+[2026.10.29-11.14.21:937][829]LogCesiumIonVrtak: Panel size x1.64 of its opening size.
+[2026.10.29-11.14.21:937][829]LogCesiumIonVrtak: Panel size x1.48 of its opening size.
+[2026.10.29-11.14.21:937][829]LogCesiumIonVrtak: Panel size x1.33 of its opening size.
+[2026.10.29-11.14.21:937][829]LogCesiumIonVrtak: Panel size x1.20 of its opening size.
+[2026.10.29-11.14.21:938][829]LogCesiumIonVrtak: Panel size x1.08 of its opening size.
+[2026.10.29-11.14.21:938][829]LogCesiumIonVrtak: Panel size x0.97 of its opening size.
+[2026.10.29-11.14.25:933][113]LogCesiumIonVrtak: Self-test: panel brought to 120 cm from the camera (expect about 120): PASS
+[2026.10.29-11.14.30:184][416]LogCesiumIonVrtak: Self-test: widget pointer VRWidgetInteraction on BP_Tool_RedX_C_0, active yes.
+[2026.10.29-11.14.30:185][416]LogCesiumIonVrtak: Self-test: widget pointer VRWidgetInteraction on BP_Tool_RedX_C_1, active yes.
+[2026.10.29-11.14.30:185][416]LogCesiumIonVrtak: Panel grabbed with BP_Tool_RedX_C_0.
+[2026.10.29-11.14.30:186][416]LogCesiumIonVrtak: Panel placed.
+[2026.10.29-11.14.30:186][416]LogCesiumIonVrtak: Self-test: 2 widget pointer(s) found; grab would use a controller pointer.
+[2026.10.29-11.14.34:427][719]LogCesiumIonVrtak: Self-test: 4 3D Tiles asset(s) to view.
+[2026.10.29-11.14.38:432][  6]LogCesiumIonVrtak: View: no bounding volume for asset 9 yet (tileset created, no root tile).
+[2026.10.29-11.14.38:432][  6]LogCesiumIonVrtak: Still loading: try again in a moment.
+[2026.10.29-11.14.38:432][  6]LogCesiumIonVrtak: Self-test: View on asset 9 (Asset 9); the view moves after the teleport settles.
+[2026.10.29-11.14.42:673][309]LogCesiumIonVrtak: View: no bounding volume for asset 12 yet (tileset created, no root tile).
+[2026.10.29-11.14.42:673][309]LogCesiumIonVrtak: Still loading: try again in a moment.
+[2026.10.29-11.14.42:674][309]LogCesiumIonVrtak: Self-test: View on asset 12 (Asset 12); the view moves after the teleport settles.
+[2026.10.29-11.14.46:677][595]LogCesiumIonVrtak: View: no bounding volume for asset 21 yet (tileset created, no root tile).
+[2026.10.29-11.14.46:677][595]LogCesiumIonVrtak: Still loading: try again in a moment.
+[2026.10.29-11.14.46:678][595]LogCesiumIonVrtak: Self-test: View on asset 21 (Asset 21); the view moves after the teleport settles.
+[2026.10.29-11.14.48:172][702]LogCesiumIonVrtak: Diagnostics: camera at X=-125395171.256 Y=-473380415.047 Z=407332695.374; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.29-11.14.48:172][702]LogCesiumIonVrtak: Diagnostics: #9 loaded 0%, 1 components, hidden 0, content (none) (size (none)), -1 units from the camera.
+[2026.10.29-11.14.48:173][702]LogCesiumIonVrtak: Diagnostics: #12 loaded 0%, 1 components, hidden 0, content (none) (size (none)), -1 units from the camera.
+[2026.10.29-11.14.48:173][702]LogCesiumIonVrtak: Diagnostics: #21 loaded 0%, 1 components, hidden 0, content (none) (size (none)), -1 units from the camera.
+[2026.10.29-11.14.48:173][702]LogCesiumIonVrtak: Diagnostics: #11 loaded 0%, 1 components, hidden 0, content (none) (size (none)), -1 units from the camera.
+[2026.10.29-11.14.50:684][881]LogCesiumIonVrtak: View: no bounding volume for asset 11 yet (tileset created, no root tile).
+[2026.10.29-11.14.50:684][881]LogCesiumIonVrtak: Still loading: try again in a moment.
+[2026.10.29-11.14.50:685][881]LogCesiumIonVrtak: Self-test: View on asset 11 (Asset 11); the view moves after the teleport settles.
+[2026.10.29-11.14.54:927][183]LogCesiumIonVrtak: Self-test: done.
+[2026.10.29-11.15.21:180][ 56]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: no.
+[2026.10.29-11.15.47:682][946]LogCesiumIonVrtak: Screenshot requested: ../../../Game/Saved/Screenshots/WindowsEditor/CesiumIon-1.png
+[2026.10.29-11.16.17:677][ 74]LogCesiumIonVrtak: Screenshot requested: ../../../Game/Saved/Screenshots/WindowsEditor/CesiumIon-2.png
+[2026.10.29-11.16.22:680][423]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: no.
+[2026.10.29-11.16.47:670][206]LogCesiumIonVrtak: Screenshot requested: ../../../Game/Saved/Screenshots/WindowsEditor/CesiumIon-3.png
+[2026.10.29-11.16.47:670][206]LogCesiumIonVrtak: Quitting after the test run.
+-- errors
+[2026.10.29-11.11.34:951][  0]LogClass: Error: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-11.11.34:951][  0]LogClass: Error: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-11.11.34:993][  0]LogAutomationTest: Error: UObject.Class AttemptToFindUninitializedScriptStructMembers will be marked as failing due to errors being logged
+[2026.10.29-11.11.34:994][  0]LogAutomationTest: Error: LogClass: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-11.11.34:995][  0]LogAutomationTest: Error: LogClass: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-11.12.06:335][498]LogHttp: Warning: 00000614C7FEE100: request failed, libcurl error: 56 (Failure when receiving data from the peer)
+[2026.10.29-11.12.41:231][715]LogHttp: Warning: 0000061600020000: request failed, libcurl error: 56 (Failure when receiving data from the peer)
+[2026.10.29-11.12.41:234][715]LogHttp: Warning: 0000061600020F00: request failed, libcurl error: 56 (Failure when receiving data from the peer)
+[2026.10.29-11.12.41:236][715]LogHttp: Warning: 0000061600020A00: request failed, libcurl error: 56 (Failure when receiving data from the peer)
+[2026.10.29-11.12.41:237][715]LogHttp: Warning: 0000061600020500: request failed, libcurl error: 56 (Failure when receiving data from the peer)
+[2026.10.29-11.12.50:519][715]LogCesium: Error: [2026-10-29 07:12:50.519] [error] [TilesetContentManager.cpp:983] An unexpected error occurred when loading tile: Request failed.
+[2026.10.29-11.12.50:520][715]LogCesium: Error: [2026-10-29 07:12:50.519] [error] [TilesetContentManager.cpp:983] An unexpected error occurred when loading tile: Request failed.
+[2026.10.29-11.12.50:523][716]LogCesium: Error: [2026-10-29 07:12:50.519] [error] [TilesetContentManager.cpp:983] An unexpected error occurred when loading tile: Request failed.
+[2026.10.29-11.12.50:524][716]LogCesium: Error: [2026-10-29 07:12:50.519] [error] [TilesetContentManager.cpp:983] An unexpected error occurred when loading tile: Request failed.
+-- shader compilation
+[2026.10.29-11.16.50:547][207]LogShaderCompilers: Display:        TBasePassPSFCachedPointIndirectLightingPolicySkylight - 9.03% of total time (compiled    5 times, average 2.00 sec, max 2.14 sec, min 1.91 sec)
+[2026.10.29-11.16.50:547][207]LogShaderCompilers: Display: ================================================
+[2026.10.29-11.16.50:630][207]LogShaderCompilers: Display: Shaders left to compile 0
+-- last log lines
+[2026.10.29-11.16.51:121][207]LogModuleManager: Shutting down and abandoning module VariantManagerContent (70)
+[2026.10.29-11.16.51:121][207]LogModuleManager: Shutting down and abandoning module DatasmithContent (68)
+[2026.10.29-11.16.51:121][207]LogModuleManager: Shutting down and abandoning module GLTFExporter (66)
+[2026.10.29-11.16.51:121][207]LogModuleManager: Shutting down and abandoning module DesktopPlatform (64)
+[2026.10.29-11.16.51:121][207]LogModuleManager: Shutting down and abandoning module PythonScriptPluginPreload (62)
+[2026.10.29-11.16.51:121][207]LogModuleManager: Shutting down and abandoning module PlatformCryptoOpenSSL (60)
+[2026.10.29-11.16.51:122][207]LogModuleManager: Shutting down and abandoning module PlatformCryptoTypes (58)
+[2026.10.29-11.16.51:122][207]LogModuleManager: Shutting down and abandoning module PlatformCrypto (56)
+[2026.10.29-11.16.51:122][207]LogModuleManager: Shutting down and abandoning module PlasticSourceControl (54)
+[2026.10.29-11.16.51:122][207]LogModuleManager: Shutting down and abandoning module PerforceSourceControl (52)
+[2026.10.29-11.16.51:122][207]LogModuleManager: Shutting down and abandoning module SourceControl (51)
+[2026.10.29-11.16.51:123][207]LogModuleManager: Shutting down and abandoning module XGEController (48)
+[2026.10.29-11.16.51:125][207]LogXGEController: Cleaning working directory: C:/Users/Cesium/AppData/Local/Temp/UnrealXGEWorkingDir/
+[2026.10.29-11.16.51:126][207]LogModuleManager: Shutting down and abandoning module FastBuildController (46)
+[2026.10.29-11.16.51:126][207]LogModuleManager: Shutting down and abandoning module IoStoreOnDemand (44)
+[2026.10.29-11.16.51:126][207]LogModuleManager: Shutting down and abandoning module AnimationModifiers (42)
+[2026.10.29-11.16.51:127][207]LogModuleManager: Shutting down and abandoning module AudioEditor (40)
+[2026.10.29-11.16.51:127][207]LogModuleManager: Shutting down and abandoning module PropertyEditor (39)
+[2026.10.29-11.16.51:127][207]LogModuleManager: Shutting down and abandoning module Virtualization (36)
+[2026.10.29-11.16.51:127][207]LogModuleManager: Shutting down and abandoning module MessageLog (35)
+[2026.10.29-11.16.51:127][207]LogModuleManager: Shutting down and abandoning module TextureCompressor (32)
+[2026.10.29-11.16.51:127][207]LogModuleManager: Shutting down and abandoning module OpenColorIOWrapper (31)
+[2026.10.29-11.16.51:128][207]LogModuleManager: Shutting down and abandoning module RenderCore (28)
+[2026.10.29-11.16.51:128][207]LogModuleManager: Shutting down and abandoning module Landscape (26)
+[2026.10.29-11.16.51:128][207]LogModuleManager: Shutting down and abandoning module SlateRHIRenderer (24)
+[2026.10.29-11.16.51:128][207]LogModuleManager: Shutting down and abandoning module AnimGraphRuntime (22)
+[2026.10.29-11.16.51:128][207]LogModuleManager: Shutting down and abandoning module Renderer (20)
+[2026.10.29-11.16.51:129][207]LogModuleManager: Shutting down and abandoning module Engine (18)
+[2026.10.29-11.16.51:129][207]LogModuleManager: Shutting down and abandoning module CoreUObject (16)
+[2026.10.29-11.16.51:129][207]LogModuleManager: Shutting down and abandoning module SandboxFile (14)
+[2026.10.29-11.16.51:129][207]LogModuleManager: Shutting down and abandoning module PakFile (12)
+[2026.10.29-11.16.51:129][207]LogPakFile: Destroying PakPlatformFile
+[2026.10.29-11.16.51:130][207]LogModuleManager: Shutting down and abandoning module RSA (11)
+[2026.10.29-11.16.51:130][207]LogModuleManager: Shutting down and abandoning module NetworkFile (8)
+[2026.10.29-11.16.51:130][207]LogModuleManager: Shutting down and abandoning module StreamingFile (6)
+[2026.10.29-11.16.51:130][207]LogModuleManager: Shutting down and abandoning module CookOnTheFly (4)
+[2026.10.29-11.16.51:130][207]LogModuleManager: Shutting down and abandoning module StorageServerClient (2)
+[2026.10.29-11.16.51:181][207]LogD3D12RHI: ~FD3D12DynamicRHI
+[2026.10.29-11.16.51:204][207]LogExit: Exiting.
+[2026.10.29-11.16.51:229][207]Log file closed, 10/29/26 07:16:51
+
+==== VR-TAK processes and windows ====  [07:16:54]
+Screenshot: vrtak-CesiumIon-1.png (1366 KB, 10/29/2026 07:15:47)
+Screenshot: vrtak-CesiumIon-2.png (1420 KB, 10/29/2026 07:16:17)
+Screenshot: vrtak-CesiumIon-3.png (1366 KB, 10/29/2026 07:16:47)
+
+==== Regression checks ====  [07:16:54]
+FAIL  LogCesiumIonVrtak: Found \d+ assets
+PASS  LogCesiumIonVrtak: Added .+ to VR-TAK's world
+PASS  LogCesiumIonVrtak: Georeference aligned
+PASS  LogCesiumIonVrtak: Cesium ion panel on screen
+PASS  LogCesiumIonVrtak: Screenshot requested
+PASS  LogCesiumIonVrtak: Quitting after the test run
+PASS  LogCesiumIonVrtak: XR system
+PASS  Self-test: done
+PASS  Self-test: resize limits .*PASS
+PASS  Self-test: panel brought to .*PASS
+PASS  no fatal errors
+REGRESSION: FAIL (1)
