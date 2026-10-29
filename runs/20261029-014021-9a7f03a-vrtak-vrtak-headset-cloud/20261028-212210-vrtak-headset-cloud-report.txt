@@ -1,0 +1,145 @@
+
+==== Build the plugin (GameEditor, incremental) ====  [21:22:10]
+
+==== Install VTAK_CesiumIon ====  [21:22:10]
+   \VTAK_CesiumIon.uplugin  653 B
+   \Resources\cesium_ion_logo.png  20,275 B
+   [2/9] Compile [x64] CesiumIonVrtakActor.gen.cpp
+   [4/9] Compile [x64] CesiumIonVrtakPanel.gen.cpp
+   [5/9] Compile [x64] CesiumIonVrtakPanel.cpp
+   [6/9] Compile [x64] CesiumIonVrtakActor.cpp
+   Total execution time: 67.15 seconds
+Build exit code: 0
+
+==== Start VR-TAK (detached) ====  [21:23:18]
+C:\Program Files\Epic Games\VR-TAK\Engine\Binaries\Win64\UnrealEditor.exe "C:\Program Files\Epic Games\VR-TAK\Game\Game.uproject" -game -windowed -ResX=1920 -ResY=1080 -log -CesiumIonOrigin=39.9526,-75.1635,0 -CesiumIonEnterWorld=20 -CesiumIonScreenshots=840 -CesiumIonShowSettings=855 -CesiumIonQuitAfter=900 -CesiumIonLoad=2275207 -CesiumIonSignIn
+Started pid 15676 at 10/28/2026 21:23:18. Run this task again for progress and screenshots.
+
+==== VR-TAK run ====  [21:40:18]
+Log: C:\Program Files\Epic Games\VR-TAK\Game\Saved\Logs\Game.log (updated 10/28/2026 21:30:26)
+-- Cesium ion plugin
+[2026.10.29-01.27.10:071][450]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: no.
+[2026.10.29-01.27.24:316][805]LogCesiumIonVrtak: Removed Google Photorealistic 3D Tiles.
+[2026.10.29-01.27.29:099][ 12]LogCesiumIonVrtak: Bing Maps Aerial with Labels: add a terrain asset first. VR-TAK drapes Cesium ion imagery over Cesium terrain.
+[2026.10.29-01.27.34:129][229]LogCesiumIonVrtak: Bing Maps Aerial: add a terrain asset first. VR-TAK drapes Cesium ion imagery over Cesium terrain.
+[2026.10.29-01.27.54:651][950]LogCesiumIonVrtak: Google Maps 2D Contour: add a terrain asset first. VR-TAK drapes Cesium ion imagery over Cesium terrain.
+[2026.10.29-01.28.05:234][323]LogCesium: Loading tileset for asset ID 0
+[2026.10.29-01.28.05:234][323]LogCesium: Loading tileset for asset ID 0 done
+[2026.10.29-01.28.05:246][323]LogCesiumIonVrtak: VR-TAK's own terrain is off while Cesium terrain is in the world.
+[2026.10.29-01.28.05:246][323]LogCesiumIonVrtak: Added Cesium World Terrain to VR-TAK's world.
+[2026.10.29-01.28.05:260][323]LogCesium: Loading tileset for asset ID 1
+[2026.10.29-01.28.05:260][323]LogCesium: Loading tileset for asset ID 1 done
+[2026.10.29-01.28.09:829][630]LogCesiumIonVrtak: VR-TAK's own terrain is back on.
+[2026.10.29-01.28.09:829][630]LogCesiumIonVrtak: Removed Cesium World Terrain.
+[2026.10.29-01.28.11:846][753]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: no.
+[2026.10.29-01.28.14:951][880]LogCesiumIonVrtak: Bing Maps Aerial: add a terrain asset first. VR-TAK drapes Cesium ion imagery over Cesium terrain.
+[2026.10.29-01.28.24:361][216]LogCesiumIonVrtak: Bing Maps Aerial: add a terrain asset first. VR-TAK drapes Cesium ion imagery over Cesium terrain.
+[2026.10.29-01.28.32:555][542]LogCesiumIonVrtak: Google Maps 2D Contour: add a terrain asset first. VR-TAK drapes Cesium ion imagery over Cesium terrain.
+[2026.10.29-01.28.38:699][785]LogCesiumIonVrtak: Google Maps 2D Roadmap: add a terrain asset first. VR-TAK drapes Cesium ion imagery over Cesium terrain.
+[2026.10.29-01.28.40:349][852]LogCesiumIonVrtak: Google Maps 2D Roadmap: add a terrain asset first. VR-TAK drapes Cesium ion imagery over Cesium terrain.
+[2026.10.29-01.28.41:807][921]LogCesiumIonVrtak: Google Maps 2D Satellite: add a terrain asset first. VR-TAK drapes Cesium ion imagery over Cesium terrain.
+[2026.10.29-01.28.51:950][405]LogCesium: Loading tileset for asset ID 0
+[2026.10.29-01.28.51:950][405]LogCesium: Loading tileset for asset ID 0 done
+[2026.10.29-01.28.51:951][405]LogCesiumIonVrtak: VR-TAK's own terrain is off while Cesium terrain is in the world.
+[2026.10.29-01.28.51:951][405]LogCesiumIonVrtak: Added Cesium World Terrain to VR-TAK's world.
+[2026.10.29-01.28.51:961][405]LogCesium: Loading tileset for asset ID 1
+[2026.10.29-01.28.51:962][405]LogCesium: Loading tileset for asset ID 1 done
+[2026.10.29-01.29.05:878][320]LogCesiumIonVrtak: Added Bing Maps Aerial over the Cesium terrain.
+[2026.10.29-01.29.12:339][657]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 39.967400, -75.213586, 0.0 m; 100.1 units/m; yaw 165.2.
+[2026.10.29-01.29.13:585][713]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: no.
+[2026.10.29-01.29.16:614][901]LogCesiumIonVrtak: Removed Bing Maps Aerial.
+[2026.10.29-01.29.19:584][ 99]LogCesiumIonVrtak: Added Google Maps 2D Roadmap over the Cesium terrain.
+[2026.10.29-01.29.19:841][116]LogCesium: Error: [2026-10-28 21:29:19.841] [error] [RasterOverlayCollection.cpp:146] Error while creating tile provider: Connection failed.
+[2026.10.29-01.29.19:904][116]LogCesiumIonVrtak: Warning: Imagery #3830184 failed to load: HTTP 0, Error while creating tile provider: Connection failed.
+[2026.10.29-01.29.31:469][860]LogCesiumIonVrtak: Removed Google Maps 2D Roadmap.
+[2026.10.29-01.29.37:368][263]LogCesiumIonVrtak: Added Google Maps 2D Satellite with Labels over the Cesium terrain.
+[2026.10.29-01.29.37:554][275]LogCesium: Error: [2026-10-28 21:29:37.554] [error] [RasterOverlayCollection.cpp:146] Error while creating tile provider: Connection failed.
+[2026.10.29-01.29.37:557][275]LogCesiumIonVrtak: Warning: Imagery #3830183 failed to load: HTTP 0, Error while creating tile provider: Connection failed.
+[2026.10.29-01.29.57:958][653]LogCesiumIonVrtak: Added Sentinel-2 over the Cesium terrain.
+[2026.10.29-01.30.15:321][751]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: no.
+[2026.10.29-01.30.16:807][844]LogCesiumIonVrtak: Added Bing Maps Aerial with Labels over the Cesium terrain.
+-- errors
+[2026.10.29-01.23.39:141][  0]LogClass: Error: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-01.23.39:142][  0]LogClass: Error: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-01.23.39:213][  0]LogAutomationTest: Error: UObject.Class AttemptToFindUninitializedScriptStructMembers will be marked as failing due to errors being logged
+[2026.10.29-01.23.39:215][  0]LogAutomationTest: Error: LogClass: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-01.23.39:218][  0]LogAutomationTest: Error: LogClass: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-01.26.34:931][362]LogCesium: Error: [2026-10-28 21:26:34.932] [error] [ErrorList.h:89] Errors when loading tileset:
+[2026.10.29-01.29.19:828][116]LogHttp: Warning: 00000B441F02FA00: request failed, libcurl error: 0 (No error)
+[2026.10.29-01.29.19:841][116]LogCesium: Error: [2026-10-28 21:29:19.841] [error] [RasterOverlayCollection.cpp:146] Error while creating tile provider: Connection failed.
+[2026.10.29-01.29.37:544][275]LogHttp: Warning: 00000B441F025A00: request failed, libcurl error: 0 (No error)
+[2026.10.29-01.29.37:554][275]LogCesium: Error: [2026-10-28 21:29:37.554] [error] [RasterOverlayCollection.cpp:146] Error while creating tile provider: Connection failed.
+[2026.10.29-01.30.17:517][888]LogWindows: Error: appError called: Assertion failed: textureCoordinateID >= 0 && textureCoordinateID < primData.overlayTextureCoordinateIDToUVIndex.size() [File:C:\Program Files\Epic Games\VR-TAK\Game\Plugins\CesiumForUnreal\Source\CesiumRuntime\Private\CesiumGltfComponent.cpp] [Line: 3632]
+[2026.10.29-01.30.17:518][888]LogWindows: Windows GetLastError: The operation completed successfully. (0)
+[2026.10.29-01.30.26:813][888]LogWindows: Error: === Critical error: ===
+[2026.10.29-01.30.26:815][888]LogWindows: Error:
+[2026.10.29-01.30.26:815][888]LogWindows: Error: Assertion failed: textureCoordinateID >= 0 && textureCoordinateID < primData.overlayTextureCoordinateIDToUVIndex.size() [File:C:\Program Files\Epic Games\VR-TAK\Game\Plugins\CesiumForUnreal\Source\CesiumRuntime\Private\CesiumGltfComponent.cpp] [Line: 3632]
+[2026.10.29-01.30.26:815][888]LogWindows: Error:
+[2026.10.29-01.30.26:816][888]LogWindows: Error:
+[2026.10.29-01.30.26:817][888]LogWindows: Error:
+[2026.10.29-01.30.26:817][888]LogWindows: Error: [Callstack] 0x00007fff2a50220e UnrealEditor-CesiumRuntime.dll!`anonymous namespace'::forEachPrimitiveComponent<`UCesiumGltfComponent::AttachRasterTile'::`2'::<lambda_1> >() [C:\Program Files\Epic Games\VR-TAK\Game\Plugins\CesiumForUnreal\Source\CesiumRuntime\Private\CesiumGltfComponent.cpp:3558]
+[2026.10.29-01.30.26:817][888]LogWindows: Error: [Callstack] 0x00007fff2a51f06d UnrealEditor-CesiumRuntime.dll!UCesiumGltfComponent::AttachRasterTile() [C:\Program Files\Epic Games\VR-TAK\Game\Plugins\CesiumForUnreal\Source\CesiumRuntime\Private\CesiumGltfComponent.cpp:3658]
+[2026.10.29-01.30.26:818][888]LogWindows: Error: [Callstack] 0x00007fff2ac0a7bb UnrealEditor-CesiumRuntime.dll!UnrealPrepareRendererResources::attachRasterInMainThread() [C:\Program Files\Epic Games\VR-TAK\Game\Plugins\CesiumForUnreal\Source\CesiumRuntime\Private\UnrealPrepareRendererResources.cpp:218]
+[2026.10.29-01.30.26:818][888]LogWindows: Error: [Callstack] 0x00007fff2adf1955 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::RasterMappedTo3DTile::update() []
+[2026.10.29-01.30.26:818][888]LogWindows: Error: [Callstack] 0x00007fff2ade8c39 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::TilesetContentManager::updateDoneState() []
+[2026.10.29-01.30.26:819][888]LogWindows: Error: [Callstack] 0x00007fff2ade8e7c UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::TilesetContentManager::updateTileContent() []
+[2026.10.29-01.30.26:820][888]LogWindows: Error: [Callstack] 0x00007fff2adbd818 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTileIfNeeded() []
+-- shader compilation
+[2026.10.29-01.23.45:654][  0]LogShaderCompilers: Warning: Failed to compile Material /CesiumForUnreal/Materials/M_CesiumBaseMaterial.M_CesiumBaseMaterial (MI:/CesiumForUnreal/Materials/Instances/MI_CesiumThreeOverlaysAndClippingAndWater.MI_CesiumThreeOverlaysAndClippingAndWater) for platform PCD3D_SM6, Default Material will be used in game.
+-- last log lines
+[2026.10.29-01.30.26:820][888]LogWindows: Error: [Callstack] 0x00007fff2adbd818 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTileIfNeeded() []
+[2026.10.29-01.30.26:820][888]LogWindows: Error: [Callstack] 0x00007fff2adbd2f4 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTile() []
+[2026.10.29-01.30.26:820][888]LogWindows: Error: [Callstack] 0x00007fff2adbddb3 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTileIfNeeded() []
+[2026.10.29-01.30.26:821][888]LogWindows: Error: [Callstack] 0x00007fff2adbd2f4 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTile() []
+[2026.10.29-01.30.26:821][888]LogWindows: Error: [Callstack] 0x00007fff2adbddb3 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTileIfNeeded() []
+[2026.10.29-01.30.26:822][888]LogWindows: Error: [Callstack] 0x00007fff2adbd2f4 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTile() []
+[2026.10.29-01.30.26:823][888]LogWindows: Error: [Callstack] 0x00007fff2adbddb3 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTileIfNeeded() []
+[2026.10.29-01.30.26:823][888]LogWindows: Error: [Callstack] 0x00007fff2adbd2f4 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTile() []
+[2026.10.29-01.30.26:824][888]LogWindows: Error: [Callstack] 0x00007fff2adbddb3 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTileIfNeeded() []
+[2026.10.29-01.30.26:824][888]LogWindows: Error: [Callstack] 0x00007fff2adbd2f4 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTile() []
+[2026.10.29-01.30.26:825][888]LogWindows: Error: [Callstack] 0x00007fff2adbddb3 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTileIfNeeded() []
+[2026.10.29-01.30.26:825][888]LogWindows: Error: [Callstack] 0x00007fff2adbd2f4 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTile() []
+[2026.10.29-01.30.26:825][888]LogWindows: Error: [Callstack] 0x00007fff2adbddb3 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTileIfNeeded() []
+[2026.10.29-01.30.26:826][888]LogWindows: Error: [Callstack] 0x00007fff2adbd2f4 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTile() []
+[2026.10.29-01.30.26:826][888]LogWindows: Error: [Callstack] 0x00007fff2adbddb3 UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::_visitTileIfNeeded() []
+[2026.10.29-01.30.26:827][888]LogWindows: Error: [Callstack] 0x00007fff2adbfd1f UnrealEditor-CesiumRuntime.dll!Cesium3DTilesSelection::Tileset::updateViewGroup() []
+[2026.10.29-01.30.26:830][888]LogWindows: Error: [Callstack] 0x00007fff2a4a82af UnrealEditor-CesiumRuntime.dll!ACesium3DTileset::Tick() [C:\Program Files\Epic Games\VR-TAK\Game\Plugins\CesiumForUnreal\Source\CesiumRuntime\Private\Cesium3DTileset.cpp:2073]
+[2026.10.29-01.30.26:831][888]LogWindows: Error: [Callstack] 0x00007fff2fba3c7d UnrealEditor-Engine.dll!AActor::TickActor() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Engine\Private\Actor.cpp:1516]
+[2026.10.29-01.30.26:831][888]LogWindows: Error: [Callstack] 0x00007fff2fb80a01 UnrealEditor-Engine.dll!FActorTickFunction::ExecuteTick() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Engine\Private\Actor.cpp:251]
+[2026.10.29-01.30.26:832][888]LogWindows: Error: [Callstack] 0x00007fff30966c0b UnrealEditor-Engine.dll!FTickFunctionTask::DoTask() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Engine\Private\TickTaskManager.cpp:278]
+[2026.10.29-01.30.26:832][888]LogWindows: Error: [Callstack] 0x00007fff30968d12 UnrealEditor-Engine.dll!TGraphTask<FTickFunctionTask>::ExecuteTask() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Core\Public\Async\TaskGraphInterfaces.h:1265]
+[2026.10.29-01.30.26:833][888]LogWindows: Error: [Callstack] 0x00007fff6dffc19f UnrealEditor-Core.dll!FNamedTaskThread::ProcessTasksNamedThread() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Core\Private\Async\TaskGraph.cpp:758]
+[2026.10.29-01.30.26:833][888]LogWindows: Error: [Callstack] 0x00007fff6dffc7ae UnrealEditor-Core.dll!FNamedTaskThread::ProcessTasksUntilQuit() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Core\Private\Async\TaskGraph.cpp:649]
+[2026.10.29-01.30.26:834][888]LogWindows: Error: [Callstack] 0x00007fff6e0005f1 UnrealEditor-Core.dll!FTaskGraphCompatibilityImplementation::WaitUntilTasksComplete() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Core\Private\Async\TaskGraph.cpp:2125]
+[2026.10.29-01.30.26:834][888]LogWindows: Error: [Callstack] 0x00007fff3096cd8a UnrealEditor-Engine.dll!FTickTaskSequencer::ReleaseTickGroup() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Engine\Private\TickTaskManager.cpp:556]
+[2026.10.29-01.30.26:835][888]LogWindows: Error: [Callstack] 0x00007fff3096fa7e UnrealEditor-Engine.dll!FTickTaskManager::RunTickGroup() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Engine\Private\TickTaskManager.cpp:1583]
+[2026.10.29-01.30.26:835][888]LogWindows: Error: [Callstack] 0x00007fff302a9265 UnrealEditor-Engine.dll!UWorld::Tick() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Engine\Private\LevelTick.cpp:1626]
+[2026.10.29-01.30.26:835][888]LogWindows: Error: [Callstack] 0x00007fff2ff7b69d UnrealEditor-Engine.dll!UGameEngine::Tick() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Engine\Private\GameEngine.cpp:1772]
+[2026.10.29-01.30.26:836][888]LogWindows: Error: [Callstack] 0x00007ff6fcfdf862 UnrealEditor.exe!FEngineLoop::Tick() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Launch\Private\LaunchEngineLoop.cpp:5825]
+[2026.10.29-01.30.26:836][888]LogWindows: Error: [Callstack] 0x00007ff6fcfa35dc UnrealEditor.exe!GuardedMain() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Launch\Private\Launch.cpp:188]
+[2026.10.29-01.30.26:837][888]LogWindows: Error: [Callstack] 0x00007ff6fcfe65aa UnrealEditor.exe!GuardedMainWrapper() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Launch\Private\Windows\LaunchWindows.cpp:118]
+[2026.10.29-01.30.26:837][888]LogWindows: Error: [Callstack] 0x00007ff6fcfe6804 UnrealEditor.exe!LaunchWindowsStartup() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Launch\Private\Windows\LaunchWindows.cpp:258]
+[2026.10.29-01.30.26:838][888]LogWindows: Error: [Callstack] 0x00007ff6fcfe6bc4 UnrealEditor.exe!WinMain() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\Launch\Private\Windows\LaunchWindows.cpp:298]
+[2026.10.29-01.30.26:838][888]LogWindows: Error: [Callstack] 0x00007ff6fcfe9f52 UnrealEditor.exe!__scrt_common_main_seh() [D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl:288]
+[2026.10.29-01.30.26:839][888]LogWindows: Error: [Callstack] 0x00007fffebd67374 KERNEL32.DLL!UnknownFunction []
+[2026.10.29-01.30.26:839][888]LogWindows: Error:
+[2026.10.29-01.30.26:849][888]LogExit: Executing StaticShutdownAfterError
+[2026.10.29-01.30.26:857][888]LogWindows: FPlatformMisc::RequestExit(1, LaunchWindowsStartup.ExceptionHandler)
+[2026.10.29-01.30.26:857][888]LogWindows: FPlatformMisc::RequestExitWithStatus(1, 3, LaunchWindowsStartup.ExceptionHandler)
+[2026.10.29-01.30.26:858][888]LogCore: Engine exit requested (reason: Win RequestExit)
+
+==== VR-TAK processes and windows ====  [21:40:19]
+   CrashReportClientEditor x1
+   CrashReportClientEditor pid 23176: responding True, CPU 37 s, window ""
+No screenshots yet.
+
+==== Regression checks ====  [21:40:19]
+PASS  LogCesiumIonVrtak: Found \d+ assets
+PASS  LogCesiumIonVrtak: Added .+ to VR-TAK's world
+PASS  LogCesiumIonVrtak: Georeference aligned
+PASS  LogCesiumIonVrtak: Cesium ion panel on screen
+FAIL  LogCesiumIonVrtak: Screenshot requested
+FAIL  LogCesiumIonVrtak: Quitting after the test run
+PASS  LogCesiumIonVrtak: XR system
+FAIL  3 fatal line(s)
+REGRESSION: FAIL (3)
