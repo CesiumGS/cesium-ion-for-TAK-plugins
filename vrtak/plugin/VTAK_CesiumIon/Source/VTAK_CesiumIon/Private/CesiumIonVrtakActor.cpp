@@ -371,6 +371,12 @@ void ACesiumIonVrtakActor::ApplyTestSwitches()
 		HideSettingsAt = Settings[0] + 25.0;
 	}
 	bStartSignIn = FParse::Param(FCommandLine::Get(), TEXT("CesiumIonSignIn"));
+	TArray<double> SelfTest;
+	if (ParseNumbers(TEXT("CesiumIonSelfTest="), SelfTest))
+	{
+		SelfTestAt = SelfTest[0];
+		NextSelfTestStepAt = SelfTest[0];
+	}
 	TArray<double> Seconds;
 	if (ParseNumbers(TEXT("CesiumIonScreenshots="), Seconds))
 	{
@@ -559,6 +565,118 @@ bool ACesiumIonVrtakActor::SyncGeoreference()
 	return true;
 }
 
+void ACesiumIonVrtakActor::RunSelfTestStep()
+{
+	// One step every few seconds, so each result is in the log before the next action.
+	NextSelfTestStepAt = ElapsedSeconds + 4.0;
+	APlayerController* Player = GetWorld() ? GetWorld()->GetFirstPlayerController() : nullptr;
+	APlayerCameraManager* Camera = Player ? Player->PlayerCameraManager : nullptr;
+	const FVector CameraLocation = Camera ? Camera->GetCameraLocation() : FVector::ZeroVector;
+	auto HolderScale = [this]() { return PanelHolder ? PanelHolder->GetActorScale3D().X / FMath::Max(PanelBaseScale, 1e-6) : 0.0; };
+	switch (SelfTestStep)
+	{
+	case 0:
+	{
+		const bool bStereo = GEngine && GEngine->IsStereoscopic3D();
+		UE_LOG(LogCesiumIonVrtak, Log, TEXT("Self-test: start; XR system %s, stereoscopic %s, %d layers loaded."),
+			(GEngine && GEngine->XRSystem.IsValid()) ? TEXT("present") : TEXT("none"), bStereo ? TEXT("ON") : TEXT("off"), LoadedNames.Num());
+		if (!bPanelInWorld)
+		{
+			// Not in VR (the headset is not worn): put the panel in the world anyway, to test that path.
+			if (Panel)
+			{
+				Panel->RemoveFromParent();
+				Panel = nullptr;
+			}
+			bPanelWanted = true;
+			UE_LOG(LogCesiumIonVrtak, Log, TEXT("Self-test: not in VR; opening the panel in the world to test it."));
+			if (!OpenPanelInWorld())
+			{
+				UE_LOG(LogCesiumIonVrtak, Warning, TEXT("Self-test: FAIL the panel did not open in the world."));
+			}
+		}
+		UE_LOG(LogCesiumIonVrtak, Log, TEXT("Self-test: panel in world %s, holder %s (own: %s), scale %.3f."), bPanelInWorld ? TEXT("yes") : TEXT("NO"),
+			PanelHolder ? *PanelHolder->GetName() : TEXT("none"), bOwnPanelHolder ? TEXT("yes") : TEXT("no"), PanelHolder ? PanelHolder->GetActorScale3D().X : 0.0);
+		break;
+	}
+	case 1:
+	{
+		for (int32 Repeat = 0; Repeat < 8; ++Repeat)
+		{
+			ScalePanel(0.85f);
+		}
+		const double Smallest = HolderScale();
+		for (int32 Repeat = 0; Repeat < 20; ++Repeat)
+		{
+			ScalePanel(1.18f);
+		}
+		const double Biggest = HolderScale();
+		UE_LOG(LogCesiumIonVrtak, Log, TEXT("Self-test: resize limits x%.2f .. x%.2f of the opening size (expect 0.50 .. 2.50): %s"), Smallest, Biggest,
+			(FMath::IsNearlyEqual(Smallest, 0.5, 0.02) && FMath::IsNearlyEqual(Biggest, 2.5, 0.02)) ? TEXT("PASS") : TEXT("FAIL"));
+		while (HolderScale() > 1.01)
+		{
+			ScalePanel(0.9f);
+		}
+		break;
+	}
+	case 2:
+	{
+		DockPanel(0.0);
+		const double Distance = PanelHolder ? FVector::Dist(PanelHolder->GetActorLocation(), CameraLocation) : -1.0;
+		UE_LOG(LogCesiumIonVrtak, Log, TEXT("Self-test: panel brought to %.0f cm from the camera (expect about 120): %s"), Distance,
+			FMath::IsNearlyEqual(Distance, 120.0, 20.0) ? TEXT("PASS") : TEXT("FAIL"));
+		break;
+	}
+	case 3:
+	{
+		int32 Pointers = 0;
+		for (TObjectIterator<UWidgetInteractionComponent> It; It; ++It)
+		{
+			if (It->GetWorld() == GetWorld())
+			{
+				++Pointers;
+				UE_LOG(LogCesiumIonVrtak, Log, TEXT("Self-test: widget pointer %s on %s, active %s."), *It->GetName(), It->GetOwner() ? *It->GetOwner()->GetName() : TEXT("?"), It->IsActive() ? TEXT("yes") : TEXT("no"));
+			}
+		}
+		StartGrab();
+		const bool bPointer = GrabPointer.IsValid();
+		EndGrab();
+		UE_LOG(LogCesiumIonVrtak, Log, TEXT("Self-test: %d widget pointer(s) found; grab would use a %s."), Pointers, bPointer ? TEXT("controller pointer") : TEXT("head fallback"));
+		break;
+	}
+	case 4:
+	{
+		for (const TPair<int64, FString>& Entry : LoadedTypes)
+		{
+			if (Entry.Value == TEXT("3DTILES") && IsValid(Tilesets.FindRef(Entry.Key)))
+			{
+				SelfTestViewIds.Add(Entry.Key);
+			}
+		}
+		UE_LOG(LogCesiumIonVrtak, Log, TEXT("Self-test: %d 3D Tiles asset(s) to view."), SelfTestViewIds.Num());
+		break;
+	}
+	default:
+	{
+		const int32 Index = SelfTestStep - 5;
+		if (Index < SelfTestViewIds.Num())
+		{
+			const int64 Id = SelfTestViewIds[Index];
+			GoToAsset(Id);
+			UE_LOG(LogCesiumIonVrtak, Log, TEXT("Self-test: View on asset %lld (%s); the view moves after the teleport settles."), Id, *LoadedNames.FindRef(Id));
+		}
+		else
+		{
+			UE_LOG(LogCesiumIonVrtak, Log, TEXT("Self-test: done."));
+			SelfTestStep = -1;
+			return;
+		}
+		break;
+	}
+	}
+	++SelfTestStep;
+}
+
 void ACesiumIonVrtakActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
@@ -592,6 +710,10 @@ void ACesiumIonVrtakActor::Tick(float DeltaSeconds)
 			const FVector Location = FMath::VInterpTo(PanelHolder->GetActorLocation(), Target, DeltaSeconds, 2.5f);
 			PanelHolder->SetActorLocationAndRotation(Location, (Location - CameraLocation).Rotation());
 		}
+	}
+	if (SelfTestAt >= 0.0 && SelfTestStep >= 0 && ElapsedSeconds >= NextSelfTestStepAt)
+	{
+		RunSelfTestStep();
 	}
 	if (!bRibbonButtonRegistered && RibbonTries < 12 && ElapsedSeconds >= NextRibbonTryAt)
 	{

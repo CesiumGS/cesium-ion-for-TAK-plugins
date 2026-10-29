@@ -139,6 +139,12 @@ private:
 	float SyncCountdown = 0.f;
 	TArray<int64> PendingTestLoads;
 	double ElapsedSeconds = 0.0;
+	/** -CesiumIonSelfTest=<seconds>: from then on the plugin exercises its own panel (resize, dock, grab pointer, View) and logs the results, for runs with nobody in the headset. */
+	double SelfTestAt = -1.0;
+	int32 SelfTestStep = 0;
+	double NextSelfTestStepAt = 0.0;
+	TArray<int64> SelfTestViewIds;
+	void RunSelfTestStep();
 	double ScreenshotAt = -1.0;
 	int32 ScreenshotsTaken = 0;
 	bool bScreenshotsWaitForSignIn = false;
