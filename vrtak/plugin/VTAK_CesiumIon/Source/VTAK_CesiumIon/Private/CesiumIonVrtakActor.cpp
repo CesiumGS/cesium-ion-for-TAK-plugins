@@ -1291,6 +1291,7 @@ void ACesiumIonVrtakActor::ToggleAsset(const FCesiumIonVrtakAsset& Asset)
 		}
 		Tilesets.Remove(Asset.Id);
 		LoadedNames.Remove(Asset.Id);
+		FailedLayers.Remove(Asset.Id);
 		LoadedTypes.Remove(Asset.Id);
 		ForgetOrphanedImagery();
 		UpdateVrtakTerrain();
@@ -1309,6 +1310,7 @@ void ACesiumIonVrtakActor::ToggleAsset(const FCesiumIonVrtakAsset& Asset)
 		}
 		Overlays.Remove(Asset.Id);
 		LoadedNames.Remove(Asset.Id);
+		FailedLayers.Remove(Asset.Id);
 		LoadedTypes.Remove(Asset.Id);
 		Message(TEXT("Removed ") + Asset.Name + TEXT("."));
 	}
@@ -1339,6 +1341,8 @@ void ACesiumIonVrtakActor::OnTilesetLoadFailure(const FCesium3DTilesetLoadFailur
 		{
 			UE_LOG(LogCesiumIonVrtak, Warning, TEXT("Layer #%lld failed to load: HTTP %d, %s"),
 				Entry.Key, Details.HttpStatusCode, *Details.Message);
+			FailedLayers.Add(Entry.Key);
+			Message(LoadedNames.FindRef(Entry.Key) + FString::Printf(TEXT(" could not be loaded (Cesium ion answered HTTP %d). Check that the asset finished processing in Cesium ion."), Details.HttpStatusCode));
 		}
 	}
 }
@@ -1441,6 +1445,7 @@ void ACesiumIonVrtakActor::ForgetOrphanedImagery()
 	{
 		Overlays.Remove(Id);
 		LoadedNames.Remove(Id);
+		FailedLayers.Remove(Id);
 		LoadedTypes.Remove(Id);
 	}
 }
@@ -1450,6 +1455,11 @@ void ACesiumIonVrtakActor::GoToAsset(int64 AssetId)
 	ACesium3DTileset* Tileset = Tilesets.FindRef(AssetId);
 	if (!IsValid(Tileset) || !IsValid(Georeference))
 	{
+		return;
+	}
+	if (FailedLayers.Contains(AssetId))
+	{
+		Message(LoadedNames.FindRef(AssetId) + TEXT(" failed to load, so there is nothing to view. Check that the asset finished processing in Cesium ion."));
 		return;
 	}
 	// The tileset's own bounding volume (known as soon as tileset.json has loaded), not the loaded

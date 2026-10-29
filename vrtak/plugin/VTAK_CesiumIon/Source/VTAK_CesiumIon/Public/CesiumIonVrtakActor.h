@@ -128,6 +128,8 @@ private:
 	/** Imagery on the map; a component of the terrain tileset it drapes over. */
 	TMap<int64, TWeakObjectPtr<UCesiumIonRasterOverlay>> Overlays;
 	TMap<int64, FString> LoadedNames;
+	/** Layers whose tileset Cesium ion refused to serve (for example an asset that failed processing). */
+	TSet<int64> FailedLayers;
 	TMap<int64, FString> LoadedTypes;
 
 	FTransform LastGlobeTransform;
