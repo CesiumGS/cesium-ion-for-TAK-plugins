@@ -1,0 +1,126 @@
+
+==== Build the plugin (GameEditor, incremental) ====  [19:41:49]
+
+==== Install VTAK_CesiumIon ====  [19:41:49]
+   \VTAK_CesiumIon.uplugin  653 B
+   \Resources\cesium_ion_logo.png  20,275 B
+   [2/8] Compile [x64] CesiumIonVrtakActor.gen.cpp
+   [4/8] Compile [x64] CesiumIonVrtakPanel.cpp
+   [5/8] Compile [x64] CesiumIonVrtakActor.cpp
+   Total execution time: 67.63 seconds
+Build exit code: 0
+
+==== Start VR-TAK (detached) ====  [19:42:57]
+C:\Program Files\Epic Games\VR-TAK\Engine\Binaries\Win64\UnrealEditor.exe "C:\Program Files\Epic Games\VR-TAK\Game\Game.uproject" -game -windowed -ResX=1920 -ResY=1080 -log -CesiumIonOrigin=39.9526,-75.1635,0 -CesiumIonEnterWorld=20 -CesiumIonScreenshots=840 -CesiumIonShowSettings=855 -CesiumIonQuitAfter=900 -CesiumIonLoad=2275207 -CesiumIonSignIn
+Started pid 19672 at 10/28/2026 19:42:57. Run this task again for progress and screenshots.
+
+==== VR-TAK run ====  [19:59:57]
+Log: C:\Program Files\Epic Games\VR-TAK\Game\Saved\Logs\Game.log (updated 10/28/2026 19:58:30)
+-- Cesium ion plugin
+[2026.10.28-23.43.26:432][  1]LogCesiumIonVrtak: Added Google Photorealistic 3D Tiles to VR-TAK's world.
+[2026.10.28-23.43.26:653][  1]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.43.26:653][  1]LogCesiumIonVrtak: Aligning with Game_GlobeReferenceActor_Ellipsoid_0. Globes: Game_GlobeReferenceActor_Ellipsoid_0(ellipsoid, scale 1.00, player at 39.9426, -75.1635, 350 m) Game_GlobeReferenceActor_ENU_0(ENU, scale 0.01, player at 15.3278, -125.1289, 634691020 m)
+[2026.10.28-23.43.26:653][  1]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 39.942600, -75.163500, 0.0 m; 100.1 units/m; yaw 165.2.
+[2026.10.28-23.43.26:713][  1]LogCesium: Loading tileset for asset ID 2275207
+[2026.10.28-23.43.26:713][  1]LogCesium: Loading tileset for asset ID 2275207 done
+[2026.10.28-23.43.26:748][  2]LogCesiumIonVrtak: Signed in as Jake.Steinerman.
+[2026.10.28-23.43.31:303][106]LogCesiumIonVrtak: Registered the Cesium ion ribbon button (Home > Application) with widget class WBP_RibbonButton_C.
+[2026.10.28-23.43.37:003][422]LogCesiumIonVrtak: Panel: in viewport 1, visible 1, tree 1, root Border, desired X=993.667 Y=6455.667, size X=540.000 Y=900.000 at X=1580.000 Y=140.000; viewport X=1920.000 Y=1080.000.
+[2026.10.28-23.43.42:255][784]LogCesiumIonVrtak: Moved the view to 39.95260, -75.16350, 0 m (as VR-TAK's Go To does).
+[2026.10.28-23.43.46:264][  1]LogCesiumIonVrtak: Entering VR-TAK's world (ce GoToWorld).
+[2026.10.28-23.43.46:759][ 21]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 15.334158, -125.121012, 0.0 m; 100.0 units/m; yaw -144.9.
+[2026.10.28-23.43.56:255][625]LogCesiumIonVrtak: Diagnostics: camera at X=35566248971.018 Y=-50566224866.946 Z=16950947295.514; georeference at X=353957433.118 Y=-503238088.755 Z=167578682.368, scale X=1.000 Y=0.994 Z=1.000.
+[2026.10.28-23.43.56:255][625]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 767 components, hidden 0, content X=202856596.686 Y=-347358.183 Z=-321872996.122 (size X=1334642698.230 Y=1731654889.139 Z=2187010290.699), 64076733759 units from the camera.
+[2026.10.28-23.43.56:501][665]LogCesiumIonVrtak: Moved the view to 39.94260, -75.16350, 350 m (as VR-TAK's Go To does), bearing 0, pitch -35.
+[2026.10.28-23.43.57:012][689]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 39.942600, -75.163500, 0.0 m; 100.1 units/m; yaw 165.2.
+[2026.10.28-23.44.26:258][682]LogCesiumIonVrtak: Diagnostics: camera at X=-125395171.256 Y=-473380415.047 Z=407332695.374; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.28-23.44.26:259][682]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 1879 components, hidden 0, content X=336750.408 Y=-2438079.120 Z=-356130022.268 (size X=1797321101.234 Y=1775072121.039 Z=2257991207.837), 905798278 units from the camera.
+[2026.10.28-23.44.28:010][804]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.44.56:508][786]LogCesiumIonVrtak: Diagnostics: camera at X=-125395171.256 Y=-473380415.047 Z=407332695.374; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.28-23.44.56:508][786]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 1879 components, hidden 0, content X=336750.408 Y=-2438079.120 Z=-356130022.268 (size X=1797321101.234 Y=1775072121.039 Z=2257991207.837), 905798278 units from the camera.
+[2026.10.28-23.45.26:509][874]LogCesiumIonVrtak: Diagnostics: camera at X=-125395171.256 Y=-473380415.047 Z=407332695.374; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.28-23.45.26:509][874]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 1879 components, hidden 0, content X=336750.408 Y=-2438079.120 Z=-356130022.268 (size X=1797321101.234 Y=1775072121.039 Z=2257991207.837), 905798278 units from the camera.
+[2026.10.28-23.45.30:265][136]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.46.32:258][433]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.47.33:766][713]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.48.35:261][993]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.49.37:504][332]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.50.39:004][624]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.51.40:753][933]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.52.43:013][258]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.53.45:256][588]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.54.47:260][909]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.55.49:252][232]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.56.51:511][570]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.57.26:250][990]LogCesiumIonVrtak: Screenshot requested: ../../../Game/Saved/Screenshots/WindowsEditor/CesiumIon-1.png
+[2026.10.28-23.57.53:499][849]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.28-23.57.56:260][ 40]LogCesiumIonVrtak: Screenshot requested: ../../../Game/Saved/Screenshots/WindowsEditor/CesiumIon-2.png
+[2026.10.28-23.58.26:250][ 88]LogCesiumIonVrtak: Screenshot requested: ../../../Game/Saved/Screenshots/WindowsEditor/CesiumIon-3.png
+[2026.10.28-23.58.26:250][ 88]LogCesiumIonVrtak: Quitting after the test run.
+-- errors
+[2026.10.28-23.43.16:935][  0]LogClass: Error: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.28-23.43.16:936][  0]LogClass: Error: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.28-23.43.17:009][  0]LogAutomationTest: Error: UObject.Class AttemptToFindUninitializedScriptStructMembers will be marked as failing due to errors being logged
+[2026.10.28-23.43.17:010][  0]LogAutomationTest: Error: LogClass: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.28-23.43.17:011][  0]LogAutomationTest: Error: LogClass: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+-- shader compilation
+[2026.10.28-23.58.30:038][ 89]LogShaderCompilers: Display:      TBasePassPSFPrecomputedVolumetricLightmapLightingPolicy - 6.62% of total time (compiled    3 times, average 4.07 sec, max 4.57 sec, min 3.39 sec)
+[2026.10.28-23.58.30:038][ 89]LogShaderCompilers: Display: ================================================
+[2026.10.28-23.58.30:110][ 89]LogShaderCompilers: Display: Shaders left to compile 0
+-- last log lines
+[2026.10.28-23.58.30:718][ 89]LogModuleManager: Shutting down and abandoning module Media (71)
+[2026.10.28-23.58.30:719][ 89]LogModuleManager: Shutting down and abandoning module ExrReaderGpu (68)
+[2026.10.28-23.58.30:719][ 89]LogModuleManager: Shutting down and abandoning module AISupportModule (66)
+[2026.10.28-23.58.30:719][ 89]LogModuleManager: Shutting down and abandoning module DesktopPlatform (64)
+[2026.10.28-23.58.30:720][ 89]LogModuleManager: Shutting down and abandoning module PythonScriptPluginPreload (62)
+[2026.10.28-23.58.30:720][ 89]LogModuleManager: Shutting down and abandoning module PlatformCryptoOpenSSL (60)
+[2026.10.28-23.58.30:720][ 89]LogModuleManager: Shutting down and abandoning module PlatformCryptoTypes (58)
+[2026.10.28-23.58.30:720][ 89]LogModuleManager: Shutting down and abandoning module PlatformCrypto (56)
+[2026.10.28-23.58.30:721][ 89]LogModuleManager: Shutting down and abandoning module PlasticSourceControl (54)
+[2026.10.28-23.58.30:722][ 89]LogModuleManager: Shutting down and abandoning module PerforceSourceControl (52)
+[2026.10.28-23.58.30:722][ 89]LogModuleManager: Shutting down and abandoning module SourceControl (51)
+[2026.10.28-23.58.30:722][ 89]LogModuleManager: Shutting down and abandoning module XGEController (48)
+[2026.10.28-23.58.30:722][ 89]LogXGEController: Cleaning working directory: C:/Users/Cesium/AppData/Local/Temp/UnrealXGEWorkingDir/
+[2026.10.28-23.58.30:723][ 89]LogModuleManager: Shutting down and abandoning module FastBuildController (46)
+[2026.10.28-23.58.30:723][ 89]LogModuleManager: Shutting down and abandoning module IoStoreOnDemand (44)
+[2026.10.28-23.58.30:723][ 89]LogModuleManager: Shutting down and abandoning module AnimationModifiers (42)
+[2026.10.28-23.58.30:724][ 89]LogModuleManager: Shutting down and abandoning module AudioEditor (40)
+[2026.10.28-23.58.30:724][ 89]LogModuleManager: Shutting down and abandoning module PropertyEditor (39)
+[2026.10.28-23.58.30:724][ 89]LogModuleManager: Shutting down and abandoning module Virtualization (36)
+[2026.10.28-23.58.30:724][ 89]LogModuleManager: Shutting down and abandoning module MessageLog (35)
+[2026.10.28-23.58.30:724][ 89]LogModuleManager: Shutting down and abandoning module TextureCompressor (32)
+[2026.10.28-23.58.30:724][ 89]LogModuleManager: Shutting down and abandoning module OpenColorIOWrapper (31)
+[2026.10.28-23.58.30:725][ 89]LogModuleManager: Shutting down and abandoning module RenderCore (28)
+[2026.10.28-23.58.30:725][ 89]LogModuleManager: Shutting down and abandoning module Landscape (26)
+[2026.10.28-23.58.30:725][ 89]LogModuleManager: Shutting down and abandoning module SlateRHIRenderer (24)
+[2026.10.28-23.58.30:725][ 89]LogModuleManager: Shutting down and abandoning module AnimGraphRuntime (22)
+[2026.10.28-23.58.30:725][ 89]LogModuleManager: Shutting down and abandoning module Renderer (20)
+[2026.10.28-23.58.30:726][ 89]LogModuleManager: Shutting down and abandoning module Engine (18)
+[2026.10.28-23.58.30:726][ 89]LogModuleManager: Shutting down and abandoning module CoreUObject (16)
+[2026.10.28-23.58.30:726][ 89]LogModuleManager: Shutting down and abandoning module SandboxFile (14)
+[2026.10.28-23.58.30:727][ 89]LogModuleManager: Shutting down and abandoning module PakFile (12)
+[2026.10.28-23.58.30:728][ 89]LogPakFile: Destroying PakPlatformFile
+[2026.10.28-23.58.30:728][ 89]LogModuleManager: Shutting down and abandoning module RSA (11)
+[2026.10.28-23.58.30:731][ 89]LogModuleManager: Shutting down and abandoning module NetworkFile (8)
+[2026.10.28-23.58.30:731][ 89]LogModuleManager: Shutting down and abandoning module StreamingFile (6)
+[2026.10.28-23.58.30:731][ 89]LogModuleManager: Shutting down and abandoning module CookOnTheFly (4)
+[2026.10.28-23.58.30:731][ 89]LogModuleManager: Shutting down and abandoning module StorageServerClient (2)
+[2026.10.28-23.58.30:832][ 89]LogD3D12RHI: ~FD3D12DynamicRHI
+[2026.10.28-23.58.30:895][ 89]LogExit: Exiting.
+[2026.10.28-23.58.30:909][ 89]Log file closed, 10/28/26 19:58:30
+
+==== VR-TAK processes and windows ====  [19:59:57]
+Screenshot: vrtak-CesiumIon-1.png (2930 KB, 10/28/2026 19:57:26)
+Screenshot: vrtak-CesiumIon-2.png (2923 KB, 10/28/2026 19:57:56)
+Screenshot: vrtak-CesiumIon-3.png (2930 KB, 10/28/2026 19:58:26)
+
+==== Regression checks ====  [19:59:57]
+PASS  LogCesiumIonVrtak: Found \d+ assets
+PASS  LogCesiumIonVrtak: Added .+ to VR-TAK's world
+PASS  LogCesiumIonVrtak: Georeference aligned
+PASS  LogCesiumIonVrtak: Cesium ion panel on screen
+PASS  LogCesiumIonVrtak: Screenshot requested
+PASS  LogCesiumIonVrtak: Quitting after the test run
+PASS  LogCesiumIonVrtak: XR system
+PASS  no fatal errors
+REGRESSION: PASS
