@@ -1,0 +1,146 @@
+
+==== Build the plugin (GameEditor, incremental) ====  [21:58:38]
+
+==== Install VTAK_CesiumIon ====  [21:58:38]
+   \VTAK_CesiumIon.uplugin  653 B
+   \Resources\cesium_ion_logo.png  20,275 B
+   [1/7] Compile [x64] CesiumIonVrtakActor.gen.cpp
+   [3/7] Compile [x64] CesiumIonVrtakPanel.cpp
+   [4/7] Compile [x64] CesiumIonVrtakActor.cpp
+   Total execution time: 84.32 seconds
+Build exit code: 0
+
+==== Start VR-TAK (detached) ====  [22:00:03]
+C:\Program Files\Epic Games\VR-TAK\Engine\Binaries\Win64\UnrealEditor.exe "C:\Program Files\Epic Games\VR-TAK\Game\Game.uproject" -game -windowed -ResX=1920 -ResY=1080 -log -CesiumIonOrigin=39.9526,-75.1635,0 -CesiumIonEnterWorld=20 -CesiumIonScreenshots=840 -CesiumIonShowSettings=855 -CesiumIonQuitAfter=900 -CesiumIonLoad=2275207 -CesiumIonSignIn
+Started pid 11784 at 10/28/2026 22:00:03. Run this task again for progress and screenshots.
+
+==== VR-TAK run ====  [22:17:03]
+Log: C:\Program Files\Epic Games\VR-TAK\Game\Saved\Logs\Game.log (updated 10/28/2026 22:15:47)
+-- Cesium ion plugin
+[2026.10.29-02.12.34:322][731]LogCesium: Loading tileset for asset ID 0 done
+[2026.10.29-02.12.34:324][731]LogCesiumIonVrtak: Added Chichén Itzá  Pyramid (Sketchfab) to VR-TAK's world.
+[2026.10.29-02.12.34:343][731]LogCesium: Loading tileset for asset ID 5146168
+[2026.10.29-02.12.34:343][731]LogCesium: Loading tileset for asset ID 5146168 done
+[2026.10.29-02.12.34:527][741]LogCesium: Error: [2026-10-28 22:12:34.527] [error] [ErrorList.h:89] Errors when loading tileset:
+[2026.10.29-02.12.34:529][741]LogCesiumIonVrtak: Warning: Layer #5146168 failed to load: HTTP 400, Received status code 400 for asset response https://api.cesium.com/v1/assets/5146168/endpoint?access_token=***
+[2026.10.29-02.12.35:671][811]LogCesiumIonVrtak: Still loading: try again in a moment.
+[2026.10.29-02.12.44:716][389]LogCesium: Loading tileset for asset ID 0
+[2026.10.29-02.12.44:717][389]LogCesium: Loading tileset for asset ID 0 done
+[2026.10.29-02.12.44:718][389]LogCesiumIonVrtak: Added Cologne Cathedral / Kölner Dom, Germany (YouTube) - mesh to VR-TAK's world.
+[2026.10.29-02.12.44:740][389]LogCesium: Loading tileset for asset ID 5098966
+[2026.10.29-02.12.44:741][389]LogCesium: Loading tileset for asset ID 5098966 done
+[2026.10.29-02.12.50:187][717]LogCesiumIonVrtak: Removed Adelaide.
+[2026.10.29-02.12.51:796][815]LogCesiumIonVrtak: Moved the view to 50.91706, 6.95692, 2224 m (as VR-TAK's Go To does), bearing 0, pitch -35.
+[2026.10.29-02.12.51:797][815]LogCesiumIonVrtak: Moved to view Cologne Cathedral / Kölner Dom, Germany (YouTube) - mesh.
+[2026.10.29-02.12.52:150][833]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 50.917059, 6.956922, 0.0 m; 100.2 units/m; yaw 83.0.
+[2026.10.29-02.13.32:389][685]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: no.
+[2026.10.29-02.14.02:159][  5]LogCesium: Loading tileset for asset ID 0
+[2026.10.29-02.14.02:160][  5]LogCesium: Loading tileset for asset ID 0 done
+[2026.10.29-02.14.02:161][  5]LogCesiumIonVrtak: Added Melbourne Photogrammetry to VR-TAK's world.
+[2026.10.29-02.14.02:182][  5]LogCesium: Loading tileset for asset ID 69380
+[2026.10.29-02.14.02:184][  5]LogCesium: Loading tileset for asset ID 69380 done
+[2026.10.29-02.14.06:108][186]LogCesiumIonVrtak: Still loading: try again in a moment.
+[2026.10.29-02.14.07:077][235]LogCesiumIonVrtak: Still loading: try again in a moment.
+[2026.10.29-02.14.15:159][641]LogCesium: Loading tileset for asset ID 0
+[2026.10.29-02.14.15:160][641]LogCesium: Loading tileset for asset ID 0 done
+[2026.10.29-02.14.15:161][641]LogCesiumIonVrtak: Added San Francisco Palace of Fine Arts (3D Tiles) to VR-TAK's world.
+[2026.10.29-02.14.15:183][641]LogCesium: Loading tileset for asset ID 5011046
+[2026.10.29-02.14.15:184][641]LogCesium: Loading tileset for asset ID 5011046 done
+[2026.10.29-02.14.20:380][890]LogCesiumIonVrtak: San Francisco Palace of Fine Arts (3D Tiles) covers too large an area to frame; use VR-TAK's Go To.
+[2026.10.29-02.14.23:808][ 56]LogCesiumIonVrtak: San Francisco Palace of Fine Arts (3D Tiles) covers too large an area to frame; use VR-TAK's Go To.
+[2026.10.29-02.14.34:166][533]LogCesiumIonVrtak: XR system present; stereoscopic 3D ON (in VR); panel is a screen widget: no.
+[2026.10.29-02.14.36:153][628]LogCesiumIonVrtak: Screenshot requested: ../../../Game/Saved/Screenshots/WindowsEditor/CesiumIon-1.png
+[2026.10.29-02.14.56:184][344]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.29-02.14.56:184][344]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: no.
+[2026.10.29-02.15.01:440][768]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.29-02.15.12:696][756]LogCesiumIonVrtak: Screenshot requested: ../../../Game/Saved/Screenshots/WindowsEditor/CesiumIon-2.png
+[2026.10.29-02.15.42:697][412]LogCesiumIonVrtak: Screenshot requested: ../../../Game/Saved/Screenshots/WindowsEditor/CesiumIon-3.png
+[2026.10.29-02.15.42:698][412]LogCesiumIonVrtak: Quitting after the test run.
+[2026.10.29-02.15.43:348][413]LogCesiumIonVrtak: VR-TAK's own terrain is back on.
+-- errors
+[2026.10.29-02.00.25:763][  0]LogClass: Error: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-02.00.25:763][  0]LogClass: Error: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-02.00.25:831][  0]LogAutomationTest: Error: UObject.Class AttemptToFindUninitializedScriptStructMembers will be marked as failing due to errors being logged
+[2026.10.29-02.00.25:832][  0]LogAutomationTest: Error: LogClass: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-02.00.25:833][  0]LogAutomationTest: Error: LogClass: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-02.09.31:820][174]LogCesium: Error: [2026-10-28 22:09:31.821] [error] [ErrorList.h:89] Errors when loading tileset:
+[2026.10.29-02.10.03:585][783]LogCesium: Error: [2026-10-28 22:10:03.586] [error] [ErrorList.h:89] Errors when loading tileset:
+[2026.10.29-02.10.34:639][846]LogHttp: Warning: 0000088C26915F00: request failed, libcurl error: 0 (No error)
+[2026.10.29-02.10.34:639][846]LogHttp: Warning: 0000088C26919100: request failed, libcurl error: 0 (No error)
+[2026.10.29-02.10.34:647][846]LogCesium: Error: [2026-10-28 22:10:34.647] [error] [RasterOverlayCollection.cpp:146] Error while creating tile provider: Connection failed.
+[2026.10.29-02.10.34:648][846]LogCesium: Error: [2026-10-28 22:10:34.647] [error] [RasterOverlayCollection.cpp:146] Error while creating tile provider: Connection failed.
+[2026.10.29-02.10.56:691][103]LogHttp: Warning: 0000088C26CAF500: request failed, libcurl error: 0 (No error)
+[2026.10.29-02.10.56:710][103]LogCesium: Error: [2026-10-28 22:10:56.711] [error] [RasterOverlayCollection.cpp:146] Error while creating tile provider: Connection failed.
+[2026.10.29-02.12.34:527][741]LogCesium: Error: [2026-10-28 22:12:34.527] [error] [ErrorList.h:89] Errors when loading tileset:
+[2026.10.29-02.14.43:449][835]LogOutputDevice: Error: === Handled ensure: ===
+[2026.10.29-02.14.43:452][835]LogOutputDevice: Error:
+[2026.10.29-02.14.43:453][835]LogOutputDevice: Error: Ensure condition failed: ((Result) >= 0)  [File:C:\Program Files\Epic Games\VR-TAK\Engine\Plugins\Runtime\OpenXR\Source\OpenXRHMD\Private\OpenXRHMD.cpp] [Line: 670]
+[2026.10.29-02.14.43:453][835]LogOutputDevice: Error: OpenXR call failed with result XR_ERROR_TIME_INVALID
+[2026.10.29-02.14.43:454][835]LogOutputDevice: Error: Stack:
+[2026.10.29-02.14.43:454][835]LogOutputDevice: Error: [Callstack] 0x00007fff3839e484 UnrealEditor-OpenXRHMD.dll!FOpenXRHMD::GetPoseForTime() [C:\Program Files\Epic Games\VR-TAK\Engine\Plugins\Runtime\OpenXR\Source\OpenXRHMD\Private\OpenXRHMD.cpp:670]
+[2026.10.29-02.14.43:454][835]LogOutputDevice: Error: [Callstack] 0x00007ffeef81eb1b UnrealEditor-OpenXRInput.dll!FOpenXRInputPlugin::FOpenXRInput::GetControllerOrientationAndPositionForTime() [C:\Program Files\Epic Games\VR-TAK\Engine\Plugins\Runtime\OpenXR\Source\OpenXRInput\Private\OpenXRInput.cpp:1239]
+[2026.10.29-02.14.43:455][835]LogOutputDevice: Error: [Callstack] 0x00007ffeef81e9e9 UnrealEditor-OpenXRInput.dll!FOpenXRInputPlugin::FOpenXRInput::GetControllerOrientationAndPositionForTime() [C:\Program Files\Epic Games\VR-TAK\Engine\Plugins\Runtime\OpenXR\Source\OpenXRInput\Private\OpenXRInput.cpp:1244]
+[2026.10.29-02.14.43:455][835]LogOutputDevice: Error: [Callstack] 0x00007ffeef81e332 UnrealEditor-OpenXRInput.dll!FOpenXRInputPlugin::FOpenXRInput::GetControllerOrientationAndPosition() [C:\Program Files\Epic Games\VR-TAK\Engine\Plugins\Runtime\OpenXR\Source\OpenXRInput\Private\OpenXRInput.cpp:1183]
+[2026.10.29-02.14.43:456][835]LogOutputDevice: Error: [Callstack] 0x00007fff93ec6ee8 UnrealEditor-HeadMountedDisplay.dll!UMotionControllerComponent::PollControllerState_GameThread() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\HeadMountedDisplay\Private\MotionControllerComponent.cpp:342]
+[2026.10.29-02.14.43:456][835]LogOutputDevice: Error: [Callstack] 0x00007fff93ec9dd9 UnrealEditor-HeadMountedDisplay.dll!UMotionControllerComponent::TickComponent() [C:\Program Files\Epic Games\VR-TAK\Engine\Source\Runtime\HeadMountedDisplay\Private\MotionControllerComponent.cpp:122]
+-- shader compilation
+[2026.10.29-02.15.46:695][413]LogShaderCompilers: Display:      TBasePassPSFPrecomputedVolumetricLightmapLightingPolicy - 7.85% of total time (compiled    3 times, average 10.32 sec, max 16.36 sec, min 4.55 sec)
+[2026.10.29-02.15.46:695][413]LogShaderCompilers: Display: ================================================
+[2026.10.29-02.15.46:749][413]LogShaderCompilers: Display: Shaders left to compile 0
+-- last log lines
+[2026.10.29-02.15.47:438][413]LogModuleManager: Shutting down and abandoning module Water (70)
+[2026.10.29-02.15.47:440][413]LogModuleManager: Shutting down and abandoning module AISupportModule (68)
+[2026.10.29-02.15.47:440][413]LogModuleManager: Shutting down and abandoning module ChaosCloth (66)
+[2026.10.29-02.15.47:441][413]LogModuleManager: Shutting down and abandoning module DesktopPlatform (64)
+[2026.10.29-02.15.47:441][413]LogModuleManager: Shutting down and abandoning module PlasticSourceControl (62)
+[2026.10.29-02.15.47:442][413]LogModuleManager: Shutting down and abandoning module PerforceSourceControl (60)
+[2026.10.29-02.15.47:442][413]LogModuleManager: Shutting down and abandoning module SourceControl (59)
+[2026.10.29-02.15.47:443][413]LogModuleManager: Shutting down and abandoning module PythonScriptPluginPreload (56)
+[2026.10.29-02.15.47:443][413]LogModuleManager: Shutting down and abandoning module PlatformCryptoOpenSSL (54)
+[2026.10.29-02.15.47:443][413]LogModuleManager: Shutting down and abandoning module PlatformCryptoTypes (52)
+[2026.10.29-02.15.47:444][413]LogModuleManager: Shutting down and abandoning module PlatformCrypto (50)
+[2026.10.29-02.15.47:445][413]LogModuleManager: Shutting down and abandoning module XGEController (48)
+[2026.10.29-02.15.47:446][413]LogXGEController: Cleaning working directory: C:/Users/Cesium/AppData/Local/Temp/UnrealXGEWorkingDir/
+[2026.10.29-02.15.47:448][413]LogModuleManager: Shutting down and abandoning module FastBuildController (46)
+[2026.10.29-02.15.47:448][413]LogModuleManager: Shutting down and abandoning module IoStoreOnDemand (44)
+[2026.10.29-02.15.47:448][413]LogModuleManager: Shutting down and abandoning module AnimationModifiers (42)
+[2026.10.29-02.15.47:449][413]LogModuleManager: Shutting down and abandoning module AudioEditor (40)
+[2026.10.29-02.15.47:449][413]LogModuleManager: Shutting down and abandoning module PropertyEditor (39)
+[2026.10.29-02.15.47:450][413]LogModuleManager: Shutting down and abandoning module Virtualization (36)
+[2026.10.29-02.15.47:450][413]LogModuleManager: Shutting down and abandoning module MessageLog (35)
+[2026.10.29-02.15.47:450][413]LogModuleManager: Shutting down and abandoning module TextureCompressor (32)
+[2026.10.29-02.15.47:451][413]LogModuleManager: Shutting down and abandoning module OpenColorIOWrapper (31)
+[2026.10.29-02.15.47:452][413]LogModuleManager: Shutting down and abandoning module RenderCore (28)
+[2026.10.29-02.15.47:452][413]LogModuleManager: Shutting down and abandoning module Landscape (26)
+[2026.10.29-02.15.47:453][413]LogModuleManager: Shutting down and abandoning module SlateRHIRenderer (24)
+[2026.10.29-02.15.47:453][413]LogModuleManager: Shutting down and abandoning module AnimGraphRuntime (22)
+[2026.10.29-02.15.47:453][413]LogModuleManager: Shutting down and abandoning module Renderer (20)
+[2026.10.29-02.15.47:453][413]LogModuleManager: Shutting down and abandoning module Engine (18)
+[2026.10.29-02.15.47:454][413]LogModuleManager: Shutting down and abandoning module CoreUObject (16)
+[2026.10.29-02.15.47:454][413]LogModuleManager: Shutting down and abandoning module SandboxFile (14)
+[2026.10.29-02.15.47:454][413]LogModuleManager: Shutting down and abandoning module PakFile (12)
+[2026.10.29-02.15.47:455][413]LogPakFile: Destroying PakPlatformFile
+[2026.10.29-02.15.47:455][413]LogModuleManager: Shutting down and abandoning module RSA (11)
+[2026.10.29-02.15.47:455][413]LogModuleManager: Shutting down and abandoning module NetworkFile (8)
+[2026.10.29-02.15.47:456][413]LogModuleManager: Shutting down and abandoning module StreamingFile (6)
+[2026.10.29-02.15.47:456][413]LogModuleManager: Shutting down and abandoning module CookOnTheFly (4)
+[2026.10.29-02.15.47:457][413]LogModuleManager: Shutting down and abandoning module StorageServerClient (2)
+[2026.10.29-02.15.47:632][413]LogD3D12RHI: ~FD3D12DynamicRHI
+[2026.10.29-02.15.47:751][413]LogExit: Exiting.
+[2026.10.29-02.15.47:778][413]Log file closed, 10/28/26 22:15:47
+
+==== VR-TAK processes and windows ====  [22:17:05]
+Screenshot: vrtak-CesiumIon-1.png (3430 KB, 10/28/2026 22:14:36)
+Screenshot: vrtak-CesiumIon-2.png (3159 KB, 10/28/2026 22:15:13)
+Screenshot: vrtak-CesiumIon-3.png (3167 KB, 10/28/2026 22:15:43)
+
+==== Regression checks ====  [22:17:05]
+PASS  LogCesiumIonVrtak: Found \d+ assets
+PASS  LogCesiumIonVrtak: Added .+ to VR-TAK's world
+PASS  LogCesiumIonVrtak: Georeference aligned
+PASS  LogCesiumIonVrtak: Cesium ion panel on screen
+PASS  LogCesiumIonVrtak: Screenshot requested
+PASS  LogCesiumIonVrtak: Quitting after the test run
+PASS  LogCesiumIonVrtak: XR system
+PASS  no fatal errors
+REGRESSION: PASS
