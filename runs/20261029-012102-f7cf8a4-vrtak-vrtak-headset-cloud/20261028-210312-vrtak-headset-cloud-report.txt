@@ -1,0 +1,118 @@
+
+==== Build the plugin (GameEditor, incremental) ====  [21:03:12]
+
+==== Install VTAK_CesiumIon ====  [21:03:12]
+   \VTAK_CesiumIon.uplugin  653 B
+   \Resources\cesium_ion_logo.png  20,275 B
+   [2/10] Compile [x64] CesiumIonVrtakActor.gen.cpp
+   [4/10] Compile [x64] CesiumIonVrtakSession.cpp
+   [5/10] Compile [x64] CesiumIonVrtakPanel.gen.cpp
+   [6/10] Compile [x64] CesiumIonVrtakPanel.cpp
+   [7/10] Compile [x64] CesiumIonVrtakActor.cpp
+   Total execution time: 43.65 seconds
+Build exit code: 0
+
+==== Start VR-TAK (detached) ====  [21:03:56]
+C:\Program Files\Epic Games\VR-TAK\Engine\Binaries\Win64\UnrealEditor.exe "C:\Program Files\Epic Games\VR-TAK\Game\Game.uproject" -game -windowed -ResX=1920 -ResY=1080 -log -CesiumIonOrigin=39.9526,-75.1635,0 -CesiumIonEnterWorld=20 -CesiumIonScreenshots=840 -CesiumIonShowSettings=855 -CesiumIonQuitAfter=900 -CesiumIonLoad=2275207 -CesiumIonSignIn
+Started pid 27200 at 10/28/2026 21:03:56. Run this task again for progress and screenshots.
+
+==== VR-TAK run ====  [21:20:56]
+Log: C:\Program Files\Epic Games\VR-TAK\Game\Saved\Logs\Game.log (updated 10/28/2026 21:06:29)
+-- Cesium ion plugin
+[2026.10.29-01.04.18:291][  0]LogCesiumIonVrtak: Cesium ion plugin actor spawned.
+[2026.10.29-01.04.22:381][  0]LogCesiumIonVrtak: Cesium ion plugin actor spawned.
+[2026.10.29-01.04.22:858][  0]LogCesiumIonVrtak: Cesium ion: Cesium ion Cloud (signed in).
+[2026.10.29-01.04.22:880][  0]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.29-01.04.25:440][  1]LogCesiumIonVrtak: Found 402 assets.
+[2026.10.29-01.04.25:464][  1]LogCesium: Display: Caching Cesium requests in C:/Program Files/Epic Games/VR-TAK/Game/cesium-request-cache.sqlite
+[2026.10.29-01.04.25:467][  1]LogCesium: Loading tileset for asset ID 0
+[2026.10.29-01.04.25:467][  1]LogCesium: Loading tileset for asset ID 0 done
+[2026.10.29-01.04.25:468][  1]LogCesiumIonVrtak: Added Google Photorealistic 3D Tiles to VR-TAK's world.
+[2026.10.29-01.04.25:545][  1]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.29-01.04.25:545][  1]LogCesiumIonVrtak: Aligning with Game_GlobeReferenceActor_Ellipsoid_0. Globes: Game_GlobeReferenceActor_Ellipsoid_0(ellipsoid, scale 1.00, player at 39.9504, -75.1645, 141 m) Game_GlobeReferenceActor_ENU_0(ENU, scale 0.01, player at 15.3384, -125.1260, 634670351 m)
+[2026.10.29-01.04.25:546][  1]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 39.950414, -75.164545, 0.0 m; 100.1 units/m; yaw 165.2.
+[2026.10.29-01.04.25:603][  1]LogCesium: Loading tileset for asset ID 2275207
+[2026.10.29-01.04.25:603][  1]LogCesium: Loading tileset for asset ID 2275207 done
+[2026.10.29-01.04.25:632][  2]LogCesiumIonVrtak: Signed in as Jake.Steinerman.
+[2026.10.29-01.04.30:379][194]LogCesiumIonVrtak: Registered the Cesium ion ribbon button (Home > Application) with widget class WBP_RibbonButton_C.
+[2026.10.29-01.04.35:891][421]LogCesiumIonVrtak: Panel: in viewport 1, visible 1, tree 1, root Border, desired X=532.000 Y=1107.000, size X=540.000 Y=900.000 at X=1580.000 Y=140.000; viewport X=1920.000 Y=1080.000.
+[2026.10.29-01.04.41:365][760]LogCesiumIonVrtak: Moved the view to 39.95260, -75.16350, 0 m (as VR-TAK's Go To does).
+[2026.10.29-01.04.45:367][996]LogCesiumIonVrtak: Entering VR-TAK's world (ce GoToWorld).
+[2026.10.29-01.04.45:396][996]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 15.339176, -125.123709, 0.0 m; 100.0 units/m; yaw -144.9.
+[2026.10.29-01.04.55:357][500]LogCesiumIonVrtak: Diagnostics: camera at X=35567767380.140 Y=-50563325467.296 Z=16956357720.338; georeference at X=353972671.761 Y=-503209414.791 Z=167632230.656, scale X=1.000 Y=0.994 Z=1.000.
+[2026.10.29-01.04.55:357][500]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 753 components, hidden 0, content X=298396.417 Y=-421491.800 Z=-321850352.614 (size X=1739759547.587 Y=1731803612.107 Z=2186965694.698), 64188695130 units from the camera.
+[2026.10.29-01.04.55:606][533]LogCesiumIonVrtak: Moved the view to 39.94260, -75.16350, 350 m (as VR-TAK's Go To does), bearing 0, pitch -35.
+[2026.10.29-01.04.55:610][533]LogCesiumIonVrtak: Georeference aligned with VR-TAK's globe: origin 39.942600, -75.163500, 0.0 m; 100.1 units/m; yaw 165.2.
+[2026.10.29-01.05.03:283][602]LogCesium: Error: [2026-10-28 21:05:03.284] [error] [TilesetContentManager.cpp:1163] An unexpected error occurred when loading tile: Connection failed.
+[2026.10.29-01.05.08:702][741]LogCesiumIonVrtak: Ribbon button clicked (VR: no).
+[2026.10.29-01.05.10:599][794]LogCesiumIonVrtak: Ribbon button clicked (VR: no).
+[2026.10.29-01.05.10:609][794]LogCesiumIonVrtak: Cesium ion panel on screen (top right, below the ribbon).
+[2026.10.29-01.05.26:246][334]LogCesiumIonVrtak: Diagnostics: camera at X=-125395171.256 Y=-473380415.047 Z=407332695.374; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.29-01.05.26:246][334]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 1876 components, hidden 0, content X=336750.408 Y=-2438079.120 Z=-356130022.268 (size X=1797321101.234 Y=1775072121.039 Z=2257991207.837), 905798278 units from the camera.
+[2026.10.29-01.05.28:244][410]LogCesiumIonVrtak: XR system present; stereoscopic 3D off; panel is a screen widget: yes.
+[2026.10.29-01.05.56:484][450]LogCesiumIonVrtak: Diagnostics: camera at X=-125395171.256 Y=-473380415.047 Z=407332695.374; georeference at X=-125388300.078 Y=-473354475.602 Z=407310124.679, scale X=1.001 Y=0.997 Z=1.000.
+[2026.10.29-01.05.56:485][450]LogCesiumIonVrtak: Diagnostics: #2275207 loaded 100%, 1876 components, hidden 0, content X=336750.408 Y=-2438079.120 Z=-356130022.268 (size X=1797321101.234 Y=1775072121.039 Z=2257991207.837), 905798278 units from the camera.
+-- errors
+[2026.10.29-01.04.16:103][  0]LogClass: Error: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-01.04.16:104][  0]LogClass: Error: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-01.04.16:177][  0]LogAutomationTest: Error: UObject.Class AttemptToFindUninitializedScriptStructMembers will be marked as failing due to errors being logged
+[2026.10.29-01.04.16:178][  0]LogAutomationTest: Error: LogClass: BoolProperty FCesiumGeocoderServiceAttribution::bShowOnScreen is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-01.04.16:179][  0]LogAutomationTest: Error: LogClass: StructProperty FCesiumGeocoderServiceFeature::LongitudeLatitudeHeight is not initialized properly. Module:CesiumRuntime File:Public/CesiumGeocoderServiceBlueprintLibrary.h
+[2026.10.29-01.05.03:241][602]LogHttp: Warning: 00000BB421A74B00: request failed, libcurl error: 35 (SSL connect error)
+[2026.10.29-01.05.03:283][602]LogCesium: Error: [2026-10-28 21:05:03.284] [error] [TilesetContentManager.cpp:1163] An unexpected error occurred when loading tile: Connection failed.
+-- shader compilation
+-- last log lines
+[2026.10.29-01.06.29:280][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:280][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:280][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:280][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:280][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:281][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:281][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:281][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:281][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:281][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:281][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:281][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:281][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:281][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:282][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:282][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:282][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:282][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:282][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:282][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:282][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:282][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:282][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:283][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:283][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:283][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:283][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:283][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:283][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:283][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:283][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:284][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:284][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:284][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:284][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:284][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:284][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:284][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:284][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+[2026.10.29-01.06.29:284][295]Game: Warning: -- UGame_GameInstance::GetTerrainCollisionChannel | gameInstance is nullptr | return ECC_Visibility
+
+==== VR-TAK processes and windows ====  [21:20:58]
+No screenshots yet.
+
+==== Regression checks ====  [21:20:59]
+PASS  LogCesiumIonVrtak: Found \d+ assets
+PASS  LogCesiumIonVrtak: Added .+ to VR-TAK's world
+PASS  LogCesiumIonVrtak: Georeference aligned
+PASS  LogCesiumIonVrtak: Cesium ion panel on screen
+FAIL  LogCesiumIonVrtak: Screenshot requested
+FAIL  LogCesiumIonVrtak: Quitting after the test run
+PASS  LogCesiumIonVrtak: XR system
+PASS  no fatal errors
+REGRESSION: FAIL (2)
