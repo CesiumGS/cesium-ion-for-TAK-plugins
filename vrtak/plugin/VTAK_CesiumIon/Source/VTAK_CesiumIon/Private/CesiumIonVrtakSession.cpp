@@ -339,7 +339,7 @@ void UCesiumIonVrtakSession::ListAssets(FCesiumIonVrtakAssetsResult OnDone)
 		return;
 	}
 	TSharedRef<IHttpRequest, ESPMode::ThreadSafe> Request = FHttpModule::Get().CreateRequest();
-	Request->SetURL(ApiUrl + TEXT("v1/assets?limit=100&sortBy=NAME&sortOrder=ASC"));
+	Request->SetURL(ApiUrl + TEXT("v1/assets?limit=1000&sortBy=NAME&sortOrder=ASC"));
 	Request->SetVerb(TEXT("GET"));
 	if (HasToken())
 	{

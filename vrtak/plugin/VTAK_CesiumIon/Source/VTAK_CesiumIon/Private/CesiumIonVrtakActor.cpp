@@ -557,6 +557,19 @@ void ACesiumIonVrtakActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	ElapsedSeconds += DeltaSeconds;
+	if (bFollowPanel && PanelHolder && GetWorld())
+	{
+		// Glide after the view (a few cm behind the head's turns) instead of being nailed to it.
+		APlayerController* Player = GetWorld()->GetFirstPlayerController();
+		if (APlayerCameraManager* Camera = Player ? Player->PlayerCameraManager : nullptr)
+		{
+			const FVector CameraLocation = Camera->GetCameraLocation();
+			const FRotator Heading(0.0, Camera->GetCameraRotation().Yaw + PanelYawOffset, 0.0);
+			const FVector Target = CameraLocation + Heading.Vector() * 120.0;
+			const FVector Location = FMath::VInterpTo(PanelHolder->GetActorLocation(), Target, DeltaSeconds, 2.5f);
+			PanelHolder->SetActorLocationAndRotation(Location, (Location - CameraLocation).Rotation());
+		}
+	}
 	if (!bRibbonButtonRegistered && RibbonTries < 12 && ElapsedSeconds >= NextRibbonTryAt)
 	{
 		// VR-TAK's ribbon is built after the world starts: try every 5 s, up to a minute.
@@ -892,16 +905,52 @@ bool ACesiumIonVrtakActor::OpenPanelAsWidgetComponent()
 	// 560 x 820 px is 5.6 x 8.2 m at 1 px per cm: scale it to about 0.56 x 0.82 m.
 	Component->SetRelativeScale3D(FVector(0.1, 0.1, 0.1));
 	Holder->SetActorLocationAndRotation(Location, Rotation);
-	NewPanel->Refresh();
 	PanelHolder = Holder;
 	Panel = NewPanel;
 	bPanelInWorld = true;
+	PanelScale = 0.1f;
+	PanelYawOffset = 0.0;
+	NewPanel->Refresh();
 	UE_LOG(LogCesiumIonVrtak, Log, TEXT("Cesium ion panel opened as the plugin's own floating panel, 120 cm ahead."));
 	return true;
 }
 
+void ACesiumIonVrtakActor::DockPanel(double YawDegrees)
+{
+	APlayerController* Player = GetWorld() ? GetWorld()->GetFirstPlayerController() : nullptr;
+	APlayerCameraManager* Camera = Player ? Player->PlayerCameraManager : nullptr;
+	if (!PanelHolder || !Camera)
+	{
+		return;
+	}
+	PanelYawOffset = YawDegrees;
+	// Level with the eyes, 120 cm out, YawDegrees to the side of the heading.
+	const FVector CameraLocation = Camera->GetCameraLocation();
+	const FRotator Heading(0.0, Camera->GetCameraRotation().Yaw + YawDegrees, 0.0);
+	const FVector Location = CameraLocation + Heading.Vector() * 120.0;
+	PanelHolder->SetActorLocationAndRotation(Location, (Location - CameraLocation).Rotation());
+}
+
+void ACesiumIonVrtakActor::ToggleFollowPanel()
+{
+	bFollowPanel = !bFollowPanel;
+}
+
+void ACesiumIonVrtakActor::ScalePanel(float Factor)
+{
+	if (PanelHolder)
+	{
+		if (UWidgetComponent* Component = PanelHolder->FindComponentByClass<UWidgetComponent>())
+		{
+			PanelScale = FMath::Clamp(PanelScale * Factor, 0.03f, 0.4f);
+			Component->SetRelativeScale3D(FVector(PanelScale));
+		}
+	}
+}
+
 void ACesiumIonVrtakActor::ClosePanelInWorld()
 {
+	bFollowPanel = false;
 	if (PanelHolder)
 	{
 		PanelHolder->Destroy();

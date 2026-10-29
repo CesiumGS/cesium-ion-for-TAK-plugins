@@ -160,6 +160,13 @@ private:
 	// is not drawn in a headset). VR-TAK's classes are reached by name (reflection), as for the
 	// teleport, so the plugin does not link VR-TAK's Game module.
 public:
+	/** The panel is the plugin's own floating panel (VR). */
+	bool IsPanelFloating() const { return PanelHolder != nullptr; }
+	bool IsFollowingPanel() const { return bFollowPanel; }
+	/** Puts the floating panel 120 cm from the camera, YawDegrees to the side of where it looks. */
+	void DockPanel(double YawDegrees);
+	void ToggleFollowPanel();
+	void ScalePanel(float Factor);
 	/** Bound to the ribbon button's OnClicked: shows or hides the panel. */
 	UFUNCTION()
 	void HandleRibbonButtonClicked(UUserWidget* Button);
@@ -186,6 +193,9 @@ private:
 	/** False after the person closed the panel with the ribbon button: it is not reopened by itself. */
 	bool bPanelWanted = true;
 	bool bWasStereo = false;
+	bool bFollowPanel = false;
+	double PanelYawOffset = 0.0;
+	float PanelScale = 0.1f;
 	double HideSettingsAt = -1.0;
 	bool bStartSignIn = false;
 	double EnteredWorldAt = -1.0;

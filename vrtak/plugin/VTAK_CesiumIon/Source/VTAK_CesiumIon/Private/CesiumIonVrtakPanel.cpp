@@ -186,6 +186,7 @@ TSharedRef<SWidget> UCesiumIonVrtakPanel::RebuildWidget()
 		Header->AddChildToHorizontalBox(SettingsButton)->SetPadding(FMargin(8.f, 0.f, 0.f, 0.f));
 		Column->AddChildToVerticalBox(Header)->SetPadding(FMargin(0.f, 0.f, 0.f, 12.f));
 
+		Column->AddChildToVerticalBox(BuildPlacement())->SetPadding(FMargin(0.f, 0.f, 0.f, 8.f));
 		Column->AddChildToVerticalBox(BuildSettings())->SetPadding(FMargin(0.f, 0.f, 0.f, 12.f));
 		Column->AddChildToVerticalBox(BuildSignInCard())->SetPadding(FMargin(0.f, 0.f, 0.f, 8.f));
 
@@ -208,8 +209,10 @@ TSharedRef<SWidget> UCesiumIonVrtakPanel::RebuildWidget()
 
 		AssetsTitle = MakeText(TEXT("Your assets"), 18, Text, true);
 		Content->AddChildToVerticalBox(AssetsTitle)->SetPadding(FMargin(0.f, 20.f, 0.f, 6.f));
+		Content->AddChildToVerticalBox(BuildAssetControls());
 		AssetList = WidgetTree->ConstructWidget<UVerticalBox>(UVerticalBox::StaticClass());
 		Content->AddChildToVerticalBox(AssetList);
+		Content->AddChildToVerticalBox(BuildPager())->SetPadding(FMargin(0.f, 8.f, 0.f, 0.f));
 
 		MessageText = MakeText(TEXT(""), 12, Muted);
 		Column->AddChildToVerticalBox(MessageText)->SetPadding(FMargin(0.f, 10.f, 0.f, 0.f));
@@ -421,25 +424,216 @@ void UCesiumIonVrtakPanel::Refresh()
 	}
 	FeaturedBox->SetVisibility(FeaturedShown > 0 ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
 
+	RebuildAssetList();
+	if (PlacementRow)
+	{
+		PlacementRow->SetVisibility(OwnerActor->IsPanelFloating() ? ESlateVisibility::Visible : ESlateVisibility::Collapsed);
+	}
+	if (FollowLabel)
+	{
+		FollowLabel->SetText(FText::FromString(OwnerActor->IsFollowingPanel() ? TEXT("Follow: on") : TEXT("Follow: off")));
+	}
+}
+
+UWidget* UCesiumIonVrtakPanel::BuildAssetControls()
+{
+	UVerticalBox* Box = WidgetTree->ConstructWidget<UVerticalBox>(UVerticalBox::StaticClass());
+	SearchBox = MakeField(TEXT("Search your assets (name or ID)"));
+	SearchBox->OnTextChanged.AddDynamic(this, &UCesiumIonVrtakPanel::HandleSearchChanged);
+	Box->AddChildToVerticalBox(SearchBox)->SetPadding(FMargin(0.f, 0.f, 0.f, 8.f));
+	UHorizontalBox* Chips = WidgetTree->ConstructWidget<UHorizontalBox>(UHorizontalBox::StaticClass());
+	AllChip = MakeButton(TEXT("All"), Blue, Ground, &AllChipLabel);
+	AllChip->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleFilterAll);
+	Chips->AddChildToHorizontalBox(AllChip)->SetPadding(FMargin(0.f, 0.f, 6.f, 0.f));
+	TilesChip = MakeButton(TEXT("3D Tiles"), Card, Text, &TilesChipLabel);
+	TilesChip->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleFilterTiles);
+	Chips->AddChildToHorizontalBox(TilesChip)->SetPadding(FMargin(0.f, 0.f, 6.f, 0.f));
+	ImageryChip = MakeButton(TEXT("Imagery"), Card, Text, &ImageryChipLabel);
+	ImageryChip->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleFilterImagery);
+	Chips->AddChildToHorizontalBox(ImageryChip)->SetPadding(FMargin(0.f, 0.f, 6.f, 0.f));
+	TerrainChip = MakeButton(TEXT("Terrain"), Card, Text, &TerrainChipLabel);
+	TerrainChip->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleFilterTerrain);
+	Chips->AddChildToHorizontalBox(TerrainChip);
+	Box->AddChildToVerticalBox(Chips)->SetPadding(FMargin(0.f, 0.f, 0.f, 8.f));
+	return Box;
+}
+
+UWidget* UCesiumIonVrtakPanel::BuildPager()
+{
+	UHorizontalBox* Row = WidgetTree->ConstructWidget<UHorizontalBox>(UHorizontalBox::StaticClass());
+	PrevButton = MakeButton(TEXT("< Previous"), Card, Text);
+	PrevButton->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandlePrevPage);
+	Row->AddChildToHorizontalBox(PrevButton);
+	PageLabel = MakeText(TEXT(""), 13, Muted);
+	UHorizontalBoxSlot* LabelSlot = Row->AddChildToHorizontalBox(PageLabel);
+	LabelSlot->SetSize(FSlateChildSize(ESlateSizeRule::Fill));
+	LabelSlot->SetHorizontalAlignment(HAlign_Center);
+	LabelSlot->SetVerticalAlignment(VAlign_Center);
+	NextButton = MakeButton(TEXT("Next >"), Card, Text);
+	NextButton->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleNextPage);
+	Row->AddChildToHorizontalBox(NextButton);
+	return Row;
+}
+
+UWidget* UCesiumIonVrtakPanel::BuildPlacement()
+{
+	// Only shown while the panel floats in the world (VR).
+	PlacementRow = WidgetTree->ConstructWidget<UHorizontalBox>(UHorizontalBox::StaticClass());
+	PlacementRow->SetVisibility(ESlateVisibility::Collapsed);
+	auto Add = [this](UButton* Button, bool bLast)
+	{
+		PlacementRow->AddChildToHorizontalBox(Button)->SetPadding(FMargin(0.f, 0.f, bLast ? 0.f : 6.f, 0.f));
+	};
+	UButton* Left = MakeButton(TEXT("Left"), Card, Text);
+	Left->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleDockLeft);
+	Add(Left, false);
+	UButton* Front = MakeButton(TEXT("Front"), Card, Text);
+	Front->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleDockFront);
+	Add(Front, false);
+	UButton* Right = MakeButton(TEXT("Right"), Card, Text);
+	Right->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleDockRight);
+	Add(Right, false);
+	UButton* Follow = MakeButton(TEXT("Follow: off"), Card, Text, &FollowLabel);
+	Follow->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleFollow);
+	Add(Follow, false);
+	UButton* Smaller = MakeButton(TEXT("-"), Card, Text);
+	Smaller->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleSmaller);
+	Add(Smaller, false);
+	UButton* Bigger = MakeButton(TEXT("+"), Card, Text);
+	Bigger->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleBigger);
+	Add(Bigger, true);
+	return PlacementRow;
+}
+
+void UCesiumIonVrtakPanel::SetChipStyle(UButton* Chip, UTextBlock* Label, bool bActive)
+{
+	if (Chip && Label)
+	{
+		Chip->SetBackgroundColor(bActive ? Blue : Card);
+		Label->SetColorAndOpacity(FSlateColor(bActive ? Ground : Text));
+	}
+}
+
+void UCesiumIonVrtakPanel::SetTypeFilter(const FString& Type)
+{
+	TypeFilter = Type;
+	PageIndex = 0;
+	RebuildAssetList();
+}
+
+void UCesiumIonVrtakPanel::RebuildAssetList()
+{
+	if (!AssetList || !OwnerActor.IsValid())
+	{
+		return;
+	}
+	UCesiumIonVrtakSession* Session = OwnerActor->GetSession();
+	const bool bReady = Session->IsReady();
+	const TArray<FCesiumIonVrtakAsset>& Assets = Session->GetAssets();
 	AssetList->ClearChildren();
 	AssetsTitle->SetText(FText::FromString(Assets.Num() ? FString::Printf(TEXT("Your assets  (%d)"), Assets.Num()) : TEXT("Your assets")));
 	if (!bReady)
 	{
 		AssetList->AddChildToVerticalBox(MakeText(TEXT("Sign in, and your Cesium ion assets appear here."), 13, Muted));
 	}
+	int32 Tiles = 0, Imagery = 0, Terrain = 0;
+	for (const FCesiumIonVrtakAsset& Asset : Assets)
+	{
+		Tiles += Asset.Type == TEXT("3DTILES") ? 1 : 0;
+		Imagery += Asset.Type == TEXT("IMAGERY") ? 1 : 0;
+		Terrain += Asset.Type == TEXT("TERRAIN") ? 1 : 0;
+	}
+	if (AllChipLabel)
+	{
+		AllChipLabel->SetText(FText::FromString(FString::Printf(TEXT("All %d"), Assets.Num())));
+		TilesChipLabel->SetText(FText::FromString(FString::Printf(TEXT("3D Tiles %d"), Tiles)));
+		ImageryChipLabel->SetText(FText::FromString(FString::Printf(TEXT("Imagery %d"), Imagery)));
+		TerrainChipLabel->SetText(FText::FromString(FString::Printf(TEXT("Terrain %d"), Terrain)));
+		SetChipStyle(AllChip, AllChipLabel, TypeFilter.IsEmpty());
+		SetChipStyle(TilesChip, TilesChipLabel, TypeFilter == TEXT("3DTILES"));
+		SetChipStyle(ImageryChip, ImageryChipLabel, TypeFilter == TEXT("IMAGERY"));
+		SetChipStyle(TerrainChip, TerrainChipLabel, TypeFilter == TEXT("TERRAIN"));
+	}
 	// What VR-TAK can add first: 3D Tiles, then terrain, then imagery.
 	auto Rank = [](const FString& Type)
 	{
 		return Type == TEXT("3DTILES") ? 0 : Type == TEXT("TERRAIN") ? 1 : Type == TEXT("IMAGERY") ? 2 : 3;
 	};
-	TArray<FCesiumIonVrtakAsset> Sorted = Assets;
-	Sorted.StableSort([&Rank](const FCesiumIonVrtakAsset& A, const FCesiumIonVrtakAsset& B)
+	const FString Query = SearchText.TrimStartAndEnd();
+	TArray<FCesiumIonVrtakAsset> Matches;
+	for (const FCesiumIonVrtakAsset& Asset : Assets)
+	{
+		if (!TypeFilter.IsEmpty() && Asset.Type != TypeFilter)
+		{
+			continue;
+		}
+		if (!Query.IsEmpty() && !Asset.Name.Contains(Query, ESearchCase::IgnoreCase) && FString::Printf(TEXT("%lld"), Asset.Id) != Query)
+		{
+			continue;
+		}
+		Matches.Add(Asset);
+	}
+	Matches.StableSort([&Rank](const FCesiumIonVrtakAsset& A, const FCesiumIonVrtakAsset& B)
 	{
 		return Rank(A.Type) < Rank(B.Type);
 	});
-	for (const FCesiumIonVrtakAsset& Asset : Sorted)
+	const int32 Pages = FMath::Max(1, FMath::DivideAndRoundUp(Matches.Num(), PageSize));
+	PageIndex = FMath::Clamp(PageIndex, 0, Pages - 1);
+	const int32 First = PageIndex * PageSize;
+	const int32 Last = FMath::Min(Matches.Num(), First + PageSize);
+	for (int32 Index = First; Index < Last; ++Index)
 	{
-		AssetList->AddChildToVerticalBox(MakeAssetRow(Asset, OwnerActor->IsLoaded(Asset.Id), false));
+		AssetList->AddChildToVerticalBox(MakeAssetRow(Matches[Index], OwnerActor->IsLoaded(Matches[Index].Id), false));
+	}
+	if (bReady && Matches.Num() == 0)
+	{
+		AssetList->AddChildToVerticalBox(MakeText(Assets.Num() ? TEXT("No assets match.") : TEXT("No assets in this account."), 13, Muted));
+	}
+	if (PageLabel)
+	{
+		PageLabel->SetText(FText::FromString(Matches.Num()
+			? FString::Printf(TEXT("%d-%d of %d"), First + 1, Last, Matches.Num()) : FString()));
+		PrevButton->SetIsEnabled(PageIndex > 0);
+		NextButton->SetIsEnabled(PageIndex < Pages - 1);
+	}
+}
+
+void UCesiumIonVrtakPanel::HandleSearchChanged(const FText& Value)
+{
+	SearchText = Value.ToString();
+	PageIndex = 0;
+	RebuildAssetList();
+}
+
+void UCesiumIonVrtakPanel::HandleFilterAll() { SetTypeFilter(FString()); }
+void UCesiumIonVrtakPanel::HandleFilterTiles() { SetTypeFilter(TEXT("3DTILES")); }
+void UCesiumIonVrtakPanel::HandleFilterImagery() { SetTypeFilter(TEXT("IMAGERY")); }
+void UCesiumIonVrtakPanel::HandleFilterTerrain() { SetTypeFilter(TEXT("TERRAIN")); }
+
+void UCesiumIonVrtakPanel::HandlePrevPage()
+{
+	--PageIndex;
+	RebuildAssetList();
+}
+
+void UCesiumIonVrtakPanel::HandleNextPage()
+{
+	++PageIndex;
+	RebuildAssetList();
+}
+
+void UCesiumIonVrtakPanel::HandleDockLeft() { if (OwnerActor.IsValid()) { OwnerActor->DockPanel(-40.0); } }
+void UCesiumIonVrtakPanel::HandleDockFront() { if (OwnerActor.IsValid()) { OwnerActor->DockPanel(0.0); } }
+void UCesiumIonVrtakPanel::HandleDockRight() { if (OwnerActor.IsValid()) { OwnerActor->DockPanel(40.0); } }
+void UCesiumIonVrtakPanel::HandleSmaller() { if (OwnerActor.IsValid()) { OwnerActor->ScalePanel(0.85f); } }
+void UCesiumIonVrtakPanel::HandleBigger() { if (OwnerActor.IsValid()) { OwnerActor->ScalePanel(1.18f); } }
+
+void UCesiumIonVrtakPanel::HandleFollow()
+{
+	if (OwnerActor.IsValid())
+	{
+		OwnerActor->ToggleFollowPanel();
+		FollowLabel->SetText(FText::FromString(OwnerActor->IsFollowingPanel() ? TEXT("Follow: on") : TEXT("Follow: off")));
 	}
 }
 

@@ -10,6 +10,7 @@ class UBorder;
 class UButton;
 class UCheckBox;
 class UEditableTextBox;
+class UHorizontalBox;
 class UTextBlock;
 class UVerticalBox;
 struct FCesiumIonVrtakAsset;
@@ -75,6 +76,34 @@ private:
 	void HandleSelfHostedMode();
 	UFUNCTION()
 	void HandleSave();
+	/** Your assets: search, type filter and pages (ten at a time, so no long scrolling in a headset). */
+	UFUNCTION()
+	void HandleSearchChanged(const FText& Text);
+	UFUNCTION()
+	void HandleFilterAll();
+	UFUNCTION()
+	void HandleFilterTiles();
+	UFUNCTION()
+	void HandleFilterImagery();
+	UFUNCTION()
+	void HandleFilterTerrain();
+	UFUNCTION()
+	void HandlePrevPage();
+	UFUNCTION()
+	void HandleNextPage();
+	/** Placement of a floating panel (VR): dock left, in front, right; follow the view; smaller, bigger. */
+	UFUNCTION()
+	void HandleDockLeft();
+	UFUNCTION()
+	void HandleDockFront();
+	UFUNCTION()
+	void HandleDockRight();
+	UFUNCTION()
+	void HandleFollow();
+	UFUNCTION()
+	void HandleSmaller();
+	UFUNCTION()
+	void HandleBigger();
 
 	UTextBlock* MakeText(const FString& Text, int32 Size, const FLinearColor& Color, bool bBold = false);
 	UButton* MakeButton(const FString& Label, const FLinearColor& Fill, const FLinearColor& TextColor, UTextBlock** OutLabel = nullptr);
@@ -85,8 +114,48 @@ private:
 	/** Loads the saved server into the form. */
 	void LoadForm();
 	void UpdateModeButtons();
+	UWidget* BuildAssetControls();
+	UWidget* BuildPager();
+	UWidget* BuildPlacement();
+	void RebuildAssetList();
+	void SetTypeFilter(const FString& Type);
+	void SetChipStyle(UButton* Chip, UTextBlock* Label, bool bActive);
+
+	static constexpr int32 PageSize = 10;
+	FString TypeFilter;
+	FString SearchText;
+	int32 PageIndex = 0;
 
 	TWeakObjectPtr<ACesiumIonVrtakActor> OwnerActor;
+
+	UPROPERTY()
+	UEditableTextBox* SearchBox = nullptr;
+	UPROPERTY()
+	UButton* AllChip = nullptr;
+	UPROPERTY()
+	UTextBlock* AllChipLabel = nullptr;
+	UPROPERTY()
+	UButton* TilesChip = nullptr;
+	UPROPERTY()
+	UTextBlock* TilesChipLabel = nullptr;
+	UPROPERTY()
+	UButton* ImageryChip = nullptr;
+	UPROPERTY()
+	UTextBlock* ImageryChipLabel = nullptr;
+	UPROPERTY()
+	UButton* TerrainChip = nullptr;
+	UPROPERTY()
+	UTextBlock* TerrainChipLabel = nullptr;
+	UPROPERTY()
+	UButton* PrevButton = nullptr;
+	UPROPERTY()
+	UButton* NextButton = nullptr;
+	UPROPERTY()
+	UTextBlock* PageLabel = nullptr;
+	UPROPERTY()
+	UHorizontalBox* PlacementRow = nullptr;
+	UPROPERTY()
+	UTextBlock* FollowLabel = nullptr;
 	bool bFormSelfHosted = false;
 
 	UPROPERTY()
