@@ -163,6 +163,8 @@ public:
 	/** The panel is the plugin's own floating panel (VR). */
 	bool IsPanelFloating() const { return PanelHolder != nullptr; }
 	bool IsFollowingPanel() const { return bFollowPanel; }
+	/** Takes the panel off the screen (or out of the world); the ribbon button brings it back. */
+	void HidePanel();
 	/** Puts the floating panel 120 cm from the camera, YawDegrees to the side of where it looks. */
 	void DockPanel(double YawDegrees);
 	void ToggleFollowPanel();

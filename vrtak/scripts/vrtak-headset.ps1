@@ -5,6 +5,7 @@ VR-TAK's world, 15 minutes. Start Quest Link (headset connected and worn) first;
 shows its world, "Switch To VR" in its ribbon enters VR. The log (published with the report)
 says every 5 s whether the view is stereoscopic and whether the panel is a screen widget.
 #>
-param([string]$VrTak = 'C:\Program Files\Epic Games\VR-TAK')
-& "$PSScriptRoot\vrtak-launch.ps1" -VrTak $VrTak -Headset -Load '9,12,21,11' -EnterWorld 20 -ScreenshotAt 840 -QuitAfter 900 -Expect @(
+# QuitAfter: seconds until VR-TAK closes itself (3600 for an hour of hands-on use).
+param([string]$VrTak = 'C:\Program Files\Epic Games\VR-TAK', [int]$QuitAfter = 900)
+& "$PSScriptRoot\vrtak-launch.ps1" -VrTak $VrTak -Headset -Load '9,12,21,11' -EnterWorld 20 -ScreenshotAt ([Math]::Max(60, $QuitAfter - 60)) -QuitAfter $QuitAfter -Expect @(
     'LogCesiumIonVrtak: XR system')

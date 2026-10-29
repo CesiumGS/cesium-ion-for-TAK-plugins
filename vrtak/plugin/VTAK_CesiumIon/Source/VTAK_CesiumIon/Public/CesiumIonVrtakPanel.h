@@ -78,6 +78,8 @@ private:
 	void HandleSave();
 	/** Your assets: search, type filter and pages (ten at a time, so no long scrolling in a headset). */
 	UFUNCTION()
+	void HandleHide();
+	UFUNCTION()
 	void HandleSearchChanged(const FText& Text);
 	UFUNCTION()
 	void HandleFilterAll();

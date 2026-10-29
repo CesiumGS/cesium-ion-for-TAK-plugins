@@ -184,6 +184,9 @@ TSharedRef<SWidget> UCesiumIonVrtakPanel::RebuildWidget()
 		}
 		SettingsButton->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleSettings);
 		Header->AddChildToHorizontalBox(SettingsButton)->SetPadding(FMargin(8.f, 0.f, 0.f, 0.f));
+		UButton* HideButton = MakeButton(TEXT("Hide"), Card, Text);
+		HideButton->OnClicked.AddDynamic(this, &UCesiumIonVrtakPanel::HandleHide);
+		Header->AddChildToHorizontalBox(HideButton)->SetPadding(FMargin(8.f, 0.f, 0.f, 0.f));
 		Column->AddChildToVerticalBox(Header)->SetPadding(FMargin(0.f, 0.f, 0.f, 12.f));
 
 		Column->AddChildToVerticalBox(BuildPlacement())->SetPadding(FMargin(0.f, 0.f, 0.f, 8.f));
@@ -595,6 +598,14 @@ void UCesiumIonVrtakPanel::RebuildAssetList()
 			? FString::Printf(TEXT("%d-%d of %d"), First + 1, Last, Matches.Num()) : FString()));
 		PrevButton->SetIsEnabled(PageIndex > 0);
 		NextButton->SetIsEnabled(PageIndex < Pages - 1);
+	}
+}
+
+void UCesiumIonVrtakPanel::HandleHide()
+{
+	if (OwnerActor.IsValid())
+	{
+		OwnerActor->HidePanel();
 	}
 }
 

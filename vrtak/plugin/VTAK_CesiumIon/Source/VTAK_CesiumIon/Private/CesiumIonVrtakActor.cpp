@@ -722,6 +722,9 @@ void ACesiumIonVrtakActor::OpenPanel()
 	}
 	Panel->SetOwnerActor(this);
 	bPanelInWorld = false;
+	// A new widget has no placement: without this, PlacePanel sees an unchanged size and skips it,
+	// and the panel fills the screen.
+	PanelSize = FVector2D::ZeroVector;
 	// Desktop view: docked on the right. (In VR, OpenPanelInWorld uses VR-TAK's UI subsystem.)
 	Panel->AddToViewport(50);
 	PlacePanel();
@@ -811,6 +814,20 @@ void ACesiumIonVrtakActor::RegisterRibbonButton()
 	UE_LOG(LogCesiumIonVrtak, Log, TEXT("Registered the Cesium ion ribbon button (Home > Application) with widget class %s."), *ButtonClass->GetName());
 }
 
+void ACesiumIonVrtakActor::HidePanel()
+{
+	if (bPanelInWorld)
+	{
+		ClosePanelInWorld();
+	}
+	else if (Panel)
+	{
+		Panel->RemoveFromParent();
+		Panel = nullptr;
+	}
+	bPanelWanted = false;
+}
+
 void ACesiumIonVrtakActor::HandleRibbonButtonClicked(UUserWidget* Button)
 {
 	const bool bVr = GEngine && GEngine->IsStereoscopic3D();
@@ -819,16 +836,7 @@ void ACesiumIonVrtakActor::HandleRibbonButtonClicked(UUserWidget* Button)
 	if (bShown && !(bVr && !bPanelInWorld))
 	{
 		// Open: close it (and do not bring it back by itself).
-		if (bPanelInWorld)
-		{
-			ClosePanelInWorld();
-		}
-		else
-		{
-			Panel->RemoveFromParent();
-			Panel = nullptr;
-		}
-		bPanelWanted = false;
+		HidePanel();
 		return;
 	}
 	if (bShown)
